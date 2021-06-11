@@ -1,0 +1,70 @@
+@charset "UTF-8";
+/* --- 質問通知 解決済み通知 --- */
+/*タブ切り替え全体のスタイル*/
+.tabs {
+  margin-top: 50px;
+  padding-bottom: 40px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(5, 0, 0, 0.2);
+  width: 400px;
+  margin: 0 ;}
+
+/*タブのスタイル*/
+.tab_item {
+  width: calc(100%/2);
+  height: 35px;
+  border-bottom: 3px solid grey;
+  background-color: orange;
+  line-height: 35px;
+  font-size: 14px;
+  text-align: center;
+  color: #565656;
+  display: block;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+.tab_item:hover {
+  opacity: 0.75;
+}
+
+/*ラジオボタンを全て消す*/
+input[name="tab_item"] {
+  display: none;
+}
+
+/*タブ切り替えの中身のスタイル*/
+.tab_content {
+  display: none;
+  padding: 40px 40px 0;
+  clear: both;
+  overflow: hidden;
+  height:450px;
+}
+
+
+/*選択されているタブのコンテンツのみを表示*/
+#html:checked ~ #html_content,
+#css:checked ~ #css_content,
+#javascript:checked ~ #javascript_content,
+#java:checked ~ #java_content,
+#sql:checked ~ #sql_content {
+  display: block;
+}
+
+/*選択されているタブのスタイルを変える*/
+.tabs input:checked + .tab_item {
+  color: #fff;
+  width: 50%;
+
+}
+
+.content1 {
+  box-sizing     : border-box;           /* 罫線も含む長さ      */
+  background     : white;              /* BOXの背景色         */
+  border         : 1px solid black;    /* 枠線の指定          */
+  width          : 700px;                 /* サンプルBOXの幅     */
+  height         : 180px;                 /* サンプルBOXの幅     */
+  margin         : 2px;                  /* サンプルBOXの間     */
+}

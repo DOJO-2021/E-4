@@ -20,10 +20,11 @@ public class IdpwDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:\\pleiades\\workspace\\E-4\\Qsama\\data\\E-4", "sa", "");
 
 			// SELECT文を準備する
-			String sql = "select count(*) from IDPW where ID = ? and PW = ?";
+			String sql = "select count(*) from IDPW where user_id = ? and user_pw = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, id);
 			pStmt.setString(2, pw);
+
 
 			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -38,11 +39,9 @@ public class IdpwDAO {
 			}
 		}
 		catch (SQLException e) {
-//			e.printStackTrace();      // ※お客様提出時にコメントアウトにする
 			loginResult = false;
 		}
 		catch (ClassNotFoundException e) {
-//			e.printStackTrace();      // ※お客様提出時にコメントアウトにする
 			loginResult = false;
 		}
 		finally {					// 必ず実行するコマンド
@@ -52,7 +51,6 @@ public class IdpwDAO {
 					conn.close();
 				}
 				catch (SQLException e) {
-//					e.printStackTrace();	// ※お客様提出時にコメントアウトにする
 					loginResult = false;
 				}
 			}

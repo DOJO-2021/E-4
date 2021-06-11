@@ -20,9 +20,9 @@
         <form class="login-form" method="POST" id="form" action="/Qsama/LoginServlet">
 		  <label class = content><input type="text" name = "USER_ID" placeholder = "ユーザID"></label><br>
 		  <label class = content><input type="password" name = "USER_PW" placeholder = "パスワード"></label><br>
+		  <input type="submit" name="Login" value="Login" class="login-submit" >
 		</form>
 		</div>
-		<input type="submit" name="Login" value="Login" class="login-submit" >
 	  </div>
     </div>
   </div>
@@ -68,6 +68,7 @@
 	    </section> -->
     </div>
 </div>
+<!--
 <script  src = "//Qsama/WebContent/js/login.js">
 $(function () {
 	  $('#openModal').click(function(){
@@ -77,6 +78,6 @@ $(function () {
 	    $('#modalArea').fadeOut();
 	  });
 	});
-</script>
+</script>-->
 </body>
 </html>

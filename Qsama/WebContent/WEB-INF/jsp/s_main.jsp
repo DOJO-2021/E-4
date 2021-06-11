@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Qsama | top(student)</title>
+<title>Qsama | top</title>
 <link rel="stylesheet" href="css/s_main.css">
 </head>
 <body>
