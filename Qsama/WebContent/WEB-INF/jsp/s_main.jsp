@@ -9,15 +9,23 @@
 </head>
 <body>
 <!-- 共通のヘッダー -->
+<ul id="nav">
+  <li>メニュー</li>
+  <li><a href="/Qsama/ProfileServlet">Mypage</a></li>
+  <li><a href="/Qsama/SerachServlet">投稿</a></li>
+  <li><a href="/Qsama/SerchServlet">検索</a></li>
+  <li><a href="/Qsama/LogoutServlet">ログアウト</a></li>
+</ul>
 <!-- 共通ヘッダーここまで -->
 
 <!-- お知らせ -->
 <div class="info">
-<dl><dt>日付を表示</dt><dd>講師からの質問回答通知が入ります。</dd></dl>
-<dl><dt>日付を表示</dt><dd>講師からの質問回答通知が入ります。</dd></dl>
-<dl><dt>日付を表示</dt><dd>講師からの質問回答通知が入ります。</dd></dl>
-<dl><dt>日付を表示</dt><dd>講師からの質問回答通知が入ります。</dd></dl>
-<dl><dt>日付を表示</dt><dd>講師からの質問回答通知が入ります。</dd></dl>
+  <h3>お知らせ</h3>
+	<dl><dt>日付を表示</dt><dd>講師からの質問回答通知が入ります。</dd></dl>
+	<dl><dt>日付を表示</dt><dd>講師からの質問回答通知が入ります。</dd></dl>
+	<dl><dt>日付を表示</dt><dd>講師からの質問回答通知が入ります。</dd></dl>
+	<dl><dt>日付を表示</dt><dd>講師からの質問回答通知が入ります。</dd></dl>
+	<dl><dt>日付を表示</dt><dd>講師からの質問回答通知が入ります。</dd></dl>
 </div>
 <!-- お知らせここまで -->
 

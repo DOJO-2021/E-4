@@ -1,8 +1,14 @@
 @charset "UTF-8";
 
+/* --- bodyタグのwidth --- */
 body {
-
   width: 1200px;
+}
+
+/* --- h3タグ --- */
+h3 {
+	text-align:center;
+	margin:2px ;
 }
 /* --- お知らせ --- */
 *, *:before, *:after {-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
@@ -16,7 +22,7 @@ body {
 
 /* --- よくある質問集コンテンツ、最近の質問コンテンツ --- */
 .box {
-  margin         : auto;                 /* サンプル用 中央寄せ */
+  margin         : auto;                 /* 中央寄せ */
   box-sizing     : border-box;           /* 罫線も含む長さ      */
   background     : #fff;                 /* BOXの背景色         */
   border         : 1px solid #666;       /* 枠線の指定          */
@@ -29,7 +35,7 @@ body {
 .box .content {
   box-sizing     : border-box;           /* 罫線も含む長さ      */
   background     : white;              /* BOXの背景色         */
-  border         : 2px solid #35557f;    /* 枠線の指定          */
+  border         : 1px solid black;    /* 枠線の指定          */
   width          : 300px;                 /* サンプルBOXの幅     */
   height         : 400px;                 /* サンプルBOXの幅     */
   margin         : 2px;                  /* サンプルBOXの間     */
