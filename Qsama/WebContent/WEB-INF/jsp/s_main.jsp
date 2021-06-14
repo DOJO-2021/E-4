@@ -12,7 +12,8 @@
 <ul id="nav">
   <li>メニュー</li>
   <li><a href="/Qsama/ProfileServlet">Mypage</a></li>
-  <li><a href="/Qsama/SerachServlet">投稿</a></li>
+  <li><a href="/Qsama/Question_allpostServlet">全体投稿</a></li>
+  <li><a href="/Qsama/Question_postServlet">個別投稿</a></li>
   <li><a href="/Qsama/SerchServlet">検索</a></li>
   <li><a href="/Qsama/LogoutServlet">ログアウト</a></li>
 </ul>
