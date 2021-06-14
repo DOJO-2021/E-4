@@ -6,89 +6,88 @@ public class Question_post implements Serializable {
 
 	// Post_wordの列名をフィールドに設定する
 
-	private int Q_Number;
-	protected int user_id;
-	private String Major_items;
-	private String Medium_item;
-	private String Q_date;
-	private String A_date;
-	private String Q_content;
-	private String A_content;
-	private int A_level;
-	private int Q_flag;
-	private int A_flag;
-	private int emergency;
+	protected int QQ_id;                // 識別ナンバー
+	protected int ac_id;                // 識別ID
+	protected int Post_Number;          // 共有ナンバー
+	private String M_items;             // 大項目
+	private String S_items;             // 小項目
+	private String Q_date;              // 投稿日
+	private String Q_content;           // 質問内容
+	private int A_level;                // 回答レベル
+	private int Q_flag;                 // 質問者フラグ
+	private int emergency;              // 緊急レベル
 
 
 
 	// 引数がないコンストラクタ（デフォルトコンストラクタ）
 	public Question_post() {
 		super();
-		this.Q_Number = 0;
-		this.user_id = 0;
-		this.Major_items = "";
-		this.Medium_item = "";
+		this.QQ_id = 0;
+		this.ac_id = 0;
+		this.Post_Number = 0;
+		this.M_items = "";
+		this.S_items = "";
 		this.Q_date = "";
-		this.A_date = "";
 		this.Q_content = "";
-		this.A_content = "";
 		this.A_level = 0;
 		this.Q_flag = 0;
-		this.A_flag = 0;
 		this.emergency = 0;
 	}
 
 	// 引数があるコンストラクタ
-	public Question_post(int q_Number, int user_id, String major_items,
-			String medium_item, String q_date, String a_date,
-			String q_content, String a_content, int a_level, int q_flag,
-			int a_flag, int emergency) {
+	public Question_post(int QQ_id, int ac_id, int Post_Number, String M_items, String S_items, String Q_date, String Q_content, int A_level, int Q_flag, int emergency) {
 		super();
-		this.Q_Number = q_Number;
-		this.user_id = user_id;
-		this.Major_items = major_items;
-		this.Medium_item = medium_item;
-		this.Q_date = q_date;
-		this.A_date = a_date;
-		this.Q_content = q_content;
-		this.A_content = a_content;
-		this.A_level = a_level;
-		this.Q_flag = q_flag;
-		this.A_flag = a_flag;
+		this.QQ_id = QQ_id;
+		this.ac_id = ac_id;
+		this.Post_Number = Post_Number;
+		this.M_items = M_items;
+		this.S_items = S_items;
+		this.Q_date = Q_date;
+		this.Q_content = Q_content;
+		this.A_level = A_level;
+		this.Q_flag = Q_flag;
 		this.emergency = emergency;
 	}
 
-	// getter/setter
-	public int getQ_Number() {
-		return Q_Number;
+	// getter ・ setter
+	public int getQQ_id() {
+		return QQ_id;
 	}
 
-	public void setQ_Number(int q_Number) {
-		Q_Number = q_Number;
+	public void setQQ_id(int qQ_id) {
+		QQ_id = qQ_id;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public int getAc_id() {
+		return ac_id;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setAc_id(int ac_id) {
+		this.ac_id = ac_id;
 	}
 
-	public String getMajor_items() {
-		return Major_items;
+	public int getPost_Number() {
+		return Post_Number;
 	}
 
-	public void setMajor_items(String major_items) {
-		Major_items = major_items;
+	public void setPost_Number(int post_Number) {
+		Post_Number = post_Number;
 	}
 
-	public String getMedium_item() {
-		return Medium_item;
+	public String getM_items() {
+		return M_items;
 	}
 
-	public void setMedium_item(String medium_item) {
-		Medium_item = medium_item;
+	public void setM_items(String m_items) {
+		M_items = m_items;
+	}
+
+	public String getS_items() {
+		return S_items;
+	}
+
+	public void setS_items(String s_items) {
+		S_items = s_items;
 	}
 
 	public String getQ_date() {
@@ -99,28 +98,12 @@ public class Question_post implements Serializable {
 		Q_date = q_date;
 	}
 
-	public String getA_date() {
-		return A_date;
-	}
-
-	public void setA_date(String a_date) {
-		A_date = a_date;
-	}
-
 	public String getQ_content() {
 		return Q_content;
 	}
 
 	public void setQ_content(String q_content) {
 		Q_content = q_content;
-	}
-
-	public String getA_content() {
-		return A_content;
-	}
-
-	public void setA_content(String a_content) {
-		A_content = a_content;
 	}
 
 	public int getA_level() {
@@ -139,14 +122,6 @@ public class Question_post implements Serializable {
 		Q_flag = q_flag;
 	}
 
-	public int getA_flag() {
-		return A_flag;
-	}
-
-	public void setA_flag(int a_flag) {
-		A_flag = a_flag;
-	}
-
 	public int getEmergency() {
 		return emergency;
 	}
@@ -155,4 +130,5 @@ public class Question_post implements Serializable {
 		this.emergency = emergency;
 	}
 
+	
 }

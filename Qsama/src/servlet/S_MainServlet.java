@@ -27,14 +27,14 @@ public class S_MainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
+		if (session.getAttribute("user_id") == null) {
 			response.sendRedirect("/Qsama/LoginServlet");
 			return;
 		}
 
 		//個人情報を抽出
-		String user_id = request.getParameter("ID");
-		String user_pw = request.getParameter("PW");
+		String user_id = request.getParameter("USER_ID");
+		String user_pw = request.getParameter("USER_PW");
 		IdpwDAO iDao = new IdpwDAO();
 
 		//「MyList」にac_id, user_id, user_pw, my_class, e_mail, name, user_rank が格納されている
@@ -50,15 +50,4 @@ public class S_MainServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/Qsama/LoginServlet");
-			return;
-		}
-	}
 }

@@ -10,8 +10,8 @@
 </head>
 <body>
 <!-- ヘッダー -->
-  
-  
+
+
   <h1>全体投稿</h1>
   <main>
 
@@ -19,14 +19,14 @@
     <!-- チャット閲覧部分 -->
     <div class="chat-area">
     </div>
-   
+
     <!-- コメント  フレームワーク -->
     <div class="message-area">
       <!-- コメント入力欄 -->
       <div class="message-area-text">
         <textarea id="text"></textarea>
       </div>
-      
+
       <!-- 送信ボタン -->
       <div class="message-area-button">
         <button id="send" class="disabled-button">送信</button>
@@ -34,13 +34,13 @@
     </div>
     <!-- コメント部分  フレームワーク -->
   </div>
-  
-  
-  
+
+
+
   <!-- 戻るボタン
      受講者トップページへのリンク -->
-  <a href="">戻る</a>
-  
+  <a href="/Qsama/S_MainServlet">戻る</a>
+
   </main>
 
 </body>

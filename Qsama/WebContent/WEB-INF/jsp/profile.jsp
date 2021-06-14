@@ -54,5 +54,9 @@
 
 	 <input type="submit" name="edit" value="編集">
 	 <input type="reset" name="reset" value="削除"><br>
+
+   <!-- 戻るボタン
+   受講者トップページへのリンク -->
+  <a href="/Qsama/S_MainServlet">戻る</a>
 </body>
 </html>

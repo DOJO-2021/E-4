@@ -1,13 +1,17 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import dao.Question_postDAO;
 import model.Question_post;
@@ -16,6 +20,7 @@ import model.Question_post;
 /**
  * Servlet implementation class Question_postServlet
  */
+@MultipartConfig(location = "C:\\pleiades\\workspace\\Qsama\\WebContent\\images") // アップロードファイルの一時的な保存先
 @WebServlet("/Question_postServlet")
 public class Question_postServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -23,6 +28,10 @@ public class Question_postServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	public Question_postServlet() {
+		super();
+	}
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	// 個人投稿ページにフォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_post.jsp");
@@ -36,20 +45,56 @@ public class Question_postServlet extends HttpServlet {
 		
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		String Major_items = request.getParameter("Major_items");
-		String Medium_item = request.getParameter("Medium_item");
+		String M_items = request.getParameter("M_items");
+		String S_items = request.getParameter("S_items");
 		String Q_date = request.getParameter("Q_date");
-		String A_date = request.getParameter("A_date");
 		String Q_content = request.getParameter("Q_content");
-		String A_content = request.getParameter("A_content");
 		int A_level = Integer.parseInt(request.getParameter("A_level"));
 		int Q_flag = Integer.parseInt(request.getParameter(" Q_flag"));
-		int A_flag = Integer.parseInt(request.getParameter("A_flag"));
 		int emergency = Integer.parseInt(request.getParameter("emergency"));
 
+		//--------------- ファイル取得 ---------------
+		Part part = request.getPart("photo"); // getPartでファイル取得
+		String image = this.getFileName(part);
+		request.setAttribute("image", image);
+		
+		// サーバの指定のファイルパスへファイルを保存
+        //場所はクラス名↑の上に指定してある
+		
+		//ここで名前を決定
+		 LocalDateTime nowDateTime = LocalDateTime.now();
+		 DateTimeFormatter java8Format = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+		 
+		 // 日時情報を指定フォーマットの文字列で取得
+		 String java8Disp = nowDateTime.format( java8Format );
+		 
+		 // if文でファイルの種類を判定する
+		 part.write(java8Disp+".jpg");
+		 String url_s = "image/"+java8Disp+".jpg";
+		 System.out.println("image/"+java8Disp+".jpg");
+			
+
+       //ディスパッチ
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+		dispatcher.forward(request, response);
+		
+	
+	   //ファイルの名前を取得してくる
+		 private String getFileName() {
+	        String name = null;
+	        for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
+	            if (dispotion.trim().startsWith("filename")) {
+	                name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+	                name = name.substring(name.lastIndexOf("\\") + 1);
+	                break;
+	            }
+	        }		
+			return;  // nameを戻す
+		}
+	
 		// 登録処理を行う
 		Question_postDAO qDao = new Question_postDAO();
-		if (qDao.insert(new Question_post(0, 0, Major_items, Medium_item, Q_date, A_date, Q_content, A_content, A_level, Q_flag, A_flag, emergency))) {	// 登録成功
+		if (qDao.insert(new Question_post(0, 0, 0, M_items, S_items, Q_date, Q_content, A_level, Q_flag, emergency))) {	// 登録成功
 			System.out.println("登録成功");
 		}
 		else {
@@ -57,8 +102,8 @@ public class Question_postServlet extends HttpServlet {
 		}
 		
 		// 投稿ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_post.jsp");
-				dispatcher.forward(request, response);
+		RequestDispatcher dispatcher2 = request.getRequestDispatcher("/WEB-INF/jsp/question_allpost.jsp");
+				dispatcher2.forward(request, response);
 
 	}
 }

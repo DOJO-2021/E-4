@@ -157,8 +157,8 @@
     </div>
  </div>
  <!-- class = form1 -->
-    
- 
+
+
   <!-- 画像添付欄 -->
   <div class="form2">
   <div class="drag-area">
@@ -172,7 +172,7 @@
     <div id="drag-and-drop-area">
       <div>画像をドラッグ＆ドロップ<br>またはクリックでファイル選択</div>
     </div>
-  
+
     <h4>プレビュー</h4>
     <div id="previews"></div>
 
@@ -183,7 +183,7 @@
   </div>
   -->
   <!-- class = form2 -->
-  
+
   </div>
   <!-- class = form-wrapper -->
   </div>
@@ -198,7 +198,7 @@
 
 <!-- 戻るボタン
      受講者トップページへのリンク -->
-  <a href="">戻る</a>
+  <a href="/Qsama/S_MainServlet">戻る</a>
   </main>
 
 <!-- フッター -->
@@ -235,11 +235,11 @@ function flexTextarea(el) {
 }
 
 document.querySelectorAll('.FlexTextarea').forEach(flexTextarea)
- 
+
 
 /* 画像添付 */
-  
- 
+
+
  //selecting all required elements
 const dropArea = document.querySelector(".drag-area"),
 dragText = dropArea.querySelector("header"),
@@ -291,11 +291,11 @@ function showFile(){
     dragText.textContent = "Drag & Drop to Upload File";
   }
 }
- 
- 
- 
- 
- 
+
+
+
+
+
 // ファイル選択ボタン, ドラッグ＆ドロップ領域のクリックでファイル選択ダイアログ
 /*
 document.querySelectorAll('#file-select-button, #drag-and-drop-area').forEach((ele) => {

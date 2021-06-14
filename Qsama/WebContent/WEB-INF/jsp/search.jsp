@@ -19,9 +19,10 @@
 				<!--ヘッダー開始-->
 				<nav class="nav">
 					<ul>
-						<li><a href="/Qsama/MainServlet">Qさま</a></li>
+						<li><a href="/Qsama/S_MainServlet">Qさま</a></li>
 						<li><a href="/Qsama/ProfileServlet">マイページ</a></li>
-						<li><a href="/Qsama/Question_postServlet">投稿</a></li>
+						<li><a href="/Qsama/Question_postServlet">個別投稿</a></li>
+						<li><a href="/Qsama/Question_allpostServlet">全体投稿</a></li>
 						<li><a href="/Qsama/SearchServlet">検索</a></li>
 						<li><a href="/Qsama/LogoutServlet">ログアウト</a></li>
 					</ul>
@@ -241,5 +242,9 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><!--jquery読み込み-->
 		<script src="js/Search.js"></script>		<!--講師ジャンル表示用js-->
 		<script src="js/Search2.js"></script>		<!--事務局ジャンル表示用js-->
+
+	<!-- 戻るボタン
+    受講者トップページへのリンク -->
+  <a href="/Qsama/S_MainServlet">戻る</a>
 </body>
 </html>

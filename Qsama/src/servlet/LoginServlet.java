@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.IdpwDAO;
 import model.LoginUser;
+import model.Result;
 
 /**
  * Servlet implementation class LoginServlet
@@ -36,8 +37,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		String user_id = request.getParameter("ID");
-		String user_pw = request.getParameter("PW");
+		String user_id = request.getParameter("USER_ID");
+		String user_pw = request.getParameter("USER_PW");
 
 		// ログイン処理を行う
 		IdpwDAO iDao = new IdpwDAO();
@@ -55,9 +56,14 @@ public class LoginServlet extends HttpServlet {
 			// メインサーブレットにリダイレクトする
 			response.sendRedirect("/Qsama/S_MainServlet");
 		}
+
 		else {									// ログイン失敗
+			// リクエストスコープに、タイトル、メッセージ、戻り先を格納する
+			request.setAttribute("result",
+			new Result("ログイン失敗！", "IDまたはPWに間違いがあります。", "/Qsama/LoginServlet"));
+
 			// 結果ページにフォワードする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/s_main.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
 			dispatcher.forward(request, response);
 		}
 	}

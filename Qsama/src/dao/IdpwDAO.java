@@ -12,7 +12,7 @@ import model.LoginUser;
 
 public class IdpwDAO {
 	// ログインできるならtrueを返す
-	public boolean isLoginOK(String id, String pw) {
+	public boolean isLoginOK(String user_id, String user_pw) {
 		Connection conn = null;				// 接続がされているかどうかチェックするため
 		boolean loginResult = false;			// ログインできたかどうかチェックするため
 
@@ -21,13 +21,13 @@ public class IdpwDAO {
 			Class.forName("org.h2.Driver");
 
 			// データベースに接続する　connが「true」なら接続されている
-			conn = DriverManager.getConnection("jdbc:h2:file:C:\\pleiades\\workspace\\E-4\\Qsama\\data\\E-4", "sa", "");
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 			// SELECT文を準備する
-			String sql = "select count(*) from IDPW where user_id = ? and user_pw = ?";
+			String sql = "select count(*) from LOGIN where user_id = ? and user_pw = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, id);
-			pStmt.setString(2, pw);
+			pStmt.setString(1, user_id);
+			pStmt.setString(2, user_pw);
 
 
 			// SELECT文を実行し、結果表を取得する
@@ -35,8 +35,8 @@ public class IdpwDAO {
 
 			// ユーザーIDとパスワードが一致するユーザーがいたかどうかをチェックする
 			rs.next();
-			System.out.println(rs);
-			System.out.println(rs.getInt("count(*)"));
+			//System.out.println(rs);
+			//System.out.println(rs.getInt("count(*)"));
 
 			if (rs.getInt("count(*)") == 1) {
 				loginResult = true;
@@ -59,10 +59,13 @@ public class IdpwDAO {
 				}
 			}
 		}
-
+		System.out.println(user_id);
+		System.out.println(user_pw);
+		System.out.println(loginResult);
 		// 結果を返す
 		return loginResult;
 	}
+
 	// 個人情報を取得
 	public List<LoginUser> Mydata(String user_id, String user_pw) {
 		Connection conn = null;
@@ -73,11 +76,11 @@ public class IdpwDAO {
 				Class.forName("org.h2.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/simpleBC", "sa", "");
+				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 				//認証成功後、ログインIDを利用して個人データを抽出実行
-				String mysql = "select * from IDPW where user_id = ? and user_pw = ?";
-				PreparedStatement myidpw = conn.prepareStatement(mysql);
+				String mysql2 = "select * from LOGIN where user_id = ? and user_pw = ?";
+				PreparedStatement myidpw = conn.prepareStatement(mysql2);
 				myidpw.setString(1, user_id);
 				myidpw.setString(2, user_pw);
 				ResultSet Mydata2 = myidpw.executeQuery();
@@ -131,11 +134,11 @@ public class IdpwDAO {
 				Class.forName("org.h2.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/simpleBC", "sa", "");
+				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 				//認証成功後、ログインIDを利用して個人データを抽出実行
-				String mysql = "select user_rank from IDPW where user_id = ? and user_pw = ?";
-				PreparedStatement myidpw = conn.prepareStatement(mysql);
+				String mysql3 = "select user_rank from LOGIN where user_id = ? and user_pw = ?";
+				PreparedStatement myidpw = conn.prepareStatement(mysql3);
 				myidpw.setString(1, user_id);
 				myidpw.setString(2, user_pw);
 				ResultSet Mydata = myidpw.executeQuery();

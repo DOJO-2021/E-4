@@ -27,8 +27,8 @@ public class ProfileServlet extends HttpServlet {
 //		HttpSession session = request.getSession();
 
 		// プロフィールページにフォワードする
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");
-//		dispatcher.forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");
+		dispatcher.forward(request, response);
 
 
 	    // 検索処理を行う
@@ -42,8 +42,8 @@ public class ProfileServlet extends HttpServlet {
 		System.out.println("プロフィールの中身:"+ProfileList);
 
 		 // 結果ページにフォワードする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");
-			dispatcher.forward(request, response);
+		//	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");
+		//	dispatcher.forward(request, response);
 
 	}
 
