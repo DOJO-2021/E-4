@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,10 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ProfileDAO;
 import model.Profile;
+
 /**
  * Servlet implementation class ProfileServlet
  */
-@WebServlet("ProfileServlet")
+@WebServlet("/ProfileServlet")
 public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -22,9 +24,27 @@ public class ProfileServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		HttpSession session = request.getSession();
+
 		// プロフィールページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");
-		dispatcher.forward(request, response);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");
+//		dispatcher.forward(request, response);
+
+
+	    // 検索処理を行う
+		int ac_id = 10; //10は仮値　　ここにログイン時のac_idを格納する！！
+
+		ProfileDAO pDao = new ProfileDAO();
+		List<Profile> ProfileList = pDao.profileAll(ac_id);
+
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("ProfileList", ProfileList);
+		System.out.println("プロフィールの中身:"+ProfileList);
+
+		 // 結果ページにフォワードする
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");
+			dispatcher.forward(request, response);
+
 	}
 
 	/**
@@ -34,8 +54,8 @@ public class ProfileServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 			// もしもログインしていなかったらログインサーブレットにリダイレクトする
-	/*	HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
+//		HttpSession session = request.getSession();
+	/*	if (session.getAttribute("id") == null) {
 			response.sendRedirect("/Qsama/LoginServlet");
 			return;
 	}
@@ -56,21 +76,20 @@ public class ProfileServlet extends HttpServlet {
 		String qualification= request.getParameter("QUALIFICATION");
         String fovorite= request.getParameter("FAVORITE");
         String comment= request.getParameter ("COMMENT");
-	}
 
 
-
-    // 登録処理を行う
+    // 検索処理を行う
+	int ac_id = 10; //10は仮値　　！！
 
 	ProfileDAO pDao = new ProfileDAO();
-	List<Profile> ProfileList = pDao.profileAll(new Profile("COMPANY, MY_CLASS, NAME, EXPERIENCE, BLOODTYPE,BIRTHDAY, COLLEGE, UNDERGRADUATE, HOBBY, SPECIAL_SKILL, QUALIFICATION, FAVORITE, COMMENT"));
+	List<Profile> ProfileList = pDao.profileAll(ac_id);
+
 	// 検索結果をリクエストスコープに格納する
 	request.setAttribute("ProfileList", ProfileList);
-
+//	System.out.println("プロフィールの中身:"+ProfileList);
 
 	 // 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");
 		dispatcher.forward(request, response);
-
-
+	}
 }

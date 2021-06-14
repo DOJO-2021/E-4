@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.IdpwDAO;
-import model.LoginUser;
+import dao.SearchDAO;
+import model.Search;
 
 /**
- * Servlet implementation class S_MainServlet
+ * Servlet implementation class SearchServlet
  */
-@WebServlet("/S_MainServlet")
-public class S_MainServlet extends HttpServlet {
+@WebServlet("/SearchServlet")
+public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -26,27 +26,9 @@ public class S_MainServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/Qsama/LoginServlet");
-			return;
-		}
 
-		//個人情報を抽出
-		String user_id = request.getParameter("ID");
-		String user_pw = request.getParameter("PW");
-		IdpwDAO iDao = new IdpwDAO();
-
-		//「MyList」にac_id, user_id, user_pw, my_class, e_mail, name, user_rank が格納されている
-		List<LoginUser> MyList = iDao.Mydata(user_id, user_pw);
-		System.out.println(MyList);
-
-		// 「Rank」にuser_rankが格納されている
-		int Rank = iDao.MyRank(user_id, user_pw);
-		System.out.println(Rank);
-
-		// mainページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/s_main.jsp");
+		// 検索ページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -60,5 +42,21 @@ public class S_MainServlet extends HttpServlet {
 			response.sendRedirect("/Qsama/LoginServlet");
 			return;
 		}
+
+		// リクエストパラメータを取得する
+		request.setCharacterEncoding("UTF-8");
+		String Search_word = request.getParameter("search_word");		// 検索キーワードを取得
+
+		// 検索処理を行う
+		SearchDAO sDao = new SearchDAO();
+		List<Search> SearchList = sDao.KeywordSearch(new Search(Search_word));
+
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("SearchList", SearchList);
+//		System.out.println("検索件数："+cardList);
+
+		// 結果ページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search.jsp");
+		dispatcher.forward(request, response);
 	}
 }

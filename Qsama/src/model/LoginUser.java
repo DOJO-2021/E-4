@@ -3,16 +3,55 @@ package model;
 import java.io.Serializable;
 
 public class LoginUser implements Serializable {
+	private int ac_id;			// 識別ID
 	private String user_id;	// ログイン時のID
-	private String my_class ;
-	private int user_rank;
+	private String user_pw;	// パスワード
+	private String my_class;	// 所属クラス
+	private String e_mail;		// E-mail
+	private String name;		// 氏名
+	private int user_rank;	// ユーザーランク
 
-	public LoginUser() {
-		this(null);
+	public LoginUser(int ac_id, String user_id, String user_pw, String my_class, String e_mail, String name, int user_rank) {
+		this.ac_id = ac_id;
+		this.user_id = user_id;
+		this.user_pw = user_pw;
+		this.my_class = my_class;
+		this.e_mail = e_mail;
+		this.name = name;
+		this.user_rank = user_rank;
 	}
 
-	public LoginUser(String user_id) {
+	public LoginUser() {
+		this.ac_id = 0;
+		this.user_id = "";
+		this.user_pw = "";
+		this.my_class = "";
+		this.e_mail = "";
+		this.name = "";
+		this.user_rank = 0;
+	}
+
+	public LoginUser(String user_id, String user_pw, String my_class, int user_rank) {
 		this.user_id = user_id;
+		this.user_pw = user_pw;
+		this.my_class = my_class;
+		this.user_rank = user_rank;
+	}
+
+	public LoginUser(String id) {
+		this.user_id = id;
+	}
+
+	public LoginUser(String id, String pw) {
+		this.user_pw = pw;
+	}
+
+	public int getAc_id() {
+		return ac_id;
+	}
+
+	public void setAc_id(int ac_id) {
+		this.ac_id = ac_id;
 	}
 
 	public String getUser_id() {
@@ -23,12 +62,36 @@ public class LoginUser implements Serializable {
 		this.user_id = user_id;
 	}
 
+	public String getUser_pw() {
+		return user_pw;
+	}
+
+	public void setUser_pw(String user_pw) {
+		this.user_pw = user_pw;
+	}
+
 	public String getMy_class() {
 		return my_class;
 	}
 
 	public void setMy_class(String my_class) {
 		this.my_class = my_class;
+	}
+
+	public String getE_mail() {
+		return e_mail;
+	}
+
+	public void setE_mail(String e_mail) {
+		this.e_mail = e_mail;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getUser_rank() {
@@ -38,4 +101,5 @@ public class LoginUser implements Serializable {
 	public void setUser_rank(int user_rank) {
 		this.user_rank = user_rank;
 	}
+
 }
