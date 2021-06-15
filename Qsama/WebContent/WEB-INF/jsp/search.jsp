@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -19,10 +20,9 @@
 				<!--ヘッダー開始-->
 				<nav class="nav">
 					<ul>
-						<li><a href="/Qsama/S_MainServlet">Qさま</a></li>
+						<li><a href="/Qsama/MainServlet">Qさま</a></li>
 						<li><a href="/Qsama/ProfileServlet">マイページ</a></li>
-						<li><a href="/Qsama/Question_postServlet">個別投稿</a></li>
-						<li><a href="/Qsama/Question_allpostServlet">全体投稿</a></li>
+						<li><a href="/Qsama/Question_postServlet">投稿</a></li>
 						<li><a href="/Qsama/SearchServlet">検索</a></li>
 						<li><a href="/Qsama/LogoutServlet">ログアウト</a></li>
 					</ul>
@@ -34,6 +34,7 @@
 	<main>
 		<!--メイン-->
 		<div id="search_body" class="search_body">
+		<form method="POST" id="search_form" action="/Qsama/SearchServlet">
 			<div id="search_window" class="tabs2">
 				<input id="teacher" type="radio" name="tab_item2" checked>
  				<label class="tab_item2" for="teacher">講師</label>
@@ -43,109 +44,106 @@
 				    <div class="tab_content_description">
 				    	<div>
 						<h3>質問検索</h3><!--質問窓-->
-						<form method="POST" id="search_form" action="/Qsama/SearchServlet">
-							<input type="search" id="search_word" class="search_word" name="s_word" size="50" placeholder="検索キーワード(例) JavaScript オブジェクト" autofocus required>
+							<input type="search" id="search_word" class="search_word" name="search_word" size="50" placeholder="検索キーワード(例) JavaScript オブジェクト" autofocus required>
 							<input type="submit" name="submit" value="検索">
-						</form>
 						</div>
-				<div class="genre" style="width:50%; float:left;">
-					<br>検索条件<br>
-					<input type="radio" name="s1" value="and"> 全てのワードを含む<br>
-					<input type="radio" name="s1" value="or"> いずれかのワードを含む<br>
-				</div>
-				<div class="pulldownset" style="float:left;">
-					<br>ジャンル選択<br>
+						<div class="genre" style="width:50%; float:left;">
+						<br>検索条件<br>
+							<input type="radio" name="search_radio" value="and" checked> 全てのワードを含む<br>
+							<input type="radio" name="search_radio" value="or"> いずれかのワードを含む<br>
+						</div>
+						<div class="pulldownset" style="float:left;">
+						<br>ジャンル選択<br>
 					<select class="major_items" name="m_items">
 						<option value="" selected="selected">ジャンルを選択</option>
 						<option value="HTML">HTML</option>
 						<option value="CSS">CSS</option>
-						<option value="JavaScript">Javascript</option>
+						<option value="JavaScript">JavaScript</option>
 						<option value="Java">Java</option>
 						<option value="SQL">SQL</option>
-						<option value="Servlet_JSP">ｻｰﾌﾞﾚｯﾄ・JSP</option>
-						<option value="App">アプリケーション</option>
-						<option value="Other">その他</option>
+						<option value="ｻｰﾌﾞﾚｯﾄ・JSP">ｻｰﾌﾞﾚｯﾄ・JSP</option>
+						<option value="ｱﾌﾟﾘｹｰｼｮﾝ">ｱﾌﾟﾘｹｰｼｮﾝ</option>
+						<option value="その他">その他</option>
 					</select><br>
-					<select class="sub_item" name="s_item">
+					<select class="sub_item" name="s_items">
 						<option value="" selected="selected">詳細ジャンルを選択</option>
-						<option value="" data-val="HTML">基礎・基本的な書式</option>
-						<option value="" data-val="HTML">見出し・段落・リスト</option>
-						<option value="" data-val="HTML">テキスト・単語</option>
-						<option value="" data-val="HTML">リンク・画像挿入</option>
-						<option value="" data-val="HTML">class属性・id属性</option>
-						<option value="" data-val="HTML">テーブル・フォーム</option>
-						<option value="" data-val="HTML">グループ化</option>
-						<option value="" data-val="HTML">その他</option>
-						<option value="" data-val="CSS">基礎・基本的な書式</option>
-						<option value="" data-val="CSS">装飾</option>
-						<option value="" data-val="CSS">レイアウト</option>
-						<option value="" data-val="CSS">パディング・マージン</option>
-						<option value="" data-val="CSS">レスポンシブデザイン</option>
-						<option value="" data-val="CSS">その他</option>
-						<option value="" data-val="JavaScript">基礎</option>
-						<option value="" data-val="JavaScript">アウトプット方法</option>
-						<option value="" data-val="JavaScript">文法</option>
-						<option value="" data-val="JavaScript">条件分岐・繰り返し</option>
-						<option value="" data-val="JavaScript">関数作成</option>
-						<option value="" data-val="JavaScript">配列</option>
-						<option value="" data-val="JavaScript">イベント処理</option>
-						<option value="" data-val="JavaScript">オブジェクト（Date,Mathなど）</option>
-						<option value="" data-val="JavaScript">その他</option>
-						<option value="" data-val="Java">基礎・基本的な書式</option>
-						<option value="" data-val="Java">条件分岐・繰り返し</option>
-						<option value="" data-val="Java">配列</option>
-						<option value="" data-val="Java">メソッド</option>
-						<option value="" data-val="Java">オブジェクト指向</option>
-						<option value="" data-val="Java">継承</option>
-						<option value="" data-val="Java">多態性</option>
-						<option value="" data-val="Java">カプセル化</option>
-						<option value="" data-val="Java">API</option>
-						<option value="" data-val="Java">コレクション</option>
-						<option value="" data-val="Java">例外</option>
-						<option value="" data-val="Java">エラーメッセージ</option>
-						<option value="" data-val="Java">その他</option>
-						<option value="" data-val="Servlet_JSP">サーブレット</option>
-						<option value="" data-val="Servlet_JSP">JSP</option>
-						<option value="" data-val="Servlet_JSP">フォーム</option>
-						<option value="" data-val="Servlet_JSP">MVCモデル</option>
-						<option value="" data-val="Servlet_JSP">スコープ</option>
-						<option value="" data-val="Servlet_JSP">アクションタグ</option>
-						<option value="" data-val="Servlet_JSP">EL式</option>
-						<option value="" data-val="Servlet_JSP">データベース</option>
-						<option value="" data-val="Servlet_JSP">エラーメッセージ</option>
-						<option value="" data-val="Servlet_JSP">その他</option>
-						<option value="" data-val="SQL">データベースの基本</option>
-						<option value="" data-val="SQL">検索 -select-</option>
-						<option value="" data-val="SQL">内部結合・外部結合</option>
-						<option value="" data-val="SQL">サブクエリ</option>
-						<option value="" data-val="SQL">登録 -insert-</option>
-						<option value="" data-val="SQL">更新 -update-</option>
-						<option value="" data-val="SQL">削除 -delete-</option>
-						<option value="" data-val="SQL">テーブル作成</option>
-						<option value="" data-val="SQL">その他</option>
-						<option value="" data-val="App">Eclipse</option>
- 						<option value="" data-val="App">H2コンソール</option>
-						<option value="" data-val="App">Git関係</option>
-						<option value="" data-val="App">その他</option>
-						<option value="" data-val="Other">講義全般</option>
-    					<option value="" data-val="Other">その他</option>
+						<option value="基礎・基本的な書式" data-val="HTML">基礎・基本的な書式</option>
+						<option value="見出し・段落・リスト" data-val="HTML">見出し・段落・リスト</option>
+						<option value="テキスト・単語" data-val="HTML">テキスト・単語</option>
+						<option value="リンク・画像挿入" data-val="HTML">リンク・画像挿入</option>
+						<option value="class属性・id属性" data-val="HTML">class属性・id属性</option>
+						<option value="テーブル・フォーム" data-val="HTML">テーブル・フォーム</option>
+						<option value="グループ化" data-val="HTML">グループ化</option>
+						<option value="その他" data-val="HTML">その他</option>
+						<option value="基礎・基本的な書式" data-val="CSS">基礎・基本的な書式</option>
+						<option value="装飾" data-val="CSS">装飾</option>
+						<option value="レイアウト" data-val="CSS">レイアウト</option>
+						<option value="パディング・マージン" data-val="CSS">パディング・マージン</option>
+						<option value="レスポンシブデザイン" data-val="CSS">レスポンシブデザイン</option>
+						<option value="その他" data-val="CSS">その他</option>
+						<option value="基礎" data-val="JavaScript">基礎</option>
+						<option value="アウトプット方法" data-val="JavaScript">アウトプット方法</option>
+						<option value="文法" data-val="JavaScript">文法</option>
+						<option value="条件分岐・繰り返し" data-val="JavaScript">条件分岐・繰り返し</option>
+						<option value="関数作成" data-val="JavaScript">関数作成</option>
+						<option value="配列" data-val="JavaScript">配列</option>
+						<option value="イベント処理" data-val="JavaScript">イベント処理</option>
+						<option value="オブジェクト（Date,Mathなど）" data-val="JavaScript">オブジェクト（Date,Mathなど）</option>
+						<option value="その他" data-val="JavaScript">その他</option>
+						<option value="基礎・基本的な書式" data-val="Java">基礎・基本的な書式</option>
+						<option value="条件分岐・繰り返し" data-val="Java">条件分岐・繰り返し</option>
+						<option value="配列" data-val="Java">配列</option>
+						<option value="メソッド" data-val="Java">メソッド</option>
+						<option value="オブジェクト指向" data-val="Java">オブジェクト指向</option>
+						<option value="継承" data-val="Java">継承</option>
+						<option value="多態性" data-val="Java">多態性</option>
+						<option value="カプセル化" data-val="Java">カプセル化</option>
+						<option value="API" data-val="Java">API</option>
+						<option value="コレクション" data-val="Java">コレクション</option>
+						<option value="例外" data-val="Java">例外</option>
+						<option value="エラーメッセージ" data-val="Java">エラーメッセージ</option>
+						<option value="その他" data-val="Java">その他</option>
+						<option value="サーブレット" data-val="ｻｰﾌﾞﾚｯﾄ・JSP">サーブレット</option>
+						<option value="JSP" data-val="ｻｰﾌﾞﾚｯﾄ・JSP">JSP</option>
+						<option value="フォーム" data-val="ｻｰﾌﾞﾚｯﾄ・JSP">フォーム</option>
+						<option value="MVCモデル" data-val="ｻｰﾌﾞﾚｯﾄ・JSP">MVCモデル</option>
+						<option value="スコープ" data-val="ｻｰﾌﾞﾚｯﾄ・JSP">スコープ</option>
+						<option value="アクションタグ" data-val="ｻｰﾌﾞﾚｯﾄ・JSP">アクションタグ</option>
+						<option value="EL式" data-val="ｻｰﾌﾞﾚｯﾄ・JSP">EL式</option>
+						<option value="データベース" data-val="ｻｰﾌﾞﾚｯﾄ・JSP">データベース</option>
+						<option value="エラーメッセージ" data-val="ｻｰﾌﾞﾚｯﾄ・JSP">エラーメッセージ</option>
+						<option value="その他" data-val="ｻｰﾌﾞﾚｯﾄ・JSP">その他</option>
+						<option value="データベースの基本" data-val="SQL">データベースの基本</option>
+						<option value="検索 -select-" data-val="SQL">検索 -select-</option>
+						<option value="内部結合・外部結合" data-val="SQL">内部結合・外部結合</option>
+						<option value="サブクエリ" data-val="SQL">サブクエリ</option>
+						<option value="登録 -insert-" data-val="SQL">登録 -insert-</option>
+						<option value="更新 -update-" data-val="SQL">更新 -update-</option>
+						<option value="削除 -delete-" data-val="SQL">削除 -delete-</option>
+						<option value="テーブル作成" data-val="SQL">テーブル作成</option>
+						<option value="その他" data-val="SQL">その他</option>
+						<option value="Eclipse" data-val="ｱﾌﾟﾘｹｰｼｮﾝ">Eclipse</option>
+ 						<option value="H2コンソール" data-val="ｱﾌﾟﾘｹｰｼｮﾝ">H2コンソール</option>
+						<option value="Git関係" data-val="ｱﾌﾟﾘｹｰｼｮﾝ">Git関係</option>
+						<option value="その他" data-val="ｱﾌﾟﾘｹｰｼｮﾝ">その他</option>
+						<option value="講義全般" data-val="その他">講義全般</option>
+    					<option value="その他" data-val="その他">その他</option>
 					</select>
 				</div>
-				</div>
-				</div>
+			</div>
+		</div>
 				<div class="tab_content2" id="office_content">
 				    <div class="tab_content_description">
 						<div>
 						<h3>質問検索</h3><!--質問窓-->
-						<form method="POST" action="/Qsama/SearchServlet">
-							<input type="text" class="input_items" name="s_word" size="50" placeholder="検索キーワード">
+
+							<input type="text" class="input_items" name="search_word2" size="50" placeholder="検索キーワード">
 							<input type="submit" name="submit" value="検索">
-						</form>
 						</div>
 				<div style="width:50%; float:left;">
 					<br>検索条件<br>
-					<input type="radio" name="s1" value="and"> 全てのワードを含む<br>
-					<input type="radio" name="s1" value="or"> いずれかのワードを含む<br>
+					<input type="radio" name="search_radio2" value="and" checked> 全てのワードを含む<br>
+					<input type="radio" name="search_radio2" value="or"> いずれかのワードを含む<br>
 				</div>
 				<div style="float:left;">
 					<br>ジャンル選択<br>
@@ -155,7 +153,7 @@
 						<option value="Report">遅刻・欠席・退勤忘れ</option>
 						<option value="S_other">その他</option>
 					</select><br>
-					<select class="sub_item2" name="s_item2">
+					<select class="sub_item2" name="s_items2">
 						<option value="" selected="selected">項目を選択</option>
 						<option value="項目A" data-val="Procedure">項目A</option>
 						<option value="項目B" data-val="Procedure">項目B</option>
@@ -165,58 +163,58 @@
   						<option value="項目F" data-val="S_other">項目F</option>
 					</select>
 				</div>
+			</div>
+		</div>
+	</div >
+	</form>
+		<!--ランキング窓-->
+		<div class="tabs" style="float:left;">
+			<input id="w_ranking" type="radio" name="tab_item" checked>
+			<label class="tab_item" for="w_ranking">週間ランキング</label>
+			<input id="a_ranking" type="radio" name="tab_item">
+			<label class="tab_item" for="a_ranking">通期ランキング</label>
+			<div class="tab_content" id="w_ranking_content">
+				<div class="tab_content_description">
+				<p class="c-txtsp">
+				<h3>週間ランキング</h3>
+					<ol class="ranking">
+						<li>1位</li>
+						<li>2位</li>
+						<li>3位</li>
+						<li>4位</li>
+						<li>5位</li>
+					</ol>
 				</div>
-				</div>
-
-			</div >
-
-				<!--ランキング窓-->
-			<div class="tabs" style="float:left;">
-				<input id="w_ranking" type="radio" name="tab_item" checked>
-				<label class="tab_item" for="w_ranking">週間ランキング</label>
-				<input id="a_ranking" type="radio" name="tab_item">
-				<label class="tab_item" for="a_ranking">通期ランキング</label>
-				<div class="tab_content" id="w_ranking_content">
-					<div class="tab_content_description">
-					<p class="c-txtsp">
-					<h3>週間ランキング</h3>
-						<ol class="ranking">
-							<li>1位</li>
-							<li>2位</li>
-							<li>3位</li>
-							<li>4位</li>
-							<li>5位</li>
-						</ol>
-					</div>
-				</div>
-				<div class="tab_content" id="a_ranking_content">
-					<div class="tab_content_description">
-					<p class="c-txtsp">
-					<h3>通期ランキング</h3>
-						<ol class="ranking">
-							<li>1位</li>
-							<li>2位</li>
-							<li>3位</li>
-							<li>4位</li>
-							<li>5位</li>
-						</ol>
-					</div>
+			</div>
+			<div class="tab_content" id="a_ranking_content">
+				<div class="tab_content_description">
+				<p class="c-txtsp">
+				<h3>通期ランキング</h3>
+					<ol class="ranking">
+						<li>1位</li>
+						<li>2位</li>
+						<li>3位</li>
+						<li>4位</li>
+						<li>5位</li>
+					</ol>
 				</div>
 			</div>
 		</div>
-
-		<div id="search_results" class="search_results" style="clear:both;">
-			<div id="result_body" class="result_body" style="clear:both;">
-			<h3>検索結果</h3><br>
-				<div class="cp_qa">
-					<div class="cp_actab">
-						<input id="cp_tabfour031" type="checkbox" name="tabs">
-						<label for="cp_tabfour031">質問テキスト</label>
-							<div class="cp_actab-content">
-								<p>答えテキスト</p>
-							</div>
+	</div>
+	<div id="search_results" class="search_results" style="clear:both;">
+		<div id="result_body" class="result_body" style="clear:both;">
+		<h3>検索結果</h3><br>
+			<div class="cp_qa">
+			<c:forEach var="s" items="${SearchList}" varStatus="z">
+				<div class="cp_actab">
+					<input id="cp_tabfour031" type="checkbox" name="tabs">
+					<label for="cp_tabfour031">${s.q_content}</label>
+					<div class="cp_actab-content">
+						<p>${s.a_content}</p>
 					</div>
-					<div class="cp_actab">
+				</div>
+			</c:forEach>
+<!--  			<div class="cp_actab">
 						<input id="cp_tabfour032" type="checkbox" name="tabs">
 						<label for="cp_tabfour032">質問テキスト</label>
 							<div class="cp_actab-content">
@@ -229,10 +227,10 @@
 							<div class="cp_actab-content">
 								<p>答えテキスト</p>
 							</div>
-					</div>
+					</div>  -->
+				</div>
 			</div>
 		</div>
-	</div>
 	</main>
 
 		<footer class="footer"><!--フッター-->
@@ -242,9 +240,5 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><!--jquery読み込み-->
 		<script src="js/Search.js"></script>		<!--講師ジャンル表示用js-->
 		<script src="js/Search2.js"></script>		<!--事務局ジャンル表示用js-->
-
-	<!-- 戻るボタン
-    受講者トップページへのリンク -->
-  <a href="/Qsama/S_MainServlet">戻る</a>
 </body>
 </html>

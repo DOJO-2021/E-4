@@ -18,8 +18,8 @@ body {
 .tab_item {
   width: calc(100%/2);
   height: 50px;
-  border-bottom: 3px solid #5ab4bd;
-  background-color: #d9d9d9;
+  border-bottom: 3px solid orange;
+  background-color: #F2F2F2;
   line-height: 50px;
   font-size: 16px;
   text-align: center;
@@ -57,7 +57,7 @@ input[name="tab_item"] {
 
 /*選択されているタブのスタイルを変える*/
 .tabs input:checked + .tab_item {
-  background-color: #5ab4bd;
+  background-color: orange;
   color: #fff;
 }
 
@@ -87,9 +87,10 @@ input[name="tab_item"] {
 	padding: 0.3em;
 	transition: 0.3s;
 	letter-spacing: 1px;
-	color: #aaaaaa;
+	color: #000000;
 	border: 1px solid #1b2538;
 	border-radius: 4px;
+	margin: 0 0 10px 0;
 }
 
 .item_regist input[type='text'] {
@@ -99,17 +100,21 @@ input[name="tab_item"] {
 	padding: 0.3em;
 	transition: 0.3s;
 	letter-spacing: 1px;
-	color: #aaaaaa;
+	color: #000000;
 	border: 1px solid #1b2538;
 	border-radius: 4px;
+	margin: 0 0 10px 0;
 }
 
 .class_number { 
+	margin: 0 0 10px 0;
+}
+
+.belong {
 	margin-right: auto;
-	margin: 5px;
 }
 .content input[type='text']:focus {
-	border: 1px solid #da3c41;
+	border: 1px solid #c20c33;
 	outline: none;
 	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
 }
@@ -118,6 +123,7 @@ input[name="tab_item"] {
 .content {
 	text-align: center;
 	padding: 10px;
+	margin: 10px 0 10px 0;
 }
 
 /*テキストボックス type = password*/
@@ -128,9 +134,10 @@ input[name="tab_item"] {
 	padding: 0.3em;
 	transition: 0.3s;
 	letter-spacing: 1px;
-	color: #aaaaaa;
+	color: #000000;
 	border: 1px solid #1b2538;
 	border-radius: 4px;
+	margin: 0 0 10px 0;
 }
 
 .item_regist input[type='password'] {
@@ -140,9 +147,10 @@ input[name="tab_item"] {
 	padding: 0.3em;
 	transition: 0.3s;
 	letter-spacing: 1px;
-	color: #aaaaaa;
+	color: #000000;
 	border: 1px solid #1b2538;
 	border-radius: 4px;
+	margin: 0 0 10px 0;
 }
 
 .content input[type='password']:focus {
@@ -151,107 +159,14 @@ input[name="tab_item"] {
 	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
 }
 
-/*新規登録ボタンを押すとモーダル
-#open,#close{
-	cursor:pointer;
-	width:200px;
-	border:1px solid #ccc;
-	border-radius:4px;
-	text-align: center;
-	padding:12px 0;
-	margin:16px auto 0;
-}
-
-#mask{
-	background:rgba(0,0,0,0.4);
-	position:fixed;
-	top:0;
-	bottom:0;
-	left:0;
-	right:0;
-	z-index:1;
-}
-
-#modal{
-	background:#fff;
-	width:300px;
-	padding:20px;
-	border-radius:4px;
-	position:absolute;
-	top:40px;
-	left:0;
-	right:0;
-	margin:0 auto;
-	transition:transform 0.4s;
-	z-index:2;
-}
-
-#mask.hidden{
-	display:none;
-}
- 
-#modal.hidden{
-	transform:translate(0,-500px);
-}
-
-
-* {
-  box-sizing: border-box;
-}
-body {
-  font-family:'Avenir','Helvetica, Neue','Helvetica','Arial';
-}
-*/
-
-/* モーダルCSS 
-.modalArea {
-  display: none;
-  position: fixed;
-  z-index: 10; /*サイトによってここの数値は調整 */
-/*  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.modalBg {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(30,30,30,0.9);
-}
-
-.modalWrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform:translate(-50%,-50%);
-  width: 70%;
-  max-width: 500px;
-  padding: 10px 30px;
-  background-color: #fff;
-}
-
-.closeModal {
-  position: absolute;
-  top: 0.5rem;
-  right: 1rem;
-  cursor: pointer;
-}
-
-#openModal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform:translate(-50%,-50%);
-}
-*/
-/* 以下ボタンスタイル */
+/*以下ボタンスタイル*/
 button {
-  padding: 10px;
+  padding: 20px 0 20px 0;
   background-color: #fff;
   border: 1px solid #282828;
   border-radius: 2px;
   cursor: pointer;
+  font-size: 30px;
 }
 
 .popup {
@@ -275,4 +190,27 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* 入力エラーのスタイル */
+/*input[type=text]:required,
+input[type=password]:required,
+textarea:required {
+	color: #630015;
+	border-color: #c20c33;
+	background-color: #ffd9e1;
+}*/
+
+/*入力しているときは青、入力していないと赤になる*/
+input {
+  background-color: #FFF;
+}
+
+input:placeholder-shown {
+  background-color: #FFE4B3;
+}
+
+.button {
+	padding-top: 70px 0 50px 0;
+	font-size: 30px;
 }

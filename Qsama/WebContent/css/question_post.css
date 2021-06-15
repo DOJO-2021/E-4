@@ -41,83 +41,141 @@ h2{
   padding: 5px;
 }
 
-.ans_items, .question_cat {
+.A_level, .question_cat {
   padding-top: 5px;
 }
 
-.emergency, .Q_cont {
+.emergency, .Q_content {
   padding-top: 10px;
 }
-
-
 
 .form2 {
   padding-left: 80px;
   padding-top: 15px;
 }
 
-/* -------- 質問タブ・質問リスト -------- */
-/*タブ切り替え全体のスタイル*/
-.Q_tab {
-  margin-top: 50px;
-  padding-bottom: 40px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: auto;
-  margin: 0 auto;
-  flex-wrap: wrap;
-  display: flex;
+/* -------- タブ切り替え --------*/
+.cp_qa *, .cp_qa *:before, .cp_qa *:after {
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.cp_qa {
+	margin: 0 auto;
+	background: #ffffff;
+}
+.cp_qa input {
+	display: none;
+}
+/* カテゴリー */
+.cp_qa #cp_content1,
+.cp_qa #cp_content2 {
+	display: none;
+	padding: 20px 0 0;
+	border-top: 1px solid #dddddd;
+}
+.cp_qa label.cp_tabitem {
+	display: inline-block;
+	margin: 0 0 -1px;
+	padding: 15px 25px;
+	text-align: center;
+	color: #bbbbbb;
+	border: 1px solid transparent;
+}
+.cp_qa label.cp_tabitem:before {
+	margin-right: 10px;
 }
 
-/*タブのスタイル*/
-.tab_name {
-  width: calc(100%/2);
-  height: 50px;
-  border-bottom: 3px solid #ffc06e;
-  background-color: #d9d9d9;
-  line-height: 50px;
-  font-size: 16px;
-  text-align: center;
-  color: #565656;
+.cp_qa label.cp_tabitem:hover {
+	cursor: pointer;
+	color: #888888;
+}
+.cp_qa input:checked + label {
+	color: #555555;
+	border: 1px solid #dddddd;
+	border-bottom: 1px solid #ffffff;
+}
+/* --ブロックのバーの色 */
+.cp_qa input:checked + label[for*='1'] {
+	border-top: 5px solid #ffc06e;
+}
+.cp_qa input:checked + label[for*='2'] {
+	border-top: 5px solid #f59a25;
+}
+/*
+@media screen and (max-width: 650px) {
+	.cp_qa label.cp_tabitem {
+		font-size: 0;
+	}
+	label:before {
+		font-size: 18px;
+		margin: 0;
+	}
+}
+@media screen and (max-width: 400px) {
+	.cp_qa label.cp_tabitem {
+		padding: 15px;
+	}
+	.cp_qa label.cp_tabitem:before {
+		margin-right: 0px;
+	}
+}
+*/
+/* QAブロック */
+.cp_qa #cp_conttab1:checked  + #cp_content1 ,
+.cp_qa #cp_conttab2:checked  + #cp_content2 {
   display: block;
-  float: left;
-  font-weight: bold;
-  transition: all 0.2s ease;
-  order: -1;
+}
+.cp_qa .cp_qain {
+	overflow-x: hidden;
+	margin: 0 auto;
+	color: #333333;
+}
+.cp_qa .cp_qain .cp_actab {
+	padding: 20px 0;
+	border-bottom: 1px dotted #cccccc;
+}
+/* 質問 */
+.cp_qa .cp_qain label {
+	position: relative;
+	display: block;
+	width: 100%;
+	margin: 0;
+	padding: 10px 10px 0 48px;
+	cursor: pointer;
+}
+/* ＋アイコン */
+.cp_qa .cp_qain .cp_plus {
+	font-size: 2em;
+	line-height: 100%;
+	position: absolute;
+	z-index: 5;
+	margin-top: 3px;
+	margin-left: 10px;
+	-webkit-transition: 0.2s ease;
+	        transition: 0.2s ease;
 }
 
-/*ラジオボタンを全て消す*/
-input[name="tab_name"] {
-  display: none;
+/* 答え */
+.cp_qa .cp_qain .cp_actab-content {
+	position: relative;
+	overflow: hidden;
+	height: 0;
+	margin: 0 10px 0 48px;
+	padding: 14px 0;
+	-webkit-transition: 0.4s ease;
+	        transition: 0.4s ease;
+	opacity: 0;
 }
-
-.tab_name :hover {
-  opacity: 0.75;
+/* 質問を開いた時の仕様 */
+.cp_qa .cp_qain .cp_actab input[type=checkbox]:checked + .cp_actab-content {
+	height: auto;
+	opacity: 1;
 }
-
-
-/*タブ切り替えの中身のスタイル*/
-.Q_tabCont {
-  display: none;
-  padding: 40px 40px 0;
-  clear: both;
-  overflow: hidden;
+/* 質問をクリックした時の▼アイコンの動き */
+.cp_qa .cp_qain .cp_actab input[type=checkbox]:checked + .cp_plus {
+	-webkit-transform: rotate(45deg);
+	        transform: rotate(45deg);
 }
-
-/*選択されているタブのコンテンツのみを表示*/
-input:checked + .tab_name + .Q_tabCont {
-  display: block;
-}
-
-/*選択されているタブのスタイルを変える*/
-.Q_tab input:checked + .tab_name {
-  background-color: #ffc06e;
-  color: #fff;
-}
-
-/* -------- カテゴリ選択 --------*/
-
-
 /* -------- テキストエリア --------*/
 
 textarea {
@@ -134,140 +192,32 @@ textarea {
 }
 
 /* --------ドラッグ＆ドロップ -------- */
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-/*
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-body{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: #5256ad;
-}
-*/
-.drag-area{
-  border: 2px dashed #fff;
-  height: 350px;
-  width: 500px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  font-family: "Poppins", sans-serif;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #ffc06e;
-}
-.drag-area.active{
-  border: 2px solid #fff;
-}
-.drag-area .icon{
-  font-size: 100px;
-  color: #fff;
-}
-.drag-area header{
-  font-size: 30px;
-  font-weight: 500;
-  color: #fff;
-}
-.drag-area span{
-  font-size: 25px;
-  font-weight: 500;
-  color: #fff;
-  margin: 10px 0 15px 0;
-}
-.drag-area button{
-  padding: 10px 25px;
-  font-size: 20px;
-  font-weight: 500;
-  border: none;
-  outline: none;
-  background: #fff;
-  color: #ffc06e;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.drag-area img{
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-
-
-/*
-.image-input {
-  background-color: #eee;
-  width: 300px;
-  height: 300px;
-}
-.image-input__field {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.image-input__field.over {
-  background-color: #666;
-}
-.image-input__field > input {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  cursor: pointer;
-}
-.image-input__field > p {
-  color: #aaa;
+#dragDropArea{
+  background-color: #f4f4f4;
+  margin: 10px;
+  padding: 10px;
+  border: #ddd dashed 5px;
+  min-height: 200px;
   text-align: center;
 }
 
-/* -------- 画像添付欄 --------*/
-/*
-#drag-and-drop-area {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f3f3f3;
-  width: 500px;
-  height: 150px;
-  cursor: pointer;
+#dragDropArea p{
+    color: #999;
+    font-weight: bold;
+    font-size: 14px;
+    font-size: 1.1em;
 }
 
-#drag-and-drop-area :active {
-    background-color: lightyellow;
+#dragDropArea .drag-drop-buttons{
+    margin-top: 20px;
+    font-size: 12px;
+    font-size: 1.2em;
 }
 
-.hidden {
-  display: none;
+.drag-drop-buttons input{
+    margin: auto;
 }
 
-#previews {
-  border: 1px solid gray;
-  min-height: 10px;
-  background-color: #f3f3f3;
-  margin-bottom: 10px;
-  padding: 60px;
-}
-
-#previews img {
-    max-width: 100px;
-    max-height: 100px;
-}
 
 /* -------- 登録ボタン --------*/
 @import 'https://fonts.googleapis.com/css?family=Comfortaa:300,400,700&subset=cyrillic,cyrillic-ext,latin-ext';

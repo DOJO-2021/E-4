@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.form {
+	text-align: left;
+	grid-area: left;
+	background-color:#FF8432
+
+}
+
+.past_questions {
+    margin: auto;
+    box-sizing: border-box;
+	width: 1200px;
+ 	padding: 20px 30px;
+
+}
+
+.photo2 {
+
+  width: 600px;
+  height: 600px;
+}

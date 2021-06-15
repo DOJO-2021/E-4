@@ -3,10 +3,9 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="/Qsama/css/login.css">
-	<!-- jQuery本体↓ 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-	<!-- jQueryが書いてあるファイル↓ 
-	<script src="./js/login.js"></script>-->
+	
+	<script type='text/javascript' src= "js/login.js"></script>
+
 	<meta charset="UTF-8">
 	<title>ログイン</title>
 </head>
@@ -19,15 +18,18 @@
   <div class="tab_content" id ="login_content">
   	<div class = item_login>
     	<form class="login-form" method="POST" id="form_l" action="/Qsama/LoginServlet">
-		  <label class = content><input type="text" name = "USER_ID" placeholder = "ユーザID"></label><br>
-		  <label class = content><input type="password" name = "USER_PW" placeholder = "パスワード"></label><br>
-		  <input type="submit" name="Login" value="ログイン" class="login-submit">
+		  <label class = content><input type="text" name = "USER_ID" placeholder = "ユーザID" required></label><br>
+		  <label class = content><input type="password" name = "USER_PW" placeholder = "パスワード" required></label><br>
+		<div class = button>
+	  	  <input type="submit" name="Login" value="ログイン" class="login-submit">
+		</div>
 		</form>
+		  <p id = "error_msg"></p>
 	</div>
   </div>
   <div class="tab_content" id="regist_content">
   	<div class = item_regist>
-        <form class="login-form" method="POST" id="form_r" action="/Qsama/Regist_FServlet">
+        <form class="login-form" method="POST"  name = "form"id="form_r" action="/Qsama/Regist_FServlet">
         <div class = class_number>
           <label for = "belong">所属クラス</label>
 	        <select class = "belong" name = "belong">
@@ -38,25 +40,17 @@
 		      <option value = "e">E</option>
 	        </select><br>
 	    </div>
-	      <label class = content><input type="text" placeholder = "Email"></label><br>
-	      <label class = content><input type="text" placeholder = "氏名"></label><br>
-	      <label class = content><input type="password" placeholder = "パスワード"></label><br>
-	      <label class = content><input type="password" placeholder = "パスワード(確認)"></label><br>
+	      <label class = content><input type="text" placeholder = "Email" name = "email"required></label><br>
+	      <label class = content><input type="text" placeholder = "氏名" name = "name"required></label><br>
+	      <label class = content><input type="password" placeholder = "パスワード" name = "password"required></label><br>
+	      <label class = content><input type="password" placeholder = "パスワード(確認)" name = "password1" required></label><br>
 	      <label>ユーザランク</label><br>
-	      <input type="submit" name="regist" value="新規登録">
+	    <div class = "button">  
+	      <input type="submit" name="regist" value="新規登録" onclick = "checkForm()">
+	    </div>
 	    </form>
 		</div>
 	  </div>
  </div>
- <!-- 
- <button>ポップアップ表示</button>
- 
- 
-<div class="popup">
-    <div class="content_popup">
-        <p>サンプルテキスト、サンプルテキスト、サンプルテキスト、サンプルテキスト</p>
-        <button id="close">閉じる</button>
-    </div>
-</div>-->
-</body>
+ </body>
 </html>

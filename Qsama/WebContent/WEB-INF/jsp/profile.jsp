@@ -12,7 +12,7 @@
 
 <!-- 自己紹介（ここから） -->
 	<c:forEach var="e" items="${ProfileList}">
-	<form method="POST" action="/Qsama/ProfileServlet">
+	<form method="POST" id="form" action="/Qsama/ProfileServlet">
 
    <div class="introducation">
     <div class="mandatory">
@@ -32,14 +32,21 @@
       <label>好きなアーティスト：${e.favorite}		<input type="text" name="FAVORITE"></label><br>
 	  <label>一言コメント：${e.comment}		<input type="text" name="COMMENT"></label><br>
 	</div>
-
-	<!--個人写真の挿入  -->
-	  <img src="" class="id_photo">
 	</div>
-<!-- 自己紹介（ここまで）-->
-    <img src="" class="photo">
+
+    <!-- 自己紹介（ここまで）-->
     </form>
     </c:forEach>
+
+    <!--個人写真の挿入  -->
+	<div class="photo"><input type="file" name="file" id="file"></div>
+      <div id="result"></div>
+<!-- 画像挿入（ここから） -->
+    <div class="photo2"><input type="file" name="file" id="file"></div>
+      <div id="result"></div>
+<!-- 画像挿入（ここまで） -->
+
+
 
     <!-- 過去の質問一覧表示（ここから） -->
     <p class="past_questions">過去の質問一覧表示</p>

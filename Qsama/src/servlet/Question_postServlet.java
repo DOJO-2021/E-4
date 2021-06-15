@@ -46,17 +46,24 @@ public class Question_postServlet extends HttpServlet {
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		String M_items = request.getParameter("M_items");
+		System.out.println("大項目"+M_items);
 		String S_items = request.getParameter("S_items");
+		System.out.println("中項目"+S_items);
 		String Q_date = request.getParameter("Q_date");
+		System.out.println("日付"+Q_date);
 		String Q_content = request.getParameter("Q_content");
+		System.out.println("質問内容"+Q_content);
 		int A_level = Integer.parseInt(request.getParameter("A_level"));
+		System.out.println("回答レベル"+A_level);
 		int Q_flag = Integer.parseInt(request.getParameter(" Q_flag"));
 		int emergency = Integer.parseInt(request.getParameter("emergency"));
+		String Postpic_url = request.getParameter("Postpic_url");
 
 		//--------------- ファイル取得 ---------------
-		Part part = request.getPart("photo"); // getPartでファイル取得
-		String image = this.getFileName(part);
-		request.setAttribute("image", image);
+		Part part = request.getPart("Postpic_url"); // getPartでファイル取得
+	//	String image = this.getPostpic_url(part);
+		System.out.println("imageの中身：" + part);
+		request.setAttribute("image", part);
 		
 		// サーバの指定のファイルパスへファイルを保存
         //場所はクラス名↑の上に指定してある
@@ -71,16 +78,16 @@ public class Question_postServlet extends HttpServlet {
 		 // if文でファイルの種類を判定する
 		 part.write(java8Disp+".jpg");
 		 String url_s = "image/"+java8Disp+".jpg";
-		 System.out.println("image/"+java8Disp+".jpg");
+		 System.out.println("URL書き換え後：" + url_s);
 			
 
        //ディスパッチ
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+	/*	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
 		dispatcher.forward(request, response);
 		
-	
+	*/
 	   //ファイルの名前を取得してくる
-		 private String getFileName() {
+	/*	 private String getFileName() {
 	        String name = null;
 	        for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
 	            if (dispotion.trim().startsWith("filename")) {
@@ -91,10 +98,10 @@ public class Question_postServlet extends HttpServlet {
 	        }		
 			return;  // nameを戻す
 		}
-	
+	*/
 		// 登録処理を行う
 		Question_postDAO qDao = new Question_postDAO();
-		if (qDao.insert(new Question_post(0, 0, 0, M_items, S_items, Q_date, Q_content, A_level, Q_flag, emergency))) {	// 登録成功
+		if (qDao.insert(new Question_post(0, 0, 0, M_items, S_items, Q_date, Q_content, A_level, Q_flag, emergency, Postpic_url))) {	// 登録成功
 			System.out.println("登録成功");
 		}
 		else {

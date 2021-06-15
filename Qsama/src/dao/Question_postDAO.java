@@ -11,7 +11,7 @@ import java.util.List;
 import model.Question_post;
 
 public class Question_postDAO {
-	public List<Question_post> findAll(){
+	public List<Question_post> select(){
 	  List<Question_post> Question_postList = new ArrayList<Question_post>();
 
       Connection conn = null;
@@ -27,10 +27,10 @@ public class Question_postDAO {
 		"select * from Question_post";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-		// findAll文の実行
+		// select文の実行
 		ResultSet rs = pStmt.executeQuery();
 
-		// findAll文の結果をArrayListに格納
+		// selet文の結果をArrayListに格納
 		while (rs.next()) {
 			Question_post question_post = new Question_post(
 				rs.getInt("QQ_id"),
@@ -42,7 +42,8 @@ public class Question_postDAO {
 				rs.getString("Q_content"),
 				rs.getInt("A_level"),
 				rs.getInt("Q_flag"),
-				rs.getInt("emergency")
+				rs.getInt("emergency"),
+				rs.getString("Postpic_url")
 				);
 				Question_postList.add(question_post);
 				System.out.println(question_post);
@@ -88,46 +89,55 @@ public class Question_postDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 			// insert文を準備する
-			String sql = "insert into question_post(QQ_id, ac_id, Post_Number, M_items, S_items, Q_date, Q_Content,  A_level, Q_flag, emergency"+" values (null,null, null, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "insert into question_post values (null,null, null, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
 			// insert文中の？に使用する値を設定しSQLを完成
-			if (question_post.getM_items() != null) {
+			
+			// not null制約あり
+			if (question_post.getM_items() != null && !question_post.getM_items().equals("")) {
 				pStmt.setString(1, question_post.getM_items());
 			} else {
-				pStmt.setString(1, "null");
+				pStmt.setString(1, null);
 			}
 
 			if (question_post.getS_items() != null) {
 				pStmt.setString(2, question_post.getS_items());
 			} else {
-				pStmt.setString(2, "null");
+				pStmt.setString(2, null);
 			}
 
 			if (question_post.getQ_date() != null) {
 				pStmt.setString(3, question_post.getQ_date());
 			} else {
-				pStmt.setString(3, "null");
+				pStmt.setString(3, null);
 			}
 
-			if (question_post.getQ_content() != null) {
-				pStmt.setString(5, question_post.getQ_content());
+			// not null制約あり
+			if (question_post.getQ_content() != null && !question_post.getQ_content().equals("")) {
+				pStmt.setString(4, question_post.getQ_content());
 			} else {
-				pStmt.setString(5, "null");
+				pStmt.setString(4, null);
 			}
 
-			pStmt.setInt(7, question_post.getA_level());
+			pStmt.setInt(5, question_post.getA_level());
 
-			pStmt.setInt(8, question_post.getQ_flag());
+			pStmt.setInt(6, question_post.getQ_flag());
 
-			pStmt.setInt(10, question_post.getEmergency());
-
-			pStmt.setInt(11, question_post.getQQ_id());
-
-			pStmt.setInt(12, question_post.getAc_id());
+			pStmt.setInt(7, question_post.getEmergency());
 			
-			pStmt.setInt(12, question_post.getPost_Number());
+			if (question_post.getPostpic_url() != null) {
+				pStmt.setString(8, question_post.getPostpic_url());
+			} else {
+				pStmt.setString(8, null);
+			}
+
+			pStmt.setInt(9, question_post.getQQ_id());
+
+			pStmt.setInt(10, question_post.getAc_id());
+			
+			pStmt.setInt(11, question_post.getPost_Number());
 
 			// insert文を実行する
 			if (pStmt.executeUpdate() == 1) {

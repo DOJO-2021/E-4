@@ -26,24 +26,19 @@ public class ProfileServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		HttpSession session = request.getSession();
 
-		// プロフィールページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");
-		dispatcher.forward(request, response);
-
-
 	    // 検索処理を行う
-		int ac_id = 10; //10は仮値　　ここにログイン時のac_idを格納する！！
+		int ac_id = 100; //10は仮値　　ここにログイン時のac_idを格納する！！
 
 		ProfileDAO pDao = new ProfileDAO();
 		List<Profile> ProfileList = pDao.profileAll(ac_id);
 
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("ProfileList", ProfileList);
-		System.out.println("プロフィールの中身:"+ProfileList);
+		System.out.println("プロフィールの中身:"+ ProfileList);
 
 		 // 結果ページにフォワードする
-		//	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");
-		//	dispatcher.forward(request, response);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");
+			dispatcher.forward(request, response);
 
 	}
 
@@ -82,11 +77,11 @@ public class ProfileServlet extends HttpServlet {
 	int ac_id = 10; //10は仮値　　！！
 
 	ProfileDAO pDao = new ProfileDAO();
-	List<Profile> ProfileList = pDao.profileAll(ac_id);
+	//List<Profile> ProfileList = pDao.profileAll(ac_id);
 
 	// 検索結果をリクエストスコープに格納する
-	request.setAttribute("ProfileList", ProfileList);
-//	System.out.println("プロフィールの中身:"+ProfileList);
+	//request.setAttribute("ProfileList", ProfileList);
+//	System.out.println("プロフィールの中身:"+ ProfileList);
 
 	 // 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");

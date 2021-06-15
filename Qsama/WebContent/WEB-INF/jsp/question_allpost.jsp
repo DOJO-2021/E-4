@@ -9,7 +9,9 @@
 <link rel="stylesheet" type="text/css" href="css/question_allpost.css">
 </head>
 <body>
-<!-- ヘッダー -->
+<!-- 共通のヘッダー -->
+<jsp:include page="/WEB-INF/jsp/header.jsp" />
+<!-- 共通ヘッダーここまで -->
 
 
   <h1>全体投稿</h1>

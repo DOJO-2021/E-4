@@ -1,8 +1,10 @@
 @charset "UTF-8";
 
-/* --- bodyタグのwidth --- */
+html * {
+	box-sizing	: border-box;
+}
 body {
-  width: 1200px;
+	margin		: 0 0 0 0;
 }
 
 /* --- h3タグ --- */
@@ -108,8 +110,8 @@ input[name="tab_item"] {
 .profile {
   margin: 15px auto;                 /* サンプル用 中央寄せ */
   box-sizing: border-box;           /* 罫線も含む長さ      */
-  background: #fff;                 /* BOXの背景色         */
+  background: #fff;             /* BOXの背景色         */
   border: 1px solid #666;       /* 枠線の指定          */
-  width: 1200px;                /* BOXの幅             */
+  width: 1200px;                 /* BOXの幅             */
   height: 250px;
 }

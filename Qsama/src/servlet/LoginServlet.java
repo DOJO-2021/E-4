@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 			// セッションスコープにIDを格納する
 			HttpSession session = request.getSession();
 			session.setAttribute("user_id", new LoginUser(user_id));
-			session.setAttribute("user_pw", new LoginUser(user_id, user_pw));
+			//session.setAttribute("user_pw", new LoginUser(user_id, user_pw));
 
 			// メインサーブレットにリダイレクトする
 			response.sendRedirect("/Qsama/S_MainServlet");

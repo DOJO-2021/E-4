@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>Qさま｜個別投稿</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!--
 <script type="text/javascript" src="/Qsama_konno/js/question_post.js"></script>
  -->
@@ -19,33 +20,62 @@
   <main>
 
 <!-- 質問タブ表示 -->
-  <div class="Q_tab">
-    <input id="L_faq" type="radio" name="tab_name" checked>
-    <label class="tab_name" for="L_faq">最近多い質問</label>
-     <!-- コンテンツ表示 -->
-    <div class="Q_tabCont" id="L_faq_Cont">
-      <p>最近多い質問がここに入ります</p>
-    </div>
-
-
-    <input id="faq" type="radio" name="tab_name">
-    <label class="tab_name" for="faq">よくある質問</label>
-     <!-- コンテンツ表示 -->
-    <div class="Q_tabCont" id="faq_Cont">
-      <p>よくある質問がここに入ります</p>
-    </div>
-
-  </div>
-
+   <div class="cp_qa">
+     <input id="cp_conttab1" type="radio" name="tabs" checked>
+     <label for="cp_conttab1" class="cp_tabitem">最近多い質問</label>
+     <input id="cp_conttab2" type="radio" name="tabs">
+     <label for="cp_conttab2" class="cp_tabitem">よくある質問</label>
+     
+     <div id="cp_content1">
+	 <div class="cp_qain">
+		<div class="cp_actab">
+			<input type="checkbox" name="tabs">
+			<div class="cp_plus">+</div>
+			<label>最近1</label>
+			<div class="cp_actab-content">答えテキスト</div>
+		</div>
+		<div class="cp_actab">
+			<input type="checkbox" name="tabs">
+			<div class="cp_plus">+</div>
+			<label>最近２</label>
+			<div class="cp_actab-content">答えテキスト</div>
+		</div>
+	</div>
+	</div>
+	<div id="cp_content2">
+	<div class="cp_qain">
+		<div class="cp_actab">
+			<input type="checkbox" name="tabs">
+			<div class="cp_plus">+</div>
+			<label>よくある１</label>
+			<div class="cp_actab-content">答えテキスト</div>
+		</div>
+		<div class="cp_actab">
+			<input type="checkbox" name="tabs">
+			<div class="cp_plus">+</div>
+			<label>よくある２</label>
+			<div class="cp_actab-content">答えテキスト</div>
+		</div>
+		<div class="cp_actab">
+			<input type="checkbox" name="tabs">
+			<div class="cp_plus">+</div>
+			<label>よくある３</label>
+			<div class="cp_actab-content">答えテキスト</div>
+		</div>
+	</div>
+</div>
+     
+   </div>
 
   <h2>投稿入力欄</h2>
 <!-- 投稿入力フォーム（ここから） -->
-  <form>
+  <!-- Qsama/image/* -->
+  <form method="POST" action="/Qsama/Question_postServlet" accept="image/png, image/jpeg, image/jpg" enctype="multipart/form-data" >
   <div class="form-wrapper">
   <div class="form1">
   <!-- 大カテゴリ (必須選択） -->
   <div class="question_cat">
-    <select id="Major_items" name="Major_items">
+    <select id="M_items" name="M_items">
       <option value=""> -- 大カテゴリ選択 -- </option>
       <option value="HTML">HTML</option>
       <option value="CSS">CSS</option>
@@ -63,9 +93,9 @@
   JavaScriptで大カテゴリと中カテゴリを連動させる
   -->
   <div class="question_cat">
-    <select id="Medium_item" name="Medium_item">
+    <select id="S_items" name="S_items">
       <option value="" data-category=""> -- 中カテゴリ選択 -- </option>
-      <option value="" data-category="HTML">基礎・基本的な書式</option>
+      <option value="base" data-category="HTML">基礎・基本的な書式</option>
       <option value="" data-category="HTML">見出し・段落・リスト</option>
       <option value="" data-category="HTML">テキスト・単語</option>
       <option value="" data-category="HTML">リンク・画像挿入</option>
@@ -133,11 +163,11 @@
   </div>
 
   <!-- 回答レベル選択 -->
-  <div class="ans_items">
-    <select name="ans_items">
+  <div class="A_level">
+    <select name="A_level">
       <option value=""> -- 回答レベル選択 --</option>
-      <option value="hint">ヒントが欲しい</option>
-      <option value="answer">回答が欲しい</option>
+      <option value=0>ヒントが欲しい</option>
+      <option value=1>回答が欲しい</option>
     </select>
   </div>
 
@@ -145,238 +175,54 @@
   <!-- 緊急レベル選択 -->
   <div class="emergency">
     緊急の場合は「はい」を選択してください。
-    <input type="radio" name="emergency" value="yes">はい
-    <input type="radio" name="emergency" value="no" checked>いいえ
+    <input type="radio" name="emergency" value=0>はい
+    <input type="radio" name="emergency" value=1 checked>いいえ
   </div>
 
   <!-- 質問内容入力フォーム -->
-    <div class="Q_cont">
+    <div class="Q_content">
       <label>質問内容<br>
-        <textarea name="Q_area"></textarea>
+        <textarea name="Q_content"></textarea>
       </label>
     </div>
  </div>
- <!-- class = form1 -->
-
-
+ <!-- class = form1 ここまで-->
+ 
   <!-- 画像添付欄 -->
   <div class="form2">
-  <div class="drag-area">
-    <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
-    <header>Drag & Drop to Upload File</header>
-    <span>OR</span>
-    <button>Browse File</button>
-    <input type="file" type="hidden">
-  </div>
-  <!--
-    <div id="drag-and-drop-area">
-      <div>画像をドラッグ＆ドロップ<br>またはクリックでファイル選択</div>
-    </div>
-
-    <h4>プレビュー</h4>
-    <div id="previews"></div>
-
-    <div id="file-select">
-      <input type="file" class="hidden" accept="image/*" id="file-select-input">
-      <button type="button" id="file-select-button">ファイル選択</button>
+    <!-- enctypeは、送信時のデータ形式 -->
+    
+    <div id="dragDropArea">
+        <div class="drag-drop-inside">
+            <p class="drag-drop-info">ここにファイルをドロップ</p>
+            <p>または</p>
+            <p class="drag-drop-buttons">
+                <input id="fileInput" type="file"  value="ファイルを選択" name="Postpic_url" onChange="photoPreview(event)" multiple>
+            </p>
+            <div id="previewArea"></div>
+        </div>
     </div>
   </div>
-  -->
-  <!-- class = form2 -->
-
-  </div>
-  <!-- class = form-wrapper -->
-  </div>
+  <!-- class = form2 ここまで-->
+ </div>
+ <!-- class = form-wrapper ここまで-->
+   
   <!-- 投稿ボタン -->
   <div class="Q_submit">
-    <input type="submit" name="Q_submit" value="投稿">
+    <input type="submit" name="Q_submit" value="投稿" >
   </div>
-  </form>
-
+  
+</form>
 <!-- 投稿入力フォーム（ここまで） -->
 
 
 <!-- 戻るボタン
      受講者トップページへのリンク -->
-  <a href="/Qsama/S_MainServlet">戻る</a>
+  <a href="">戻る</a>
   </main>
 
 <!-- フッター -->
 
 </body>
 <!-- body（ここまで） -->
-
-<script>
-
-/* カテゴリ連動 */
-document.addEventListener("DOMContentLoaded", function(){
-    // 初期値が設定されている場合は最上位を選択させない
-    var firstChange = ($("#Medium_item").val() == "");
-
-    $("#Major_items").on("change",function(){
-        if(firstChange){
-            // 最上位を選択（現在選択項目を解除）
-            $("#Medium_item option[value='']").prop('selected',true);
-        }
-        firstChange = true;
-
-        $("#Medium_item option").hide();
-        $("#Medium_item option[data-category='']").show();
-        $("#Medium_item option[data-category=" + this.value + "]").show();
-    }).change();
-});
-
-/* テキストエリアのサイズ可変 */
-function flexTextarea(el) {
-  const dummy = el.querySelector('.FlexTextarea__dummy')
-  el.querySelector('.FlexTextarea__textarea').addEventListener('input', e => {
-    dummy.textContent = e.target.value + '\u200b'
-  })
-}
-
-document.querySelectorAll('.FlexTextarea').forEach(flexTextarea)
-
-
-/* 画像添付 */
-
-
- //selecting all required elements
-const dropArea = document.querySelector(".drag-area"),
-dragText = dropArea.querySelector("header"),
-button = dropArea.querySelector("button"),
-input = dropArea.querySelector("input");
-let file; //this is a global variable and we'll use it inside multiple functions
-button.onclick = ()=>{
-  input.click(); //if user click on the button then the input also clicked
-}
-input.addEventListener("change", function(){
-  //getting user select file and [0] this means if user select multiple files then we'll select only the first one
-  file = this.files[0];
-  dropArea.classList.add("active");
-  showFile(); //calling function
-});
-//If user Drag File Over DropArea
-dropArea.addEventListener("dragover", (event)=>{
-  event.preventDefault(); //preventing from default behaviour
-  dropArea.classList.add("active");
-  dragText.textContent = "Release to Upload File";
-});
-//If user leave dragged File from DropArea
-dropArea.addEventListener("dragleave", ()=>{
-  dropArea.classList.remove("active");
-  dragText.textContent = "Drag & Drop to Upload File";
-});
-//If user drop File on DropArea
-dropArea.addEventListener("drop", (event)=>{
-  event.preventDefault(); //preventing from default behaviour
-  //getting user select file and [0] this means if user select multiple files then we'll select only the first one
-  file = event.dataTransfer.files[0];
-  showFile(); //calling function
-});
-function showFile(){
-  let fileType = file.type; //getting selected file type
-  let validExtensions = ["image/jpeg", "image/jpg", "image/png"]; //adding some valid image extensions in array
-  if(validExtensions.includes(fileType)){ //if user selected file is an image file
-    let fileReader = new FileReader(); //creating new FileReader object
-    fileReader.onload = ()=>{
-      let fileURL = fileReader.result; //passing user file source in fileURL variable
-        // UNCOMMENT THIS BELOW LINE. I GOT AN ERROR WHILE UPLOADING THIS POST SO I COMMENTED IT
-      // let imgTag = `<img src="${fileURL}" alt="image">`; //creating an img tag and passing user selected file source inside src attribute
-      dropArea.innerHTML = imgTag; //adding that created img tag inside dropArea container
-    }
-    fileReader.readAsDataURL(file);
-  }else{
-    alert("This is not an Image File!");
-    dropArea.classList.remove("active");
-    dragText.textContent = "Drag & Drop to Upload File";
-  }
-}
-
-
-
-
-
-// ファイル選択ボタン, ドラッグ＆ドロップ領域のクリックでファイル選択ダイアログ
-/*
-document.querySelectorAll('#file-select-button, #drag-and-drop-area').forEach((ele) => {
-  ele.addEventListener('click', () => {
-    document.getElementById('file-select-input').click();
-  });
-});
-
-// ファイル選択後
-document.getElementById('file-select-input').addEventListener('change', (event) => {
-  const files = event.target.files;
-  if (files.length > 0) {
-    previewAndInsert(files);
-  }
-  event.target.files = null;
-  event.target.value = null;
-});
-
-const dragAndDropArea = document.getElementById('drag-and-drop-area');
-
-// ドラッグ中
-dragAndDropArea.addEventListener('dragover', (event) => {
-  dragAndDropArea.classList.add('active');
-  event.preventDefault();
-  event.dataTransfer.dropEffect = 'copy';
-});
-
-// マウスがドラッグ＆ドロップ領域外に出たとき
-dragAndDropArea.addEventListener('dragleave', (event) => {
-  dragAndDropArea.classList.remove('active');
-});
-
-// ドロップ時
-dragAndDropArea.addEventListener('drop', (event) => {
-  event.preventDefault();
-  dragAndDropArea.classList.remove('active');
-  const files = event.dataTransfer.files;
-  if (files.length === 0) {
-    return;
-  }
-
-  // 画像ファイルのみ OK
-  if (!files[0].type.match(/image\/*/
-//		  )) {
-/*    return;
-  }
-
-  previewAndInsert(files);
-});
-
-// 画像プレビューと input 追加
-const previewAndInsert = (files) => {
-  const file = files[0];
-
-  const wrapper = document.createElement('div');
-
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.classList.add('hidden');
-  // https://qiita.com/jkr_2255/items/1c30f7afefe6959506d2
-  if (files.length > 1 && typeof DataTransfer !== 'undefined') {
-    const dt = new DataTransfer();
-    dt.items.add(files[0]);
-    input.files = dt.files;
-  } else {
-    input.files = files;
-  }
-  wrapper.appendChild(input);
-
-  const img = document.createElement('img');
-  const reader = new FileReader();
-  reader.onload = (event) => {
-    img.src = event.target.result;
-    updateHTMLCode();
-  }
-  reader.readAsDataURL(file);
-  wrapper.appendChild(img);
-
-  document.getElementById('previews').appendChild(wrapper);
-}
-*/
-</script>
-
 </html>

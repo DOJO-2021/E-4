@@ -16,6 +16,7 @@ public class Question_post implements Serializable {
 	private int A_level;                // 回答レベル
 	private int Q_flag;                 // 質問者フラグ
 	private int emergency;              // 緊急レベル
+	private String Postpic_url;         // 画像
 
 
 
@@ -32,10 +33,11 @@ public class Question_post implements Serializable {
 		this.A_level = 0;
 		this.Q_flag = 0;
 		this.emergency = 0;
+		this.Postpic_url = "";
 	}
 
 	// 引数があるコンストラクタ
-	public Question_post(int QQ_id, int ac_id, int Post_Number, String M_items, String S_items, String Q_date, String Q_content, int A_level, int Q_flag, int emergency) {
+	public Question_post(int QQ_id, int ac_id, int Post_Number, String M_items, String S_items, String Q_date, String Q_content, int A_level, int Q_flag, int emergency, String Postpic_url) {
 		super();
 		this.QQ_id = QQ_id;
 		this.ac_id = ac_id;
@@ -47,6 +49,7 @@ public class Question_post implements Serializable {
 		this.A_level = A_level;
 		this.Q_flag = Q_flag;
 		this.emergency = emergency;
+		this.Postpic_url = Postpic_url;
 	}
 
 	// getter ・ setter
@@ -128,6 +131,14 @@ public class Question_post implements Serializable {
 
 	public void setEmergency(int emergency) {
 		this.emergency = emergency;
+	}
+	
+	public String getPostpic_url() {
+		return Postpic_url;
+	}
+
+	public void setPostpic_url(String Postpic_url) {
+		this.Postpic_url = Postpic_url;
 	}
 
 	
