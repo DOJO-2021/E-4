@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
+管理者用
 <!-- 共通のヘッダー -->
 <ul id="nav">
   <li>メニュー</li>

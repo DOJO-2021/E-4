@@ -31,7 +31,7 @@ public class Question_postServlet extends HttpServlet {
 	public Question_postServlet() {
 		super();
 	}
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	// 個人投稿ページにフォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_post.jsp");
@@ -42,16 +42,16 @@ public class Question_postServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		String M_items = request.getParameter("M_items");
+		String M_items = request.getParameter("m_items");
 		System.out.println("大項目"+M_items);
-		String S_items = request.getParameter("S_items");
+		String S_items = request.getParameter("s_items");
 		System.out.println("中項目"+S_items);
-		String Q_date = request.getParameter("Q_date");
+		String Q_date = request.getParameter("q_date");
 		System.out.println("日付"+Q_date);
-		String Q_content = request.getParameter("Q_content");
+		String Q_content = request.getParameter("q_content");
 		System.out.println("質問内容"+Q_content);
 		int A_level = Integer.parseInt(request.getParameter("A_level"));
 		System.out.println("回答レベル"+A_level);
@@ -64,27 +64,27 @@ public class Question_postServlet extends HttpServlet {
 	//	String image = this.getPostpic_url(part);
 		System.out.println("imageの中身：" + part);
 		request.setAttribute("image", part);
-		
+
 		// サーバの指定のファイルパスへファイルを保存
         //場所はクラス名↑の上に指定してある
-		
+
 		//ここで名前を決定
 		 LocalDateTime nowDateTime = LocalDateTime.now();
 		 DateTimeFormatter java8Format = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-		 
+
 		 // 日時情報を指定フォーマットの文字列で取得
 		 String java8Disp = nowDateTime.format( java8Format );
-		 
+
 		 // if文でファイルの種類を判定する
 		 part.write(java8Disp+".jpg");
 		 String url_s = "image/"+java8Disp+".jpg";
 		 System.out.println("URL書き換え後：" + url_s);
-			
+
 
        //ディスパッチ
 	/*	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
 		dispatcher.forward(request, response);
-		
+
 	*/
 	   //ファイルの名前を取得してくる
 	/*	 private String getFileName() {
@@ -95,7 +95,7 @@ public class Question_postServlet extends HttpServlet {
 	                name = name.substring(name.lastIndexOf("\\") + 1);
 	                break;
 	            }
-	        }		
+	        }
 			return;  // nameを戻す
 		}
 	*/
@@ -107,7 +107,7 @@ public class Question_postServlet extends HttpServlet {
 		else {
 			System.out.println("登録失敗");
 		}
-		
+
 		// 投稿ページにフォワードする
 		RequestDispatcher dispatcher2 = request.getRequestDispatcher("/WEB-INF/jsp/question_allpost.jsp");
 				dispatcher2.forward(request, response);

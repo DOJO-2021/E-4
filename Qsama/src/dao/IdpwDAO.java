@@ -29,7 +29,6 @@ public class IdpwDAO {
 			pStmt.setString(1, user_id);
 			pStmt.setString(2, user_pw);
 
-
 			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
 

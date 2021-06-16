@@ -11,7 +11,7 @@ import java.util.List;
 import model.Question_post;
 
 public class Question_postDAO {
-	public List<Question_post> select(){
+	public List<Question_post> select(Question_post param){
 	  List<Question_post> Question_postList = new ArrayList<Question_post>();
 
       Connection conn = null;
@@ -48,14 +48,13 @@ public class Question_postDAO {
 				Question_postList.add(question_post);
 				System.out.println(question_post);
 			}
-		
 
 	  }  // エラー処理
-		catch (SQLException e) {   
-			e.printStackTrace();   
+		catch (SQLException e) {
+			e.printStackTrace();
 			Question_postList = null;
 		}
-		catch (ClassNotFoundException e) {  
+		catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			Question_postList = null;
 		}
@@ -94,7 +93,7 @@ public class Question_postDAO {
 
 			// SQL文を完成させる
 			// insert文中の？に使用する値を設定しSQLを完成
-			
+
 			// not null制約あり
 			if (question_post.getM_items() != null && !question_post.getM_items().equals("")) {
 				pStmt.setString(1, question_post.getM_items());
@@ -126,7 +125,7 @@ public class Question_postDAO {
 			pStmt.setInt(6, question_post.getQ_flag());
 
 			pStmt.setInt(7, question_post.getEmergency());
-			
+
 			if (question_post.getPostpic_url() != null) {
 				pStmt.setString(8, question_post.getPostpic_url());
 			} else {
@@ -136,7 +135,7 @@ public class Question_postDAO {
 			pStmt.setInt(9, question_post.getQQ_id());
 
 			pStmt.setInt(10, question_post.getAc_id());
-			
+
 			pStmt.setInt(11, question_post.getPost_Number());
 
 			// insert文を実行する

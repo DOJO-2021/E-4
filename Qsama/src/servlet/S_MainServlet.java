@@ -50,4 +50,30 @@ public class S_MainServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// リクエストパラメータを取得する
+		request.setCharacterEncoding("UTF-8");
+		String M_items = request.getParameter("M_items");		//大項目
+		System.out.println("大項目"+M_items);
+		String Q_date = request.getParameter("Q_date");			//投稿日
+		System.out.println("日付"+Q_date);
+		String Q_content = request.getParameter("Q_content");	//投稿内容
+		System.out.println("質問内容"+Q_content);
+
+		// 検索処理を行う
+		//Question_postDAO sDao = new Question_postDAO();
+		//List<Question_post> Question_postList = sDao.select(new Question_post(0, 0, 0, M_items, "", Q_date, Q_content, "", 0, 0, 0, 0, "");
+
+		// 検索結果をリクエストスコープに格納する
+		//request.setAttribute("Question_postList", Question_postList);
+
+		// メインページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/s_main.jsp");
+				dispatcher.forward(request, response);
+
+	}
 }

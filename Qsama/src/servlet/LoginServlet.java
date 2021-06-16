@@ -43,6 +43,8 @@ public class LoginServlet extends HttpServlet {
 		// ログイン処理を行う
 		IdpwDAO iDao = new IdpwDAO();
 		if (iDao.isLoginOK(user_id, user_pw)) {	// ログイン成功
+			int rank = iDao.MyRank(user_id, user_pw);		//MyRankメソッドからuser_rank取得
+			//System.out.println(rank);						//確認ok
 
 			//個人情報を抽出
 			List<LoginUser> MyList = iDao.Mydata(user_id, user_pw);
@@ -51,10 +53,16 @@ public class LoginServlet extends HttpServlet {
 			// セッションスコープにIDを格納する
 			HttpSession session = request.getSession();
 			session.setAttribute("user_id", new LoginUser(user_id));
-			//session.setAttribute("user_pw", new LoginUser(user_id, user_pw));
+			session.setAttribute("user_pw", new LoginUser(user_id, user_pw));
 
-			// メインサーブレットにリダイレクトする
-			response.sendRedirect("/Qsama/S_MainServlet");
+			if (rank == 1) {
+				// 管理者メインサーブレットにリダイレクトする
+				response.sendRedirect("/Qsama/AdminServlet");
+			}
+			else {
+				// 受講者メインサーブレットにリダイレクトする
+				response.sendRedirect("/Qsama/S_MainServlet");
+			}
 		}
 
 		else {									// ログイン失敗

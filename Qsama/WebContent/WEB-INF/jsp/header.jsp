@@ -21,7 +21,7 @@
         <li>マイページ
             <ul class="dropdwn_menu">
                 <li><a href="#">過去の質問一覧</a></li>
-                <li><a href="#">プロフィール編集</a></li>
+                <li><a href="ProfileServlet">プロフィール編集</a></li>
                 <li><a href="#">プロフィール一覧</a></li>
             </ul>
         </li>

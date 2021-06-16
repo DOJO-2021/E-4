@@ -20,6 +20,7 @@ public class SearchDAO {
       String sqladd = null;					// SQLの追加分作成準備
       String Operator = null;					// AND・OR入れ物準備
 
+      word_insert(S4_word);						// 検索キーワード蓄積
       var Search_word = S4_word.split(" ");	// 半角スペースで配列
 
    //------------------AND・OR判定---------------------------------------
@@ -32,28 +33,26 @@ public class SearchDAO {
 
    //-------------------項目判定-----------------------------------------
       if( !(m_items.equals("")) && !(s_items.equals(""))) {			// 大項目・小項目記入あり
-    	  sqladd = "M_items='"+m_items+"'"+"S_items='"+s_items+"' ";
-      }else if(!(m_items.equals(""))) {		// 大項目のみ記入あり
-    	  sqladd = "M_items='"+m_items+"'";
+    	  sqladd = "M_items='"+m_items+"' AND "+"S_items='"+s_items+"' AND ";
+      }else if(!(m_items.equals(""))) {							// 大項目のみ記入あり
+    	  sqladd = "M_items='"+m_items+"' AND ";
       }
-      System.out.println(!(m_items.equals("")));
-      System.out.println(!(m_items.equals("")) && !(s_items.equals("")));
+//		System.out.println(!(m_items.equals("")));
+// 		System.out.println(!(m_items.equals("")) && !(s_items.equals("")));
+
    //-------------------検索キーワード判定------------------------------------------------------------
       if(Search_word.length==1) {
-    	  sqladd = "Q_CONTENT LIKE '%"+Search_word[0]+"%'";	// 検索キーワードが１つならこれだけ
+    	  sqladd = sqladd+" Q_CONTENT LIKE '%"+Search_word[0]+"%'";	// 検索キーワードが１つならこれだけ
       }else {
             for (int i = 0; Search_word.length > 0; i++){	// 検索キーワード数が２つ以上ならfor文で追記
             	if(i == 0) {
             		sqladd = "Q_CONTENT LIKE '%"+Search_word[i]+"%' "+Operator;
-            		word_insert(Search_word[i]);			// 検索キーワード蓄積
             	}else if((Search_word.length - i) ==0){
             		break;
             	}else if((Search_word.length - i) ==1) {
             		sqladd =  sqladd+"Q_CONTENT LIKE '%"+Search_word[i]+"%'";
-            		word_insert(Search_word[i]);			// 検索キーワード蓄積
             	}else if((Search_word.length - i) !=0) {
             		sqladd =  sqladd+"Q_CONTENT LIKE '%"+Search_word[i]+"%' "+Operator;
-            		word_insert(Search_word[i]);			// 検索キーワード蓄積
             	}
             }
       }
@@ -118,13 +117,17 @@ public class SearchDAO {
 
 
 	//検索キーワードを蓄積するだけ
-	public boolean word_insert(String word) {
+	public boolean word_insert(String S4_word) {
 	Connection conn = null;
 	boolean result = false;
 
-	LocalDateTime nowDateTime = LocalDateTime.now();
-	DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-");
-	String today = datetimeformatter.format(nowDateTime);
+//------------------本日の日付を格納----------------------------------------------------------
+		LocalDateTime nowDateTime = LocalDateTime.now();
+		DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String today = datetimeformatter.format(nowDateTime);
+
+//------------------本日の日付を格納----------------------------------------------------------
+    var Search_word = S4_word.split(" ");	// 半角スペースで配列
 
 	try {
 		// JDBCドライバを読み込む
@@ -133,28 +136,19 @@ public class SearchDAO {
 		// データベースに接続する
 		conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
-		// SQL文を準備する
-		String sql2 = "insert into SEARCH_WORD (key_id, word, search_date) values ('', ?, ?)";
+		for (int i = 0; Search_word.length > (i+1); i++){
+			// SQL文を準備する
+			String sql2 = "insert into SEARCH_WORD (word, search_date) values ("+"'"+Search_word[i]+"', '"+today+"')";
 
-		PreparedStatement pStmt = conn.prepareStatement(sql2);
+			PreparedStatement pStmt = conn.prepareStatement(sql2);
 
-		// SQL文を完成させる
-		if (word != null) {
-			pStmt.setString(2, word);			// 検索キーワード
-		}else {
-			pStmt.setString(2, null);
-		}
-		if (today != null) {
-			pStmt.setString(3, today);			// 検索日
-		}else {
-			pStmt.setString(3, null);
-		}
+			int end = pStmt.executeUpdate();
 
-		// SQL文を実行する
-		if (pStmt.executeUpdate() == 1) {
-			result = true;
-		}
-	}
+			// SQL文を実行する
+			if (end == 1 && Search_word.length == i) {
+				result = true;
+			}
+	}}
 	catch (SQLException e) {
 		e.printStackTrace();
 	}
@@ -174,4 +168,106 @@ public class SearchDAO {
 		}
 	}return result;
 }
+
+//-----------------------検索ランキング出力------------------------------------
+	public List<Search> MaxSearchRanking(){
+		  List<Search> MaxRankingList = new ArrayList<Search>();
+
+	      Connection conn = null;					// 接続リセット
+
+		  try {
+	        // JDBCドライバの読み込み
+			Class.forName("org.h2.Driver");
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
+
+			// SQL文の準備 通年：上位５位まで出力
+			String sql = "SELECT word ,count(word) from SEARCH_WORD group by word order by count(word) DESC limit 5";
+
+			PreparedStatement s2_res = conn.prepareStatement(sql);
+
+			// select文の実行
+			ResultSet rs = s2_res.executeQuery();
+
+			// select文の結果をArrayListに格納
+			while (rs.next()) {
+				Search Search = new Search(
+					rs.getString("WORD"),
+					rs.getInt("COUNT(WORD)")
+					);
+				MaxRankingList.add(Search);
+				}
+		  }  // エラー処理
+		  catch (SQLException e) {
+				e.printStackTrace();
+				MaxRankingList = null;
+		  }
+		  catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				MaxRankingList = null;
+		  }
+		  finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+						MaxRankingList = null;
+					}
+				}
+		  }return MaxRankingList;	 	// 結果を返す
+		}
+
+	//-----------------------検索ランキング出力------------------------------------
+	public List<Search> WeekSearchRanking(){
+		  List<Search> WeekRankingList = new ArrayList<Search>();
+
+	      Connection conn = null;					// 接続リセット
+
+		  try {
+	        // JDBCドライバの読み込み
+			Class.forName("org.h2.Driver");
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
+
+			// SQL文の準備 週間：上位５位まで出力
+			String sql = "SELECT word ,count(word) from SEARCH_WORD where A_DATE >= (NOW() - INTERVAL 7 DAY) group by word order by count(word) DESC limit 5";
+
+			PreparedStatement s2_res = conn.prepareStatement(sql);
+
+			// select文の実行
+			ResultSet rs = s2_res.executeQuery();
+
+			// select文の結果をArrayListに格納
+			while (rs.next()) {
+				Search Search = new Search(
+					rs.getString("WORD"),
+					rs.getInt("COUNT(WORD)")
+					);
+				WeekRankingList.add(Search);
+				}
+		  }  // エラー処理
+		  catch (SQLException e) {
+				e.printStackTrace();
+				WeekRankingList = null;
+		  }
+		  catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				WeekRankingList = null;
+		  }
+		  finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+						WeekRankingList = null;
+					}
+				}
+		  }return WeekRankingList;	 	// 結果を返す
+		}
 }

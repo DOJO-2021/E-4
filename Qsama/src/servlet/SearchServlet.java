@@ -26,6 +26,16 @@ public class SearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 
+		// 検索処理を行う
+		SearchDAO sDao = new SearchDAO();
+		List<Search> MaxRankingList = sDao.MaxSearchRanking();
+		List<Search> WeekRankingList = sDao.WeekSearchRanking();
+
+		System.out.println(MaxRankingList);		//結果出力　テストok
+
+		request.setAttribute("MaxRankingList", MaxRankingList);
+		request.setAttribute("WeekRankingList", WeekRankingList);
+
 		// 検索ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search.jsp");
 		dispatcher.forward(request, response);
@@ -55,9 +65,9 @@ public class SearchServlet extends HttpServlet {
 
 //		System.out.println(Search_word); 								// 検索ワードの確認テスト　ok
 //		System.out.println(Search_word.length()); 						// 検索ワードの長さ確認  ok
-		System.out.print("ｻｰﾌﾞﾚｯﾄradio:"+Search_radio+" "); 			// ラジオテスト　ok
-		System.out.print("ｻｰﾌﾞﾚｯﾄm_items:"+m_items+" "); 				// 大項目確認  ok
-		System.out.println("ｻｰﾌﾞﾚｯﾄs_items:"+s_items); 					// 小項目確認　ok
+//		System.out.print("ｻｰﾌﾞﾚｯﾄradio:"+Search_radio+"\t"); 			// ラジオテスト　ok
+//		System.out.print("ｻｰﾌﾞﾚｯﾄm_items:"+m_items+"\t"); 				// 大項目確認  ok
+//		System.out.println("ｻｰﾌﾞﾚｯﾄs_items:"+s_items); 					// 小項目確認　ok
 
 		if(Search_word2.length() > 0) {				// 事務局側で入力した場合
 			Search_word = Search_word2;
@@ -89,11 +99,13 @@ public class SearchServlet extends HttpServlet {
 		// 検索処理を行う
 		SearchDAO sDao = new SearchDAO();
 		List<Search> SearchList = sDao.KeywordSearch(S4_word, Search_radio, m_items, s_items);
+		List<Search> MaxRankingList = sDao.MaxSearchRanking();
 
-//		System.out.println(SearchList);		//結果出力　テストok
+//		System.out.println(SearchList);			//結果出力　テストok
 
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("SearchList", SearchList);
+		request.setAttribute("MaxRankingList", MaxRankingList);
 
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search.jsp");

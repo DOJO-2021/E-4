@@ -20,7 +20,7 @@
 				<!--ヘッダー開始-->
 				<nav class="nav">
 					<ul>
-						<li><a href="/Qsama/MainServlet">Qさま</a></li>
+						<li><a href="/Qsama/S_MainServlet">Qさま</a></li>
 						<li><a href="/Qsama/ProfileServlet">マイページ</a></li>
 						<li><a href="/Qsama/Question_postServlet">投稿</a></li>
 						<li><a href="/Qsama/SearchServlet">検索</a></li>
@@ -178,11 +178,9 @@
 				<p class="c-txtsp">
 				<h3>週間ランキング</h3>
 					<ol class="ranking">
-						<li>1位</li>
-						<li>2位</li>
-						<li>3位</li>
-						<li>4位</li>
-						<li>5位</li>
+					<c:forEach var="w" items="${WeekRankingList}" varStatus="t1">
+						${(t1.index)+1}位 : ${w.word} <br>
+					</c:forEach>
 					</ol>
 				</div>
 			</div>
@@ -191,11 +189,9 @@
 				<p class="c-txtsp">
 				<h3>通期ランキング</h3>
 					<ol class="ranking">
-						<li>1位</li>
-						<li>2位</li>
-						<li>3位</li>
-						<li>4位</li>
-						<li>5位</li>
+					<c:forEach var="y" items="${MaxRankingList}" varStatus="t2">
+						${(t2.index)+1}位 : ${y.word} <br>
+					</c:forEach>
 					</ol>
 				</div>
 			</div>
@@ -214,23 +210,9 @@
 					</div>
 				</div>
 			</c:forEach>
-<!--  			<div class="cp_actab">
-						<input id="cp_tabfour032" type="checkbox" name="tabs">
-						<label for="cp_tabfour032">質問テキスト</label>
-							<div class="cp_actab-content">
-								<p>答えテキスト</p>
-							</div>
-					</div>
-					<div class="cp_actab">
-						<input id="cp_tabfour033" type="checkbox" name="tabs">
-						<label for="cp_tabfour033">質問テキスト</label>
-							<div class="cp_actab-content">
-								<p>答えテキスト</p>
-							</div>
-					</div>  -->
-				</div>
 			</div>
 		</div>
+	</div>
 	</main>
 
 		<footer class="footer"><!--フッター-->

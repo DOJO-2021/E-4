@@ -23,6 +23,7 @@ public class Search implements Serializable {
 	private int A_flag;			// 回答者フラグ
 	private int area_open;			// 公開範囲指定
 	private String Search_word;	// 検索キーワード
+	private int count;				// カウント
 
 	// 検索キーワード 蓄積用
 	public Search(int key_id, String word, String search_date){
@@ -33,6 +34,12 @@ public class Search implements Serializable {
 	// 検索キーワード 検索用
 	public Search(String Search_word) {
 	this.Search_word = Search_word;
+	}
+
+	// ランキング用
+	public Search(String word, int count) {
+	this.word = word;
+	this.count = count;
 	}
 
 	public Search(){
@@ -190,5 +197,11 @@ public class Search implements Serializable {
 	}
 	public void setSearch_word(String search_word) {
 		Search_word = search_word;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 }
