@@ -4,18 +4,18 @@
 /* カテゴリ連動 */
 document.addEventListener("DOMContentLoaded", function(){
     // 初期値が設定されている場合は最上位を選択させない
-    var firstChange = ($("#Medium_item").val() == "");
+    var firstChange = ($("#S_items").val() == "");
 
-    $("#Major_items").on("change",function(){
+    $("#M_items").on("change",function(){
         if(firstChange){
             // 最上位を選択（現在選択項目を解除）
-            $("#Medium_item option[value='']").prop('selected',true);
+            $("#S_items option[value='']").prop('selected',true);
         }
         firstChange = true;
 
-        $("#Medium_item option").hide();
-        $("#Medium_item option[data-category='']").show();
-        $("#Medium_item option[data-category=" + this.value + "]").show();
+        $("#S_items option").hide();
+        $("#S_items option[data-category='']").show();
+        $("#S_items option[data-category=" + this.value + "]").show();
     }).change();
 });
 

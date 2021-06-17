@@ -56,6 +56,7 @@ h2{
 
 /* -------- タブ切り替え --------*/
 .cp_qa *, .cp_qa *:before, .cp_qa *:after {
+	font-family: 'FontAwesome', sans-serif;
 	-webkit-box-sizing: border-box;
 	        box-sizing: border-box;
 }
@@ -68,7 +69,9 @@ h2{
 }
 /* カテゴリー */
 .cp_qa #cp_content1,
-.cp_qa #cp_content2 {
+.cp_qa #cp_content2,
+.cp_qa #cp_content3,
+.cp_qa #cp_content4 {
 	display: none;
 	padding: 20px 0 0;
 	border-top: 1px solid #dddddd;
@@ -84,6 +87,14 @@ h2{
 .cp_qa label.cp_tabitem:before {
 	margin-right: 10px;
 }
+/*
+.cp_qa label.cp_tabitem[for*='1']:before {
+	content: '\f2bd'; 
+}
+.cp_qa label.cp_tabitem[for*='2']:before {
+	content: '\f15c'; 
+}
+*/
 
 .cp_qa label.cp_tabitem:hover {
 	cursor: pointer;
@@ -96,12 +107,17 @@ h2{
 }
 /* --ブロックのバーの色 */
 .cp_qa input:checked + label[for*='1'] {
-	border-top: 5px solid #ffc06e;
+	border-top: 5px solid #00BCD4;
 }
 .cp_qa input:checked + label[for*='2'] {
-	border-top: 5px solid #f59a25;
+	border-top: 5px solid #FF5722;
 }
-/*
+.cp_qa input:checked + label[for*='3'] {
+	border-top: 5px solid #03A9F4;
+}
+.cp_qa input:checked + label[for*='4'] {
+	border-top: 5px solid #E91E63;
+}
 @media screen and (max-width: 650px) {
 	.cp_qa label.cp_tabitem {
 		font-size: 0;
@@ -119,10 +135,11 @@ h2{
 		margin-right: 0px;
 	}
 }
-*/
 /* QAブロック */
-.cp_qa #cp_conttab1:checked  + #cp_content1 ,
-.cp_qa #cp_conttab2:checked  + #cp_content2 {
+.cp_qa #cp_conttab1:checked ~ #cp_content1,
+.cp_qa #cp_conttab2:checked ~ #cp_content2,
+.cp_qa #cp_conttab3:checked ~ #cp_content3,
+.cp_qa #cp_conttab4:checked ~ #cp_content4 {
   display: block;
 }
 .cp_qa .cp_qain {
@@ -167,12 +184,12 @@ h2{
 	opacity: 0;
 }
 /* 質問を開いた時の仕様 */
-.cp_qa .cp_qain .cp_actab input[type=checkbox]:checked + .cp_actab-content {
+.cp_qa .cp_qain .cp_actab input[type=checkbox]:checked ~ .cp_actab-content {
 	height: auto;
 	opacity: 1;
 }
 /* 質問をクリックした時の▼アイコンの動き */
-.cp_qa .cp_qain .cp_actab input[type=checkbox]:checked + .cp_plus {
+.cp_qa .cp_qain .cp_actab input[type=checkbox]:checked ~ .cp_plus {
 	-webkit-transform: rotate(45deg);
 	        transform: rotate(45deg);
 }

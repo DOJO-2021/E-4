@@ -52,13 +52,25 @@ public class Question_post implements Serializable {
 		this.Postpic_url = Postpic_url;
 	}
 
+	public Question_post(String M_items, String S_items, String Q_date, String Q_content, int A_level, int emergency, String Postpic_url) {
+		super();
+		this.M_items = M_items;
+		this.S_items = S_items;
+		this.Q_date = Q_date;
+		this.Q_content = Q_content;
+		this.A_level = A_level;
+		this.emergency = emergency;
+		this.Postpic_url = Postpic_url;
+	}
+	
+	
 	// getter ・ setter
 	public int getQQ_id() {
 		return QQ_id;
 	}
 
-	public void setQQ_id(int qQ_id) {
-		QQ_id = qQ_id;
+	public void setQQ_id(int QQ_id) {
+		this.QQ_id = QQ_id;
 	}
 
 	public int getAc_id() {
@@ -73,56 +85,56 @@ public class Question_post implements Serializable {
 		return Post_Number;
 	}
 
-	public void setPost_Number(int post_Number) {
-		Post_Number = post_Number;
+	public void setPost_Number(int Post_Number) {
+		this.Post_Number = Post_Number;
 	}
 
 	public String getM_items() {
 		return M_items;
 	}
 
-	public void setM_items(String m_items) {
-		M_items = m_items;
+	public void setM_items(String M_items) {
+		this.M_items = M_items;
 	}
 
 	public String getS_items() {
 		return S_items;
 	}
 
-	public void setS_items(String s_items) {
-		S_items = s_items;
+	public void setS_items(String S_items) {
+		this.S_items = S_items;
 	}
 
 	public String getQ_date() {
 		return Q_date;
 	}
 
-	public void setQ_date(String q_date) {
-		Q_date = q_date;
+	public void setQ_date(String Q_date) {
+		this.Q_date = Q_date;
 	}
 
 	public String getQ_content() {
 		return Q_content;
 	}
 
-	public void setQ_content(String q_content) {
-		Q_content = q_content;
+	public void setQ_content(String Q_content) {
+		this.Q_content = Q_content;
 	}
 
 	public int getA_level() {
 		return A_level;
 	}
 
-	public void setA_level(int a_level) {
-		A_level = a_level;
+	public void setA_level(int A_level) {
+		this.A_level = A_level;
 	}
 
 	public int getQ_flag() {
 		return Q_flag;
 	}
 
-	public void setQ_flag(int q_flag) {
-		Q_flag = q_flag;
+	public void setQ_flag(int Q_flag) {
+		this.Q_flag = Q_flag;
 	}
 
 	public int getEmergency() {
