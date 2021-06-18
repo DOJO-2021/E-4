@@ -1,19 +1,34 @@
 @charset "UTF-8";
+body {
+	padding-bottom	: 10px;
+    padding-bottom	: 20px;
+    padding-right	: 60px;
+    padding-left	: 60px;
+}
+
+/* ------------- ↑全体バランス用テスト↑ ------------ */
+
+
+
+.right_content{
+	margin		:5px;
+}
 
 .content_box {
-	display: flex;
-	flex-wrap: wrap;
+	display		: flex;
+	flex-wrap	: wrap;
 }
 
 /* --- 質問通知 解決済み通知 --- */
 /*タブ切り替え全体のスタイル*/
 .tabs {
-  margin-top: 50px;
-  padding-bottom: 40px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(5, 0, 0, 0.2);
-  width: 400px;
-  margin: 0 ;}
+  margin-top		: 50px;
+  padding-bottom	: 40px;
+  background-color	: #fff;
+  box-shadow		: 0 0 10px rgba(5, 0, 0, 0.2);
+  width				: 400px;
+  margin			: 0 ;
+  }
 
 /*タブのスタイル*/
 .tab_item {
@@ -43,12 +58,11 @@ input[name="tab_item"] {
 /*タブ切り替えの中身のスタイル*/
 .tab_content {
   display: none;
-  padding: 40px 40px 0;
+  padding: 20px 20px 0;
   clear: both;
-  overflow: hidden;
   height:500px;
+  overflow-y: scroll;
 }
-
 
 /*選択されているタブのコンテンツのみを表示*/
 #html:checked ~ #html_content,
@@ -63,14 +77,13 @@ input[name="tab_item"] {
 .tabs input:checked + .tab_item {
   color: #fff;
   width: 50%;
-
 }
 
 .content_box .content1 {
   box-sizing     : border-box;           /* 罫線も含む長さ      */
   background     : white;              /* BOXの背景色         */
   border         : 1px solid black;    /* 枠線の指定          */
-  width          : 800px;                 /* BOXの幅     */
+  width          : 720px;                 /* BOXの幅     */
   height         : 160px;                 /* BOXの幅     */
   margin         : 2px;                  /* BOXの間     */
 }
@@ -99,6 +112,7 @@ textarea {
   width          : 350px;                 /* BOXの幅     */
   height         : 220px;                 /* BOXの幅     */
   margin         : 2px;                  /* BOXの間     */
+  text-align	 : center;
 }
 
 /* -------- 受講者別質問管理 --------*/
@@ -111,4 +125,68 @@ textarea {
   margin         : 2px;                  /* BOXの間     */
 }
 
+/* -------- 最新質問ボタン --------*/
+button.cp_btn {
+	position		: relative;
+	display			: block;
+	width			: 350px;
+	padding			: 0.5em;
+	text-align		: center;
+	border			: 3px solid #9C27B0;
+	text-decoration	: none;
+	outline			: none;
+	transition		: all .4s;
+}
+button.cp_btn::before,
+button.cp_btn::after {
+	position		: absolute;
+	top				: -3px;
+	right			: -3px;
+	bottom			: -3px;
+	left			: -3px;
+	z-index			: 2;
+	content			: '';
+	transition		: all .4s;
+}
+button.cp_btn::before {
+	border-top		: 3px solid #FF5722;
+	border-bottom	: 3px solid #FF5722;
+	transform		: scale(0, 1);
+}
+button.cp_btn::after {
+	border-right	: 3px solid #FF5722;
+	border-left		: 3px solid #FF5722;
+	transform		: scale(1, 0);
+}
+button.cp_btn:hover {
+	color			: #FF5722;
+}
+button.cp_btn:hover::after,
+button.cp_btn:hover::before {
+	transform		: scale(1);
+}
 
+/* -------- モーダルウィンドウ表示　一覧２つ --------*/
+.modal{
+    display		: none;
+    height		: 100vh;
+    position	: fixed;
+    top			: 0;
+    width		: 70%;
+}
+.modal__bg{
+    background	: rgba(0,0,0,0.8);
+    height		: 100vh;
+    position	: absolute;
+    width		: 150%;
+}
+.modal__content{
+    background	: #fff;
+    left		: 50%;
+    padding		: 40px;
+    position	: absolute;
+    top			: 50%;
+    transform	: translate(-50%,-50%);
+    width		: 60%;
+    overflow-y	: scroll;
+}
