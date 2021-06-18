@@ -27,4 +27,5 @@ public class Idpw implements Serializable {
 	public void setUser_pw(String user_pw) {
 		this.user_pw = user_pw;
 	}
+
 }

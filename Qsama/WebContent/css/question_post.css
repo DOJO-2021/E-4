@@ -11,7 +11,7 @@ html * {
 
 body {
   margin: 0 auto;
-  max-width: auto;
+  max-width: 1000px;
 }
 
 /* -------- <h?>タグ -------- */
@@ -46,7 +46,7 @@ h2{
 }
 
 .emergency, .Q_content {
-  padding-top: 10px;
+  padding-top: 20px;
 }
 
 .form2 {
@@ -54,28 +54,33 @@ h2{
   padding-top: 15px;
 }
 
-/* -------- タブ切り替え --------*/
+/* --------------- タブ切り替え -----------------*/
 .cp_qa *, .cp_qa *:before, .cp_qa *:after {
 	font-family: 'FontAwesome', sans-serif;
 	-webkit-box-sizing: border-box;
 	        box-sizing: border-box;
 }
+
 .cp_qa {
 	margin: 0 auto;
 	background: #ffffff;
 }
+
 .cp_qa input {
 	display: none;
 }
-/* カテゴリー */
+
+/* ------------------- カテゴリー ---------------- */
+
+/* 質問内容・回答の表示エリア */
 .cp_qa #cp_content1,
-.cp_qa #cp_content2,
-.cp_qa #cp_content3,
-.cp_qa #cp_content4 {
+.cp_qa #cp_content2{
 	display: none;
 	padding: 20px 0 0;
 	border-top: 1px solid #dddddd;
 }
+
+/* エリア全体(.cp_qa) labelは項目表示部分 */
 .cp_qa label.cp_tabitem {
 	display: inline-block;
 	margin: 0 0 -1px;
@@ -84,17 +89,10 @@ h2{
 	color: #bbbbbb;
 	border: 1px solid transparent;
 }
+
 .cp_qa label.cp_tabitem:before {
 	margin-right: 10px;
 }
-/*
-.cp_qa label.cp_tabitem[for*='1']:before {
-	content: '\f2bd'; 
-}
-.cp_qa label.cp_tabitem[for*='2']:before {
-	content: '\f15c'; 
-}
-*/
 
 .cp_qa label.cp_tabitem:hover {
 	cursor: pointer;
@@ -105,19 +103,16 @@ h2{
 	border: 1px solid #dddddd;
 	border-bottom: 1px solid #ffffff;
 }
+
 /* --ブロックのバーの色 */
 .cp_qa input:checked + label[for*='1'] {
-	border-top: 5px solid #00BCD4;
+	border-top: 5px solid #ffc06e;
 }
 .cp_qa input:checked + label[for*='2'] {
-	border-top: 5px solid #FF5722;
+	border-top: 5px solid #fd8b68;
 }
-.cp_qa input:checked + label[for*='3'] {
-	border-top: 5px solid #03A9F4;
-}
-.cp_qa input:checked + label[for*='4'] {
-	border-top: 5px solid #E91E63;
-}
+
+/* レスポンシブデザイン対応 */
 @media screen and (max-width: 650px) {
 	.cp_qa label.cp_tabitem {
 		font-size: 0;
@@ -127,6 +122,7 @@ h2{
 		margin: 0;
 	}
 }
+
 @media screen and (max-width: 400px) {
 	.cp_qa label.cp_tabitem {
 		padding: 15px;
@@ -135,23 +131,27 @@ h2{
 		margin-right: 0px;
 	}
 }
-/* QAブロック */
+
+/* Q&Aブロック */
 .cp_qa #cp_conttab1:checked ~ #cp_content1,
-.cp_qa #cp_conttab2:checked ~ #cp_content2,
-.cp_qa #cp_conttab3:checked ~ #cp_content3,
-.cp_qa #cp_conttab4:checked ~ #cp_content4 {
+.cp_qa #cp_conttab2:checked ~ #cp_content2 {
   display: block;
 }
+
+/* Q&A 内部(.cp_qain) */
 .cp_qa .cp_qain {
 	overflow-x: hidden;
 	margin: 0 auto;
 	color: #333333;
 }
+
+/* .cp_actab はQ&A 1つずつのブロック */
 .cp_qa .cp_qain .cp_actab {
 	padding: 20px 0;
 	border-bottom: 1px dotted #cccccc;
 }
-/* 質問 */
+
+/* 質問表示部分 */
 .cp_qa .cp_qain label {
 	position: relative;
 	display: block;
@@ -184,28 +184,29 @@ h2{
 	opacity: 0;
 }
 /* 質問を開いた時の仕様 */
-.cp_qa .cp_qain .cp_actab input[type=checkbox]:checked ~ .cp_actab-content {
+input[type=checkbox]:checked ~ .cp_actab-content {
 	height: auto;
 	opacity: 1;
 }
 /* 質問をクリックした時の▼アイコンの動き */
-.cp_qa .cp_qain .cp_actab input[type=checkbox]:checked ~ .cp_plus {
+ input[type=checkbox]:checked ~ .cp_plus {
 	-webkit-transform: rotate(45deg);
-	        transform: rotate(45deg);
+	        transform: rotate(45deg);     
 }
+
 /* -------- テキストエリア --------*/
 
 textarea {
   font-family: inherit;
-  font-size: inherit;
+  font-size: 16px;
   resize: none;
   width:500px;
   height:200px;
   overflow: scroll;
 }
-.Q_cont label {
-  font-size: 18px;
-  font-weight: bold;
+.Q_content label {
+  font-size: 22px;
+  
 }
 
 /* --------ドラッグ＆ドロップ -------- */
@@ -216,6 +217,7 @@ textarea {
   border: #ddd dashed 5px;
   min-height: 200px;
   text-align: center;
+  width: 400px;
 }
 
 #dragDropArea p{

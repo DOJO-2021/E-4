@@ -170,4 +170,83 @@ public class IdpwDAO {
 			// 結果を返す
 			return Rank;
 		}
+
+	//新規登録
+	// 引数nで指定されたレコードを登録し、成功したらtrueを返す
+	public boolean insert(LoginUser n) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
+
+			// SQL文を準備する
+			String sql = "insert into LOGIN values (null, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			if (n.getUser_id() != null) {
+				pStmt.setString(1, n.getUser_id());
+			}
+			else {
+				pStmt.setString(1, "null");
+			}
+			if (n.getUser_pw() != null) {
+				pStmt.setString(2, n.getUser_pw());
+			}
+			else {
+				pStmt.setString(2, "null");
+			}
+			if (n.getMy_class() != null) {
+				pStmt.setString(3, n.getMy_class());
+			}
+			else {
+				pStmt.setString(3, "null");
+			}
+			if (n.getEmail() != null) {
+				pStmt.setString(4, n.getEmail());
+			}
+			else {
+				pStmt.setString(4, "null");
+			}
+			if (n.getName() != null) {
+				pStmt.setString(5, n.getName());
+			}
+			else {
+				pStmt.setString(5, "null");
+			}
+			//user_rank
+			pStmt.setInt(6, n.getUser_rank());
+
+			System.out.println(pStmt);
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
 	}
+}

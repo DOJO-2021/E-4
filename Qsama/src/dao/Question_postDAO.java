@@ -12,6 +12,8 @@ import java.util.List;
 
 import model.Question_post;
 
+
+
 public class Question_postDAO {
 	
 	public List<Question_post> postAll(){
@@ -28,8 +30,14 @@ public class Question_postDAO {
 		conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 		// SQL文の準備
-		String sql =
+	/*	 String sql =
 		"select * from Question_post";
+	*/	
+		// 外部結合で、p_userテーブルのデータ "ac_id" 取得
+		 String sql =
+		"select * from Question_post outer join ( select ac_id from p_user ) ";
+		
+
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 		// select文の実行
@@ -91,7 +99,7 @@ public class Question_postDAO {
 				LocalDateTime nowDateTime = LocalDateTime.now();
 				DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				String today = datetimeformatter.format(nowDateTime);
-		//----------------本日の日付を格納----------------------------------------------------------
+		//----------------本日の日付を格納--------------------------------------------
 
 		try {
 			
@@ -171,5 +179,126 @@ public class Question_postDAO {
 		// 結果を返す
 		return result;
 	}
+
+//-----------------------よくある質問 出力------------------------------------
+	public List<Question_post> PostFaq(){
+		  List<Question_post> PostFaqList = new ArrayList<Question_post>();
+
+	      Connection conn = null;					// 接続リセット
+
+		  try {
+			  
+	        // JDBCドライバの読み込み
+			Class.forName("org.h2.Driver");
+			
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
+
+			// SQL文の準備 よくある質問：上位５件の出力
+			String sql =
+			"select M_items, count(M_items), Q_content, A_content from Post_word outer join (select A_content from management_word)  group by M_items, Q_content, A_content order by count(M_items) DESC limit 5";
+			
+			/*
+			 * String sql =
+			"select p.M_items, p.count(M_items), p.Q_content, m.A_content from Post_word as p outer join ( select A_content from management_word as m ) group by M_items order by count(M_items) DESC limit 5";
+			 * 
+			 */
+			
+			PreparedStatement q2_res = conn.prepareStatement(sql);
+
+			// select文の実行
+			ResultSet rs = q2_res.executeQuery();
+
+			// select文の結果をArrayListに格納
+			while (rs.next()) {
+				Question_post question_post = new Question_post(
+					rs.getString("M_items"),
+					rs.getInt("count(M_items)"),
+					rs.getString("Q_content"),
+					rs.getString("A_content")
+					);
+				PostFaqList.add(question_post);
+				}
+			
+			System.out.println("DAO　PostFaqList:" + PostFaqList);     //OK
+			
+		  }  // エラー処理
+		  catch (SQLException e) {
+				e.printStackTrace();
+				PostFaqList = null;
+		  }
+		  catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				PostFaqList = null;
+		  }
+		  finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+						PostFaqList = null;
+					}
+				}
+		  } return PostFaqList;	 	// 結果を返す
+		}
+	}
+
+/*
+	//-----------------------検索ランキング出力------------------------------------
+	public List<Search> WeekSearchRanking(){
+		  List<Search> WeekRankingList = new ArrayList<Search>();
+
+	      Connection conn = null;					// 接続リセット
+
+		  try {
+	        // JDBCドライバの読み込み
+			Class.forName("org.h2.Driver");
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
+
+			// SQL文の準備 週間：上位５位まで出力
+			String sql = "SELECT word ,count(word) from SEARCH_WORD where A_DATE >= (NOW() - INTERVAL 7 DAY) group by word order by count(word) DESC limit 5";
+
+			PreparedStatement s2_res = conn.prepareStatement(sql);
+
+			// select文の実行
+			ResultSet rs = s2_res.executeQuery();
+
+			// select文の結果をArrayListに格納
+			while (rs.next()) {
+				Search Search = new Search(
+					rs.getString("WORD"),
+					rs.getInt("COUNT(WORD)")
+					);
+				WeekRankingList.add(Search);
+				}
+		  }  // エラー処理
+		  catch (SQLException e) {
+				e.printStackTrace();
+				WeekRankingList = null;
+		  }
+		  catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				WeekRankingList = null;
+		  }
+		  finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+						WeekRankingList = null;
+					}
+				}
+		  }return WeekRankingList;	 	// 結果を返す
+		}
 }
+
+*/
+
 

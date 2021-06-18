@@ -7,16 +7,16 @@ public class LoginUser implements Serializable {
 	private String user_id;	// ログイン時のID
 	private String user_pw;	// パスワード
 	private String my_class;	// 所属クラス
-	private String e_mail;		// E-mail
+	private String email;		// E-mail
 	private String name;		// 氏名
 	private int user_rank;	// ユーザーランク
 
-	public LoginUser(int ac_id, String user_id, String user_pw, String my_class, String e_mail, String name, int user_rank) {
+	public LoginUser(int ac_id, String user_id, String user_pw, String my_class, String email, String name,int user_rank) {
 		this.ac_id = ac_id;
 		this.user_id = user_id;
 		this.user_pw = user_pw;
 		this.my_class = my_class;
-		this.e_mail = e_mail;
+		this.email = email;
 		this.name = name;
 		this.user_rank = user_rank;
 	}
@@ -26,7 +26,7 @@ public class LoginUser implements Serializable {
 		this.user_id = "";
 		this.user_pw = "";
 		this.my_class = "";
-		this.e_mail = "";
+		this.email = "";
 		this.name = "";
 		this.user_rank = 0;
 	}
@@ -78,12 +78,12 @@ public class LoginUser implements Serializable {
 		this.my_class = my_class;
 	}
 
-	public String getE_mail() {
-		return e_mail;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setE_mail(String e_mail) {
-		this.e_mail = e_mail;
+	public void setE_mail(String email) {
+		this.email = email;
 	}
 
 	public String getName() {

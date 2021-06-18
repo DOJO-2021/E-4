@@ -108,7 +108,7 @@
 	<!-- 最近の質問 -->
 	<div class="content">
 	<h3>最近の質問</h3>
-	<c:forEach var="m" items="${Q_RecentList}">
+	<c:forEach var="m" items="${RecentqList}">
 		<label>${m.Q_content}</label>
 		<label>${m.Q_date}</label>
 		<label>${m.M_items}</label>

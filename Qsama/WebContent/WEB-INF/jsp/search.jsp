@@ -13,23 +13,9 @@
 	<script src="js/Search3.js"></script>		<!--検索ボタン空作動防止js-->
 </head>
 <body>
-	<div class="wrapper">
-		<div class="black">
-			<!--ヘッダー背景-->
-			<header class="header">
-				<!--ヘッダー開始-->
-				<nav class="nav">
-					<ul>
-						<li><a href="/Qsama/S_MainServlet">Qさま</a></li>
-						<li><a href="/Qsama/ProfileServlet">マイページ</a></li>
-						<li><a href="/Qsama/Question_postServlet">投稿</a></li>
-						<li><a href="/Qsama/SearchServlet">検索</a></li>
-						<li><a href="/Qsama/LogoutServlet">ログアウト</a></li>
-					</ul>
-				</nav>
-			</header>
-		</div>
-	</div>
+<!-- 共通のヘッダー -->
+<jsp:include page="/WEB-INF/jsp/header.jsp" />
+<!-- 共通ヘッダーここまで -->
 
 	<main>
 		<!--メイン-->

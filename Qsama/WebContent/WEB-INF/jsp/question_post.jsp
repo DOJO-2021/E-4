@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +8,11 @@
 
 <!-- JavaScript -->
 <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?ver=1.11.3'></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- 
 <script type='text/javascript' src= "js/question_post.js"></script>
-<!-- fontawesome -->
-<link href="https://use.fontawesome.com/releases/v6.6.0-beta1/css/all.css" rel="stylesheet">
+ -->
 <link rel="stylesheet" type="text/css" href="css/question_post.css">
 </head>
 <!-- body（ここから） -->
@@ -20,21 +23,24 @@
   <h1>個別投稿</h1>
   <main>
 
-<!-- 質問タブ表示 -->
+<!----------------  質問タブ表示 （ ここから ）--------------->
   <div class="cp_qa">
     <input id="cp_conttab1" type="radio" name="tabs" checked>
-    <label for="cp_conttab1" class="cp_tabitem"><i class="fa-solid fa-circle-question"></i>最近多い質問</label>
+    <label for="cp_conttab1" class="cp_tabitem">最近多い質問</label>
     <input id="cp_conttab2" type="radio" name="tabs">
     <label for="cp_conttab2" class="cp_tabitem">よくある質問</label>
 
   <div id="cp_content1">
 	<div class="cp_qain">
+	 
 		<div class="cp_actab">
-			<input id="cp_tabfour051" type="checkbox" name="tabs">
-			<div class="cp_plus">+</div>
-			<label for="cp_tabfour051">質問テキスト</label>
-			<div class="cp_actab-content">答えテキスト</div>
+			<input id="cp_tabfour051" type="checkbox" name="tabs">  
+			  <div class="cp_plus">+</div>
+			  <label for="cp_tabfour051">質問</label>
+			<div class="cp_actab-content">カテゴリ：大項目 <br>回答</div>
 		</div>
+	 
+	<!-- 
 		<div class="cp_actab">
 			<input id="cp_tabfour052" type="checkbox" name="tabs">
 			<div class="cp_plus">+</div>
@@ -47,38 +53,43 @@
 			<label for="cp_tabfour053">質問テキスト</label>
 			<div class="cp_actab-content">答えテキスト</div>
 		</div>
+	 -->
 	</div>
   </div>
   
   <div id="cp_content2">
 	<div class="cp_qain">
+	 <c:forEach var="e" items="${PostFaqList}">
 		<div class="cp_actab">
 			<input id="cp_tabfour054" type="checkbox" name="tabs">
 			<div class="cp_plus">+</div>
-			<label for="cp_tabfour054">質問テキスト</label>
-			<div class="cp_actab-content">答えテキスト</div>
+			<label for="cp_tabfour054">${e.q_content}</label>
+			<div class="cp_actab-content">カテゴリ：${e.m_items} <br>${e.a_content}</div>
 		</div>
-
+	 </c:forEach>
+	<!-- 
 		<div class="cp_actab">
 			<input id="cp_tabfour055" type="checkbox" name="tabs">
 			<div class="cp_plus">+</div>
-			<label for="cp_tabfour055">質問テキスト</label>
+			<label for="cp_tabfour055">質問</label>
 			<div class="cp_actab-content">答えテキスト</div>
 		</div>
+	   -->
+	  
 	</div>
   </div>
-  
   </div>
-  
-  
-   <!-- 投稿入力フォーム（ここから） -->
+  <!----------------  質問タブ表示 （ ここまで ）--------------->
+
+
+   <!---------------- 投稿入力フォーム（ここから）---------------->
    <h2>投稿入力欄</h2>
    
   <!-- Qsama/image/* -->
-  <form method="POST" action="/Qsama/Question_postServlet">
+  <form method="POST" action="/Qsama/Question_postServlet" >
   <div class="form-wrapper">
     <div class="form1">
-    <!-- 大カテゴリ (必須選択） -->
+    <!---------------- 大カテゴリ (必須選択） ---------------->
     <div class="question_cat">
       <select id="M_items" name="M_items">
         <option value=""> -- 大カテゴリ選択 -- </option>
@@ -94,9 +105,8 @@
       </select>
     </div>
 
-    <!-- 中カテゴリ
-      JavaScriptで大カテゴリと中カテゴリを連動させる
-    -->
+    <!---------------- 中カテゴリ
+               JavaScriptで大カテゴリと中カテゴリを連動させる ----------------->
     <div class="question_cat">
       <select id="S_items" name="S_items">
         <option value="" data-category=""> -- 中カテゴリ選択 -- </option>
@@ -136,16 +146,16 @@
         <option value="例外" data-category="Java">例外</option>
         <option value="エラーメッセージ" data-category="Java">エラーメッセージ</option>
         <option value="その他" data-category="Java">その他</option>
-        <option value="サーブレット" data-category="servlet_JSP">サーブレット</option>
-        <option value="JSP" data-category="servlet_JSP">JSP</option>
-        <option value="フォーム" data-category="servlet_JSP">フォーム</option>
-        <option value="MVCモデル" data-category="servlet_JSP">MVCモデル</option>
-        <option value="スコープ" data-category="servlet_JSP">スコープ</option>
-        <option value="アクションタグ" data-category="servlet_JSP">アクションタグ</option>
-        <option value="EL式" data-category="servlet_JSP">EL式</option>
-        <option value="データベース" data-category="servlet_JSP">データベース</option>
-        <option value="エラーメッセージ" data-category="servlet_JSP">エラーメッセージ</option>
-        <option value="その他" data-category="servlet_JSP">その他</option>
+        <option value="サーブレット" data-category="サーブレット・JSP">サーブレット</option>
+        <option value="JSP" data-category="サーブレット・JSP">JSP</option>
+        <option value="フォーム" data-category="サーブレット・JSP">フォーム</option>
+        <option value="MVCモデル" data-category="サーブレット・JSP">MVCモデル</option>
+        <option value="スコープ" data-category="サーブレット・JSP">スコープ</option>
+        <option value="アクションタグ" data-category="サーブレット・JSP">アクションタグ</option>
+        <option value="EL式" data-category="サーブレット・JSP">EL式</option>
+        <option value="データベース" data-category="サーブレット・JSP">データベース</option>
+        <option value="エラーメッセージ" data-category="サーブレット・JSP">エラーメッセージ</option>
+        <option value="その他" data-category="サーブレット・JSP">その他</option>
         <option value="データベースの基本" data-category="SQL">データベースの基本</option>
         <option value="検索 -select-" data-category="SQL">検索 -select-</option>
         <option value="内部結合・外部結合" data-category="SQL">内部結合・外部結合</option>
@@ -155,19 +165,19 @@
         <option value="削除 -delete-" data-category="SQL">削除 -delete-</option>
         <option value="テーブル作成" data-category="SQL">テーブル作成</option>
         <option value="その他" data-category="SQL">その他</option>
-        <option value="初段" data-category="rank">初段</option>
-        <option value="2段" data-category="rank">2段</option>
-        <option value="3段" data-category="rank">3段</option>
-        <option value="その他" data-category="rank">その他</option>
-        <option value="アルゴリズムドリル" data-category="drill">アルゴリズムドリル</option>
-        <option value="SQLドリル" data-category="drill">SQLドリル</option>
-        <option value="Javaドリル" data-category="drill">Javaドリル</option>
-        <option value="その他" data-category="drill">その他</option>
-        <option value="選択事項なし" data-category="office"> -- 選択事項なし --</option>
+        <option value="初段" data-category="段位認定">初段</option>
+        <option value="2段" data-category="段位認定">2段</option>
+        <option value="3段" data-category="段位認定">3段</option>
+        <option value="その他" data-category="段位認定">その他</option>
+        <option value="アルゴリズムドリル" data-category="ドリル">アルゴリズムドリル</option>
+        <option value="SQLドリル" data-category="ドリル">SQLドリル</option>
+        <option value="Javaドリル" data-category="ドリル">Javaドリル</option>
+        <option value="その他" data-category="ドリル">その他</option>
+        <option value="選択事項なし" data-category="事務局"> -- 選択事項なし --</option>
       </select>
     </div>
 
-    <!-- 回答レベル選択 -->
+    <!---------------- 回答レベル選択 ---------------->
     <div class="A_level">
       <select name="A_level">
         <option value=""> -- 回答レベル選択 --</option>
@@ -177,22 +187,22 @@
     </div>
 
 
-    <!-- 緊急レベル選択 -->
+    <!----------------  緊急レベル選択  ---------------->
     <div class="emergency"> 緊急の場合は「はい」を選択してください。
       <input type="radio" name="emergency" value="0">はい
       <input type="radio" name="emergency" value="1" checked>いいえ
     </div>
 
-    <!-- 質問内容入力フォーム -->
+    <!---------------- 質問内容入力フォーム ---------------->
       <div class="Q_content">
         <label>質問内容<br>
           <textarea name="Q_content"></textarea>
         </label>
       </div>
    </div>
-   <!-- class = form1 ここまで-->
+   <!---------------- class = form1 ここまで ---------------->
  
-    <!-- 画像添付欄 -->
+    <!-------------------    画像添付欄    -------------------->
     <div class="form2">
     <!-- enctypeは、送信時のデータ形式 -->
     
@@ -207,29 +217,29 @@
         </div>
      </div>
    </div>
-   <!-- class = form2 ここまで-->
+   <!---------------- class = form2 ( ここまで ) ---------------->
   
  </div>
- <!-- class = form-wrapper ここまで-->
+ <!---------------- class = form-wrapper ( ここまで ) ---------------->
    
-    <!-- 投稿ボタン -->
+    <!---------------- 投稿ボタン ---------------->
     <div class="Q_submit">
       <input type="submit" name="Q_submit" value="投稿" >
     </div>
   
   </form>
-<!-- 投稿入力フォーム（ここまで） -->
+<!---------------- 投稿入力フォーム（ここまで） ---------------->
+  
 
-
-<!-- 戻るボタン
-     受講者トップページへのリンク -->
+<!---------------- 戻るボタン
+               受講者トップページへのリンク ---------------->
   <a href="">戻る</a>
   </main>
 
+<script type='text/javascript' src= "js/question_post.js"></script>
 
-
-<!-- フッター -->
+<!---------------- フッター ---------------->
 
 </body>
-<!-- body（ここまで） -->
+<!---------------- body（ここまで） ---------------->
 </html>

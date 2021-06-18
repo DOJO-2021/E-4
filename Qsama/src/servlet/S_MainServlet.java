@@ -65,11 +65,11 @@ public class S_MainServlet extends HttpServlet {
 		System.out.println("質問内容"+Q_content);
 
 		// 検索処理を行う
-		//Question_postDAO sDao = new Question_postDAO();
-		//List<Question_post> Question_postList = sDao.select(new Question_post(0, 0, 0, M_items, "", Q_date, Q_content, "", 0, 0, 0, 0, "");
+		//MainDAO sDao = new MainDAO();
+		//List<S_Main> RecentqList = sDao.RecentQ();
 
 		// 検索結果をリクエストスコープに格納する
-		//request.setAttribute("Question_postList", Question_postList);
+		//request.setAttribute("RecentqList", RecentqList);
 
 		// メインページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/s_main.jsp");

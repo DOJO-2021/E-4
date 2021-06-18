@@ -3,7 +3,7 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="/Qsama/css/login.css">
-	
+
 	<script type='text/javascript' src= "js/login.js"></script>
 
 	<meta charset="UTF-8">
@@ -29,23 +29,24 @@
   </div>
   <div class="tab_content" id="regist_content">
   	<div class = item_regist>
-        <form class="login-form" method="POST"  name = "form"id="form_r" action="/Qsama/Regist_FServlet">
+        <form class="login-form" method="POST"  name = "form"id="form_r" action="/Qsama/RegistServlet">
         <div class = class_number>
           <label for = "belong">所属クラス</label>
 	        <select class = "belong" name = "belong">
-		      <option value = "a">A</option>
-		      <option value = "b">B</option>
-		      <option value = "c">C</option>
-		      <option value = "d">D</option>
-		      <option value = "e">E</option>
+		      <option value = "A">A</option>
+		      <option value = "B">B</option>
+		      <option value = "C">C</option>
+		      <option value = "D">D</option>
+		      <option value = "E">E</option>
 	        </select><br>
 	    </div>
+	      <label class = content><input type="text" placeholder = "ID" name = "id"required></label><br>
 	      <label class = content><input type="text" placeholder = "Email" name = "email"required></label><br>
 	      <label class = content><input type="text" placeholder = "氏名" name = "name"required></label><br>
-	      <label class = content><input type="password" placeholder = "パスワード" name = "password"required></label><br>
-	      <label class = content><input type="password" placeholder = "パスワード(確認)" name = "password1" required></label><br>
-	      <label>ユーザランク</label><br>
-	    <div class = "button">  
+	      <label class = content><input type="password" placeholder = "パスワード" name = "pw"required></label><br>
+          <label class = content><input type="radio" name="rank" value="2" checked="checked">受講者
+					            <input type="radio" name="rank" value="1" >管理者</label><br>
+	    <div class = "button">
 	      <input type="submit" name="regist" value="新規登録" onclick = "checkForm()">
 	    </div>
 	    </form>

@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,12 +26,30 @@ public class Question_postServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public Question_postServlet() {
-		super();
-	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	// 個人投稿ページにフォワード
+		/*
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+			HttpSession session = request.getSession();
+			if (session.getAttribute("user_id") == null) {
+				response.sendRedirect("/Qsama/LoginServlet");
+				return;
+			}
+		
+		// ログインしているユーザID（ac_id)の取得
+			String ac_id = (String) session.getAttribute("ac_id");
+		*/	
+				
+		// ----------- よくある質問 ------------------
+			Question_postDAO qDao = new Question_postDAO();
+			List<Question_post> PostFaqList = qDao.PostFaq();
+			
+			System.out.println("scope PostFaqList:" + PostFaqList);   // 結果出力
+				
+			// 結果をリクエストスコープに格納する
+			request.setAttribute("PostFaqList", PostFaqList);	
+		
+		// 個人投稿ページにフォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_post.jsp");
 			dispatcher.forward(request, response);
 	}
@@ -39,6 +58,18 @@ public class Question_postServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+			HttpSession session = request.getSession();
+			if (session.getAttribute("user_id") == null) {
+				response.sendRedirect("/Qsama/LoginServlet");
+				return;
+			}
+				
+		
+			// ログインしているユーザID（ac_id)の取得
+						String ac_id = (String) session.getAttribute("ac_id");
+		*/
 		
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
@@ -63,6 +94,19 @@ public class Question_postServlet extends HttpServlet {
 	//	System.out.println("回答フラグ：" + Q_flag);
 		System.out.println("緊急レベル：" + emergency);
 		System.out.println("画像URL：" + Postpic_url);
+		
+/*			
+		// ----------- よくある質問 ------------------
+		Question_postDAO qDao = new Question_postDAO();
+		List<Question_post> PostFaqList = qDao.PostFaq();
+		
+			System.out.println("scope PostFaqList:" + PostFaqList);   // 結果出力
+		
+			// 結果をリクエストスコープに格納する
+			request.setAttribute("PostFaqList", PostFaqList);	
+*/			
+			
+		
 /*		
 		//--------------- ファイル取得 ---------------
 		Part part = request.getPart("Postpic_url"); // getPartでファイル取得
@@ -113,9 +157,12 @@ public class Question_postServlet extends HttpServlet {
 			System.out.println("登録失敗");
 		}
 		
+		
+		
+			
 		// 投稿ページにフォワードする
-		RequestDispatcher dispatcher2 = request.getRequestDispatcher("/WEB-INF/jsp/question_post.jsp");
-				dispatcher2.forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_post.jsp");
+				dispatcher.forward(request, response);
 
 	}
 }
