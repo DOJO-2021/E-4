@@ -18,7 +18,8 @@ public class Question_post implements Serializable {
 	private int emergency;              // 緊急レベル
 	private String Postpic_url;         // 画像
 	private int count;				    // カウント
-	private String A_content;            // 回答
+	private String A_content;           // 回答
+	private String A_date;              // 回答日
 
 
 
@@ -36,6 +37,7 @@ public class Question_post implements Serializable {
 		this.Q_flag = 0;
 		this.emergency = 0;
 		this.Postpic_url = "";
+		this.A_date = "";
 	}
 
 	// 引数があるコンストラクタ
@@ -74,6 +76,14 @@ public class Question_post implements Serializable {
 		this.A_content = A_content;
 		}
 		
+	// -------------------- 最近の質問用 コンストラクタ -------------------- 
+		public Question_post(String M_items, int count, String Q_content, String A_content, String A_date) {
+			this.M_items = M_items;
+			this.count = count;
+			this.Q_content = Q_content;
+			this.A_content = A_content;
+			this.A_date = A_date;
+			}
 		
 	
 	// getter ・ setter
@@ -176,6 +186,12 @@ public class Question_post implements Serializable {
 	}
 	public void setA_content(String a_content) {
 		A_content = a_content;
+	}
+	public String getA_date() {
+		return A_date;
+	}
+	public void setA_date(String a_date) {
+		A_date = a_date;
 	}
 }
 

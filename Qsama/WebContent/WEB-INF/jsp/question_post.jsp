@@ -18,7 +18,7 @@
 <!-- body（ここから） -->
 <body>
   <!-- ヘッダー -->
-<jsp:include page="/WEB-INF/jsp/header.jsp" />
+<jsp:include page="/WEB-INF/jsp/header.jsp"/>
 
   <h1>個別投稿</h1>
   <main>
@@ -32,14 +32,14 @@
 
   <div id="cp_content1">
 	<div class="cp_qain">
-	 
+	  <c:forEach var="w" items="${WeekFaqList}">
 		<div class="cp_actab">
-			<input id="cp_tabfour051" type="checkbox" name="tabs">  
+			<input class="rename_id1" id="cp_tabfour051" type="checkbox" name="tabs">  
 			  <div class="cp_plus">+</div>
-			  <label for="cp_tabfour051">質問</label>
-			<div class="cp_actab-content">カテゴリ：大項目 <br>回答</div>
+			  <label for="cp_tabfour051">${w.q_content}</label>
+			<div class="cp_actab-content">カテゴリ：${w.m_items} <br>${w.a_content}</div>
 		</div>
-	 
+	  </c:forEach>
 	<!-- 
 		<div class="cp_actab">
 			<input id="cp_tabfour052" type="checkbox" name="tabs">
@@ -86,7 +86,7 @@
    <h2>投稿入力欄</h2>
    
   <!-- Qsama/image/* -->
-  <form method="POST" action="/Qsama/Question_postServlet" >
+  <form method="POST" action="/Qsama/Question_postServlet">
   <div class="form-wrapper">
     <div class="form1">
     <!---------------- 大カテゴリ (必須選択） ---------------->
@@ -206,16 +206,19 @@
     <div class="form2">
     <!-- enctypeは、送信時のデータ形式 -->
     
+    
     <div id="dragDropArea">
-       <div class="drag-drop-inside">
+        <div class="drag-drop-inside">
             <p class="drag-drop-info">ここにファイルをドロップ</p>
             <p>または</p>
             <p class="drag-drop-buttons">
-                <input id="fileInput" type="file"  value="ファイルを選択" name="Postpic_url" onChange="photoPreview(event)" multiple>
+                <input id="fileInput" type="file" value="ファイルを選択" name="Postpic_url" onChange="photoPreview(event)" multiple>
             </p>
             <div id="previewArea"></div>
         </div>
-     </div>
+    </div>
+    
+     
    </div>
    <!---------------- class = form2 ( ここまで ) ---------------->
   

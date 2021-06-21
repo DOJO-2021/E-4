@@ -12,6 +12,7 @@ html * {
 body {
   margin: 0 auto;
   max-width: 1000px;
+  background-color: #f3f3f3;
 }
 
 /* -------- <h?>タグ -------- */
@@ -54,7 +55,9 @@ h2{
   padding-top: 15px;
 }
 
-/* --------------- タブ切り替え -----------------*/
+
+
+/* --------------- ここから、200行目までが該当箇所です。タブ切り替え -----------------*/
 .cp_qa *, .cp_qa *:before, .cp_qa *:after {
 	font-family: 'FontAwesome', sans-serif;
 	-webkit-box-sizing: border-box;
@@ -107,9 +110,11 @@ h2{
 /* --ブロックのバーの色 */
 .cp_qa input:checked + label[for*='1'] {
 	border-top: 5px solid #ffc06e;
+	width: 170px;
 }
 .cp_qa input:checked + label[for*='2'] {
 	border-top: 5px solid #fd8b68;
+	width: 170px;
 }
 
 /* レスポンシブデザイン対応 */
@@ -235,6 +240,11 @@ textarea {
 
 .drag-drop-buttons input{
     margin: auto;
+}
+
+#previewImage {
+  max-width: 300px;
+  max-height: 200px;
 }
 
 

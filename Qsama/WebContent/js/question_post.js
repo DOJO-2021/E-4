@@ -18,12 +18,15 @@
 
         $("#S_items option").hide();
         $("#S_items option[data-category='']").show();
-        $("#S_items option[data-category=" + this.value + "]").show();
+        $("#S_items option[data-category=' + this.value + ']").show();
     }).change();
 });
 
 
-/*  ----------------------- + アイコンの回転 ----------------------- */
+/*  ----------------------- + アイコンの回転 と id/forの変更----------------------- */
+
+	// ここがうまくできない！！！！！
+
 
    /* 読み込み時にファンクション  */
    
@@ -31,8 +34,8 @@
    
      // id属性,for属性の変更・自動生成
      const moji = 'cp_tabfour05'
-     var input_id = document.getElementById('cp_tabfour054');        // id
-     var label_for = $('label').prop('label.htmlFor');               // for
+     var input_id = document.getElementById('cp_tabfour051');        // id
+     var label_for = $('label').prop('label.htmlFor');               // for jQuery以外の記述方法見つからない
    
    for(var i=0; i<input_id.length; i++){
    
@@ -62,29 +65,34 @@
   // ドロップ有効範囲
     var fileArea = document.getElementById('dragDropArea');
   
+
   // ファイル選択ボタン
     var fileInput = document.getElementById('fileInput');
 
+
   //ドロップ有効範囲上
     fileArea.addEventListener('dragover',function(evt) {
-      evt.stopPropagation();
+    //  evt.stopPropagation();
       evt.preventDefault();
       
       this.style.background = '#e1e7f0';
       fileArea.classList.add('dragover');
     });
 
+
   // ドロップ有効範囲外
     fileArea.addEventListener('dragleave', function(evt) {
-      evt.stopPropagation();
+    //  evt.stopPropagation();
       evt.preventDefault();
       
       this.style.background = '#ffffff';
       fileArea.classList.remove('dragover');
     });
 
+
+   // ファイルをドロップしたとき
     fileArea.addEventListener('drop', function(evt) {
-	  evt.stopPropagation();
+	//  evt.stopPropagation();
       evt.preventDefault();
       
       fileArea.classList.remove('dragenter');
@@ -99,6 +107,7 @@
     photoPreview('onChenge',files[0]);
     });
 
+
   // プレビュー機能
     function photoPreview(event, f = null) {
       var file = f;
@@ -107,7 +116,7 @@
     }
 
   /* FileReaderで読み込み、プレビュー画像を表示。 */
-  for (i = 0; i < files.length; i++) {
+//  for (i = 0; i < files.length; i++) {
     var reader = new FileReader();
     var preview = document.getElementById("previewArea");
     var previewImage = document.getElementById("previewImage");
@@ -117,7 +126,7 @@
     }
 
 
-    filereader.onload = function() {
+    reader.onload = function(event) {
 
     var img = document.createElement("img");
     img.setAttribute("src", reader.result);
@@ -128,12 +137,12 @@
     reader.readAsDataURL(file);
     console.log(file);             // ファイル情報取得
   }
-}
+
 
 
 /* ---------  ファイルの自動アップデート  --------- */
 
-
+/*
   var formData = new FormData();
   for (var i = 0; i < files.length; i++) {
     formData.append('file', files[i]);
@@ -152,5 +161,5 @@
     };
 
     xhr.send(formData);
-
+*/
   

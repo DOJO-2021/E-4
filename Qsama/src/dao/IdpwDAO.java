@@ -91,7 +91,7 @@ public class IdpwDAO {
 						Mydata2.getString("USER_ID"),
 						Mydata2.getString("USER_PW"),
 						Mydata2.getString("MY_CLASS"),
-						Mydata2.getString("E_MAIL"),
+						Mydata2.getString("EMAIL"),
 						Mydata2.getString("NAME"),
 						Mydata2.getInt("USER_RANK")
 						);

@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.Question_postDAO;
 import model.Question_post;
@@ -28,7 +29,7 @@ public class Question_postServlet extends HttpServlet {
 	 */
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
+		
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 			HttpSession session = request.getSession();
 			if (session.getAttribute("user_id") == null) {
@@ -37,17 +38,20 @@ public class Question_postServlet extends HttpServlet {
 			}
 		
 		// ログインしているユーザID（ac_id)の取得
-			String ac_id = (String) session.getAttribute("ac_id");
-		*/	
+		//	String ac_id = (String) session.getAttribute("ac_id");
+		
 				
 		// ----------- よくある質問 ------------------
 			Question_postDAO qDao = new Question_postDAO();
 			List<Question_post> PostFaqList = qDao.PostFaq();
+			List<Question_post> WeekFaqList = qDao.WeekFaqRanking();
 			
 			System.out.println("scope PostFaqList:" + PostFaqList);   // 結果出力
+			System.out.println("scope WeekFaqList:" + WeekFaqList);
 				
 			// 結果をリクエストスコープに格納する
 			request.setAttribute("PostFaqList", PostFaqList);	
+			request.setAttribute("WeekFaqList", WeekFaqList);
 		
 		// 個人投稿ページにフォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_post.jsp");
@@ -58,7 +62,7 @@ public class Question_postServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
+		
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 			HttpSession session = request.getSession();
 			if (session.getAttribute("user_id") == null) {
@@ -67,10 +71,10 @@ public class Question_postServlet extends HttpServlet {
 			}
 				
 		
-			// ログインしているユーザID（ac_id)の取得
-						String ac_id = (String) session.getAttribute("ac_id");
-		*/
-		
+		// ログインしているユーザID（ac_id)の取得
+	//	String ac_id = (String) session.getAttribute("ac_id");
+	
+
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		String M_items = request.getParameter("M_items");
@@ -84,7 +88,11 @@ public class Question_postServlet extends HttpServlet {
 		int emergency = Integer.parseInt(request.getParameter("emergency"));
 	//	int emergency = 0;
 		String Postpic_url = request.getParameter("Postpic_url");
-
+	//	LoginUser ac_id = (LoginUser)session.getAttribute("ac_id");
+	//	System.out.print("ac_id:" + ac_id );
+		
+	//	int ac_id = LoginUser.getAc_id();
+		
 		// ----------パラメータの取得確認 ----------
 		System.out.println("大項目：" + M_items);
 		System.out.println("中項目：" + S_items);

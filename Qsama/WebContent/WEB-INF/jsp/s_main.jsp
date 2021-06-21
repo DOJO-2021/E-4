@@ -41,14 +41,12 @@
 	  <div class="tab_content" id="html_content">
 	    <div class="tab_content_description">
 	      <p class="c-txtsp">HTMLの質問がここに入ります(ランキング形式)</p>
-	      <ol>
-	      	<li>質問内容</li>
-	      	<li>質問内容</li>
-	      	<li>質問内容</li>
-	      	<li>質問内容</li>
-	      	<li>質問内容</li>
-	      	<li>質問内容</li>
-	      </ol>
+			<c:forEach var="h" items="${ResoledQList}">
+				${h.m_items}
+				${h.q_flag}
+				<p class="q_list">${h.q_content}</p>
+				<hr>
+			</c:forEach>
 	    </div>
 	  </div>
 	  <div class="tab_content" id="css_content">
@@ -107,20 +105,20 @@
 	<!-- よくある質問集ここまで -->
 	<!-- 最近の質問 -->
 	<div class="content">
-	<h3>最近の質問</h3>
-	<c:forEach var="m" items="${RecentqList}">
-		<label>${m.Q_content}</label>
-		<label>${m.Q_date}</label>
-		<label>${m.M_items}</label>
-	</c:forEach>
+		<h3>最近の質問</h3>
+		<c:forEach var="m" items="${RecentqList}">
+			${m.q_date}:${m.m_items}
+			<p class="q_list">${m.q_content}</p>
+			<hr>
+		</c:forEach>
 	</div>
 	<!-- 最近の質問ここまで -->
 </div>
 
 <!-- プロフィール -->
-<div class="profile">
+<!--  <div class="profile">
 	<h3>プロフィール</h3>
-</div>
+</div>-->
 <!-- プロフィールここまで -->
 
 <!-- 共通のフッターー -->

@@ -35,7 +35,7 @@ public class Question_postDAO {
 	*/	
 		// 外部結合で、p_userテーブルのデータ "ac_id" 取得
 		 String sql =
-		"select * from Question_post outer join ( select ac_id from p_user ) ";
+		"select * from Question_post outer join ( select ac_id from login) ";
 		
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -89,11 +89,13 @@ public class Question_postDAO {
 		return Question_postList;
 	 }
 
+	
 
 	// insert
 	public boolean P_insert(Question_post question_post) {
 		Connection conn = null;
 		boolean result = false;
+	
 		
 		//--------------- 本日の日付を格納 -------------------------------------------
 				LocalDateTime nowDateTime = LocalDateTime.now();
@@ -101,6 +103,7 @@ public class Question_postDAO {
 				String today = datetimeformatter.format(nowDateTime);
 		//----------------本日の日付を格納--------------------------------------------
 
+				
 		try {
 			
 			// JDBCドライバを読み込む
@@ -110,7 +113,7 @@ public class Question_postDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 			// SQL文を準備する
-			String sql = "insert into Post_word (M_items, S_items, Q_date, Q_content, A_level, emergency, Postpic_url) values (?, ?, ?, ?, ?, ?, ?)";
+			String sql = "insert into Post_word (ac_id, M_items, S_items, Q_date, Q_content, A_level, emergency, Postpic_url) values (null, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -128,11 +131,8 @@ public class Question_postDAO {
 				pStmt.setString(2, null);
 			}
 
-		//	if (question_post.getQ_date() != null) {
 				pStmt.setString(3, today);      // 今日の日付
-		//	} else {
-		//		pStmt.setString(3, null);
-		//	}
+		
 
 			// not null制約あり
 			if (question_post.getQ_content() != null && !question_post.getQ_content().equals("")) {
@@ -152,6 +152,7 @@ public class Question_postDAO {
 				pStmt.setString(7, null);
 			}
 
+			pStmt.setInt(8, question_post.getAc_id());
 			
 			// insert文を実行する
 			if (pStmt.executeUpdate() == 1) {
@@ -181,6 +182,7 @@ public class Question_postDAO {
 	}
 
 //-----------------------よくある質問 出力------------------------------------
+	
 	public List<Question_post> PostFaq(){
 		  List<Question_post> PostFaqList = new ArrayList<Question_post>();
 
@@ -196,7 +198,7 @@ public class Question_postDAO {
 
 			// SQL文の準備 よくある質問：上位５件の出力
 			String sql =
-			"select M_items, count(M_items), Q_content, A_content from Post_word outer join (select A_content from management_word)  group by M_items, Q_content, A_content order by count(M_items) DESC limit 5";
+			"select M_items, count(M_items), Q_content, A_content from Post_word as p inner join MANAGEMENT_WORD as m inner join p_user as u on p.post_number = m.post_number on u.ac_id = p.ac_id group by M_items, Q_content, A_content order by count(M_items) DESC limit 5";
 			
 			/*
 			 * String sql =
@@ -244,12 +246,12 @@ public class Question_postDAO {
 				}
 		  } return PostFaqList;	 	// 結果を返す
 		}
-	}
+	
 
-/*
-	//-----------------------検索ランキング出力------------------------------------
-	public List<Search> WeekSearchRanking(){
-		  List<Search> WeekRankingList = new ArrayList<Search>();
+	//-----------------------   最近の質問出力  ------------------------------------
+	
+	public List<Question_post> WeekFaqRanking(){
+		  List<Question_post> WeekFaqList = new ArrayList<Question_post>();
 
 	      Connection conn = null;					// 接続リセット
 
@@ -260,8 +262,13 @@ public class Question_postDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 			// SQL文の準備 週間：上位５位まで出力
-			String sql = "SELECT word ,count(word) from SEARCH_WORD where A_DATE >= (NOW() - INTERVAL 7 DAY) group by word order by count(word) DESC limit 5";
-
+	/*		String sql = "SELECT word ,count(word) from SEARCH_WORD where A_DATE >= (NOW() - INTERVAL 7 DAY) group by word order by count(word) DESC limit 5";
+	 * 
+	 */
+			String sql =
+				"select M_items, count(M_items), Q_content, A_content, A_date from Post_word as p inner join MANAGEMENT_WORD as m inner join p_user as u on p.post_number = m.post_number on u.ac_id = p.ac_id where m.A_DATE >= (NOW() - INTERVAL 7 DAY) group by M_items, Q_content, A_content, A_date order by count(M_items) DESC limit 5";
+			
+			
 			PreparedStatement s2_res = conn.prepareStatement(sql);
 
 			// select文の実行
@@ -269,20 +276,29 @@ public class Question_postDAO {
 
 			// select文の結果をArrayListに格納
 			while (rs.next()) {
-				Search Search = new Search(
-					rs.getString("WORD"),
-					rs.getInt("COUNT(WORD)")
-					);
-				WeekRankingList.add(Search);
+				Question_post question_post = new Question_post(
+						
+						rs.getString("M_items"),
+						rs.getInt("count(M_items)"),
+						rs.getString("Q_content"),
+						rs.getString("A_content"),
+						rs.getString("A_date")
+						
+						);
+				
+				WeekFaqList.add(question_post);
 				}
+			
+			System.out.println("DAO　WeekFaqList:" + WeekFaqList);
+			
 		  }  // エラー処理
 		  catch (SQLException e) {
 				e.printStackTrace();
-				WeekRankingList = null;
+				WeekFaqList = null;
 		  }
 		  catch (ClassNotFoundException e) {
 				e.printStackTrace();
-				WeekRankingList = null;
+				WeekFaqList = null;
 		  }
 		  finally {
 				// データベースを切断
@@ -292,13 +308,13 @@ public class Question_postDAO {
 					}
 					catch (SQLException e) {
 						e.printStackTrace();
-						WeekRankingList = null;
+						WeekFaqList = null;
 					}
 				}
-		  }return WeekRankingList;	 	// 結果を返す
+		  }return WeekFaqList;	 	// 結果を返す
 		}
 }
 
-*/
+
 
 
