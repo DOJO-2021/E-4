@@ -19,8 +19,7 @@
 	<dl>
 	  <dt>日付を表示</dt>
 	    <dd><c:forEach var="o" items="${NoticeList}">
-
-			${o.a_flag}回答が届いています。
+			${o.a_flag}講師から質問の回答がきています！
 			</c:forEach>
 	    </dd>
 	</dl>

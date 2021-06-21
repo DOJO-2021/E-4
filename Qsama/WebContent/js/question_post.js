@@ -29,7 +29,7 @@
 
 
    /* 読み込み時にファンクション  */
-   
+  /* 
    window.addEventListener('load', function() {
    
      // id属性,for属性の変更・自動生成
@@ -94,32 +94,42 @@
     fileArea.addEventListener('drop', function(evt) {
 	//  evt.stopPropagation();
       evt.preventDefault();
-      
       fileArea.classList.remove('dragenter');
-      var files = evt.dataTransfer.files;       // drag&dropでのファイル取得
-        console.log("DRAG & DROP");
-        console.table(files);
+
 	
-  // 取得したファイルをinput[type=file]へ
-    fileInput.files = files;
-      console.table(files);
-      
-    photoPreview('onChenge',files[0]);
+	  
+      var files = evt.dataTransfer.files;       // drag&dropでのファイル取得（ここが配列！）
+
+		// sendFiles(evt.originalEvent.dataTransfer.files, 'Qsama/images/*');
+		
+        console.log("DRAG & DROP");      // OK
+        console.table(files);            // ファイル数確認OK
+	
+	
+    // 取得したファイルをinput[type=file]へ
+      fileInput.files = files;           
+
+     //   console.table(fileInput.files);              // ファイル数確認OK filesと一致
+        photoPreview('onChenge',files[0]);
+
     });
 
 
   // プレビュー機能
-    function photoPreview(event, f = null) {
+    function photoPreview(evt, f = null) {
       var file = f;
       if(file === null){
-        file = event.target.files[0];
+	
+         file = evt.target.files[0];
+
     }
 
   /* FileReaderで読み込み、プレビュー画像を表示。 */
-//  for (i = 0; i < files.length; i++) {
-    var reader = new FileReader();
-    var preview = document.getElementById("previewArea");
-    var previewImage = document.getElementById("previewImage");
+//   for (i = 0; i < files.length; i++) {
+	
+      var reader = new FileReader();
+      var preview = document.getElementById("previewArea");
+      var previewImage = document.getElementById("previewImage");
 
     if(previewImage != null) {
       preview.removeChild(previewImage);
@@ -135,7 +145,7 @@
    };
 
     reader.readAsDataURL(file);
-    console.log(file);             // ファイル情報取得
+    console.log(file);             // ファイル情報取得  ここが一個しか取れてない
   }
 
 

@@ -35,7 +35,7 @@ public class Question_postDAO {
 	*/	
 		// 外部結合で、p_userテーブルのデータ "ac_id" 取得
 		 String sql =
-		"select * from Question_post outer join ( select ac_id from login) ";
+		"select * from POST_WORD as p inner join P_USER as u on p.ac_id=u.ac_id ";
 		
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -113,11 +113,12 @@ public class Question_postDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 			// SQL文を準備する
-			String sql = "insert into Post_word (ac_id, M_items, S_items, Q_date, Q_content, A_level, emergency, Postpic_url) values (null, ?, ?, ?, ?, ?, ?, ?)";
+			// IDはauto increment 
+			String sql = "insert into Post_word (M_items, S_items, Q_date, Q_content, A_level, emergency, Postpic_url) values (?, ?, ?, ?, ?, ?, ?)";
+			
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			
 			
 			if (question_post.getM_items() != null) {
 				pStmt.setString(1, question_post.getM_items());
@@ -152,7 +153,6 @@ public class Question_postDAO {
 				pStmt.setString(7, null);
 			}
 
-			pStmt.setInt(8, question_post.getAc_id());
 			
 			// insert文を実行する
 			if (pStmt.executeUpdate() == 1) {
@@ -198,8 +198,8 @@ public class Question_postDAO {
 
 			// SQL文の準備 よくある質問：上位５件の出力
 			String sql =
-			"select M_items, count(M_items), Q_content, A_content from Post_word as p inner join MANAGEMENT_WORD as m inner join p_user as u on p.post_number = m.post_number on u.ac_id = p.ac_id group by M_items, Q_content, A_content order by count(M_items) DESC limit 5";
-			
+			"select p.M_items, count(M_items), p.Q_content, m.A_content from Post_word as p inner join MANAGEMENT_WORD as m inner join p_user as u on p.post_number = m.post_number on u.ac_id = p.ac_id group by p.M_items, Q_content, A_content order by count(M_items) DESC limit 5";
+		
 			/*
 			 * String sql =
 			"select p.M_items, p.count(M_items), p.Q_content, m.A_content from Post_word as p outer join ( select A_content from management_word as m ) group by M_items order by count(M_items) DESC limit 5";
@@ -266,7 +266,9 @@ public class Question_postDAO {
 	 * 
 	 */
 			String sql =
-				"select M_items, count(M_items), Q_content, A_content, A_date from Post_word as p inner join MANAGEMENT_WORD as m inner join p_user as u on p.post_number = m.post_number on u.ac_id = p.ac_id where m.A_DATE >= (NOW() - INTERVAL 7 DAY) group by M_items, Q_content, A_content, A_date order by count(M_items) DESC limit 5";
+				"select p.M_items, count(M_items), p.Q_content, m.A_content, m.A_date from Post_word as p inner join MANAGEMENT_WORD as m inner join p_user as u on p.post_number = m.post_number on u.ac_id = p.ac_id "
+			//	+ "where m.A_DATE >= (NOW() - INTERVAL 7 DAY) "
+				+ "group by p.M_items, p.Q_content, m.A_content, m.A_date  order by count(M_items) DESC limit 5";
 			
 			
 			PreparedStatement s2_res = conn.prepareStatement(sql);

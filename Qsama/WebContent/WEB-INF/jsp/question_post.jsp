@@ -82,13 +82,16 @@
   <!----------------  質問タブ表示 （ ここまで ）--------------->
 
 
+
    <!---------------- 投稿入力フォーム（ここから）---------------->
    <h2>投稿入力欄</h2>
    
   <!-- Qsama/image/* -->
-  <form method="POST" action="/Qsama/Question_postServlet">
+  <form method="POST" action="/Qsama/Question_postServlet" enctype="multipart/form-data">
   <div class="form-wrapper">
     <div class="form1">
+    
+    
     <!---------------- 大カテゴリ (必須選択） ---------------->
     <div class="question_cat">
       <select id="M_items" name="M_items">
@@ -176,6 +179,7 @@
         <option value="選択事項なし" data-category="事務局"> -- 選択事項なし --</option>
       </select>
     </div>
+    
 
     <!---------------- 回答レベル選択 ---------------->
     <div class="A_level">
@@ -193,6 +197,7 @@
       <input type="radio" name="emergency" value="1" checked>いいえ
     </div>
 
+
     <!---------------- 質問内容入力フォーム ---------------->
       <div class="Q_content">
         <label>質問内容<br>
@@ -200,19 +205,26 @@
         </label>
       </div>
    </div>
+   
+   
    <!---------------- class = form1 ここまで ---------------->
+ 
+ 
  
     <!-------------------    画像添付欄    -------------------->
     <div class="form2">
     <!-- enctypeは、送信時のデータ形式 -->
-    
+   <!-- 
+   <input type="file" name="files" multiple><br>
+   <input type="submit" value="送信">
+   -->
     
     <div id="dragDropArea">
         <div class="drag-drop-inside">
             <p class="drag-drop-info">ここにファイルをドロップ</p>
             <p>または</p>
             <p class="drag-drop-buttons">
-                <input id="fileInput" type="file" value="ファイルを選択" name="Postpic_url" onChange="photoPreview(event)" multiple>
+                <input id="fileInput" type="file" value="ファイルを選択" name="Postpic_url"  multiple>
             </p>
             <div id="previewArea"></div>
         </div>
@@ -222,10 +234,13 @@
    </div>
    <!---------------- class = form2 ( ここまで ) ---------------->
   
+  
  </div>
  <!---------------- class = form-wrapper ( ここまで ) ---------------->
    
-    <!---------------- 投稿ボタン ---------------->
+   
+   
+    <!-------------------- 投稿ボタン -------------------->
     <div class="Q_submit">
       <input type="submit" name="Q_submit" value="投稿" >
     </div>
@@ -234,10 +249,10 @@
 <!---------------- 投稿入力フォーム（ここまで） ---------------->
   
 
-<!---------------- 戻るボタン
-               受講者トップページへのリンク ---------------->
+<!---------------- 戻るボタン    受講者トップページへのリンク ---------------->
   <a href="">戻る</a>
   </main>
+
 
 <script type='text/javascript' src= "js/question_post.js"></script>
 
