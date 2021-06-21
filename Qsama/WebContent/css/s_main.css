@@ -44,7 +44,7 @@ h3 {
   overflow-y: scroll;
 
   /* FlexBoxの各ボックス均等自動幅 */
-  flex-grow      : 1;                    /* 各BOXを均等に割当て */
+  /*flex-grow      : 1;                    /* 各BOXを均等に割当て */
 }
 
 /* --- 最近の質問の文字の大きさ指定 --- */
@@ -64,7 +64,7 @@ h3 {
 
 /*タブのスタイル*/
 .tab_item {
-  width: calc(100%/5);
+  width: calc(100%/9);
   height: 35px;
   border-bottom: 3px solid grey;
   background-color: orange;
@@ -101,14 +101,18 @@ input[name="tab_item"] {
 #css:checked ~ #css_content,
 #javascript:checked ~ #javascript_content,
 #java:checked ~ #java_content,
-#sql:checked ~ #sql_content {
+#sql:checked ~ #sql_content,
+#servlet:checked ~ #servlet_content,
+#jimukyoku:checked ~ #jimukyoku_content,
+#dani:checked ~ #dani_content,
+#drill:checked ~ #drill_content {
   display: block;
 }
 
 /*選択されているタブのスタイルを変える*/
 .tabs input:checked + .tab_item {
   color: #fff;
-  width: 20%;
+  width: 10%;
 
 }
 

@@ -27,13 +27,49 @@ public class AdminServlet extends HttpServlet {
 
 		// 検索処理を行う
 		AdminDAO aDao = new AdminDAO();
-		List<Admin> GetList = aDao.PostGet();			// 未回答の検索
-		List<Admin> GetList2 = aDao.PostGet2();		// 回答済の検索
+		List<Admin> GetList = aDao.PostGet();							// 未回答の検索
+		List<Admin> GetList2 = aDao.PostGet2();						// 回答済の検索
 
-//		System.out.println("DoGetのGetListの中身："+GetList);		//結果出力　テストok
+		List<Admin> HtmlModalList = aDao.HtmlOpenModal();				// 公開済 HTML モーダルウィンドウ用
+		List<Admin> CssModalList = aDao.CssOpenModal();				// 公開済 CSS モーダルウィンドウ用
+		List<Admin> JavaModalList = aDao.JavaOpenModal();				// 公開済 Java モーダルウィンドウ用
+		List<Admin> JavascriptModalList = aDao.JavascriptOpenModal();// 公開済 JavaScript モーダルウィンドウ用
+		List<Admin> SQLModalList = aDao.SQLOpenModal();				// 公開済 SQL モーダルウィンドウ用
+		List<Admin> SJspModalList = aDao.SJspOpenModal();				// 公開済 ｻｰﾌﾞﾚｯﾄ・JSP モーダルウィンドウ用
+		List<Admin> DanModalList = aDao.DanOpenModal();				// 公開済 段位認定 モーダルウィンドウ用
+		List<Admin> DrillModalList = aDao.DrillOpenModal();			// 公開済 ﾄﾞﾘﾙ モーダルウィンドウ用
+
+//		List<Admin> Html2ModalList = aDao.HtmlCloseModal();			// 非公開 HTML モーダルウィンドウ用
+		List<Admin> Css2ModalList = aDao.CssCloseModal();				// 非公開 CSS モーダルウィンドウ用
+		List<Admin> Java2ModalList = aDao.JavaCloseModal();			// 非公開 Java モーダルウィンドウ用
+		List<Admin> Javascript2ModalList = aDao.JavascriptCloseModal();// 非公開 JavaScript モーダルウィンドウ用
+		List<Admin> SQL2ModalList = aDao.SQLCloseModal();				// 非公開 SQL モーダルウィンドウ用
+		List<Admin> SJsp2ModalList = aDao.SJspCloseModal();			// 非公開 ｻｰﾌﾞﾚｯﾄ・JSP モーダルウィンドウ用
+		List<Admin> Dan2ModalList = aDao.DanCloseModal();				// 非公開 段位認定 モーダルウィンドウ用
+		List<Admin> Drill2ModalList = aDao.DrillCloseModal();			// 非公開 ﾄﾞﾘﾙ モーダルウィンドウ用
+
+//		System.out.println("DoGetのGetListの中身："+GetList);			// 結果出力　テストok
+//		System.out.println("OpenModalListの中身："+OpenModalList);		// 結果出力　テストok
+//		System.out.println("Java2ModalListの中身："+Java2ModalList);	// 結果出力　テストok
 
 		request.setAttribute("GetList", GetList);
 		request.setAttribute("GetList2", GetList2);
+		request.setAttribute("HtmlModalList", HtmlModalList);
+		request.setAttribute("CssModalList", CssModalList);
+		request.setAttribute("JavaModalList", JavaModalList);
+		request.setAttribute("JavascriptModalList", JavascriptModalList);
+		request.setAttribute("SQLModalList", SQLModalList);
+		request.setAttribute("SJspModalList", SJspModalList);
+		request.setAttribute("DanModalList", DanModalList);
+		request.setAttribute("DrillModalList", DrillModalList);
+//		request.setAttribute("Html2ModalList", Html2ModalList);
+		request.setAttribute("Css2ModalList", Css2ModalList);
+		request.setAttribute("Java2ModalList", Java2ModalList);
+		request.setAttribute("Javascript2ModalList", Javascript2ModalList);
+		request.setAttribute("SQL2ModalList", SQL2ModalList);
+		request.setAttribute("SJsp2ModalList", SJsp2ModalList);
+		request.setAttribute("Dan2ModalList", Dan2ModalList);
+		request.setAttribute("Drill2ModalList", Drill2ModalList);
 
 		// 管理者ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/admin.jsp");
@@ -52,16 +88,23 @@ public class AdminServlet extends HttpServlet {
 */
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		String post_number = request.getParameter("post_number");		// 講師：検索キーワードを取得
-		String answer = request.getParameter("answer_area");			// 回答の投稿
+		String post_number = request.getParameter("post_number");			// 講師：検索キーワードを取得
+		String answer = request.getParameter("answer_area");				// 回答の投稿
+		String areapost_number = request.getParameter("areapost_number");	// 公開エリア更新用
 
 //		System.out.println(display_no);
 
 		// 質問内容の検索処理を行う
 		AdminDAO aDao = new AdminDAO();
-		List<Admin> GetList = aDao.PostGet();							// 未回答の検索
-		List<Admin> GetList2 = aDao.PostGet2();						// 回答済の検索
-		List<Admin> DisplayGetList = aDao.DisplayPostGet(post_number);// 右欄へ表示する内容検索
+		List<Admin> GetList = aDao.PostGet();								// 未回答の検索
+		List<Admin> GetList2 = aDao.PostGet2();							// 回答済の検索
+		List<Admin> DisplayGetList = aDao.DisplayPostGet(post_number);	// 右欄へ表示する内容検索
+
+		if (request.getParameter("button").equals("公開停止")) {
+			aDao.StopPublishing(areapost_number);							// 公開エリア：「非公開」更新
+		}else if(request.getParameter("button").equals("公開")) {
+			aDao.Release(areapost_number);									// 公開エリア:「公開」に更新
+		}
 
 //		System.out.println("DoPostのGetListの中身："+GetList);
 //		System.out.println("DoPostのGetList2の中身："+GetList2);
@@ -76,6 +119,7 @@ public class AdminServlet extends HttpServlet {
 		request.setAttribute("GetList", GetList);
 		request.setAttribute("GetList2", GetList2);
 		request.setAttribute("DisplayGetList", DisplayGetList);
+
 
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/admin.jsp");

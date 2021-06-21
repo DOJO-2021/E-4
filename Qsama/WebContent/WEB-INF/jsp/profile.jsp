@@ -1,68 +1,106 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Profile</title>
+  <meta charset="UTF-8">
+  <title>Qさま｜プロフィール</title>
+  <link rel="stylesheet" href="css/profile.css">
+  <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
+  <link href="https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+  <script type="text/javascript" src="/Qsama/js/profile.js"></script>
+<script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
 </head>
 <body>
-<h3>プロフィール</h3>
+ <div class="container">
+ 	<form method="POST" id="form" action="/Qsama/ProfileServlet" enctype="multipart/form-data">
+    <header>
+     <!----------- 画像表示部分 ----------->
+	<div class="bio">
+		<div class="result" id="result"><canvas id="preview"></canvas></div>
+       	<div class="file">
+       		<input type="file" id="file" name="IMAGE" accept="Qsama/img/*" onchange="previewImage(this);" multiple accept=".jpg,.gif,.png,image/gif,image/jpeg,image/png" hidden="true">
+       	</div>
+	</div>
+     <!----------- 画像表示部分 ここまで----------->
+	<div class="avatarcontainer" >
+		<div class="icon">
+			<input type="file" id="file2" name="IMAGE2" accept="Qsama/img/*" onchange="preview2Image(this);" multiple accept=".jpg,.gif,.png,image/gif,image/jpeg,image/png" hidden="true">
+		</div>
+	</div>
+    </header>
 
-<!-- 自己紹介（ここから） -->
+    <div class="content">
+      <div class="data">
+        <!-- 自己紹介（ここから） -->
 	<c:forEach var="e" items="${ProfileList}">
-	<form method="POST" id="form" action="/Qsama/ProfileServlet">
-
    <div class="introducation">
     <div class="mandatory">
-      <label>会社名：${e.company}		<input type="text" name="COMPANY" required></label><br>
-      <label>クラス番号：${e.my_class}		<input type="text" name="MY_CLASS" required></label><br>
-      <label>名前：${e.name}		<input type="text" name="NAME" required></label><br>
-      <label>プログラミング経験：${e.experience}		<input type="text" name="EXPERIENCE" required></label><br>
+      <label>名前：${e.name}
+      <input type="text" name="NAME" id="A3" hidden="true" size="40"value="${e.name}" style="background:#e9e9e9;" readonly></label><br>
+      <label>会社名：${e.company}
+      <input type="text" name="COMPANY" id="A1" hidden="true" size="40"value="${e.company}" ></label><br>
+      <label>クラス番号：${e.my_class}
+      <input type="text" name="MY_CLASS" id="A2" hidden="true" size="40"value="${e.my_class}" style="background:#e9e9e9;" readonly></label><br>
+      <label>プログラミング経験：${e.experience}
+      <input type="text" name="EXPERIENCE" id="A4" hidden="true"size="40"value="${e.experience}"></label><br>
     </div>
     <div class="choice">
-      <label>血液型：${e.bloodtype}		<input type="text" name="BLOODTYPE"></label><br>
-      <label>誕生日：${e.birthday}		<input type="text" name="BIRTHDAY"></label><br>
-      <label>大学名：${e.college}		<input type="text" name="COLLEGE"></label><br>
-      <label>学部名：${e.undergraduate}		<input type="text" name="UNDERGRADUATE"></label><br>
-      <label>趣味：${e.hobby}		<input type="text" name="HOBBY"></label><br>
-      <label>特技：${e.special_skill}		<input type="text" name="SPECIAL_SKILL"></label><br>
-      <label>資格：${e.qualification}		<input type="text" name="QUALIFICATION"></label><br>
-      <label>好きなアーティスト：${e.favorite}		<input type="text" name="FAVORITE"></label><br>
-	  <label>一言コメント：${e.comment}		<input type="text" name="COMMENT"></label><br>
+      <label>血液型：${e.bloodtype}
+      <input type="text" name="BLOODTYPE" id="A5" hidden="true"size="40"value="${e.bloodtype}"></label><br>
+      <label>誕生日：${e.birthday}
+      <input type="text" name="BIRTHDAY" id="A6" hidden="true"size="40"value="${e.birthday}"></label><br>
+      <label>大学名：${e.college}
+      <input type="text" name="COLLEGE" id="A7" hidden="true"size="40"value="${e.college}"></label><br>
+      <label>学部名：${e.undergraduate}
+      <input type="text" name="UNDERGRADUATE" id="A8" hidden="true"size="40"value="${e.undergraduate}"></label><br>
+      <label>趣味：${e.hobby}
+      <input type="text" name="HOBBY" id="A9" hidden="true"size="40"value="${e.hobby}"></label><br>
+      <label>特技：${e.special_skill}
+      <input type="text" name="SPECIAL_SKILL" id="A10" hidden="true"size="40"value="${e.special_skill}"></label><br>
+      <label>資格：${e.qualification}
+      <input type="text" name="QUALIFICATION" id="A11" hidden="true"size="40"value="${e.qualification}"></label><br>
+      <label>好きなアーティスト：${e.favorite}
+      <input type="text" name="FAVORITE" id="A12" hidden="true"size="40"value="${e.favorite}"></label><br>
+	  <label>一言コメント：${e.comment}
+	  <input type="text" name="COMMENT" id="A13" hidden="true"size="40"value="${e.comment}"></label><br>
 	</div>
 	</div>
-
     <!-- 自己紹介（ここまで）-->
-    </form>
     </c:forEach>
+      </div>
+      <div class="edit">
+        <a>
+        <input type="button"  class="edit" id="h_edit"	onclick="OnButtonClick()" value="編集" 		style="display:inline;">
+        <input type="submit"  class="edit" id="h_submit" value="変更決定"	style="display:none;">
+        <input type="button"  class="edit" id="h_reset"	onclick="OnButtonClick()" value="キャンセル"style="display:none;">
+        </a>
+      </div>
+    </div>
+  </form>
+  </div>
 
-    <!--個人写真の挿入  -->
-	<div class="photo"><input type="file" name="file" id="file"></div>
-      <div id="result"></div>
-<!-- 画像挿入（ここから） -->
-    <div class="photo2"><input type="file" name="file" id="file"></div>
-      <div id="result"></div>
-<!-- 画像挿入（ここまで） -->
-
-
-
+   <div class="container">
     <!-- 過去の質問一覧表示（ここから） -->
-    <p class="past_questions">過去の質問一覧表示</p>
-    	<ol>
-	      <li>質問内容</li>
-	      <li>質問内容</li>
-	      <li>質問内容</li>
-	      <li>質問内容</li>
-	      <li>質問内容</li>
-	    </ol>
+       <p style="font-size: 1.2em; margin-inline-start: 10px;">過去の質問一覧表示</p>
+    		<c:forEach var="mg" items="${MyGetList}" varStatus="mm">
+   				<div class="cp_qa">
+					<div class="cp_actab">
+					  <form method="POST" id="display_form" action="/Qsama/AdminServlet">
+						<input id="cp_tabfour_${mm.index}" type="checkbox" name="tabs">
+						<label for="cp_tabfour_${mm.index}">質問日　：　${mg.q_date}<br>${mg.q_content}</label>
+						<div class="cp_actab-content">
+							<p>回答日　：　${mg.a_date}<br>${mg.a_content}</p>
+						</div>
+					  </form>
+					</div>
+				</div>
+	      	</c:forEach>
     <!-- 過去の質問一覧表示（ここまで） -->
-
-	 <input type="submit" name="edit" value="編集">
-	 <input type="reset" name="reset" value="削除"><br>
-
-   <!-- 戻るボタン
+   </div>
+  <!-- 戻るボタン
    受講者トップページへのリンク -->
   <a href="/Qsama/S_MainServlet">戻る</a>
 </body>

@@ -1,22 +1,280 @@
 @charset "UTF-8";
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  background-color: #ECF0F1; }
+header {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  padding-bottom: 3em;
+  -moz-border-radius-topleft: 8px;
+  -webkit-border-top-left-radius: 8px;
+  border-top-left-radius: 8px;
+  -moz-border-radius-topright: 8px;
+  -webkit-border-top-right-radius: 8px;
+  border-top-right-radius: 8px; }
+.container {
+  width: 1000px;
+  margin: 3em auto 1em auto;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  border-radius: 8px;
+  padding-bottom: 1.5em;
+  background-color: white;
+  -webkit-box-shadow: #BDC3C7 0 5px 5px;
+  -moz-box-shadow: #BDC3C7 0 5px 5px;
+  box-shadow: #BDC3C7 0 5px 5px; }
+.bg {
+  width: 100%;
+  margin-top: 5%;
+  margin-inline-start: 0.5px;
+  border-bottom: 8px solid #FF773E;
+  }
+ .bio {
+   background-color: #FFAD90;
+   }
+.bio:hover > .desc {
+  cursor: pointer;
+  opacity: 1;
+  }
 
-.form {
-	text-align: left;
-	grid-area: left;
-	background-color:#FF8432
-
+ .file {
+    position: relative;
+    text-align: center;
+}
+.file input[type="file"] {
+    width: 30%;
+    margin: 0;
+    text-align: center;
 }
 
-.past_questions {
-    margin: auto;
-    box-sizing: border-box;
-	width: 1200px;
- 	padding: 20px 30px;
+.avatarcontainer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  width: 70px;
+  height: 70px;
+  display: block; }
+  .avatarcontainer:hover > .hover {
+    opacity: 1; }
 
+.result img {
+	width: 100%;
+	height: 250px;
+    object-fit: cover;
+    object-position: center center;
+}
+.avatar {
+  width: 100%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative; }
+  .avatar img {
+    width: 65px;
+    height: 65px; }
+  .avatar:hover + .hover {
+    opacity: 1;
+    cursor: pointer; }
+
+.icon {
+  position: absolute;
+  cursor: pointer;
+  width: 250%;
+  height: 250%;
+  background-color: #FFAD90;
+  top: -110px;
+  left: -400px;
+  font-size: 1.8em;
+  text-align: center;
+  color: white;
+  padding-top: 18%;
+  opacity: 1;
+  font-family: 'FontAwesome';
+  font-weight: 300;
+  border: 3px solid #FF773E ;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
+  }
+
+.data {
+  margin-top: .6em;
+  color: #81878B; }
+  .data li {
+    width: 32%;
+    text-align: center;
+    display: inline-block;
+    font-size: 1.5em;
+    font-family: 'Lato';
+    border-right: solid 1px #BDC3C7; }
+    .data li:last-child {
+      border: none; }
+    .data li span {
+      display: block;
+      text-transform: uppercase;
+      font-family: 'Quicksand';
+      font-size: .5em;
+      margin-top: .6em;
+      font-weight:700;
+    }
+.desc {
+  position: absolute;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 171px;
+  padding: 1.2em 1em 0 1em;
+  color: white;
+  text-align: center;
+  opacity: 0;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-in;
+  -moz-transition-timing-function: ease-in;
+  -o-transition-timing-function: ease-in;
+  transition-timing-function: ease-in; }
+  .desc h3 {
+    font-family: "Lato";
+    font-size: 1.5em;;
+    margin-bottom: .5em; }
+  .desc p {
+    font-size: .9em;
+    font-family: 'Quicksand';
+    line-height: 1.5em; }
+
+.edit {
+  text-align: center;
+}
+  .edit :hover {
+    color:  #FFAD90;
+    cursor: pointer; }
+
+label {
+	margin-inline-start: 100px;
 }
 
-.photo2 {
+#A1{margin-inline-start: 30%;}
+#A2{margin-inline-start: 36.5%;}
+#A3{margin-inline-start: 34.3%;}
+#A4{margin-inline-start: 18.8%;}
+#A5{margin-inline-start: 39.6%;}
+#A6{margin-inline-start: 31.3%;}
+#A7{margin-inline-start: 34.3%;}
+#A8{margin-inline-start: 32.7%;}
+#A9{margin-inline-start: 35.9%;}
+#A10{margin-inline-start: 35.9%;}
+#A11{margin-inline-start: 39.1%;}
+#A12{margin-inline-start: 24.7%;}
+#A13{margin-inline-start: 25.2%;}
 
-  width: 600px;
-  height: 600px;
+.preview {
+  background-color: #ffad90;
+  min-height: 200px;
+  text-align: center;
+  width: 1000px;
+}
+
+canvas {
+  background-color: #ffad90;
+  max-height: 200px;
+  text-align: center;
+  width: 1000px;
+  object-fit: cover;
+}
+
+/* --------------------自分の質問------------------------------------ */
+.cp_qa *, .cp_qa *:after, .cp_qa *:before {
+	-webkit-box-sizing	: border-box;
+	        box-sizing	: border-box;
+}
+.cp_qa {
+	border-top			: 1px solid #1b2538;
+}
+.cp_qa .cp_actab {
+	position			: relative;
+	overflow			: hidden;
+	width				: 100%;
+	margin-bottom		: 1px;
+	color				: #1b2538;
+}
+.cp_qa .cp_actab input {
+	position			: absolute;
+	opacity				: 0;
+}
+/* 質問 */
+.cp_qa .cp_actab label {
+	font-weight			: bold;
+	line-height			: 1.6;
+	position			: relative;
+	display				: block;
+	margin				: 0 0 0 0;
+	padding				: 1em 2em 1em 1em;
+	cursor				: pointer;
+	border-bottom		: 1px solid #1b2538;
+}
+.cp_qa .cp_actab label:hover {
+	color: #00838F;
+}
+/* 答え */
+.cp_qa .cp_actab .cp_actab-content {
+	overflow: hidden;
+	max-height: 0;
+	-webkit-transition: max-height 0.5s ease;
+	        transition: max-height 0.5s ease;
+	color: #ffffff;
+	background: rgba(0, 131, 143, 0.5);
+}
+.cp_qa .cp_actab .cp_actab-content p {
+	margin: 1em;
+}
+/* 質問を開いた時の仕様 */
+/* --アイコン */
+.cp_qa .cp_actab input:checked ~ label {
+	color: #00838F;
+}
+/* --答えの高さ */
+.cp_qa .cp_actab input:checked ~ .cp_actab-content {
+	max-height: 40em;
+}
+/* 質問をクリックした時のアイコンの動き */
+.cp_qa .cp_actab label::after {
+	line-height: 1.6;
+	position: absolute;
+	top: 50%;
+	right: 0;
+	display: block;
+	width: 3em;
+	margin-top: -12.5px;
+	-webkit-transition: all 0.5s ease;
+	        transition: all 0.5s ease;
+	text-align: center;
+}
+.cp_qa .cp_actab input[type=checkbox] + label::after {
+	content: 'BC';
+}
+.cp_qa .cp_actab input[type=checkbox]:checked + label::after {
+	-webkit-transform: rotateX(180deg);
+	transform: rotateX(180deg);
 }

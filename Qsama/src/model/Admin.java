@@ -61,6 +61,23 @@ public class Admin implements Serializable {
 		this.Name = name;
 	}
 
+	public Admin(int QQ_id, int Post_Number, String M_items, String S_items, String Q_date, String Q_content, int A_level, int emergency, String postpic_url, int Q_flag, int A_flag, String A_content, String name) {
+		super();
+		this.QQ_id = QQ_id;
+		this.Post_Number = Post_Number;
+		this.M_items = M_items;
+		this.S_items = S_items;
+		this.Q_date = Q_date;
+		this.Q_content = Q_content;
+		this.A_level = A_level;
+		this.emergency = emergency;
+		this.postpic_url = postpic_url;
+		this.Q_flag = Q_flag;
+		this.A_flag = A_flag;
+		this.A_content = A_content;
+		this.Name = name;
+	}
+
 	public String getName() {
 		return Name;
 	}

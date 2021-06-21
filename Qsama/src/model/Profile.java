@@ -59,7 +59,7 @@ public class Profile implements Serializable {
 	}
 	public Profile(String company, String my_class, String name, String experience,
 			String bloodtype, String birthday, String college, String undergraduate, String hobby,
-			String special_skill, String qualification, String favorite, String comment) {
+			String special_skill, String qualification, String favorite, String comment, int ac_id) {
 
 		this.company = company;				// 会社名
 		this.my_class = my_class;	        // クラスNo
@@ -74,6 +74,7 @@ public class Profile implements Serializable {
 		this.qualification = qualification;	// 資格
 		this.favorite = favorite;			// 好きなアーティスト
 		this.comment = comment;				// 一言コメント
+		this.ac_id = ac_id;
 	}
 
 	public int getAc_id() {

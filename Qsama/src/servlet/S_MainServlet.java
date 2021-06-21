@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.IdpwDAO;
 import dao.MainDAO;
-import model.LoginUser;
 import model.S_Main;
 
 /**
@@ -34,20 +32,28 @@ public class S_MainServlet extends HttpServlet {
 			return;
 		}
 
+		String user_id = String.valueOf(session.getAttribute("login_user_id"));
+		System.out.println(user_id + "user_idの中身");
+		String ac_id = String.valueOf(session.getAttribute("ac_id"));
+		System.out.println(ac_id + "ac_idの中身");
 		//個人情報を抽出
-		String user_id = request.getParameter("USER_ID");
-		String user_pw = request.getParameter("USER_PW");
-		IdpwDAO iDao = new IdpwDAO();
+		//String user_id = request.getParameter("USER_ID");
+		//String user_pw = request.getParameter("USER_PW");
+		//IdpwDAO iDao = new IdpwDAO();
 
 		//「MyList」にac_id, user_id, user_pw, my_class, e_mail, name, user_rank が格納されている
-		List<LoginUser> MyList = iDao.Mydata(user_id, user_pw);
-		System.out.println(MyList);
+		//List<LoginUser> MyList = iDao.Mydata(user_id, user_pw);
 
 		// 「Rank」にuser_rankが格納されている
-		int Rank = iDao.MyRank(user_id, user_pw);
-		System.out.println(Rank);
+		//int Rank = iDao.MyRank(user_id, user_pw);
 
 		MainDAO qDao = new MainDAO();
+		//---お知らせ----
+		List<S_Main> NoticeList = qDao.Notice(user_id);
+		// 結果をリクエストスコープに格納する
+		request.setAttribute("NoticeList", NoticeList);
+		System.out.println(NoticeList + "NoticeListの中身");
+
 		//---最近の質問----
 		List<S_Main> RecentqList = qDao.RecentQ();
 		// 結果をリクエストスコープに格納する
@@ -59,6 +65,46 @@ public class S_MainServlet extends HttpServlet {
 		List<S_Main> ResoledQList = qDao.ResolvedQuestion();
 		request.setAttribute("ResoledQList", ResoledQList);
 
+		//---CSSの解決済み質問----
+		// 結果をリクエストスコープに格納する
+		List<S_Main> ResoledQList2 = qDao.ResolvedQuestion2();
+		request.setAttribute("ResoledQList2", ResoledQList2);
+
+		//---JavaScriptの解決済み質問----
+		// 結果をリクエストスコープに格納する
+		List<S_Main> ResoledQList3 = qDao.ResolvedQuestion3();
+		request.setAttribute("ResoledQList3", ResoledQList3);
+
+		//---Javaの解決済み質問----
+		// 結果をリクエストスコープに格納する
+		List<S_Main> ResoledQList4 = qDao.ResolvedQuestion4();
+		request.setAttribute("ResoledQList4", ResoledQList4);
+
+		//---SQLの解決済み質問----
+		// 結果をリクエストスコープに格納する
+		List<S_Main> ResoledQList5 = qDao.ResolvedQuestion5();
+		request.setAttribute("ResoledQList5", ResoledQList5);
+
+		//---サーブレット・JSPの解決済み質問----
+		// 結果をリクエストスコープに格納する
+		List<S_Main> ResoledQList6 = qDao.ResolvedQuestion6();
+		request.setAttribute("ResoledQList6", ResoledQList6);
+
+		//---事務局の解決済み質問----
+		// 結果をリクエストスコープに格納する
+		List<S_Main> ResoledQList7 = qDao.ResolvedQuestion7();
+		request.setAttribute("ResoledQList7", ResoledQList7);
+
+		//---段位認定の解決済み質問----
+		// 結果をリクエストスコープに格納する
+		List<S_Main> ResoledQList8 = qDao.ResolvedQuestion8();
+		request.setAttribute("ResoledQList8", ResoledQList8);
+
+		//---ドリルの解決済み質問----
+		// 結果をリクエストスコープに格納する
+		List<S_Main> ResoledQList9 = qDao.ResolvedQuestion9();
+		request.setAttribute("ResoledQList9", ResoledQList9);
+
 		// mainページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/s_main.jsp");
 		dispatcher.forward(request, response);
@@ -68,22 +114,6 @@ public class S_MainServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		/*// リクエストパラメータを取得する
-		request.setCharacterEncoding("UTF-8");
-		String M_items = request.getParameter("M_items");		//大項目
-		System.out.println("大項目"+M_items);
-		String Q_date = request.getParameter("Q_date");			//投稿日
-		System.out.println("日付"+Q_date);
-		String Q_content = request.getParameter("Q_content");	//投稿内容
-		System.out.println("質問内容"+Q_content);*/
-
-		// 検索処理を行う
-		//MainDAO sDao = new MainDAO();
-		//List<S_Main> RecentqList = sDao.RecentQ();
-
-		// 検索結果をリクエストスコープに格納する
-		//request.setAttribute("RecentqList", RecentqList);
 
 		// メインページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/s_main.jsp");

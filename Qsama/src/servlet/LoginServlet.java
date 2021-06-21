@@ -37,6 +37,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
+		//String ac_id = request.getParameter("AC_ID");
 		String user_id = request.getParameter("USER_ID");
 		String user_pw = request.getParameter("USER_PW");
 
@@ -51,8 +52,13 @@ public class LoginServlet extends HttpServlet {
 			List<LoginUser> MyList = iDao.Mydata(user_id, user_pw);
 			System.out.println(MyList);
 
+			String ac_id = iDao.acReturn(user_id, user_pw);
+			System.out.println(ac_id + "ac_idの中身");
+
 			// セッションスコープにIDを格納する
 			HttpSession session = request.getSession();
+			session.setAttribute("login_user_id",user_id);
+			session.setAttribute("ac_id",ac_id);
 			session.setAttribute("user_id", new LoginUser(user_id));
 			session.setAttribute("user_pw", new LoginUser(user_id, user_pw));
 
@@ -69,49 +75,6 @@ public class LoginServlet extends HttpServlet {
 			System.out.println("失敗");
 
 		}
-
-/*		//新規登録
-		// リクエストパラメータを取得する
-		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
-		String myclass = request.getParameter("belong");
-		String email = request.getParameter("email");
-		String name = request.getParameter("name");
-
-		//user_rankの判定 radioボタンのvalueを取得し1か2で判定する
-		String rank1 = request.getParameter("rank");
-		if(rank1 == "1") {
-			//Stringからintに変換
-			int rank2 = Integer.parseInt(rank1);
-			// 管理者として新規登録処理を行う
-			IdpwDAO bDao = new IdpwDAO();
-			if (bDao.insert(new LoginUser(0, id, pw, myclass, email, name, rank2))) {	// 登録成功
-				System.out.println("登録成功！");
-			}
-			else {												// 登録失敗
-				System.out.println("登録失敗！");
-			}
-			// ログインページにフォワードする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
-					dispatcher.forward(request, response);
-		}
-		else {
-			//Stringからintに変換
-			int rank2 = Integer.parseInt(rank1);
-			// 受講生として新規登録処理を行う
-			IdpwDAO bDao = new IdpwDAO();
-			if (bDao.insert(new LoginUser(0, id, pw, myclass, email, name, rank2))) {	// 登録成功
-				System.out.println("登録成功！");
-			}
-			else {												// 登録失敗
-				System.out.println("登録失敗！");
-			}
-
-			// ログインページにフォワードする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
-					dispatcher.forward(request, response);
-		}
-		*/
 	}
 
 }

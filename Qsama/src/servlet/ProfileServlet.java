@@ -1,21 +1,27 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import dao.ProfileDAO;
+import model.Admin;
 import model.Profile;
 
 /**
  * Servlet implementation class ProfileServlet
  */
+@MultipartConfig(location = "C:\\pleiades\\workspace\\E-4\\Qsama\\WebContent\\img")
 @WebServlet("/ProfileServlet")
 public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,15 +37,18 @@ public class ProfileServlet extends HttpServlet {
 
 		ProfileDAO pDao = new ProfileDAO();
 		List<Profile> ProfileList = pDao.profileAll(ac_id);
+		List<Admin> MyGetList = pDao.MyPostGet(ac_id);
 
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("ProfileList", ProfileList);
-		System.out.println("プロフィールの中身:"+ ProfileList);
+		request.setAttribute("MyGetList", MyGetList);
+
+//		System.out.println("プロフィールの中身:"+ ProfileList);
+//		System.out.println("自分の質問の中身:"+ MyGetList);
 
 		 // 結果ページにフォワードする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");
-			dispatcher.forward(request, response);
-
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
@@ -55,11 +64,26 @@ public class ProfileServlet extends HttpServlet {
 			return;
 	}
 	*/
+		request.setCharacterEncoding("UTF-8");
+
+		Part part = request.getPart("IMAGE"); // getPartで取得
+
+		String image = this.getFileName(part);
+		request.setAttribute("image", image);
+		// サーバの指定のファイルパスへファイルを保存
+        //場所はクラス名↑の上に指定してある
+
+		//ここで名前を決定
+		 LocalDateTime nowDateTime = LocalDateTime.now();
+		 DateTimeFormatter java8Format = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+		 // 日時情報を指定フォーマットの文字列で取得
+		 String java8Disp = nowDateTime.format( java8Format );
+		 part.write(java8Disp+".jpg");
+
 
 	//リクエストパラメータを取得する
-	request.setCharacterEncoding("UTF-8");
 		String company= request.getParameter("COMPANY");
-		String class_number= request.getParameter("My_CLASS");
+		String my_class= request.getParameter("MY_CLASS");
 		String name= request.getParameter("NAME");
 		String experience= request.getParameter("EXPERIENCE");
 		String bloodtype= request.getParameter("BLOODTYPE");
@@ -69,22 +93,39 @@ public class ProfileServlet extends HttpServlet {
 		String hobby= request.getParameter("HOBBY");
 		String special_skill= request.getParameter("SPECIAL_SKILL");
 		String qualification= request.getParameter("QUALIFICATION");
-        String fovorite= request.getParameter("FAVORITE");
+        String favorite_artist = request.getParameter("FAVORITE_ARTIST");
         String comment= request.getParameter ("COMMENT");
 
-
-    // 検索処理を行う
-	int ac_id = 10; //10は仮値　　！！
+    // 登録処理を行う
+	int ac_id = 100; //100は仮値　　ここにログイン時のac_idを格納する！！
 
 	ProfileDAO pDao = new ProfileDAO();
-	//List<Profile> ProfileList = pDao.profileAll(ac_id);
+	pDao.p_update(company, my_class, name, experience, bloodtype, birthday, college, undergraduate, hobby, special_skill, qualification, favorite_artist, comment, ac_id);
+	List<Profile> ProfileList = pDao.profileAll(ac_id);
+	List<Admin> MyGetList = pDao.MyPostGet(ac_id);
 
 	// 検索結果をリクエストスコープに格納する
-	//request.setAttribute("ProfileList", ProfileList);
+	request.setAttribute("ProfileList", ProfileList);
+	request.setAttribute("MyGetList", MyGetList);
+
 //	System.out.println("プロフィールの中身:"+ ProfileList);
+//	System.out.println("自分の質問の中身:"+ MyGetList);
 
 	 // 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");
 		dispatcher.forward(request, response);
+	}
+
+	//ファイルの名前を取得してくる
+	private String getFileName(Part part) {
+        String name = null;
+        for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
+            if (dispotion.trim().startsWith("filename")) {
+                name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+                name = name.substring(name.lastIndexOf("\\") + 1);
+                break;
+            }
+        }		// TODO 自動生成されたメソッド・スタブ
+		return name;
 	}
 }

@@ -249,4 +249,56 @@ public class IdpwDAO {
 		// 結果を返す
 		return result;
 	}
+
+	//ac_idの値を返す
+	public String acReturn(String user_id, String user_pw) {
+		Connection conn = null;				// 接続がされているかどうかチェックするため
+		String ac_id = "";
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する　connが「true」なら接続されている
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
+
+			// SELECT文を準備する
+			String sql = "select ac_id from LOGIN where user_id ='"+user_id+"' and user_pw ='"+user_pw+"'";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SELECT文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// ユーザーIDとパスワードが一致するユーザーがいたかどうかをチェックする
+			//rs.next();
+			//System.out.println(rs);
+			//System.out.println(rs.getInt("count(*)"));
+			while (rs.next()) {
+					ac_id = rs.getString("AC_ID");
+
+			}
+
+		}
+		catch (SQLException e) {
+			ac_id = null;
+		}
+		catch (ClassNotFoundException e) {
+			ac_id = null;
+		}
+		finally {					// 必ず実行するコマンド
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					ac_id = null;
+				}
+			}
+		}
+
+
+		// 結果を返す
+		return ac_id;
+	}
 }

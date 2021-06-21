@@ -54,7 +54,8 @@
 	</div>
 	<!-- 通知欄ここまで -->
 
-		<div class="right_content"> <!-- 右側全体のコンテンツ -->
+<!---------------------- 右側全体のコンテンツ ---------------------->
+		<div class="right_content">
 				質　問　内　容
 			<!-- 質問内容 -->
 			<div class="content1">	<!-- 一番上のコンテンツ -->
@@ -146,7 +147,7 @@
 						<option value="" selected>${d.s_items}</option>
 						</c:forEach>
 					</select><br>
-				<!-- 回答入力フォーム -->
+<!----------------------- 回答入力フォーム ----------------------->
 				回　答　入　力
 				<form method="POST" id="answer_form" name="answer_form" action="/Qsama/AdminServlet">
 					<label>
@@ -158,34 +159,267 @@
 					</label>
 				</form>
 			</div>
-			<div class="under_content"> <!-- 下二つのコンテンツ -->
+
+			<div class="under_content" style="float:left;"> <!-- 下二つのコンテンツ -->
 				<!-- 質問公開設定 -->
 				<div class="content2">質問公開設定<br><br>
 					<button style="width: 80%;" class="js-modal-open" data-target="modal01">公開済 - 投稿一覧表示</button><br><br>
 					<button style="width: 80%;" class="js-modal-open" data-target="modal02">未公開 - 投稿一覧表示</button>
 				</div>
+
+<!---------- 【モーダルウィンドウ】公開済 - 投稿一覧表示 ---------->
 				<div id="modal01" class="modal js-modal">
 					<div class="modal__bg js-modal-close"></div>
 					<div class="modal__content">
-						<p>1つ目モーダルウィンドウです。ここにモーダルウィンドウで表示したいコンテンツを入れます。モーダルウィンドウを閉じる場合は下の「閉じる」をクリックするか、背景の黒い部分をクリックしても閉じることができます。</p>
-						<a class="js-modal-close" href="">閉じる</a>
+								<div class="cp_qa" id="checkbox_id">
+									<input id="cp_conttab1" type="radio" name="tabs" value="HTML">
+									<label for="cp_conttab1" class="cp_tabitem">HTML</label>
+									<input id="cp_conttab2" type="radio" name="tabs" value="CSS">
+									<label for="cp_conttab2" class="cp_tabitem">CSS</label>
+									<input id="cp_conttab3" type="radio" name="tabs" value="JavaScript">
+									<label for="cp_conttab3" class="cp_tabitem">JavaScript</label>
+									<input id="cp_conttab4" type="radio" name="tabs" value="Java">
+									<label for="cp_conttab4" class="cp_tabitem">Java</label>
+									<input id="cp_conttab5" type="radio" name="tabs" value="SQL">
+									<label for="cp_conttab5" class="cp_tabitem">SQL</label>
+									<input id="cp_conttab6" type="radio" name="tabs" value="ｻｰﾌﾞﾚｯﾄ・JSP">
+									<label for="cp_conttab6" class="cp_tabitem">ｻｰﾌﾞﾚｯﾄ・JSP</label>
+									<input id="cp_conttab7" type="radio" name="tabs" value="段位認定">
+									<label for="cp_conttab7" class="cp_tabitem">段位認定</label>
+									<input id="cp_conttab8" type="radio" name="tabs" value="ﾄﾞﾘﾙ">
+									<label for="cp_conttab8" class="cp_tabitem">ﾄﾞﾘﾙ</label>
+									<div id="cp_content1">
+										<div class="cp_qain">
+											<c:forEach var="op1" items="${HtmlModalList}" varStatus="op11">
+											<div class="cp_actab">
+												<input id="cp_tabfour1${op11.index}" type="checkbox" name="tabs">
+												<div class="cp_plus">+</div>
+												<label for="cp_tabfour1${op11.index}">${op1.q_content}</label>
+												<div class="cp_actab-content">${op1.a_content}</div>
+											</div>
+											</c:forEach>
+										</div>
+									</div>
+									<div id="cp_content2">
+										<div class="cp_qain">
+											<c:forEach var="op2" items="${CssModalList}" varStatus="op21">
+											<div class="cp_actab">
+												<input id="cp_tabfour2${op21.index}" type="checkbox" name="tabs">
+												<div class="cp_plus">+</div>
+												<label for="cp_tabfour2${op21.index}">${op2.q_content}</label>
+												<div class="cp_actab-content">${op2.a_content}</div>
+											</div>
+											</c:forEach>
+										</div>
+									</div>
+									<div id="cp_content3">
+										<div class="cp_qain">
+											<c:forEach var="op3" items="${JavascriptModalList}" varStatus="op31">
+											<div class="cp_actab">
+												<input id="cp_tabfour3${op31.index}" type="checkbox" name="tabs">
+												<div class="cp_plus">+</div>
+												<label for="cp_tabfour3${op31.index}">${op3.q_content}</label>
+												<div class="cp_actab-content">${op3.a_content}</div>
+											</div>
+											</c:forEach>
+										</div>
+									</div>
+									<div id="cp_content4">
+										<div class="cp_qain">
+											<c:forEach var="op4" items="${JavaModalList}" varStatus="op41">
+											<div class="cp_actab">
+												<input id="cp_tabfour4${op41.index}" type="checkbox" name="tabs">
+												<div class="cp_plus">+</div>
+												<label for="cp_tabfour4${op41.index}">${op4.q_content}</label>
+												<div class="cp_actab-content">${op4.a_content}</div>
+											</div>
+											</c:forEach>
+										</div>
+									</div>
+									<div id="cp_content5">
+										<div class="cp_qain">
+											<c:forEach var="op5" items="${SQLModalList}" varStatus="op51">
+												<div class="cp_actab">
+												<input id="cp_tabfour5${op51.index}" type="checkbox" name="tabs">
+												<div class="cp_plus">+</div>
+												<label for="cp_tabfour1${op51.index}">${op5.q_content}</label>
+												<div class="cp_actab-content">${op5.a_content}</div>
+											</div>
+											</c:forEach>
+										</div>
+									</div>
+									<div id="cp_content6">
+										<div class="cp_qain">
+											<c:forEach var="op6" items="${SJspModalList}" varStatus="op61">
+											<div class="cp_actab">
+												<input id="cp_tabfour6${op61.index}" type="checkbox" name="tabs">
+												<div class="cp_plus">+</div>
+												<label for="cp_tabfour6${op61.index}">${op6.q_content}</label>
+												<div class="cp_actab-content">${op6.a_content}</div>
+											</div>
+											</c:forEach>
+										</div>
+									</div>
+									<div id="cp_content7">
+										<div class="cp_qain">
+											<c:forEach var="op7" items="${DanModalList}" varStatus="op71">
+											<div class="cp_actab">
+												<input id="cp_tabfour7${op71.index}" type="checkbox" name="tabs">
+												<div class="cp_plus">+</div>
+												<label for="cp_tabfour7${op71.index}">${op7.q_content}</label>
+												<div class="cp_actab-content">${op7.a_content}</div>
+											</div>
+											</c:forEach>
+										</div>
+									</div>
+									<div id="cp_content8">
+										<div class="cp_qain">
+											<c:forEach var="op8" items="${DrillModalList}" varStatus="op81">
+											<div class="cp_actab">
+												<input id="cp_tabfour8${op81.index}" type="checkbox" name="tabs">
+												<div class="cp_plus">+</div>
+												<label for="cp_tabfour8${op81.index}">${op8.q_content}</label>
+												<div class="cp_actab-content">${op8.a_content}</div>
+											</div>
+											</c:forEach>
+										</div>
+									</div>
+								</div>
+								<a class="js-modal-close" href="">閉じる</a>
 					</div><!--modal__inner-->
 				</div><!--modal-->
+
+<!---------- 【モーダルウィンドウ】非公開 - 投稿一覧表示 ---------->
 				<div id="modal02" class="modal js-modal">
 					<div class="modal__bg js-modal-close"></div>
 					<div class="modal__content">
-						<p>2つ目モーダルウィンドウです。ここにモーダルウィンドウで表示したいコンテンツを入れます。モーダルウィンドウを閉じる場合は下の「閉じる」をクリックするか、背景の黒い部分をクリックしても閉じることができます。</p>
-						<a class="js-modal-close" href="">閉じる</a>
+								<div class="cp_qa" id="checkbox_id">
+<!--								<input id="cp_conttab11" type="radio" name="tabs" value="HTML">
+									<label for="cp_conttab11" class="cp_tabitem">HTML</label>  -->
+									<input id="cp_conttab12" type="radio" name="tabs" value="CSS">
+									<label for="cp_conttab12" class="cp_tabitem">CSS</label>
+									<input id="cp_conttab13" type="radio" name="tabs" value="JavaScript">
+									<label for="cp_conttab13" class="cp_tabitem">JavaScript</label>
+									<input id="cp_conttab14" type="radio" name="tabs" value="Java">
+									<label for="cp_conttab14" class="cp_tabitem">Java</label>
+									<input id="cp_conttab15" type="radio" name="tabs" value="SQL">
+									<label for="cp_conttab15" class="cp_tabitem">SQL</label>
+									<input id="cp_conttab16" type="radio" name="tabs" value="ｻｰﾌﾞﾚｯﾄ・JSP">
+									<label for="cp_conttab16" class="cp_tabitem">ｻｰﾌﾞﾚｯﾄ・JSP</label>
+									<input id="cp_conttab17" type="radio" name="tabs" value="段位認定">
+									<label for="cp_conttab17" class="cp_tabitem">段位認定</label>
+									<input id="cp_conttab18" type="radio" name="tabs" value="ﾄﾞﾘﾙ">
+									<label for="cp_conttab18" class="cp_tabitem">ﾄﾞﾘﾙ</label>
+	<!-- 							<div id="cp_content11">
+										<div class="cp_qain">
+											<c:forEach var="qp1" items="${Html2ModalList}" varStatus="qp11">
+											<div class="cp_actab">
+												<input id="cp_tabfour11${qp11.index}" type="checkbox" name="tabs">
+												<div class="cp_plus">+</div>
+												<label for="cp_tabfour11${qp11.index}">${qp1.q_content}</label>
+												<div class="cp_actab-content">${qp1.a_content}</div>
+											</div>
+											</c:forEach>
+										</div>
+									</div>  -->
+									<div id="cp_content12">
+										<div class="cp_qain">
+											<c:forEach var="qp2" items="${Css2ModalList}" varStatus="qp21">
+											<div class="cp_actab">
+												<input id="cp_tabfour12${qp21.index}" type="checkbox" name="tabs">
+												<div class="cp_plus">+</div>
+												<label for="cp_tabfour12${qp21.index}">${qp2.q_content}</label>
+												<div class="cp_actab-content">${qp2.a_content}
+												<form method="POST" id="tab12_form" name="answer_form" action="/Qsama/AdminServlet">
+												<input type="hidden" name="areapost_number" value="${g.post_Number}">
+												<button>公開</button>
+												</form>
+												</div>
+											</div>
+											</c:forEach>
+										</div>
+									</div>
+									<div id="cp_content13">
+										<div class="cp_qain">
+											<c:forEach var="qp3" items="${Javascript2ModalList}" varStatus="qp31">
+											<div class="cp_actab">
+												<input id="cp_tabfour13${qp31.index}" type="checkbox" name="tabs">
+												<div class="cp_plus">+</div>
+												<label for="cp_tabfour13${qp31.index}">${qp3.q_content}</label>
+												<div class="cp_actab-content">${qp3.a_content}</div>
+											</div>
+											</c:forEach>
+										</div>
+									</div>
+									<div id="cp_content14">
+										<div class="cp_qain">
+											<c:forEach var="qp4" items="${Java2ModalList}" varStatus="qp41">
+											<div class="cp_actab">
+												<input id="cp_tabfour14${qp41.index}" type="checkbox" name="tabs">
+												<div class="cp_plus">+</div>
+												<label for="cp_tabfour14${qp41.index}">${qp4.q_content}</label>
+												<div class="cp_actab-content">${qp4.a_content}</div>
+											</div>
+											</c:forEach>
+										</div>
+									</div>
+									<div id="cp_content15">
+										<div class="cp_qain">
+											<c:forEach var="qp5" items="${SQL2ModalList}" varStatus="qp51">
+											<div class="cp_actab">
+												<input id="cp_tabfour15${qp51.index}" type="checkbox" name="tabs">
+												<div class="cp_plus">+</div>
+												<label for="cp_tabfour15${qp51.index}">${qp5.q_content}</label>
+												<div class="cp_actab-content">${qp5.a_content}</div>
+											</div>
+											</c:forEach>
+										</div>
+									</div>
+									<div id="cp_content16">
+										<div class="cp_qain">
+											<c:forEach var="qp6" items="${SJsp2ModalList}" varStatus="qp61">
+											<div class="cp_actab">
+												<input id="cp_tabfour16${qp61.index}" type="checkbox" name="tabs">
+												<div class="cp_plus">+</div>
+												<label for="cp_tabfour16${qp61.index}">${qp6.q_content}</label>
+												<div class="cp_actab-content">${qp6.a_content}</div>
+											</div>
+											</c:forEach>
+										</div>
+									</div>
+									<div id="cp_content17">
+										<div class="cp_qain">
+											<c:forEach var="qp7" items="${Dan2ModalList}" varStatus="qp71">
+											<div class="cp_actab">
+												<input id="cp_tabfour17${qp71.index}" type="checkbox" name="tabs">
+												<div class="cp_plus">+</div>
+												<label for="cp_tabfour17${qp71.index}">${qp7.q_content}</label>
+												<div class="cp_actab-content">${qp7.a_content}</div>
+											</div>
+											</c:forEach>
+										</div>
+									</div>
+									<div id="cp_content18">
+										<div class="cp_qain">
+											<c:forEach var="qp8" items="${Drill2ModalList}" varStatus="qp81">
+											<div class="cp_actab">
+												<input id="cp_tabfour18${qp81.index}" type="checkbox" name="tabs">
+												<div class="cp_plus">+</div>
+												<label for="cp_tabfour18${qp81.index}">${qp8.q_content}</label>
+												<div class="cp_actab-content">${qp8.a_content}</div>
+											</div>
+											</c:forEach>
+										</div>
+									</div>
+								</div>
+								<a class="js-modal-close" href="">閉じる</a>
 					</div><!--modal__inner-->
 				</div><!--modal-->
-				<!-- 受講者質問管理 -->
-				<div class="content3">受講者別質問管理
-				</div>
 			</div>
+			<!-- 受講者質問管理 -->
 		</div>
-</div>
+	</div>
 </body>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="js/Admin.js"></script>		<!--モーダルウィンドウ用js-->
-<script>
 </html>

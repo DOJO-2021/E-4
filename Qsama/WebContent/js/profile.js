@@ -1,61 +1,66 @@
 'use strict';
 
-//編集をクリックすると自己紹介の項目を表示する
+	/** -----------編集ボタン----------- **/
+function OnButtonClick(){
+    let array1 = ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12", "A13"];
+    for(let i=0; i<array1.length; i++){
 
-//編集ボタンをクリックでアクションを起こす
- function OnButtonClick() {
-    target = document.getElementByname("edit");
+		/* inputのon・off */
+        if (document.getElementById(array1[i]).hidden === true){
+            // hidden属性を削除
+            document.getElementById(array1[i]).hidden = "";
+            document.getElementById(array1[i]).style.color = "black";
+        }else{
+            // hidden属性を設定
+            document.getElementById(array1[i]).hidden = "true";
+            document.getElementById(array1[i]).style.color = "White";
+        }
+    }
+		/* 画像アップロードボタンのon・off */
+		if (document.getElementById("file").hidden === true){
+            // hidden属性を削除
+            document.getElementById("file").hidden = "";
+
+        }else{
+            // hidden属性を設定
+            document.getElementById("file").hidden = "true";
+
+        }
+ 		/* 編集・編集決定・リセットボタンのon・off */
+
+   		if(document.getElementById("h_edit").style.display="inline"){
+			 document.getElementById("h_edit").style.display="none";	// 編集 非表示
+			 document.getElementById("h_reset").style.display="inline";	// リセット 表示
+ 			 document.getElementById("h_submit").style.display="inline";	// 決定 表示
+ 		}
+ 		if(document.getElementById("h_reset").style.display="inline"){
+ //			document.getElementById("h_edit").style.display="inline";	// 編集 表示
+ //			document.getElementById("h_reset").style.display="none";	// リセット 非表示
+ //			document.getElementById("h_submit").style.display="none";	// 決定 非表示
+ 		}
  }
 
- var id = document.getElementById('form');     //HTML要素のform要素を取得
 
-//ユーザがブラウザに入力した情報の取得
-document.forms("company         :    " + location.company);
-document.forms("my_class        :    " + location.my_class);
-document.forms("name            :    " + location.name);
-document.forms("experience      :    " + location.experience);
-document.forms("bloodtype       :    " + location.boodtype);
-document.forms("birthday        :    " + location.birthday);
-document.forms("college         :    " + location.college);
-document.forms("undergraduate   :    " + location.undergraduate);
-document.forms("hobby           :    " + location.hobby);
-document.forms("special_skill   :    " + location.special_skill);
-document.forms("qualification   :    " + location.qualification);
-document.forms("favorite        :    " + location.favorite);
-document.forms("comment         :    " + location.comment);
+	/* 背景画像の編集 */
+	function previewImage(obj){
 
-//削除ボタンのクリックでアクションを起こす
-function OnButtonClick() {
-    target = document.getElementByname("reset");
-}
+		var fileReader = new FileReader();
 
-//ファイル（画像）アップロード
+		// 読み込み後に実行する処理
+		fileReader.onload = (function() {
 
-var file = document.getElementById('file');
-var result = document.getElementById('result');
+			// canvas にプレビュー画像を表示
+			var canvas = document.getElementById('preview');
+			var ctx = canvas.getContext('2d');
+			var image = new Image();
+			image.src = fileReader.result;
 
-function loadLocalImage(e) {
-  // ファイル情報を取得
-  var fileData = e.target.files[0];
-
-  // 画像ファイル以外は処理を止める
-  if(!fileData.type.match('image.*')) {
-    alert('画像を選択してください');
-    return;
-  }
-
-  // FileReaderオブジェクトを使ってファイル読み込み
-  var reader = new FileReader();
-  // ファイル読み込みに成功したときの処理
-  reader.onload = function() {
-    // ブラウザ上に画像を表示する
-    var img = document.createElement('img');
-    img.src = reader.result;
-    result.appendChild(img);
-  }
-  // ファイル読み込みを実行
-  reader.readAsDataURL(fileData);
-}
-
-// ファイルが指定された時にloadLocalImage()を実行
-file.addEventListener('change', loadLocalImage, false);
+			image.onload = (function () {
+				canvas.width = image.width;
+				canvas.height = image.height;
+				ctx.drawImage(image, 0, 0);
+			});
+		});
+		// 画像読み込み
+		fileReader.readAsDataURL(obj.files[0]);
+	}
