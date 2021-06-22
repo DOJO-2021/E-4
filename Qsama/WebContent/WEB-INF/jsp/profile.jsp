@@ -11,7 +11,7 @@
   <link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
   <link href="https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
   <script type="text/javascript" src="/Qsama/js/profile.js"></script>
-<script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
+  <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
 </head>
 <body>
  <div class="container">
@@ -73,9 +73,9 @@
       </div>
       <div class="edit">
         <a>
-        <input type="button"  class="edit" id="h_edit"	onclick="OnButtonClick()" value="編集" 		style="display:inline;">
-        <input type="submit"  class="edit" id="h_submit" value="変更決定"	style="display:none;">
-        <input type="button"  class="edit" id="h_reset"	onclick="OnButtonClick()" value="キャンセル"style="display:none;">
+        <button type="button" class="edit" id="h_edit"	onclick="OnButtonClick()" value="編集"      style="display:inline;">編集</button>
+        <button type="submit" class="edit" id="h_submit" 						  value="変更決定"	style="display:none;">変更決定</button>
+        <button type="reset"  class="edit" id="h_reset"	onclick="OnButtonClick2()" value="キャンセル"style="display:none;">キャンセル</button>
         </a>
       </div>
     </div>
@@ -88,13 +88,16 @@
     		<c:forEach var="mg" items="${MyGetList}" varStatus="mm">
    				<div class="cp_qa">
 					<div class="cp_actab">
-					  <form method="POST" id="display_form" action="/Qsama/AdminServlet">
 						<input id="cp_tabfour_${mm.index}" type="checkbox" name="tabs">
 						<label for="cp_tabfour_${mm.index}">質問日　：　${mg.q_date}<br>${mg.q_content}</label>
 						<div class="cp_actab-content">
 							<p>回答日　：　${mg.a_date}<br>${mg.a_content}</p>
+							<form method="POST" id="display_form" action="/Qsama/ProfileServlet">
+								<input type="hidden" name="question_number" value="${mg.post_Number}">
+								<button type='submit' name="button" value="削除" onClick="return ppsubmit1()">削　除</button>
+								<button type='submit' name="button" value="解決" onClick="return ppsubmit2()">解　決</button>
+					  		</form>
 						</div>
-					  </form>
 					</div>
 				</div>
 	      	</c:forEach>

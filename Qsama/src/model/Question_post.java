@@ -57,13 +57,16 @@ public class Question_post implements Serializable {
 	}
 
 	// -------------------- insert用 コンストラクタ----------------------
-	public Question_post(String M_items, String S_items, String Q_date, String Q_content, int A_level, int emergency, String Postpic_url) {
+	public Question_post(int ac_id, String M_items, String S_items, String Q_date, String Q_content, int A_level, int Q_flag, int emergency, String Postpic_url) {
 		super();
+		
+		this.ac_id = ac_id;
 		this.M_items = M_items;
 		this.S_items = S_items;
 		this.Q_date = Q_date;
 		this.Q_content = Q_content;
 		this.A_level = A_level;
+		this.Q_flag = Q_flag;
 		this.emergency = emergency;
 		this.Postpic_url = Postpic_url;
 	}
@@ -86,6 +89,7 @@ public class Question_post implements Serializable {
 			}
 		
 	
+
 	// getter ・ setter
 	public int getQQ_id() {
 		return QQ_id;

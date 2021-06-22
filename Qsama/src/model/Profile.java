@@ -17,6 +17,9 @@ public class Profile implements Serializable {
 	private String qualification;	// 資格
 	private String favorite;		// 好きなアーティスト
 	private String comment;		// 一言コメント
+	private String back_url;		// 壁紙のURL
+	private String prof_url;		// 顔写真のURL
+
 
 	public Profile(int ac_id, int user_id, String company, String my_class, String name, String experience,
 			String bloodtype, String birthday, String college, String undergraduate, String hobby,
@@ -57,9 +60,9 @@ public class Profile implements Serializable {
 		this.favorite = "";			// 好きなアーティスト
 		this.comment = "";			// 一言コメント
 	}
-	public Profile(String company, String my_class, String name, String experience,
-			String bloodtype, String birthday, String college, String undergraduate, String hobby,
-			String special_skill, String qualification, String favorite, String comment, int ac_id) {
+	public Profile(String company, String my_class, String name, String experience,String bloodtype,
+			String birthday, String college, String undergraduate, String hobby, String special_skill,
+			String qualification, String favorite, String comment, String back_url, String prof_url, int ac_id) {
 
 		this.company = company;				// 会社名
 		this.my_class = my_class;	        // クラスNo
@@ -74,7 +77,25 @@ public class Profile implements Serializable {
 		this.qualification = qualification;	// 資格
 		this.favorite = favorite;			// 好きなアーティスト
 		this.comment = comment;				// 一言コメント
+		this.back_url = back_url;		// 壁紙のURL
+		this.prof_url = prof_url;		// 顔写真のURL
 		this.ac_id = ac_id;
+	}
+
+	public String getBack_url() {
+		return back_url;
+	}
+
+	public void setBack_url(String back_url) {
+		this.back_url = back_url;
+	}
+
+	public String getProf_url() {
+		return prof_url;
+	}
+
+	public void setProf_url(String prof_url) {
+		this.prof_url = prof_url;
 	}
 
 	public int getAc_id() {

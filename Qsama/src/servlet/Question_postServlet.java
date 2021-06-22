@@ -1,8 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import dao.Question_postDAO;
@@ -36,17 +35,17 @@ public class Question_postServlet extends HttpServlet {
 	// processRequestメソッドはGETとPOSTの両方のHTTPリクエストを処理
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/* もしもログインしていなかったらログインサーブレットにリダイレクトする
+		 // もしもログインしていなかったらログインサーブレットにリダイレクトする
 			HttpSession session = request.getSession();
 			if (session.getAttribute("user_id") == null) {
 				response.sendRedirect("/Qsama/LoginServlet");
 				return;
 			}
-		*/
+		
 		
 		// ログインしているユーザID（ac_id)の取得
-		//	int ac_id = (int) session.getAttribute("ac_id");
-		//	System.out.print("ac_id:" + ac_id );
+			String ac_id = (String) session.getAttribute("ac_id");
+			System.out.print("ac_idの中身:" + ac_id );
 			
 				
 			
@@ -75,16 +74,16 @@ public class Question_postServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		/* もしもログインしていなかったらログインサーブレットにリダイレクトする
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 			HttpSession session = request.getSession();
 			if (session.getAttribute("user_id") == null) {
 				response.sendRedirect("/Qsama/LoginServlet");
 				return;
 			}
-		*/
+		
 			
 		// ログインしているユーザID（ac_id)の取得
-		//	int ac_id = (int) session.getAttribute("ac_id");
+			String ac_id = (String) session.getAttribute("ac_id");
 		
 			
 		// ----------------------   よくある質問   ----------------------
@@ -113,7 +112,7 @@ public class Question_postServlet extends HttpServlet {
 		int A_level = Integer.parseInt(request.getParameter("A_level"));
 	//	int A_level = 0;
 	//	int Q_flag = Integer.parseInt(request.getParameter("Q_flag"));
-	//	int Q_flag = 0;
+		int Q_flag = 0;
 		int emergency = Integer.parseInt(request.getParameter("emergency"));
 	//	int emergency = 0;
 		String Postpic_url = request.getParameter("Postpic_url");
@@ -132,35 +131,54 @@ public class Question_postServlet extends HttpServlet {
 		
 
 		 // ---------------------  画像アップロード  ------------------------
-
+/*
 		StringBuilder sb = new StringBuilder();     // 文字列作成
 		
 		//Part part = request.getPart("Postpic_url"); // getPartで取得,ここが配列？
 		
 		 for (Part part : request.getParts()) {
             if (part.getName().equals("Postpic_url")) {
-            	
-            	//ここで名前を決定
-       		 LocalDateTime nowDateTime = LocalDateTime.now();
-       		 DateTimeFormatter java8Format = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-       		 
-       		 // 日時情報を指定フォーマットの文字列で取得
-       		 String java8Disp = nowDateTime.format( java8Format );
-       		 part.write(java8Disp+".jpg");
 
-            	
-                String name = getFileName(part);
+                String name = this.getFileName(part);
                 part.write(name);                       // ファイルへの書き込み
                 sb.append(name).append("<br>");
-                
+        
                 
                 System.out.println("nameの中身:" + name);
                 System.out.println("partの中身:" + part);
+                
+                
+            } else {
+            	break;
             }
         }
 		
+	 */
+		
+		  StringBuilder sb = new StringBuilder();
+	        for (Part part : request.getParts()) {
+	            if (part.getName().equals("files")) {
+	                String name = getFileName(part);
+	                part.write(name);
+	                sb.append(name).append("<br>");
+	            }
+	        }
+	        request.setAttribute("upload_files", sb.toString());
+	        request.getRequestDispatcher("index.jsp").forward(request, response);
+	    
+     	//ここで名前を決定
+	/*	 LocalDateTime nowDateTime = LocalDateTime.now();
+		 DateTimeFormatter java8Format = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+		 
+		 // 日時情報を指定フォーマットの文字列で取得
+		 String java8Disp = nowDateTime.format( java8Format );
+		 part.write(java8Disp+".jpg");
+	
+     
+		
         request.setAttribute("upload_files", sb.toString());
-       
+        System.out.print(sb.toString());
+       */
 		// String image = this.getFileName(part);
 		// request.setAttribute("image", image);
 		
@@ -170,7 +188,7 @@ public class Question_postServlet extends HttpServlet {
 	     
 		// 登録処理を行う
 		//Question_postDAO q2Dao = new Question_postDAO();
-		if (qDao.P_insert(new Question_post(M_items, S_items, Q_date, Q_content, A_level, emergency, Postpic_url))) {	// 登録成功
+		if (qDao.P_insert(ac_id, M_items, S_items, Q_date, Q_content, A_level, Q_flag, emergency, Postpic_url)) {	
 			
 			System.out.println("登録成功");
 		}
@@ -207,8 +225,6 @@ public class Question_postServlet extends HttpServlet {
         }	
 		return name;
 	}
-
-	
-	
+		
 	
 }

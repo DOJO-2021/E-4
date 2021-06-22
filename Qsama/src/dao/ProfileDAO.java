@@ -12,6 +12,7 @@ import model.Admin;
 import model.Profile;
 
 public class ProfileDAO {
+	//----------------------ac_idで個人プロフィールを検索----------------------------
 	public List<Profile> profileAll(int ac_id){
 	  List<Profile> ProfileList = new ArrayList<Profile>();
 
@@ -47,6 +48,8 @@ public class ProfileDAO {
 				rs.getString("QUALIFICATION"),
 				rs.getString("FAVORITE_ARTIST"),
 				rs.getString("COMPANY"),
+				rs.getString("BACK_URL"),
+				rs.getString("PROF_URL"),
 				rs.getInt("ac_id")
 				);
 			ProfileList.add(Profile);
@@ -79,7 +82,7 @@ public class ProfileDAO {
 	 }
 
 
-	// プロフィールの更新
+	// ----------------プロフィールの更新---------------------------------------------------------------------------
 	public boolean p_update(String company, String my_class, String name, String experience, String bloodtype, String birthday, String college,
 			String undergraduate, String hobby, String special_skill, String qualification, String favorite_artist, String comment, int ac_id) {
 		Connection conn = null;
@@ -161,7 +164,7 @@ public class ProfileDAO {
 					+ " p.POSTPIC_URL, p.Q_FLAG, m.A_FLAG, m.A_date, m.A_CONTENT, u.NAME "
 					+ " FROM POST_WORD as p inner join MANAGEMENT_WORD as m inner join p_user as u"
 					+ " on p.post_number=m.post_number on u.ac_id = p.ac_id"
-					+ " where p.ac_id=100 order by p.Q_DATE DESC";
+					+ " where p.ac_id="+ac_id+" order by p.Q_DATE DESC";
 
 			PreparedStatement s_res = conn.prepareStatement(sql);
 
@@ -208,5 +211,196 @@ public class ProfileDAO {
 					}
 				}
 		  }return MyGetList;	 	// 結果を返す
+	}
+
+	//-----------------------登録者の全出力-----------------------------------------------------------------------
+		public List<Profile> Personal_information(){
+		  List<Profile> ProfileList = new ArrayList<Profile>();
+
+	      Connection conn = null;
+
+		  try {
+	        // JDBCドライバの読み込み
+			Class.forName("org.h2.Driver");
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
+
+			// SQL文の準備
+			String sql = "select * from p_user";
+
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// select文の実行
+			ResultSet rs = pStmt.executeQuery();
+
+			// select文の結果をArrayListに格納
+			while (rs.next()) {
+				Profile Profile = new Profile(
+					rs.getString("COMPANY"),
+					rs.getString("MY_CLASS"),
+					rs.getString("NAME"),
+					rs.getString("EXPERIENCE"),
+					rs.getString("BLOODTYPE"),
+					rs.getString("BIRTHDAY"),
+					rs.getString("COLLEGE"),
+					rs.getString("UNDERGRADUATE"),
+					rs.getString("HOBBY"),
+					rs.getString("SPECIAL_SKILL"),
+					rs.getString("QUALIFICATION"),
+					rs.getString("FAVORITE_ARTIST"),
+					rs.getString("COMPANY"),
+					rs.getString("BACK_URL"),
+					rs.getString("PROF_URL"),
+					rs.getInt("ac_id")
+					);
+				ProfileList.add(Profile);
+				}
+
+		 }  // エラー処理
+			catch (SQLException e) {   // JDBC関連のメソッドを呼んだときの例外
+				e.printStackTrace();   // eclipseのコンソールに例外情報を表示する
+				ProfileList = null;
+			}
+			catch (ClassNotFoundException e) {  // ドライバをロードしたとき（ドライバ存在しない）例外
+				e.printStackTrace();
+				ProfileList = null;
+			}
+			finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+						ProfileList = null;
+					}
+				}
+			}
+			return ProfileList;
+		 }
+
+		//-----------------------「解決済」フラグ-----------------------------------------------------------------------
+		public boolean updateQflag(String post_number) {
+			Connection conn = null;
+			boolean result = false;
+
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("org.h2.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
+
+				// SQL文を準備する
+				String sql = "update POST_WORD set q_flag=1 where post_number="+post_number;
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+
+				// SQL文を実行する
+				if (pStmt.executeUpdate() == 1) {
+					result = true;
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.commit();
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}return result;
+		}
+
+		//--------------------質問の削除--------------------------------------------------------------------------
+		public boolean deleteQuestion(String post_number) {
+			Connection conn = null;
+			boolean result = false;
+
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("org.h2.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
+
+				// SQL文を準備する
+				String sql = "delete from POST_WORD where post_number="+post_number;
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+
+				// SQL文を実行する
+				if (pStmt.executeUpdate() == 1) {
+					result = true;
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.commit();
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}return result;
+		}
+
+	//-----------画像を保存---------------------------------------------------------
+		public boolean pic_insert(int ac_id, String prof_url, String back_url) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
+
+				// SQL文を準備する
+			String sql2 = "update p_user set prof_url="+"'"+prof_url+"', back_url='"+back_url+"' where ac_id="+ac_id;
+
+			PreparedStatement pStmt = conn.prepareStatement(sql2);
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.commit();
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}return result;
 	}
 }

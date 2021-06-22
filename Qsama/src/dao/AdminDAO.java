@@ -1429,4 +1429,70 @@ public class AdminDAO {
 			// 結果を返す
 			return result;
 		}
+
+		// -----------生徒別で過去の質問を検索---------------------------------------------------------------------------
+		public List<Admin> Student_Search(String Name){
+		  List<Admin> StudentList = new ArrayList<Admin>();
+
+	      Connection conn = null;					// 接続リセット
+
+		  try {
+	        // JDBCドライバの読み込み
+			Class.forName("org.h2.Driver");
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
+
+			// SQL文の準備 検索キーワードに対して、個別質問 + 管理テーブルを全出力
+			String sql = "SELECT p.QQ_ID, p.POST_NUMBER, p.M_ITEMS, p.S_ITEMS, p.Q_DATE, p.Q_CONTENT, p.A_LEVEL, p.EMERGENCY,"
+					+ "	p.POSTPIC_URL, m.A_FLAG, m.A_CONTENT, u.NAME"
+					+ "	FROM POST_WORD as p inner join MANAGEMENT_WORD as m inner join p_user as u"
+					+ "	on p.post_number=m.post_number on u.ac_id = p.ac_id"
+					+ "	where u.NAME='"+Name+"' order by p.Q_DATE DESC";
+
+			PreparedStatement s_res = conn.prepareStatement(sql);
+
+			// select文の実行
+			ResultSet rs = s_res.executeQuery();
+
+			// select文の結果をArrayListに格納
+			while (rs.next()) {
+				Admin Admin_ = new Admin(
+					rs.getInt("QQ_id"),
+					rs.getInt("Post_Number"),
+					rs.getString("M_items"),
+					rs.getString("S_items"),
+					rs.getString("Q_date"),
+					rs.getString("Q_content"),
+					rs.getInt("A_level"),
+					rs.getInt("emergency"),
+					rs.getString("Postpic_url"),
+					rs.getInt("A_flag"),
+					rs.getString("A_CONTENT"),
+					rs.getString("NAME")
+					);
+				StudentList.add(Admin_);
+				}
+		  }  // エラー処理
+		  catch (SQLException e) {
+				e.printStackTrace();
+				StudentList = null;
+		  }
+		  catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				StudentList = null;
+		  }
+		  finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+						StudentList = null;
+					}
+				}
+		  }return StudentList;	 	// 結果を返す
+		}
+
 }

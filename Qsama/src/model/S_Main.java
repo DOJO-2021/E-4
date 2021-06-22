@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class S_Main implements Serializable{
 	private String user_id;
 	// Post_wordの列名をフィールドに設定する
+	protected int qq_id;
+	protected int aa_id;
 	protected int ac_id;                // 識別ID
 	private String M_items;             // 大項目
 	private String Q_date;              // 投稿日
@@ -12,6 +14,7 @@ public class S_Main implements Serializable{
 	protected int Q_flag;
 	// management_wordの必要な列名をフィールドに設定する
 	protected int A_flag;
+	private String A_content;
 
 	// 引数がないコンストラクタ（デフォルトコンストラクタ）
 	public S_Main() {
@@ -22,15 +25,16 @@ public class S_Main implements Serializable{
 		this.Q_content = "";
 		this.Q_flag = 0;
 		this.A_flag = 0;
+		this.A_content = "";
 		//management_word
 		//this.ac_id1 = 0;
 		//this.A_content = "";
 	}
 	// お知らせ用
 	public S_Main(int ac_id, int A_flag) {
-
 		this.ac_id = ac_id;
 		this.A_flag = A_flag;
+
 	}
 
 	public S_Main(String user_id) {
@@ -38,12 +42,14 @@ public class S_Main implements Serializable{
 	}
 
 	// 引数があるコンストラクタ//解決済みの質問
-	public S_Main(int ac_id, String M_items, String Q_date, String Q_content, int Q_flag) {
+	public S_Main(int qq_id, int aa_id, int ac_id, String M_items, String Q_date, String Q_content, int Q_flag, String A_content) {
+		this.qq_id = qq_id;
 		this.ac_id = ac_id;
 		this.M_items = M_items;
 		this.Q_date = Q_date;
 		this.Q_content = Q_content;
 		this.Q_flag = Q_flag;
+		this.A_content = A_content;
 
 	}
 
@@ -55,6 +61,21 @@ public class S_Main implements Serializable{
 		this.Q_content = Q_content;
 	}
 
+	public int getQq_id() {
+		return qq_id;
+	}
+
+	public void setQq_id(int qq_id) {
+		this.qq_id = qq_id;
+	}
+
+	public int getAa_id() {
+		return aa_id;
+	}
+
+	public void setAa_id(int aa_id) {
+		this.aa_id = aa_id;
+	}
 
 	public int getAc_id() {
 		return ac_id;
@@ -110,21 +131,13 @@ public class S_Main implements Serializable{
 		this.user_id = user_id;
 	}
 
-/*	public int getAc_id1() {
-		return ac_id1;
-	}
-
-	public void setPostpic_url(int ac_id1) {
-		this.ac_id1 = ac_id1;
-	}
-
 	public String getA_content() {
 		return A_content;
 	}
 
 	public void setA_content(String a_content) {
 		this.A_content = a_content;
-	}*/
+	}
 
 
 

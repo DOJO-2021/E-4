@@ -3,50 +3,23 @@
 
 /* ----------------------- カテゴリ連動 ----------------------- */
 
-  document.addEventListener("DOMContentLoaded", function(){
-  
+document.addEventListener("DOMContentLoaded", function(){
     // 初期値が設定されている場合は最上位を選択させない
-    var firstChange = ($("#S_items").val() == "");
+    var firstChange = ($("#subcategory").val() == "");
 
-    $("#M_items").on("change",function(){
+    $("#maincategory").on("change",function(){
         if(firstChange){
             // 最上位を選択（現在選択項目を解除）
-            $("#S_items option[value='']").prop('selected',true);
+            $("#subcategory option[value='']").prop('selected',true);
         }
-        
         firstChange = true;
 
-        $("#S_items option").hide();
-        $("#S_items option[data-category='']").show();
-        $("#S_items option[data-category=' + this.value + ']").show();
+        $("#subcategory option").hide();
+        $("#subcategory option[data-category='']").show();
+        $("#subcategory option[data-category=" + this.value + "]").show();
     }).change();
 });
 
-
-/*  ----------------------- + アイコンの回転 と id/forの変更----------------------- */
-
-	// ここがうまくできない！！！！！
-
-
-   /* 読み込み時にファンクション  */
-  /* 
-   window.addEventListener('load', function() {
-   
-     // id属性,for属性の変更・自動生成
-     const moji = 'cp_tabfour05'
-     var input_id = document.getElementById('cp_tabfour051');        // id
-     var label_for = $('label').prop('label.htmlFor');               // for jQuery以外の記述方法見つからない
-   
-   for(var i=0; i<input_id.length; i++){
-   
-     input_id[i].setAttribute('id', moji + (i+1) );
-     label_for[i].setAttribute('label.htmlFor', moji + (i+1) );
-     
-     console.log('for属性：' + label_for[i] + ',id属性' + input_id[i]);
-     
-   }
-   
-  });
 
 /* -------------------- テキストエリアのサイズ可変 --------------------- */
   
@@ -150,26 +123,39 @@
 
 
 
-/* ---------  ファイルの自動アップデート  --------- */
-
-/*
-  var formData = new FormData();
-  for (var i = 0; i < files.length; i++) {
-    formData.append('file', files[i]);
-  }
-
-  //XMLHttpRequestオブジェクトを作成
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'Sample/image/*');
+/* ---------------------------  notNull制約部分が未記入・未選択で投稿した場合  ---------------------------- */
     
-    xhr.onload = function () {
-      if (xhr.status === 200) {    //レスポンスが持っているHTTPのステータスコードが200であることを確認
-        console.log('all done: ' + xhr.status);
-      } else {
-        console.log('Something went terribly wrong...');
-      }
-    };
+    document.getElementById('form').onsubmit = function(event) {
+      const M_items = document.getElementById('form').M_items.value;         // 大項目
+      const Q_content = document.getElementById('form').Q_content.value;     // 質問内容
 
-    xhr.send(formData);
-*/
-  
+
+      if (M_items != "" && Q_content != ""){
+     		event.preventDefault();
+			console.log('登録成功');
+			window.alert('投稿完了しました！');
+
+
+		} else if (M_items === "" && Q_content != "") {
+			event.preventDefault();
+			window.alert('投稿失敗！未入力項目があります。');
+			document.getElementById('output1').textContent = '大カテゴリは必須選択です';
+		
+		
+		} else if (M_items != "" && Q_content === "") {
+			event.preventDefault();
+			window.alert('投稿失敗！未入力項目があります。');
+			document.getElementById('output2').textContent = '質問内容を入力してください';
+		
+		
+		} else {
+			event.preventDefault();
+			window.alert('投稿失敗！未入力項目があります。');
+			document.getElementById('output1').textContent = '大カテゴリは必須選択です';
+			document.getElementById('output2').textContent = '質問内容を入力してください';
+		}
+	 };
+
+
+    
+

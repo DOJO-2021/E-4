@@ -174,20 +174,17 @@ header {
 label {
 	margin-inline-start: 100px;
 }
-
-#A1{margin-inline-start: 30%;}
-#A2{margin-inline-start: 36.5%;}
-#A3{margin-inline-start: 34.3%;}
-#A4{margin-inline-start: 18.8%;}
-#A5{margin-inline-start: 39.6%;}
-#A6{margin-inline-start: 31.3%;}
-#A7{margin-inline-start: 34.3%;}
-#A8{margin-inline-start: 32.7%;}
-#A9{margin-inline-start: 35.9%;}
-#A10{margin-inline-start: 35.9%;}
-#A11{margin-inline-start: 39.1%;}
-#A12{margin-inline-start: 24.7%;}
-#A13{margin-inline-start: 25.2%;}
+div.mandatory{
+	overflow: hidden;
+}
+div.choice{
+	overflow: hidden;
+}
+input#A1,#A2,#A3,#A4,#A5,#A6,#A7,#A8,#A9,#A10,#A11,#A12,#A13{
+	float: right;
+	clear: both;
+	margin-right: 50px;
+}
 
 .preview {
   background-color: #ffad90;
@@ -272,7 +269,7 @@ canvas {
 	text-align: center;
 }
 .cp_qa .cp_actab input[type=checkbox] + label::after {
-	content: 'BC';
+	content: '👇';
 }
 .cp_qa .cp_actab input[type=checkbox]:checked + label::after {
 	-webkit-transform: rotateX(180deg);

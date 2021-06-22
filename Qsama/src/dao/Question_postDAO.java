@@ -38,7 +38,7 @@ public class Question_postDAO {
 		"select * from POST_WORD as p inner join P_USER as u on p.ac_id=u.ac_id ";
 		
 
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+		PreparedStatement pStmt = conn.prepareStatement(sql);
 
 		// select文の実行
 		ResultSet rs = pStmt.executeQuery();
@@ -92,16 +92,18 @@ public class Question_postDAO {
 	
 
 	// insert
-	public boolean P_insert(Question_post question_post) {
+	public boolean P_insert(String ac_id, String M_items, String S_items, String Q_date, String Q_content, int A_level, int Q_flag, int emergency, String Postpic_url) {
+		
+		
 		Connection conn = null;
 		boolean result = false;
 	
 		
-		//--------------- 本日の日付を格納 -------------------------------------------
+		//---------------   本日の日付を格納   -----------------------------
 				LocalDateTime nowDateTime = LocalDateTime.now();
 				DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				String today = datetimeformatter.format(nowDateTime);
-		//----------------本日の日付を格納--------------------------------------------
+		//---------------    本日の日付を格納   ------------------------------
 
 				
 		try {
@@ -114,20 +116,24 @@ public class Question_postDAO {
 
 			// SQL文を準備する
 			// IDはauto increment 
-			String sql = "insert into Post_word (M_items, S_items, Q_date, Q_content, A_level, emergency, Postpic_url) values (?, ?, ?, ?, ?, ?, ?)";
+			String sql = "insert into POST_WORD (ac_id, M_items, S_items, Q_date, Q_content, A_level, Q_flag, emergency, Postpic_url) values ("+ac_id+", ?, ?, ?, ?, ?, ?, ?, ?)";
+			
+			
+			
+		//	String sql = "insert into POST_WORD (QQ_id, (select u.ac_id from P_USER as u inner join POST_WORD as p on u.ac_id = p.ac_id) , Post_Number, M_items, S_items, Q_date, Q_content, A_level, Q_flag, emergency, Postpic_url) values (0, 0, 0, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
 			
-			if (question_post.getM_items() != null) {
-				pStmt.setString(1, question_post.getM_items());
+			if (M_items != null) {
+				pStmt.setString(1, M_items);
 			} else {
 				pStmt.setString(1, null);
 			}
 
-			if (question_post.getS_items() != null) {
-				pStmt.setString(2, question_post.getS_items());
+			if (S_items != null) {
+				pStmt.setString(2, S_items);
 			} else {
 				pStmt.setString(2, null);
 			}
@@ -136,21 +142,23 @@ public class Question_postDAO {
 		
 
 			// not null制約あり
-			if (question_post.getQ_content() != null && !question_post.getQ_content().equals("")) {
-				pStmt.setString(4, question_post.getQ_content());
+			if (Q_content != null && !Q_content.equals("")) {
+				pStmt.setString(4, Q_content);
 			} else {
 				pStmt.setString(4, null);
 			}
 
-			pStmt.setInt(5, question_post.getA_level());        
+			pStmt.setInt(5, A_level);        
 
-			pStmt.setInt(6, question_post.getEmergency());
+			pStmt.setInt(6, Q_flag);
 			
-			if (question_post.getPostpic_url() != null) {
-				pStmt.setString(7, question_post.getPostpic_url());
-				System.out.print(question_post.getPostpic_url());
+			pStmt.setInt(7, emergency);
+			
+			if (Postpic_url != null) {
+				pStmt.setString(8, Postpic_url);
+			    //	System.out.print(question_post.getPostpic_url());     
 			} else {
-				pStmt.setString(7, null);
+				pStmt.setString(8, null);
 			}
 
 			
@@ -181,7 +189,7 @@ public class Question_postDAO {
 		return result;
 	}
 
-//-----------------------よくある質問 出力------------------------------------
+//-----------------------   よくある質問 出力   ------------------------------------
 	
 	public List<Question_post> PostFaq(){
 		  List<Question_post> PostFaqList = new ArrayList<Question_post>();
@@ -198,13 +206,7 @@ public class Question_postDAO {
 
 			// SQL文の準備 よくある質問：上位５件の出力
 			String sql =
-			"select p.M_items, count(M_items), p.Q_content, m.A_content from Post_word as p inner join MANAGEMENT_WORD as m inner join p_user as u on p.post_number = m.post_number on u.ac_id = p.ac_id group by p.M_items, Q_content, A_content order by count(M_items) DESC limit 5";
-		
-			/*
-			 * String sql =
-			"select p.M_items, p.count(M_items), p.Q_content, m.A_content from Post_word as p outer join ( select A_content from management_word as m ) group by M_items order by count(M_items) DESC limit 5";
-			 * 
-			 */
+			"select p.M_items, count(M_items), p.Q_content, m.A_content from POST_WORD as p inner join MANAGEMENT_WORD as m inner join P_USER as u on p.post_number = m.post_number on u.ac_id = p.ac_id group by p.M_items, Q_content, A_content order by count(M_items) DESC limit 5";
 			
 			PreparedStatement q2_res = conn.prepareStatement(sql);
 

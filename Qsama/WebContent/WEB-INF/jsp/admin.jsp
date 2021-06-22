@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Qsama | 管理者ページ</title>
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
@@ -196,6 +197,10 @@
 												<div class="cp_plus">+</div>
 												<label for="cp_tabfour1${op11.index}">${op1.q_content}</label>
 												<div class="cp_actab-content">${op1.a_content}</div>
+												<form method="POST" id="tab1_form${op11.index}" name="answer_form" >
+												<input type="hidden" name="areapost_number" value="${op1.post_Number}">
+												<button type='submit' name="button" value="公開停止" onClick="return formsubmit2()">公開停止</button>
+												</form>
 											</div>
 											</c:forEach>
 										</div>
@@ -208,6 +213,10 @@
 												<div class="cp_plus">+</div>
 												<label for="cp_tabfour2${op21.index}">${op2.q_content}</label>
 												<div class="cp_actab-content">${op2.a_content}</div>
+												<form method="POST" id="tab2_form${op21.index}" name="answer_form" >
+												<input type="hidden" name="areapost_number" value="${op2.post_Number}">
+												<button type='submit' name="button" value="公開停止" onClick="return formsubmit2()">公開停止</button>
+												</form>
 											</div>
 											</c:forEach>
 										</div>
@@ -220,6 +229,10 @@
 												<div class="cp_plus">+</div>
 												<label for="cp_tabfour3${op31.index}">${op3.q_content}</label>
 												<div class="cp_actab-content">${op3.a_content}</div>
+												<form method="POST" id="tab3_form${op31.index}" name="answer_form" >
+												<input type="hidden" name="areapost_number" value="${op3.post_Number}">
+												<button type='submit' name="button" value="公開停止" onClick="return formsubmit2()">公開停止</button>
+												</form>
 											</div>
 											</c:forEach>
 										</div>
@@ -232,6 +245,10 @@
 												<div class="cp_plus">+</div>
 												<label for="cp_tabfour4${op41.index}">${op4.q_content}</label>
 												<div class="cp_actab-content">${op4.a_content}</div>
+												<form method="POST" id="tab4_form${op41.index}" name="answer_form" >
+												<input type="hidden" name="areapost_number" value="${op4.post_Number}">
+												<button type='submit' name="button" value="公開停止" onClick="return formsubmit2()">公開停止</button>
+												</form>
 											</div>
 											</c:forEach>
 										</div>
@@ -244,6 +261,10 @@
 												<div class="cp_plus">+</div>
 												<label for="cp_tabfour1${op51.index}">${op5.q_content}</label>
 												<div class="cp_actab-content">${op5.a_content}</div>
+												<form method="POST" id="tab5_form${op51.index}" name="answer_form" >
+												<input type="hidden" name="areapost_number" value="${op5.post_Number}">
+												<button type='submit' name="button" value="公開停止" onClick="return formsubmit2()">公開停止</button>
+												</form>
 											</div>
 											</c:forEach>
 										</div>
@@ -256,6 +277,10 @@
 												<div class="cp_plus">+</div>
 												<label for="cp_tabfour6${op61.index}">${op6.q_content}</label>
 												<div class="cp_actab-content">${op6.a_content}</div>
+												<form method="POST" id="tab6_form${op61.index}" name="answer_form" >
+												<input type="hidden" name="areapost_number" value="${op6.post_Number}">
+												<button type='submit' name="button" value="公開停止" onClick="return formsubmit2()">公開停止</button>
+												</form>
 											</div>
 											</c:forEach>
 										</div>
@@ -268,6 +293,10 @@
 												<div class="cp_plus">+</div>
 												<label for="cp_tabfour7${op71.index}">${op7.q_content}</label>
 												<div class="cp_actab-content">${op7.a_content}</div>
+												<form method="POST" id="tab7_form${op71.index}" name="answer_form" >
+												<input type="hidden" name="areapost_number" value="${op7.post_Number}">
+												<button type='submit' name="button" value="公開停止" onClick="return formsubmit2()">公開停止</button>
+												</form>
 											</div>
 											</c:forEach>
 										</div>
@@ -280,6 +309,10 @@
 												<div class="cp_plus">+</div>
 												<label for="cp_tabfour8${op81.index}">${op8.q_content}</label>
 												<div class="cp_actab-content">${op8.a_content}</div>
+												<form method="POST" id="tab8_form${op81.index}" name="answer_form" >
+												<input type="hidden" name="areapost_number" value="${op8.post_Number}">
+												<button type='submit' name="button" value="公開停止" onClick="return formsubmit2()">公開停止</button>
+												</form>
 											</div>
 											</c:forEach>
 										</div>
@@ -329,12 +362,11 @@
 												<input id="cp_tabfour12${qp21.index}" type="checkbox" name="tabs">
 												<div class="cp_plus">+</div>
 												<label for="cp_tabfour12${qp21.index}">${qp2.q_content}</label>
-												<div class="cp_actab-content">${qp2.a_content}
-												<form method="POST" id="tab12_form" name="answer_form" action="/Qsama/AdminServlet">
-												<input type="hidden" name="areapost_number" value="${g.post_Number}">
-												<button>公開</button>
+												<div class="cp_actab-content">${qp2.a_content}</div>
+												<form method="POST" id="tab12_form${qp21.index}" name="answer_form" >
+												<input type="hidden" name="areapost_number" value="${qp2.post_Number}">
+												<button type='submit' name="button" value="公開" onClick="return formsubmit()">公開</button>
 												</form>
-												</div>
 											</div>
 											</c:forEach>
 										</div>
@@ -347,6 +379,10 @@
 												<div class="cp_plus">+</div>
 												<label for="cp_tabfour13${qp31.index}">${qp3.q_content}</label>
 												<div class="cp_actab-content">${qp3.a_content}</div>
+												<form method="POST" id="tab13_form${qp31.index}" name="answer_form" >
+												<input type="hidden" name="areapost_number" value="${qp3.post_Number}">
+												<button type='submit' name="button" value="公開" onClick="return formsubmit()">公開</button>
+												</form>
 											</div>
 											</c:forEach>
 										</div>
@@ -359,6 +395,10 @@
 												<div class="cp_plus">+</div>
 												<label for="cp_tabfour14${qp41.index}">${qp4.q_content}</label>
 												<div class="cp_actab-content">${qp4.a_content}</div>
+												<form method="POST" id="tab14_form${qp41.index}" name="answer_form" >
+												<input type="hidden" name="areapost_number" value="${qp4.post_Number}">
+												<button type='submit' name="button" value="公開" onClick="return formsubmit()">公開</button>
+												</form>
 											</div>
 											</c:forEach>
 										</div>
@@ -371,6 +411,10 @@
 												<div class="cp_plus">+</div>
 												<label for="cp_tabfour15${qp51.index}">${qp5.q_content}</label>
 												<div class="cp_actab-content">${qp5.a_content}</div>
+												<form method="POST" id="tab15_form${qp51.index}" name="answer_form" >
+												<input type="hidden" name="areapost_number" value="${qp5.post_Number}">
+												<button type='submit' name="button" value="公開" onClick="return formsubmit()">公開</button>
+												</form>
 											</div>
 											</c:forEach>
 										</div>
@@ -383,6 +427,10 @@
 												<div class="cp_plus">+</div>
 												<label for="cp_tabfour16${qp61.index}">${qp6.q_content}</label>
 												<div class="cp_actab-content">${qp6.a_content}</div>
+												<form method="POST" id="tab16_form${qp61.index}" name="answer_form" >
+												<input type="hidden" name="areapost_number" value="${qp6.post_Number}">
+												<button type='submit' name="button" value="公開" onClick="return formsubmit()">公開</button>
+												</form>
 											</div>
 											</c:forEach>
 										</div>
@@ -395,6 +443,10 @@
 												<div class="cp_plus">+</div>
 												<label for="cp_tabfour17${qp71.index}">${qp7.q_content}</label>
 												<div class="cp_actab-content">${qp7.a_content}</div>
+												<form method="POST" id="tab17_form${qp71.index}" name="answer_form" >
+												<input type="hidden" name="areapost_number" value="${qp7.post_Number}">
+												<button type='submit' name="button" value="公開" onClick="return formsubmit()">公開</button>
+												</form>
 											</div>
 											</c:forEach>
 										</div>
@@ -407,6 +459,10 @@
 												<div class="cp_plus">+</div>
 												<label for="cp_tabfour18${qp81.index}">${qp8.q_content}</label>
 												<div class="cp_actab-content">${qp8.a_content}</div>
+												<form method="POST" id="tab18_form${qp81.index}" name="answer_form" >
+												<input type="hidden" name="areapost_number" value="${qp8.post_Number}">
+												<button type='submit' name="button" value="公開" onClick="return formsubmit()">公開</button>
+												</form>
 											</div>
 											</c:forEach>
 										</div>
@@ -417,8 +473,27 @@
 				</div><!--modal-->
 			</div>
 			<!-- 受講者質問管理 -->
+			<div class="content3" style="float:left;">受講者別質問管理
+					<form method="POST" id="personal_form" action="/Qsama/AdminServlet">
+						<select class="personal_items" name="personal_items">
+							<option value="" selected>検索したい受講者を選択</option>
+							<c:forEach var="pp" items="${PersonalList}" varStatus="pp1">
+							<option value="${pp.name}" >${pp.name}</option>
+							</c:forEach>
+						</select>
+						<button type="submit" id="personal_submit" name="personal_submit"onClick="personalsubmit()">検索</button>
+					</form>
+			<c:forEach var="st" items="${StudentList}" varStatus="stu">
+	     	<div>
+	     		<form method="POST" id="personal2_form" action="/Qsama/AdminServlet">
+	     			<input type="hidden" name="post_number" value="${st.post_Number}">
+ 					<button class="cp_btn" id="title_${stu.index}" >質問No:${st.post_Number} ｼﾞｬﾝﾙ：${st.m_items}</button><br>
+ 				</form>
+			</div>
+	    	</c:forEach>
 		</div>
 	</div>
+</div>
 </body>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="js/Admin.js"></script>		<!--モーダルウィンドウ用js-->

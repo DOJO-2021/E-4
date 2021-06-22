@@ -58,7 +58,6 @@ public class S_MainServlet extends HttpServlet {
 		List<S_Main> RecentqList = qDao.RecentQ();
 		// 結果をリクエストスコープに格納する
 		request.setAttribute("RecentqList", RecentqList);
-		//System.out.println("scope RecentqList:" + RecentqList);   // 結果出力
 
 		//---HTMLの解決済み質問----
 		// 結果をリクエストスコープに格納する
@@ -95,12 +94,12 @@ public class S_MainServlet extends HttpServlet {
 		List<S_Main> ResoledQList7 = qDao.ResolvedQuestion7();
 		request.setAttribute("ResoledQList7", ResoledQList7);
 
-		//---段位認定の解決済み質問----
+		//---ドリルの解決済み質問----
 		// 結果をリクエストスコープに格納する
 		List<S_Main> ResoledQList8 = qDao.ResolvedQuestion8();
 		request.setAttribute("ResoledQList8", ResoledQList8);
 
-		//---ドリルの解決済み質問----
+		//---段位認定の解決済み質問----
 		// 結果をリクエストスコープに格納する
 		List<S_Main> ResoledQList9 = qDao.ResolvedQuestion9();
 		request.setAttribute("ResoledQList9", ResoledQList9);

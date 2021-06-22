@@ -36,14 +36,20 @@ h2{
 /* -------- フォーム -------- */
 .form-wrapper {
   display: flex;
+  background-color: #fffffc;
+  box-shadow: 0 0 5px rgb(0 0 0 / 10%);
 }
 
 .form1 {
-  padding: 5px;
+  padding: 10px 0 0 15px;;
 }
 
-.A_level, .question_cat {
+.question_cat {
   padding-top: 5px;
+}
+
+.A_level {
+  padding-top: 20px;
 }
 
 .emergency, .Q_content {
@@ -51,13 +57,14 @@ h2{
 }
 
 .form2 {
-  padding-left: 80px;
+  padding-left: 60px;
   padding-top: 15px;
 }
 
 
 
-/* --------------- ここから、200行目までが該当箇所です。タブ切り替え -----------------*/
+/* --------------- ここから、タブ切り替え -----------------*/
+
 .cp_qa *, .cp_qa *:before, .cp_qa *:after {
 	font-family: 'FontAwesome', sans-serif;
 	-webkit-box-sizing: border-box;
@@ -67,6 +74,7 @@ h2{
 .cp_qa {
 	margin: 0 auto;
 	background: #ffffff;
+	box-shadow: 0 0 5px rgba(0,0,0,.1);
 }
 
 .cp_qa input {
@@ -83,7 +91,7 @@ h2{
 	border-top: 1px solid #dddddd;
 }
 
-/* エリア全体(.cp_qa) labelは項目表示部分 */
+/* タブ */
 .cp_qa label.cp_tabitem {
 	display: inline-block;
 	margin: 0 0 -1px;
@@ -182,11 +190,13 @@ h2{
 	position: relative;
 	overflow: hidden;
 	height: 0;
-	margin: 0 10px 0 48px;
-	padding: 14px 0;
+	margin: 10px 20px 10px 48px;
+	padding: 14px 10px;
 	-webkit-transition: 0.4s ease;
 	        transition: 0.4s ease;
 	opacity: 0;
+	background-color: #f3f3f3;
+	border-radius: 18px;
 }
 /* 質問を開いた時の仕様 */
 input[type=checkbox]:checked ~ .cp_actab-content {
@@ -207,14 +217,55 @@ textarea {
   resize: none;
   width:500px;
   height:200px;
-  overflow: scroll;
+  border-radius: 5px;
+  box-shadow: 0 0 0 1px rgb(221, 221, 221) inset;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  
+ /* overflow: scroll; */
 }
+
+textarea :focus {
+    outline: 0;
+    box-shadow: 0 0 0 2px rgb(33, 150, 243) inset;
+}
+
 .Q_content label {
   font-size: 22px;
   
 }
 
 /* --------ドラッグ＆ドロップ -------- */
+  
+
+
+.text {
+    position: absolute;
+    top: 50%; 
+    right: 50%;
+    transform: translate(50%,-50%);
+    text-transform: uppercase;
+    font-family: verdana;
+/*    font-size: 12em;  */
+    font-weight: 700;
+    color: #f5f5f5;
+    text-shadow: 1px 1px 1px #919191,
+        1px 2px 1px #919191,
+        1px 3px 1px #919191,
+        1px 4px 1px #919191,
+        1px 5px 1px #919191,
+        1px 6px 1px #919191,
+        1px 7px 1px #919191,
+        1px 8px 1px #919191,
+        1px 9px 1px #919191,
+        1px 10px 1px #919191,
+    1px 18px 6px rgba(16,16,16,0.4),
+    1px 22px 10px rgba(16,16,16,0.2),
+    1px 25px 35px rgba(16,16,16,0.2),
+    1px 30px 60px rgba(16,16,16,0.4);
+}
+
 #dragDropArea{
   background-color: #f4f4f4;
   margin: 10px;
@@ -230,6 +281,29 @@ textarea {
     font-weight: bold;
     font-size: 14px;
     font-size: 1.1em;
+/*     position: absolute;
+    top: 50%; 
+    right: 50%;
+    transform: translate(50%,-50%);
+    text-transform: uppercase;
+    font-family: verdana;
+   font-size: 12em; 
+    font-weight: 700;
+    color: #f5f5f5;
+    text-shadow: 1px 1px 1px #919191,
+        1px 2px 1px #919191,
+        1px 3px 1px #919191,
+        1px 4px 1px #919191,
+        1px 5px 1px #919191,
+        1px 6px 1px #919191,
+        1px 7px 1px #919191,
+        1px 8px 1px #919191,
+        1px 9px 1px #919191,
+        1px 10px 1px #919191,
+    1px 18px 6px rgba(16,16,16,0.4),
+    1px 22px 10px rgba(16,16,16,0.2),
+    1px 25px 35px rgba(16,16,16,0.2),
+    1px 30px 60px rgba(16,16,16,0.4);      */
 }
 
 #dragDropArea .drag-drop-buttons{

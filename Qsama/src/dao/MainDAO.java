@@ -33,7 +33,6 @@ public class MainDAO {
 				// selet文の結果をArrayListに格納
 				while (rs.next()) {
 					S_Main recent = new S_Main(
-
 						rs.getInt("ac_id"),
 						rs.getInt("A_flag")
 						);
@@ -141,7 +140,7 @@ public class MainDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 			// SQL文の準備
-			String sql ="select * from post_word where m_items like 'HTML' and Q_FLAG = '1'";
+			String sql ="select p.qq_id, p.ac_id, p.m_items, p.Q_date, p.q_content, p.q_flag, m.a_content, m.aa_id from post_word as p INNER JOIN management_word as m  ON p.qq_id = m.aa_id where p.m_items = 'HTML' and p.Q_FLAG = '1'";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// select文の実行
@@ -150,11 +149,14 @@ public class MainDAO {
 			// selet文の結果をArrayListに格納
 			while (rs.next()) {
 				S_Main recent1 = new S_Main(
+					rs.getInt("qq_id"),
+					rs.getInt("aa_id"),
 					rs.getInt("ac_id"),
 					rs.getString("M_items"),
 					rs.getString("Q_date"),
 					rs.getString("Q_content"),
-					rs.getInt("Q_flag")
+					rs.getInt("Q_flag"),
+					rs.getString("A_content")
 					);
 					ResoledQList.add(recent1);
 
@@ -202,7 +204,7 @@ public class MainDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 			// SQL文の準備
-			String sql ="select * from post_word where m_items like 'CSS' and Q_FLAG = '1'";
+			String sql ="select p.qq_id, p.ac_id, p.m_items, p.Q_date, p.q_content, p.q_flag, m.a_content, m.aa_id from post_word as p INNER JOIN management_word as m  ON p.qq_id = m.aa_id where p.m_items = 'CSS' and p.Q_FLAG = '1'";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// select文の実行
@@ -211,11 +213,14 @@ public class MainDAO {
 			// selet文の結果をArrayListに格納
 			while (rs.next()) {
 				S_Main recent1 = new S_Main(
-					rs.getInt("ac_id"),
-					rs.getString("M_items"),
-					rs.getString("Q_date"),
-					rs.getString("Q_content"),
-					rs.getInt("Q_flag")
+						rs.getInt("qq_id"),
+						rs.getInt("aa_id"),
+						rs.getInt("ac_id"),
+						rs.getString("M_items"),
+						rs.getString("Q_date"),
+						rs.getString("Q_content"),
+						rs.getInt("Q_flag"),
+						rs.getString("A_content")
 					);
 					ResoledQList2.add(recent1);
 				}
@@ -262,7 +267,7 @@ public class MainDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 			// SQL文の準備
-			String sql ="select * from post_word where m_items like 'JavaScript' and Q_FLAG = '1'";
+			String sql ="select p.qq_id, p.ac_id, p.m_items, p.Q_date, p.q_content, p.q_flag, m.a_content, m.aa_id from post_word as p INNER JOIN management_word as m  ON p.qq_id = m.aa_id where p.m_items = 'JavaScript' and p.Q_FLAG = '1'";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// select文の実行
@@ -271,11 +276,14 @@ public class MainDAO {
 			// selet文の結果をArrayListに格納
 			while (rs.next()) {
 				S_Main recent1 = new S_Main(
-					rs.getInt("ac_id"),
-					rs.getString("M_items"),
-					rs.getString("Q_date"),
-					rs.getString("Q_content"),
-					rs.getInt("Q_flag")
+						rs.getInt("qq_id"),
+						rs.getInt("aa_id"),
+						rs.getInt("ac_id"),
+						rs.getString("M_items"),
+						rs.getString("Q_date"),
+						rs.getString("Q_content"),
+						rs.getInt("Q_flag"),
+						rs.getString("A_content")
 					);
 					ResoledQList3.add(recent1);
 
@@ -323,7 +331,7 @@ public class MainDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 			// SQL文の準備
-			String sql ="select * from post_word where m_items like 'Java' and Q_FLAG = '1'";
+			String sql ="select p.qq_id, p.ac_id, p.m_items, p.Q_date, p.q_content, p.q_flag, m.a_content, m.aa_id from post_word as p INNER JOIN management_word as m  ON p.qq_id = m.aa_id where p.m_items = 'Java' and p.Q_FLAG = '1'";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// select文の実行
@@ -332,11 +340,14 @@ public class MainDAO {
 			// selet文の結果をArrayListに格納
 			while (rs.next()) {
 				S_Main recent1 = new S_Main(
-					rs.getInt("ac_id"),
-					rs.getString("M_items"),
-					rs.getString("Q_date"),
-					rs.getString("Q_content"),
-					rs.getInt("Q_flag")
+						rs.getInt("qq_id"),
+						rs.getInt("aa_id"),
+						rs.getInt("ac_id"),
+						rs.getString("M_items"),
+						rs.getString("Q_date"),
+						rs.getString("Q_content"),
+						rs.getInt("Q_flag"),
+						rs.getString("A_content")
 					);
 					ResoledQList4.add(recent1);
 
@@ -384,7 +395,7 @@ public class MainDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 			// SQL文の準備
-			String sql ="select * from post_word where m_items like 'SQL' and Q_FLAG = '1'";
+			String sql ="select p.qq_id, p.ac_id, p.m_items, p.Q_date, p.q_content, p.q_flag, m.a_content, m.aa_id from post_word as p INNER JOIN management_word as m  ON p.qq_id = m.aa_id where p.m_items = 'SQL' and p.Q_FLAG = '1'";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// select文の実行
@@ -393,11 +404,14 @@ public class MainDAO {
 			// selet文の結果をArrayListに格納
 			while (rs.next()) {
 				S_Main recent1 = new S_Main(
-					rs.getInt("ac_id"),
-					rs.getString("M_items"),
-					rs.getString("Q_date"),
-					rs.getString("Q_content"),
-					rs.getInt("Q_flag")
+						rs.getInt("qq_id"),
+						rs.getInt("aa_id"),
+						rs.getInt("ac_id"),
+						rs.getString("M_items"),
+						rs.getString("Q_date"),
+						rs.getString("Q_content"),
+						rs.getInt("Q_flag"),
+						rs.getString("A_content")
 					);
 					ResoledQList5.add(recent1);
 
@@ -445,7 +459,7 @@ public class MainDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 			// SQL文の準備
-			String sql ="select * from post_word where m_items like 'サーブレット・JSP' and Q_FLAG = '1'";
+			String sql ="select p.qq_id, p.ac_id, p.m_items, p.Q_date, p.q_content, p.q_flag, m.a_content, m.aa_id from post_word as p INNER JOIN management_word as m  ON p.qq_id = m.aa_id where p.m_items = 'サーブレット・JSP' and p.Q_FLAG = '1'";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// select文の実行
@@ -454,11 +468,14 @@ public class MainDAO {
 			// selet文の結果をArrayListに格納
 			while (rs.next()) {
 				S_Main recent1 = new S_Main(
-					rs.getInt("ac_id"),
-					rs.getString("M_items"),
-					rs.getString("Q_date"),
-					rs.getString("Q_content"),
-					rs.getInt("Q_flag")
+						rs.getInt("qq_id"),
+						rs.getInt("aa_id"),
+						rs.getInt("ac_id"),
+						rs.getString("M_items"),
+						rs.getString("Q_date"),
+						rs.getString("Q_content"),
+						rs.getInt("Q_flag"),
+						rs.getString("A_content")
 					);
 					ResoledQList6.add(recent1);
 
@@ -506,7 +523,7 @@ public class MainDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 			// SQL文の準備
-			String sql ="select * from post_word where m_items like '事務局' and Q_FLAG = '1'";
+			String sql ="select p.qq_id, p.ac_id, p.m_items, p.Q_date, p.q_content, p.q_flag, m.a_content, m.aa_id from post_word as p INNER JOIN management_word as m  ON p.qq_id = m.aa_id where p.m_items = '事務局' and p.Q_FLAG = '1'";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// select文の実行
@@ -515,11 +532,14 @@ public class MainDAO {
 			// selet文の結果をArrayListに格納
 			while (rs.next()) {
 				S_Main recent1 = new S_Main(
-					rs.getInt("ac_id"),
-					rs.getString("M_items"),
-					rs.getString("Q_date"),
-					rs.getString("Q_content"),
-					rs.getInt("Q_flag")
+						rs.getInt("qq_id"),
+						rs.getInt("aa_id"),
+						rs.getInt("ac_id"),
+						rs.getString("M_items"),
+						rs.getString("Q_date"),
+						rs.getString("Q_content"),
+						rs.getInt("Q_flag"),
+						rs.getString("A_content")
 					);
 					ResoledQList7.add(recent1);
 
@@ -566,7 +586,7 @@ public class MainDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 			// SQL文の準備
-			String sql ="select * from post_word where m_items like 'ドリル' and Q_FLAG = '1'";
+			String sql ="select p.qq_id, p.ac_id, p.m_items, p.Q_date, p.q_content, p.q_flag, m.a_content, m.aa_id from post_word as p INNER JOIN management_word as m  ON p.qq_id = m.aa_id where p.m_items = 'ドリル' and p.Q_FLAG = '1'";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// select文の実行
@@ -575,11 +595,14 @@ public class MainDAO {
 			// selet文の結果をArrayListに格納
 			while (rs.next()) {
 				S_Main recent1 = new S_Main(
-					rs.getInt("ac_id"),
-					rs.getString("M_items"),
-					rs.getString("Q_date"),
-					rs.getString("Q_content"),
-					rs.getInt("Q_flag")
+						rs.getInt("qq_id"),
+						rs.getInt("aa_id"),
+						rs.getInt("ac_id"),
+						rs.getString("M_items"),
+						rs.getString("Q_date"),
+						rs.getString("Q_content"),
+						rs.getInt("Q_flag"),
+						rs.getString("A_content")
 					);
 					ResoledQList8.add(recent1);
 
@@ -626,7 +649,7 @@ public class MainDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 			// SQL文の準備
-			String sql ="select * from post_word where m_items like '段位認定' and Q_FLAG = '1'";
+			String sql ="select p.qq_id, p.ac_id, p.m_items, p.Q_date, p.q_content, p.q_flag, m.a_content, m.aa_id from post_word as p INNER JOIN management_word as m  ON p.qq_id = m.aa_id where p.m_items = '段位認定' and p.Q_FLAG = '1'";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// select文の実行
@@ -635,11 +658,14 @@ public class MainDAO {
 			// selet文の結果をArrayListに格納
 			while (rs.next()) {
 				S_Main recent1 = new S_Main(
-					rs.getInt("ac_id"),
-					rs.getString("M_items"),
-					rs.getString("Q_date"),
-					rs.getString("Q_content"),
-					rs.getInt("Q_flag")
+						rs.getInt("qq_id"),
+						rs.getInt("aa_id"),
+						rs.getInt("ac_id"),
+						rs.getString("M_items"),
+						rs.getString("Q_date"),
+						rs.getString("Q_content"),
+						rs.getInt("Q_flag"),
+						rs.getString("A_content")
 					);
 					ResoledQList9.add(recent1);
 

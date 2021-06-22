@@ -4,62 +4,68 @@ html * {
 	box-sizing	: border-box;
 }
 body {
-	margin		: 0 0 0 0;
+  margin: 0 auto;
+  max-width: 1000px;
+background-color: #f3f3f3;
 }
+
 
 /* --- h3タグ --- */
 h3 {
-	text-align:center;
+	text-align:left;
 	margin:2px ;
 }
 /* --- お知らせ --- */
 *, *:before, *:after {-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
-.info {margin: 1em auto;padding: 0 1.5em;border: 1px solid #ccc;text-align: left;font-size: 1em;line-height: 1.2;color: #444;overflow: auto;width: 90%;height: 8em;background-color: #fcfcfc;}
+.info {margin: 1em auto;padding: 0 1.5em;border: 1px solid #ccc;text-align: left;font-size: 1em;line-height: 1.2;color: #444;overflow: auto;width: 1000px;height: 8em;background-color: #fcfcfc;}
 .info dl {padding: 0.5em 0;border-bottom: 1px solid #ccc;font-size:10px;}
 .info dt {padding-bottom: 0;width: 5em;font-size:10px;}
-@media screen and (min-width: 480px) {
-.info dt {clear: left;float: left;}
-.info dd {margin-left: 1em;}
-}
 
 /* --- よくある質問集コンテンツ、最近の質問コンテンツ --- */
 .box {
-  margin         : auto;                 /* 中央寄せ */
+  margin		: 0 auto;
   box-sizing     : border-box;           /* 罫線も含む長さ      */
   background     : #fff;                 /* BOXの背景色         */
   border         : 1px solid #666;       /* 枠線の指定          */
-  width          : 1200px;                /* BOXの幅             */
   display        : flex;                 /* FlexBox定義         */
+  height         : 500px;
   flex-wrap      : wrap;                 /* 折り返し定義        */
+
+}
+
+.box2 {
+  margin		: 0 auto;
+  box-sizing     : border-box;           /* 罫線も含む長さ      */
+  background     : #fff;                 /* BOXの背景色         */
+  border         : 1px solid #666;       /* 枠線の指定          */
+  display        : flex;                 /* FlexBox定義         */
+  height         : 500px;
+  flex-wrap      : wrap;                 /* 折り返し定義        */
+  overflow-y: scroll;
 }
 
  /*最近の質問BOXの定義*/
-.box .content {
+ .content {
   box-sizing     : border-box;           /* 罫線も含む長さ      */
   background     : white;              /* BOXの背景色         */
   border         : 1px solid black;    /* 枠線の指定          */
-  width          : 300px;                 /* サンプルBOXの幅     */
-  height         : 400px;                 /* サンプルBOXの幅     */
+  padding-top    : 20px;
+  width          : 1000px;                 /* サンプルBOXの幅     */
   margin         : 2px;                  /* サンプルBOXの間     */
-  overflow-y: scroll;
+
 
   /* FlexBoxの各ボックス均等自動幅 */
   /*flex-grow      : 1;                    /* 各BOXを均等に割当て */
 }
 
-/* --- 最近の質問の文字の大きさ指定 --- */
-.q_list {
-	font-size:12px;
-}
-
-/* --- よくある質問集 --- */
+/* ----- 解決済みの質問集 ----- */
 /*タブ切り替え全体のスタイル*/
 .tabs {
-  margin-top: 50px;
+
   padding-bottom: 40px;
   background-color: #fff;
+  width:1000px;
   box-shadow: 0 0 10px rgba(5, 0, 0, 0.2);
-  width: 550px;
   margin: 0 ;}
 
 /*タブのスタイル*/
@@ -112,10 +118,23 @@ input[name="tab_item"] {
 /*選択されているタブのスタイルを変える*/
 .tabs input:checked + .tab_item {
   color: #fff;
-  width: 10%;
 
 }
 
+p.question {
+	cursor: pointer;
+}
+
+p.question:hover {
+        text-decoration: underline;
+}
+
+p.ans {
+	    display: none;
+        background: grey;
+
+
+}
 /* --- プロフィール --- */
 .box .profile {
   margin: 15px auto;                 /* サンプル用 中央寄せ */

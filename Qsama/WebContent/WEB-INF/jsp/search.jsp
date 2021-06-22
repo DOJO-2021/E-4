@@ -206,7 +206,6 @@
 		</footer>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><!--jquery読み込み-->
-		<script src="js/Search.js"></script>		<!--講師ジャンル表示用js-->
-		<script src="js/Search2.js"></script>		<!--事務局ジャンル表示用js-->
+		<script src="js/Search.js"></script>		<!--講師・事務局ジャンル表示用js-->
 </body>
 </html>
