@@ -17,3 +17,16 @@ $(document).ready(function(){
   $(this).next().slideToggle(200);
  });
 });
+
+/* フェードイン機能 */
+/*
+  // htmlで付与したクラス単位で、アニメーションを追加する
+  ScrollReveal().reveal('.content');
+
+  // オプションを追加し、アニメーションをカスタマイズ可能
+  ScrollReveal().reveal('.content', {
+    duration: 1000, // アニメーションの完了にかかる時間
+    reset: true   // 何回もアニメーション表示するか
+  });
+*/
+

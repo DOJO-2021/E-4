@@ -7,22 +7,22 @@
 <meta charset="UTF-8">
 <title>Qsama | top</title>
 <link rel="stylesheet" href="css/s_main.css">
+<script src="https://unpkg.com/scrollreveal"></script>
+<script src="jquery.simplePagination.js"></script>
 </head>
 <body>
 <!-- 共通のヘッダー -->
 <jsp:include page="/WEB-INF/jsp/header.jsp" />
 <!-- 共通ヘッダーここまで -->
-
 <!-- お知らせ -->
 
 <div class="info">
-  <h3>お知らせ</h3>
+  <h2>お知らせ</h2>
   <c:forEach var="o" items="${NoticeList}">
 	<dl>
-		<dt>日付</dt>
+		<dt></dt>
 	    <dd>
-			${o.q_date}:${o.m_items}に対しての回答がきています！
-
+			${o.q_date}の質問に対して回答が届いています！
 	    </dd>
 	</dl>
   </c:forEach>
@@ -56,7 +56,7 @@
 	    <div class="tab_content_description">
 			<c:forEach var="h" items="${ResoledQList}">
 				<p class="question">${h.q_content}</p>
-				<p class="ans">A. ${h.a_content}</p>
+				<p class="ans">${h.a_content}</p>
 				<hr>
 			</c:forEach>
 	    </div>
@@ -65,7 +65,7 @@
 	    <div class="tab_content_description">
 			<c:forEach var="h2" items="${ResoledQList2}">
 				<p class="question">${h2.q_content}</p>
-				<p class="ans">A. ${h2.a_content}</p>
+				<p class="ans">${h2.a_content}</p>
 				<hr>
 			</c:forEach>
 	    </div>
@@ -74,7 +74,7 @@
 	    <div class="tab_content_description">
 			<c:forEach var="h3" items="${ResoledQList3}">
 				<p class="question">${h3.q_content}</p>
-				<p class="ans">A. ${h3.a_content}</p>
+				<p class="ans">${h3.a_content}</p>
 				<hr>
 			</c:forEach>
 	    </div>
@@ -83,7 +83,7 @@
 	    <div class="tab_content_description">
 			<c:forEach var="h4" items="${ResoledQList4}">
 				<p class="question">${h4.q_content}</p>
-				<p class="ans">A. ${h4.a_content}</p>
+				<p class="ans">${h4.a_content}</p>
 				<hr>
 			</c:forEach>
 	    </div>
@@ -92,7 +92,7 @@
 	    <div class="tab_content_description">
 			<c:forEach var="h5" items="${ResoledQList5}">
 				<p class="question">${h5.q_content}</p>
-				<p class="ans">A. ${h5.a_content}</p>
+				<p class="ans">${h5.a_content}</p>
 				<hr>
 			</c:forEach>
 	    </div>
@@ -102,7 +102,7 @@
       <div class="tab_content_description">
 		  <c:forEach var="h6" items="${ResoledQList6}">
 			    <p class="question">${h6.q_content}</p>
-			    <p class="ans">A. ${h6.a_content}</p>
+			    <p class="ans">${h6.a_content}</p>
 			    <hr>
 		  </c:forEach>
       </div>
@@ -111,7 +111,7 @@
 	   <div class="tab_content_description">
 			<c:forEach var="h7" items="${ResoledQList7}">
 				<p class="question">${h7.q_content}</p>
-				<p class="ans">A. ${h7.a_content}</p>
+				<p class="ans">${h7.a_content}</p>
 				<hr>
 			</c:forEach>
 	    </div>
@@ -121,7 +121,7 @@
 	      <p class="c-txtsp"></p>
 			<c:forEach var="h8" items="${ResoledQList8}">
 				<p class="question">${h8.q_content}</p>
-				<p class="ans">A. ${h8.a_content}</p>
+				<p class="ans">${h8.a_content}</p>
 				<hr>
 			</c:forEach>
 	    </div>
@@ -130,31 +130,25 @@
 	    <div class="tab_content_description">
 			<c:forEach var="h9" items="${ResoledQList9}">
 				<p class="question">${h9.q_content}</p>
-				<p class="ans">A. ${h9.a_content}</p>
+				<p class="ans">${h9.a_content}</p>
 				<hr>
 			</c:forEach>
 	    </div>
 	  </div>
 </div>
 
-<h3>最近投稿されている質問</h3>
-<div class="box2">
-	<!-- 最近の質問 -->
-	<div class="content">
+<h3>過去に投稿された質問</h3>
 
+<div class="box2">
+	<!-- 最近の質問  日付上位5件を表示-->
 		<c:forEach var="m" items="${RecentqList}">
+		<div class="content" >
 			${m.q_date}:${m.m_items}
 			<p class="q_list">${m.q_content}</p>
-			<hr>
+		</div>
 		</c:forEach>
-	</div>
 </div>
-	<!-- 最近の質問ここまで -->
-<!-- プロフィール -->
-<!--  <div class="profile">
-	<h3>プロフィール</h3>
-</div>-->
-<!-- プロフィールここまで -->
+<!-- 最近の質問ここまで -->
 
 <!-- 共通のフッターー -->
 <!-- 共通ヘッダーここまで -->

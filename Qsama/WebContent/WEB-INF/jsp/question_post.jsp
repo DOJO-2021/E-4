@@ -11,6 +11,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type='text/javascript' src= "js/question_post.js"></script>
 <link rel="stylesheet" type="text/css" href="css/question_post.css">
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
 </head>
 
@@ -20,7 +21,7 @@
   <!-- ヘッダー -->
 <jsp:include page="/WEB-INF/jsp/header.jsp"/>
 
-  <h1>個別投稿</h1>
+  <h1><i class="fa fa-chevron-circle-right color-change"></i>個別投稿</h1>
   <main>
 
 <!----------------    質問タブ表示 （ ここから ）  --------------->
@@ -70,7 +71,7 @@
    <h2>投稿入力欄</h2>
    
   <!-- Qsama/image/* enctype="multipart/form-data" -->
-  <form method="POST" action="/Qsama/Question_postServlet" id="form" accept=".png, .jpeg, .jpg">
+  <form method="POST" action="/Qsama/Question_postServlet" id="form" enctype="multipart/form-data">
   <div class="form-wrapper">
     <div class="form1">
     
@@ -209,7 +210,7 @@
    
    <!----------------  class = form1 ここまで  ---------------->
  
- 
+
  
     <!-------------------    画像添付欄    -------------------->
     <div class="form2">
@@ -225,6 +226,7 @@
             <div id="previewArea"></div>
         </div>
     </div>
+    
     
      
    </div>

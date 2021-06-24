@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -102,9 +104,9 @@ public class Question_postServlet extends HttpServlet {
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-	//	int ac_id = Integer.parseInt(request.getParameter("ac_id"));
 	//	int QQ_id = Integer.parseInt(request.getParameter("QQ_id"));
 	//	int Post_Number = Integer.parseInt(request.getParameter("Post_Number"));
+		int Post_Number = 71;
 		String M_items = request.getParameter("M_items");
 		String S_items = request.getParameter("S_items");
 		String Q_date = request.getParameter("Q_date");
@@ -127,44 +129,102 @@ public class Question_postServlet extends HttpServlet {
 		System.out.println("回答レベル：" + A_level);
 	//	System.out.println("回答フラグ：" + Q_flag);
 		System.out.println("緊急レベル：" + emergency);
-		System.out.println("画像URL：" + Postpic_url);
+		System.out.println("画像：" + Postpic_url);          // null値
 		
+		List<Question_post> Question_postList = qDao.postAll();
+		request.setAttribute("Question_postList",Question_postList);
 
-		 // ---------------------  画像アップロード  ------------------------
-/*
-		StringBuilder sb = new StringBuilder();     // 文字列作成
+		System.out.println(Question_postList);
 		
-		//Part part = request.getPart("Postpic_url"); // getPartで取得,ここが配列？
+		
+		// ---------------------  画像アップロード  ------------------------
+
+		// 文字列作成
+			StringBuilder sb = new StringBuilder();     
+		
+		//ここで名前を決定
+			 LocalDateTime nowDateTime = LocalDateTime.now();
+			 DateTimeFormatter java8Format = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+			 
+			 // 日時情報を指定フォーマットの文字列で取得
+			 //  String rename = nowDateTime.format( java8Format );
+			 // System.out.println(rename);                   
+		
+		//Part part = request.getPart("Postpic_url"); // getPartで取得
 		
 		 for (Part part : request.getParts()) {
             if (part.getName().equals("Postpic_url")) {
-
+            	
+            //	for(int i = 0; i < 2; i++) {
+            		
                 String name = this.getFileName(part);
+                System.out.println("nameの中身:" + name);     // ファイル名そのまま
+            //     String fileReName = rename + "_" + i + ".jpg";
+            //    System.out.println("renameの中身:" + fileReName);   // 日付でのリネーム
+            	
+            //    String Url = "Qsama/WebContent/" + name;
+                
                 part.write(name);                       // ファイルへの書き込み
                 sb.append(name).append("<br>");
-        
+                //part.write(getServletContext().getRealPath("/WEB-INF/images") + "/" + name);
                 
-                System.out.println("nameの中身:" + name);
+                
                 System.out.println("partの中身:" + part);
                 
-                
-            } else {
-            	break;
+            	
+          //   } else {
+          //  	 break;
             }
         }
+		 
+		 	// 配列作成
+		 	request.setAttribute("upload_files", sb.toString());
+	        //  request.getRequestDispatcher("index.jsp").forward(request, response);
+	        System.out.print("sb.toStringの中身: "+ sb.toString());    // OK 
+	        
+	       
+	     // ----------------------- 配列分解  --------------------------
+	        String newPostpic_url = sb.toString();
+
+			String array1[] = newPostpic_url.split("<br>");
+			for (String a : array1) {
+				System.out.println("配列分解：" + a);       // OK
+				
+				// URL化
+				// String post_url = "Qsama/images/"+ a;
+				String post_url = "file:///C:/pleiades/workspace/E-4/Qsama/WebContent/images/" + a ;
+							
+				System.out.println("URL化：" + post_url);
+			}
+			
+			 qDao.post_url(ac_id, Post_Number, newPostpic_url);		// URL配列
+		        
+			
+	 
+	/*			// 文字列作成
+			       StringBuilder sb = new StringBuilder(); 
+				
+				//Part part = request.getPart("Postpic_url"); // getPartで取得,ここが配列？
 		
-	 */
 		
-		  StringBuilder sb = new StringBuilder();
-	        for (Part part : request.getParts()) {
-	            if (part.getName().equals("files")) {
-	                String name = getFileName(part);
-	                part.write(name);
+		 		for (Part part : request.getParts()) {
+            		if (part.getName().equals("Postpic_url")) {
+				
+				
+	                String name = this.getFileName(part);
+	                part.write(name);                       // ファイルへの書き込み
 	                sb.append(name).append("<br>");
+	        
+	                
+	                System.out.println("nameの中身:" + name);
+	                System.out.println("partの中身:" + part);
+                
+                
+	            } else {
+	            	break;
 	            }
 	        }
-	        request.setAttribute("upload_files", sb.toString());
-	        request.getRequestDispatcher("index.jsp").forward(request, response);
+		    
 	    
      	//ここで名前を決定
 	/*	 LocalDateTime nowDateTime = LocalDateTime.now();
@@ -172,24 +232,19 @@ public class Question_postServlet extends HttpServlet {
 		 
 		 // 日時情報を指定フォーマットの文字列で取得
 		 String java8Disp = nowDateTime.format( java8Format );
+		 
 		 part.write(java8Disp+".jpg");
 	
-     
-		
-        request.setAttribute("upload_files", sb.toString());
-        System.out.print(sb.toString());
        */
-		// String image = this.getFileName(part);
-		// request.setAttribute("image", image);
 		
-		// サーバの指定のファイルパスへファイルを保存
-        //場所はクラス名↑の上に指定してある
+       
+         
 	     
-	     
-		// 登録処理を行う
-		//Question_postDAO q2Dao = new Question_postDAO();
-		if (qDao.P_insert(ac_id, M_items, S_items, Q_date, Q_content, A_level, Q_flag, emergency, Postpic_url)) {	
+		// ------------------------------  登録処理を行う  -----------------------------
 			
+		//Question_postDAO q2Dao = new Question_postDAO();
+		if (qDao.P_insert(ac_id, Post_Number, M_items, S_items, Q_date, Q_content, A_level, Q_flag, emergency, Postpic_url)) {	
+       // if (qDao.P_insert(new Question_post(M_items, S_items, Q_date, Q_content, A_level, emergency, Postpic_url))) {	
 			System.out.println("登録成功");
 		}
 		
@@ -197,8 +252,8 @@ public class Question_postServlet extends HttpServlet {
 			System.out.println("登録失敗");
 		}
 		
+	
 		
-			
 		// 投稿ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_post.jsp");
 				dispatcher.forward(request, response);

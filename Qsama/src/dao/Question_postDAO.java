@@ -35,7 +35,7 @@ public class Question_postDAO {
 	*/	
 		// 外部結合で、p_userテーブルのデータ "ac_id" 取得
 		 String sql =
-		"select * from POST_WORD as p inner join P_USER as u on p.ac_id=u.ac_id ";
+		"select * from POST_WORD as p inner join P_USER as u on p.ac_id = u.ac_id ";
 		
 
 		PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -59,7 +59,7 @@ public class Question_postDAO {
 				rs.getString("Postpic_url")
 				);
 				Question_postList.add(question_post);
-				System.out.println(question_post);
+				
 			}
 		
 
@@ -92,8 +92,8 @@ public class Question_postDAO {
 	
 
 	// insert
-	public boolean P_insert(String ac_id, String M_items, String S_items, String Q_date, String Q_content, int A_level, int Q_flag, int emergency, String Postpic_url) {
-		
+	public boolean P_insert(String ac_id, int Post_Number, String M_items, String S_items, String Q_date, String Q_content, int A_level, int Q_flag, int emergency, String Postpic_url) {
+//	public boolean P_insert(Question_post question_post) {
 		
 		Connection conn = null;
 		boolean result = false;
@@ -116,16 +116,13 @@ public class Question_postDAO {
 
 			// SQL文を準備する
 			// IDはauto increment 
-			String sql = "insert into POST_WORD (ac_id, M_items, S_items, Q_date, Q_content, A_level, Q_flag, emergency, Postpic_url) values ("+ac_id+", ?, ?, ?, ?, ?, ?, ?, ?)";
-			
-			
-			
-		//	String sql = "insert into POST_WORD (QQ_id, (select u.ac_id from P_USER as u inner join POST_WORD as p on u.ac_id = p.ac_id) , Post_Number, M_items, S_items, Q_date, Q_content, A_level, Q_flag, emergency, Postpic_url) values (0, 0, 0, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "insert into POST_WORD (ac_id, Post_Number, M_items, S_items, Q_date, Q_content, A_level, Q_flag, emergency, Postpic_url) values ("+ac_id+", null, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			// SQL文を完成させる
 			
+			// SQL文を完成させる
+		
 			if (M_items != null) {
 				pStmt.setString(1, M_items);
 			} else {
@@ -317,6 +314,58 @@ public class Question_postDAO {
 				}
 		  }return WeekFaqList;	 	// 結果を返す
 		}
+	
+	
+	
+	
+	//-----------画像を保存---------------------------------------------------------
+			public boolean post_url(String ac_id, int Post_Number, String newPostpic_url) {
+			
+			Connection conn = null;
+			boolean result = false;
+
+			try {
+				
+				// JDBCドライバを読み込む
+				Class.forName("org.h2.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
+
+				// SQL文を準備する
+				String sql2 = "update post_word set Postpic_url="+"'"+newPostpic_url+"' where Post_Number=?";
+				PreparedStatement pStmt = conn.prepareStatement(sql2);
+
+				// SQL文を完成させる
+				// insert文中の？に使用する値を設定しSQLを完成
+					pStmt.setInt(1, Post_Number);
+
+
+				// SQL文を実行する
+				if (pStmt.executeUpdate() == 1) {
+					result = true;
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.commit();
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}return result;
+		}
+	
 }
 
 

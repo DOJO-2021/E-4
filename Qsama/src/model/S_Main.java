@@ -31,9 +31,10 @@ public class S_Main implements Serializable{
 		//this.A_content = "";
 	}
 	// お知らせ用
-	public S_Main(int ac_id, int A_flag) {
+	public S_Main(int ac_id, int A_flag, String Q_date) {
 		this.ac_id = ac_id;
 		this.A_flag = A_flag;
+		this.Q_date = Q_date;
 
 	}
 

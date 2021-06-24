@@ -12,25 +12,18 @@
 <header>
 <div class="header_body">
   <div class="header_left">
-  <img src="images/logo.png" alt="Qsama_logo">
+  <table>
+    <tr>
+       <td><img src="images/logo.png" alt="Qsama_logo"></td>
+    </tr>
+  </table>
   </div>
   <div class="header_right">
     <nav class="global">
-      <ul class="dropdwn">
+      <ul class="globalList">
         <li><a href="/Qsama/S_MainServlet">TOP</a></li>
-        <li>マイページ
-            <ul class="dropdwn_menu">
-                <li><a href="#">過去の質問一覧</a></li>
-                <li><a href="ProfileServlet">プロフィール編集</a></li>
-                <li><a href="#">プロフィール一覧</a></li>
-            </ul>
-        </li>
-        <li>投稿
-            <ul class="dropdwn_menu">
-                <li><a href="/Qsama/Question_postServlet">個別投稿</a></li>
-                <li><a href="/Qsama/Question_allpostServlet">全体投稿</a></li>
-            </ul>
-        </li>
+        <li><a href="/Qsama/ProfileServlet">プロフィール編集</a></li>
+        <li><a href="/Qsama/Question_postServlet">投稿</a></li>
         <li><a href="/Qsama/SearchServlet">検索</a></li>
         <li><a href="/Qsama/LogoutServlet">ログアウト</a></li>
     </ul>

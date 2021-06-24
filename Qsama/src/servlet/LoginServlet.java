@@ -62,13 +62,13 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("user_id", new LoginUser(user_id));
 			session.setAttribute("user_pw", new LoginUser(user_id, user_pw));
 
-			if (user_rank == 2) {	//本来は1
-				// 管理者メインサーブレットにリダイレクトする
-				response.sendRedirect("/Qsama/AdminServlet");
-			}
-			else {
+			if (user_rank == 1) {
 				// 受講者メインサーブレットにリダイレクトする
 				response.sendRedirect("/Qsama/S_MainServlet");
+			}
+			else {
+				// 管理者メインサーブレットにリダイレクトする
+				response.sendRedirect("/Qsama/AdminServlet");
 			}
 		}
 		else {									// ログイン失敗

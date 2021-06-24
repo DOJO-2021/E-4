@@ -20,7 +20,7 @@ public class Question_post implements Serializable {
 	private int count;				    // カウント
 	private String A_content;           // 回答
 	private String A_date;              // 回答日
-
+	private String newPostpic_url;      // URL配列
 
 
 	// 引数がないコンストラクタ（デフォルトコンストラクタ）
@@ -38,6 +38,7 @@ public class Question_post implements Serializable {
 		this.emergency = 0;
 		this.Postpic_url = "";
 		this.A_date = "";
+	    this.newPostpic_url = "";
 	}
 
 	// 引数があるコンストラクタ
@@ -57,10 +58,24 @@ public class Question_post implements Serializable {
 	}
 
 	// -------------------- insert用 コンストラクタ----------------------
-	public Question_post(int ac_id, String M_items, String S_items, String Q_date, String Q_content, int A_level, int Q_flag, int emergency, String Postpic_url) {
+	public Question_post(String M_items, String S_items, String Q_date, String Q_content, int A_level, int emergency, String Postpic_url) {
 		super();
-		
+	
+		this.M_items = M_items;
+		this.S_items = S_items;
+		this.Q_date = Q_date;
+		this.Q_content = Q_content;
+		this.A_level = A_level;
+	
+		this.emergency = emergency;
+		this.Postpic_url = Postpic_url;
+	}
+	
+	// -------------------- insert用 コンストラクタ----------------------
+	public Question_post(int ac_id, int Post_Number, String M_items, String S_items, String Q_date, String Q_content, int A_level, int Q_flag, int emergency, String Postpic_url) {
+		super();
 		this.ac_id = ac_id;
+		this.Post_Number = Post_Number;
 		this.M_items = M_items;
 		this.S_items = S_items;
 		this.Q_date = Q_date;
@@ -87,7 +102,13 @@ public class Question_post implements Serializable {
 			this.A_content = A_content;
 			this.A_date = A_date;
 			}
-		
+	
+	// -------------------- URL更新用 コンストラクタ --------------------
+		public Question_post(int Post_Number, String newPostpic_url) {
+			this.ac_id = ac_id;
+			this.Post_Number = Post_Number;
+			this.newPostpic_url = newPostpic_url;
+		}
 	
 
 	// getter ・ setter
@@ -197,6 +218,14 @@ public class Question_post implements Serializable {
 	public void setA_date(String a_date) {
 		A_date = a_date;
 	}
+	public String getNewPostpic_url() {
+		return newPostpic_url;
+	}
+
+	public void setNewPostpic_url(String newPostpic_url) {
+		this.newPostpic_url = newPostpic_url;
+	}
+
 }
 
 	

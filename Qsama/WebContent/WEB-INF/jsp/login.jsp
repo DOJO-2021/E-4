@@ -44,8 +44,8 @@
 	      <label class = content><input type="text" placeholder = "Email" name = "email"required></label><br>
 	      <label class = content><input type="text" placeholder = "氏名" name = "name"required></label><br>
 	      <label class = content><input type="password" placeholder = "パスワード" name = "pw"required></label><br>
-          <label class = content><input type="radio" name="rank" value="2" checked="checked">受講者
-					            <input type="radio" name="rank" value="1" >管理者</label><br>
+          <label class = content><input type="radio" name="rank" value="1" checked="checked">受講者
+					            <input type="radio" name="rank" value="2" >管理者</label><br>
 	    <div class = "button">
 	      <input type="submit" name="regist" value="新規登録" onclick = "checkForm()">
 	    </div>

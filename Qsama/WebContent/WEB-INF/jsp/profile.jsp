@@ -14,6 +14,9 @@
   <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
 </head>
 <body>
+<!--  共通ヘッダー -->
+<jsp:include page="/WEB-INF/jsp/header.jsp"/>
+
  <div class="container">
  	<form method="POST" id="form" action="/Qsama/ProfileServlet" enctype="multipart/form-data">
     <header>

@@ -9,6 +9,9 @@ html * {
 }
 body {
 	margin		: 0 0 0 0;
+	background-color: ＃F2F0E9;
+	font-family : noto-sans-cjk-jp, sans-serif;
+	
 }
 .wrapper {
 	margin		: 0 auto 0 auto;
