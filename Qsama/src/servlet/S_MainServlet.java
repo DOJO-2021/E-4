@@ -36,16 +36,6 @@ public class S_MainServlet extends HttpServlet {
 		System.out.println(user_id + "user_idの中身");
 		String ac_id = String.valueOf(session.getAttribute("ac_id"));
 		System.out.println(ac_id + "ac_idの中身");
-		//個人情報を抽出
-		//String user_id = request.getParameter("USER_ID");
-		//String user_pw = request.getParameter("USER_PW");
-		//IdpwDAO iDao = new IdpwDAO();
-
-		//「MyList」にac_id, user_id, user_pw, my_class, e_mail, name, user_rank が格納されている
-		//List<LoginUser> MyList = iDao.Mydata(user_id, user_pw);
-
-		// 「Rank」にuser_rankが格納されている
-		//int Rank = iDao.MyRank(user_id, user_pw);
 
 		MainDAO qDao = new MainDAO();
 		//---お知らせ----

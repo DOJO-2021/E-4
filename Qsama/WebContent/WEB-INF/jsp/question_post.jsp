@@ -262,16 +262,13 @@
 <!----------------  投稿入力フォーム（ここまで） ---------------->
 <!--   <p class="anime_move1"><img src="images/teracco.png" class="anime_move"></p>  -->
 
-<!----------  戻るボタン  受講者トップページへのリンク  ------------>
-  <a href="">戻る</a>
-  </main>
-
 
 <script type='text/javascript' src= "js/question_post.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
 <!---------------------   フッター   ----------------------->
-
+<!-- 共通のフッターー -->
+<jsp:include page="/WEB-INF/jsp/footer.jsp" />
 </body>
 <!---------------- body（ここまで） ---------------->
 </html>

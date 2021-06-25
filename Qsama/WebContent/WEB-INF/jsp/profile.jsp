@@ -6,9 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Qさま｜プロフィール</title>
-  <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/profile.css">
-  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
   <link href="https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
@@ -16,15 +14,23 @@
   <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
 </head>
 <body>
-<!--  共通ヘッダー -->
-<jsp:include page="/WEB-INF/jsp/header.jsp"/>
-
+<!-- 共通のヘッダー -->
+<c:choose>
+  <c:when test="${sessionScope.user_rank == 1}">
+    <jsp:include page="/WEB-INF/jsp/header.jsp" />
+  </c:when>
+  <c:otherwise>
+  	<jsp:include page="/WEB-INF/jsp/a_header.jsp" />
+  </c:otherwise>
+</c:choose>
+<!-- 共通ヘッダーここまで -->
  <div class="container">
  	<form method="POST" id="form" action="/Qsama/ProfileServlet" enctype="multipart/form-data">
     <header>
      <!----------- 画像表示部分 ----------->
 	<div class="bio">
-		<div class="result" id="result"><canvas id="preview"></canvas></div>
+		<div class="result" id="result"><c:forEach var="pr" items="${ProfileList}" varStatus="pri"><img src=${pr.back_url}></c:forEach>
+		</div>
        	<div class="file">
        		<input type="file" id="file" name="IMAGE" accept="Qsama/img/*" onchange="previewImage(this);" multiple accept=".jpg,.gif,.png,image/gif,image/jpeg,image/png" hidden="true">
        	</div>
@@ -87,21 +93,9 @@
   </form>
   </div>
 
-   
-   <!-- 過去の質問一覧表示 -->
-  <div class="foo">
-    <span class="letter" data-letter="過">過</span>
-    <span class="letter" data-letter="去">去</span>
-    <span class="letter" data-letter="の">の</span>
-    <span class="letter" data-letter="質">質</span>
-    <span class="letter" data-letter="問">問</span>
-    <span class="letter" data-letter="一">一</span>
-    <span class="letter" data-letter="覧">覧</span>
-  </div>
-  
    <div class="container">
     <!-- 過去の質問一覧表示（ここから） -->
-      
+       <p style="font-size: 1.2em; margin-inline-start: 10px;">過去の質問一覧表示</p>
     		<c:forEach var="mg" items="${MyGetList}" varStatus="mm">
    				<div class="cp_qa">
 					<div class="cp_actab">
@@ -120,8 +114,7 @@
 	      	</c:forEach>
     <!-- 過去の質問一覧表示（ここまで） -->
    </div>
-  <!-- 戻るボタン
-   受講者トップページへのリンク -->
-  <a href="/Qsama/S_MainServlet">戻る</a>
+<!-- 共通のフッターー -->
+<jsp:include page="/WEB-INF/jsp/footer.jsp" />
 </body>
 </html>

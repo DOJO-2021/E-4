@@ -18,34 +18,7 @@ a:active{
 	color		:#ff6a3b;
 }
 
-/*-----------------共通メニュー用 <共通作成時に削除予定>-----------------*/
-.nav li{
-	display: inline	;
-	list-style-type	: none;
-	padding-right	: 30px;
-}
-.nav ul{
-	margin			 : 0 0 0 0;
-	padding			 : 20px 10px 15px 20px;
-	background-image : url(../images/menu-bg.png);
-	background-repeat: repeat-x;
-}
-.nav a:link{
-	color			: #3c454d;
-	text-decoration	: none;
-}
-.nav a:visited{
-	color			: #3c454d;
-	text-decoration	: none;
-}
-.nav a:hover{
-	color			: #7b8dac;
-	text-decoration	: none;
-}
-.nav a:active{
-	color			: #5a9bc0;
-	text-decoration	: none;
-}
+
 /*-----------------検索窓 全体用-----------------*/
 .search_window {
 	top				: 5px;
@@ -86,7 +59,7 @@ a:active{
 
 /*-----------------検索ランキング用-----------------*/
 .tabs {
-  margin			: 0 auto;  
+  margin			: 0 auto;
   padding			: 20px 35px;
   background-color	: #fff;
   box-shadow		: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -240,7 +213,7 @@ input[name="tab_item2"] {
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
   border-radius: 8px;
-} 
+}
 .cp_qa *, .cp_qa *:after, .cp_qa *:before {
 	-webkit-box-sizing: border-box;
 	        box-sizing: border-box;

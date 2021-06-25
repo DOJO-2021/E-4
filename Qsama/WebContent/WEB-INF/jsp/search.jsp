@@ -15,20 +15,26 @@
 </head>
 <body>
 <!-- 共通のヘッダー -->
-<jsp:include page="/WEB-INF/jsp/header.jsp" />
+<c:choose>
+  <c:when test="${sessionScope.user_rank == 1}">
+    <jsp:include page="/WEB-INF/jsp/header.jsp" />
+  </c:when>
+  <c:otherwise>
+  	<jsp:include page="/WEB-INF/jsp/a_header.jsp" />
+  </c:otherwise>
+</c:choose>
 <!-- 共通ヘッダーここまで -->
-
 	<main>
 		<!--メイン-->
 		<div id="search_body" class="search_body">
-		
+
 		<div class="foo" id="foo_serch1">
 			<span class="letter" data-letter="質">質</span>
 			<span class="letter" data-letter="問">問</span>
 			<span class="letter" data-letter="検">検</span>
 			<span class="letter" data-letter="索">索</span>
 		</div>
-	  	<div class="foo"  id="foo_serch2"> 
+	  	<div class="foo"  id="foo_serch2">
 			<span class="letter" data-letter="ラ">ラ</span>
 			<span class="letter" data-letter="ン">ン</span>
 			<span class="letter" data-letter="キ">キ</span>
@@ -136,7 +142,7 @@
 				<div class="tab_content2" id="office_content">
 				    <div class="tab_content_description">
 						<div>
-					<!-- 	<h3>質問検索</h3>  -->  <!--質問窓-->   
+					<!-- 	<h3>質問検索</h3>  -->  <!--質問窓-->
 
 							<input type="text" class="input_items" name="search_word2" size="50" placeholder="検索キーワード">
 							<input type="submit" name="submit" value="検索">
@@ -169,10 +175,10 @@
 	</div >
 	</form>
 		<!--ランキング窓-->
-		
-		
-		
-		
+
+
+
+
 		<div class="tabs" style="float:left;">
 			<input id="w_ranking" type="radio" name="tab_item" checked>
 			<label class="tab_item" for="w_ranking">週間</label>
@@ -202,22 +208,22 @@
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 	<div id="search_results" class="search_results" style="clear:both;">
-	
-	
+
+
 		<div id="result_body" class="result_body" style="clear:both;">
 		<!-- <h3>検索結果</h3><br> -->
-		
+
 		<div class="foo" >
 			<span class="letter" data-letter="検">検</span>
 			<span class="letter" data-letter="索">索</span>
 			<span class="letter" data-letter="結">結</span>
 			<span class="letter" data-letter="果">果</span>
 		</div>
-		
-	
+
+
 			<div class="cp_qa">
 			<c:forEach var="s" items="${SearchList}" varStatus="z">
 				<div class="cp_actab">
@@ -233,9 +239,8 @@
 	</div>
 	</main>
 
-		<footer class="footer"><!--フッター-->
-			<p>&copy; Copyright Qsama. All rights reserved</p>
-		</footer>
+<!-- 共通のフッターー -->
+<jsp:include page="/WEB-INF/jsp/footer.jsp" />
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><!--jquery読み込み-->
 		<script src="js/Search.js"></script>		<!--講師・事務局ジャンル表示用js-->

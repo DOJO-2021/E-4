@@ -14,12 +14,20 @@
 </head>
 <body>
 <!-- 共通のヘッダー -->
-<jsp:include page="/WEB-INF/jsp/header.jsp" />
-<!-- 共通ヘッダーここまで -->
+<c:choose>
+  <c:when test="${sessionScope.user_rank == 1}">
+    <jsp:include page="/WEB-INF/jsp/header.jsp" />
+  </c:when>
+  <c:otherwise>
+  	<jsp:include page="/WEB-INF/jsp/a_header.jsp" />
+  </c:otherwise>
+</c:choose>
+<!-- 共通ヘッダーここまで --
+>
 <!-- お知らせ -->
 
 <div class="info">
-<!--  <h2>お知らせ</h2>  -->
+<!--  お知らせ  -->
 <div class="foo">
   <span class="letter" data-letter="お">お</span>
   <span class="letter" data-letter="知">知</span>
@@ -71,7 +79,7 @@
 	  <input id="dani" type="radio" name="tab_item">
 	  <label class="tab_item" for="dani"><a href="#dani_content">段位認定</a></label>
 
-
+	  <!-- htmlタブに表示する内容 -->
 	  <div class="tab_content" id="html_content">
 	    <div class="tab_content_description">
 			<c:forEach var="h" items="${ResoledQList}">
@@ -81,6 +89,7 @@
 			</c:forEach>
 	    </div>
 	  </div>
+	  <!-- cssタブに表示する内容 -->
 	  <div class="tab_content" id="css_content">
 	    <div class="tab_content_description">
 			<c:forEach var="h2" items="${ResoledQList2}">
@@ -90,6 +99,7 @@
 			</c:forEach>
 	    </div>
 	  </div>
+	  <!-- javascriptタブに表示する内容 -->
 	  <div class="tab_content" id="javascript_content">
 	    <div class="tab_content_description">
 			<c:forEach var="h3" items="${ResoledQList3}">
@@ -99,6 +109,7 @@
 			</c:forEach>
 	    </div>
 	  </div>
+	  <!-- javaタブに表示する内容 -->
 	  <div class="tab_content" id="java_content">
 	    <div class="tab_content_description">
 			<c:forEach var="h4" items="${ResoledQList4}">
@@ -108,6 +119,7 @@
 			</c:forEach>
 	    </div>
 	  </div>
+	  <!-- sqlタブに表示する内容 -->
 	  <div class="tab_content" id="sql_content">
 	    <div class="tab_content_description">
 			<c:forEach var="h5" items="${ResoledQList5}">
@@ -117,6 +129,7 @@
 			</c:forEach>
 	    </div>
 	  </div>
+	  <!-- jspタブに表示する内容 -->
     <div class="tab_content" id="servlet_content">
       <div class="tab_content_description">
 		  <c:forEach var="h6" items="${ResoledQList6}">
@@ -126,6 +139,7 @@
 		  </c:forEach>
       </div>
     </div>
+    <!-- 事務局タブに表示する内容 -->
 	<div class="tab_content" id="jimukyoku_content">
 	   <div class="tab_content_description">
 			<c:forEach var="h7" items="${ResoledQList7}">
@@ -135,6 +149,7 @@
 			</c:forEach>
 	    </div>
 	 </div>
+	 <!-- ドリルタブに表示する内容 -->
 	 <div class="tab_content" id="drill_content">
 	    <div class="tab_content_description">
 	      <p class="c-txtsp"></p>
@@ -145,6 +160,7 @@
 			</c:forEach>
 	    </div>
 	  </div>
+	  <!-- 段位認定タブに表示する内容 -->
 	  <div class="tab_content" id="dani_content">
 	    <div class="tab_content_description">
 			<c:forEach var="h9" items="${ResoledQList9}">
@@ -157,7 +173,7 @@
   </div>
 </div>
 
-<!--  <h3>過去に投稿された質問</h3>  -->
+<!--  過去に投稿された質問  -->
 <div class="foo">
   <span class="letter" data-letter="過">過</span>
   <span class="letter" data-letter="去">去</span>
@@ -183,7 +199,7 @@
 <!-- 最近の質問ここまで -->
 
 <!-- 共通のフッターー -->
-<!-- 共通ヘッダーここまで -->
+<jsp:include page="/WEB-INF/jsp/footer.jsp" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="js/s_main.js"></script>
 </body>

@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class S_Main implements Serializable{
 	private String user_id;
 	// Post_wordの列名をフィールドに設定する
-	protected int qq_id;
-	protected int aa_id;
+	protected int qq_id;				// 質問ID
+	protected int aa_id;				// 回答ID
 	protected int ac_id;                // 識別ID
 	private String M_items;             // 大項目
 	private String Q_date;              // 投稿日
@@ -26,9 +26,7 @@ public class S_Main implements Serializable{
 		this.Q_flag = 0;
 		this.A_flag = 0;
 		this.A_content = "";
-		//management_word
-		//this.ac_id1 = 0;
-		//this.A_content = "";
+
 	}
 	// お知らせ用
 	public S_Main(int ac_id, int A_flag,String M_items, String Q_date) {
@@ -140,8 +138,5 @@ public class S_Main implements Serializable{
 	public void setA_content(String a_content) {
 		this.A_content = a_content;
 	}
-
-
-
 
 }

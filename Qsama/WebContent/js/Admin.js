@@ -15,6 +15,14 @@ $(function(){
     });
 });
 
+
+/* ---------回答エリア submit---------*/
+function answersubmit() {
+	frm2 = document.answer_form2;
+	frm2.action="/Qsama/AdminServlet";
+	frm2.submit();
+	}
+
 /* ------「非公開」→「公開」submit------*/
 function formsubmit() {
 	var res = window.confirm("「公開」に設定します。よろしいですか？」");
@@ -49,6 +57,9 @@ function personalsubmit() {
 	frm.action="/Qsama/AdminServlet";
 	frm.submit();
 	}
+
+
+
 
 /* ------「select」を変更したら即submit------
 $(function(){

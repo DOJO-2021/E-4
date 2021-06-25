@@ -5,21 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Qsama | 管理者ページ</title>
-<link rel="stylesheet" href="css/common.css">
 <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
 <!-- 共通のヘッダー -->
-<ul id="nav">
-  <li>メニュー</li>
-  <li><a href="/Qsama/ProfileServlet">Mypage</a></li>
-  <li><a href="/Qsama/Question_allpostServlet">全体投稿</a></li>
-  <li><a href="/Qsama/Question_postServlet">個別投稿</a></li>
-  <li><a href="/Qsama/AdminServlet">管理者ページ</a></li>
-  <li><a href="/Qsama/SerchServlet">検索</a></li>
-  <li><a href="/Qsama/LogoutServlet">ログアウト</a></li>
-</ul>
+<c:choose>
+  <c:when test="${sessionScope.user_rank == 1}">
+    <jsp:include page="/WEB-INF/jsp/header.jsp" />
+  </c:when>
+  <c:otherwise>
+  	<jsp:include page="/WEB-INF/jsp/a_header.jsp" />
+  </c:otherwise>
+</c:choose>
 <!-- 共通ヘッダーここまで -->
 
 <div class="content_box">
@@ -35,7 +33,7 @@
 	     	<div class="wrap">
 	     		<form method="POST" id="display_form" action="/Qsama/AdminServlet">
 	     			<input type="hidden" name="post_number" value="${g.post_Number}">
- 					<button class="cp_btn" id="title_${GL.index}" >未回答　　　${g.q_date}<br> 質問No${g.post_Number}:　${g.name}さんより質問です</button><br>
+ 					<button class="cp_btn" name="displaybutton" id="title_${GL.index}" value="表示" onClick="picload()">未回答　　　${g.q_date}<br> 質問No${g.post_Number}:　${g.name}さんより質問です</button><br>
  				</form>
 			</div>
 	    </c:forEach>
@@ -47,7 +45,7 @@
 		    <div class="wrap">
 				<form method="POST" id="display_form2" action="/Qsama/AdminServlet">
 					<input type="hidden" name="post_number" value="${g2.post_Number}">
-					<button class="cp_btn" id="title_${GL2.index}" >回答済　　　${g2.q_date}<br> 質問No${g2.post_Number}:　${g2.name}さんより質問です</button><br>
+					<button class="cp_btn" name="displaybutton" id="title_${GL2.index}" value="表示" onClick="picload()">回答済　　　${g2.q_date}<br> 質問No${g2.post_Number}:　${g2.name}さんより質問です</button><br>
  				</form>
  			</div>
 		</c:forEach>
@@ -57,14 +55,20 @@
 	<!-- 通知欄ここまで -->
 
 <!---------------------- 右側全体のコンテンツ ---------------------->
-		<div class="right_content">
+		<div class="right_content" >
 				質　問　内　容
 			<!-- 質問内容 -->
 			<div class="content1">	<!-- 一番上のコンテンツ -->
 				<c:forEach var="d" items="${DisplayGetList}" varStatus="DG">
 				${d.q_content}
 				</c:forEach>
+				<br>
+				<c:if test="${not empty request.getAttribute('picURL')}">
+					<%= request.getAttribute("picURL") %>
+				</c:if>
+						${picURL}
 			</div>
+			<form method="POST" id="answer_form1" name="answer_form2" action="/Qsama/AdminServlet">
 			<div class="middle_content"> <!-- 真ん中のコンテンツ -->
 				<!-- 質問カテゴリ修正欄 -->
 				項目選択
@@ -79,7 +83,7 @@
 						<option value="ｱﾌﾟﾘｹｰｼｮﾝ">ｱﾌﾟﾘｹｰｼｮﾝ</option>
 						<option value="その他">その他</option>
 				  <c:forEach var="d" items="${DisplayGetList}" varStatus="DG">
-				  <option value="" selected>${d.m_items}</option>
+				  <option value="${d.m_items}" selected>${d.m_items}</option>
 				  </c:forEach>
 				</select>
 				<select class="sub_item" name="s_items">
@@ -146,22 +150,23 @@
 						<option value="講義全般" data-val="その他">講義全般</option>
     					<option value="その他" data-val="その他">その他</option>
     					<c:forEach var="d" items="${DisplayGetList}" varStatus="DG">
-						<option value="" selected>${d.s_items}</option>
+						<option value="${d.s_items}" selected>${d.s_items}</option>
 						</c:forEach>
-					</select><br>
+					</select>
+					<br>
 <!----------------------- 回答入力フォーム ----------------------->
 				回　答　入　力
-				<form method="POST" id="answer_form" name="answer_form" action="/Qsama/AdminServlet">
 					<label>
+						<c:forEach var="d" items="${DisplayGetList}" varStatus="DG">
 						<input type="hidden" name="post_number" value="${d.post_Number}">
+						</c:forEach>
 						<textarea id="answer_area" name="answer_area"><c:forEach var="d" items="${DisplayGetList}" varStatus="DG">${d.a_content}</c:forEach>
 						</textarea><br>
 						<!-- 投稿ボタン -->
-						<input type="submit" name="answer_submit" class="answer_submit" style="width: 50%;" value="投稿">
+						<button type="submit" name="answer_submit" class="answer_submit" onClick="return answersubmit()"style="width: 50%;" value="投稿">投   稿</button>
 					</label>
-				</form>
 			</div>
-
+		</form>
 			<div class="under_content" style="float:left;"> <!-- 下二つのコンテンツ -->
 				<!-- 質問公開設定 -->
 				<div class="content2">質問公開設定<br><br>

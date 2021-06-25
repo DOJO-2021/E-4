@@ -91,36 +91,48 @@ public class AdminServlet extends HttpServlet {
 		String post_number = request.getParameter("post_number");			// 講師：検索キーワードを取得
 		String answer = request.getParameter("answer_area");				// 回答の投稿
 		String areapost_number = request.getParameter("areapost_number");	// 公開エリア更新用
-		String m_items = request.getParameter("m_items");
-		String s_items = request.getParameter("s_items");
+		String m_items = request.getParameter("m_items");					// 大項目取得
+		String s_items = request.getParameter("s_items");					// 中項目取得
+		String displaybutton = request.getParameter("displaybutton");		// 左メニューボタン取得
 
 		System.out.println("AdminS内post_number:"+post_number);
+		System.out.println("m_items："+m_items+"\t s_items:"+s_items+"\n");
 
 		// ---------質問内容の検索処理を行う----------------------------------------------
 		AdminDAO aDao = new AdminDAO();
 		List<Admin> GetList = aDao.PostGet();								// 未回答の検索
 		List<Admin> GetList2 = aDao.PostGet2();							// 回答済の検索
-		List<Admin> DisplayGetList = aDao.DisplayPostGet(post_number);	// 右欄へ表示する内容検索
 
-		// ---------添付画像のURLを構築してJSPへ渡す--------------------------------------
-		String pic_url = aDao.Getpic_url(post_number);				// 「post_word」ﾃｰﾌﾞﾙより「Postpic_url」を取得
-		String picURL = "";
+		System.out.println("post_number.length()の結果："+post_number.length());
 
-		if(pic_url != null) {
-			var Extract_url = pic_url.split("<br>");				// <br>を基準に分割
+		// --------左のボタン　→　右のデータ表示機能--------------------------------------
+		if(displaybutton != null) {
+			if (displaybutton.equals("表示")) {
+				if(post_number.length() != 0) {
+					List<Admin> DisplayGetList = aDao.DisplayPostGet(post_number);	// 右欄へ表示する内容検索
 
-			for (int i = 0 ; i < Extract_url.length; i++){
-				if(i == Extract_url.length) {
-					picURL = picURL +  "<a href='images/"+Extract_url[i]+"' target=\'_blank\' rel=\'noopener noreferrer\'>添付画像"+(i+1)+"</a>";
-				}else {
-					picURL = picURL + "<a href='images/"+Extract_url[i]+"' target=\'_blank\' rel=\'noopener noreferrer\'>添付画像"+(i+1)+"</a> ";
+					request.setAttribute("DisplayGetList", DisplayGetList);
+
+					// ---------添付画像のURLを構築してJSPへ渡す--------------------------------------
+					String pic_url = aDao.Getpic_url(post_number);				// 「post_word」ﾃｰﾌﾞﾙより「Postpic_url」を取得
+					String picURL = "";
+
+					if(pic_url != null) {
+						var Extract_url = pic_url.split("<br>");				// <br>を基準に分割
+
+						for (int i = 0 ; i < Extract_url.length; i++){
+							if(i == Extract_url.length) {
+								picURL = picURL +  "<a href='images/"+Extract_url[i]+"' target=\'_blank\' rel=\'noopener noreferrer\'>添付画像"+(i+1)+"</a>";
+							}else {
+								picURL = picURL + "<a href='images/"+Extract_url[i]+"' target=\'_blank\' rel=\'noopener noreferrer\'>添付画像"+(i+1)+"</a> ";
+							}
+						}
+					}
+				request.setAttribute("picURL", picURL);
+				System.out.println("picURL→"+picURL);
 				}
 			}
 		}
-
-		request.setAttribute("picURL", picURL);
-		System.out.println("picURL→"+picURL);
-
 		//----------------------公開機能---------------------------------------------------
 		String button = request.getParameter("button");
 
@@ -134,18 +146,41 @@ public class AdminServlet extends HttpServlet {
 //		System.out.println("DoPostのGetListの中身："+GetList);
 //		System.out.println("DoPostのGetList2の中身："+GetList2);
 //		System.out.println("DoPostのDisplayGetListの中身"+DisplayGetList);
-//		System.out.println("DoPostの変数post_numberの中身"+post_number+"\t answerは："+answer);
+		System.out.println("DoPostの変数post_numberの中身"+post_number+"\t answerは："+answer);
 
 
-		if(answer != null) {				// 回答欄に書き込みがあれば書き込む
-		// 回答の登録処理を行う
-		aDao.PostAnswer(post_number, m_items, s_items, answer);
+		// ------------回答済みかチェックする----------------------------------------------
+		String answer_submit = request.getParameter("answer_submit");
+
+
+//		int AnswerResult=aDao.AnswerCheck(post_number);
+		if(answer_submit != null) {
+			if (answer_submit.equals("投稿")) {
+				if(answer != null) {												// 未回答
+					if(post_number.length() != 0) {
+						// ------------回答の登録処理を行う----------------------------------------
+						aDao.PostAnswer(post_number, m_items, s_items, answer);		// 回答書き込み
+						if(m_items != null) {
+							//-------------ジャンルの更新------------------------------------------
+							aDao.UpdateItem(m_items, s_items, post_number);			// ジャンルアップデート
+						}
+					}
+				}else {																// 回答済
+					if(post_number.length() != 0) {
+						// ------------回答の登録変更を行う----------------------------------------
+						aDao.PostCorrection(post_number, m_items, s_items, answer);	// 回答書き込み
+						if(m_items != null) {
+							//-------------ジャンルの更新------------------------------------------
+							aDao.UpdateItem(m_items, s_items, post_number);			// ジャンルアップデート
+						}
+					}
+				}
+			}
 		}
+		System.out.println("--------------------------------END------------------------------------");
 
 		request.setAttribute("GetList", GetList);
 		request.setAttribute("GetList2", GetList2);
-		request.setAttribute("DisplayGetList", DisplayGetList);
-
 
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/admin.jsp");

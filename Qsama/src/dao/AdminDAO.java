@@ -218,9 +218,6 @@ public class AdminDAO {
 		DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String today = datetimeformatter.format(nowDateTime);
 
-//------------------ジャンルの更新-----------------------------
-		UpdateItem(m_items, s_items, post_number);
-
 	try {
 		// JDBCドライバを読み込む
 		Class.forName("org.h2.Driver");
@@ -260,7 +257,7 @@ public class AdminDAO {
 	}return result;
 }
 
-	//---------------ジャンルの更新----223行目で実行--------------------------------------------------------------
+	//---------------ジャンルの更新------------------------------------------------------------------
 		public boolean UpdateItem(String m_items, String s_items, String post_number) {
 			Connection conn = null;
 			boolean result = false;
@@ -1539,4 +1536,96 @@ public class AdminDAO {
 			}
 			return pic_url;
 		}
+	//-----------------------------回答済でないか確認--------------------------------
+	public int AnswerCheck(String post_number) {
+		Connection conn = null;
+		int A_flag= 0;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
+
+			// SQL文を準備する
+			String sql3 = "select A_flag from MANAGEMENT_WORD where post_number="+post_number;
+
+			PreparedStatement s_res = conn.prepareStatement(sql3);
+
+			// select文の実行
+			ResultSet rs = s_res.executeQuery();
+
+			while (rs.next()) {
+				A_flag = rs.getInt("A_flag");
+			}
+
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.commit();
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}return A_flag;
+	}
+
+	//---------------管理ページ：回答訂正---------------------------------------------------------------------------
+		public boolean PostCorrection(String post_number, String m_items, String s_items, String answer) {
+			Connection conn = null;
+			boolean result = false;
+
+	//------------------本日の日付を格納-----------------------------
+			LocalDateTime nowDateTime = LocalDateTime.now();
+			DateTimeFormatter datetimeformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			String today = datetimeformatter.format(nowDateTime);
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
+
+
+			// SQL文を準備する
+			String sql2 ="update MANAGEMENT_WORD set POST_NUMBER="+post_number+", A_DATE="+today+", A_CONTENT="+answer+", A_FLAG=1, AREA_OPEN=0)";
+
+			PreparedStatement pStmt = conn.prepareStatement(sql2);
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.commit();
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}return result;
+	}
 }

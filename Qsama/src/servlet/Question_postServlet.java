@@ -132,6 +132,7 @@ public class Question_postServlet extends HttpServlet {
 
 		//Part part = request.getPart("Postpic_url"); // getPartで取得
 
+	try {
 		 for (Part part : request.getParts()) {
             if (part.getName().equals("Postpic_url")) {
 
@@ -153,7 +154,10 @@ public class Question_postServlet extends HttpServlet {
          //   } else {
           //  	break;
             }
-        }
+		 }
+		}catch (Exception e) {
+			System.out.println("画像入力されてません");
+	   	}
 
 		 	// 配列作成
 		 	request.setAttribute("upload_files", sb.toString());
