@@ -7,7 +7,8 @@
 	<!--情報-->
 <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>質問検索</title>
+	<title>Qさま｜質問検索</title>
+	<link rel="stylesheet" href="css/common.css">
 	<link rel="stylesheet" href="css/search.css"><!--CSS読み込み-->
 	<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?ver=1.11.3'></script>
 	<script src="js/Search3.js"></script>		<!--検索ボタン空作動防止js-->
@@ -20,6 +21,20 @@
 	<main>
 		<!--メイン-->
 		<div id="search_body" class="search_body">
+		
+		<div class="foo" id="foo_serch1">
+			<span class="letter" data-letter="質">質</span>
+			<span class="letter" data-letter="問">問</span>
+			<span class="letter" data-letter="検">検</span>
+			<span class="letter" data-letter="索">索</span>
+		</div>
+	  	<div class="foo"  id="foo_serch2"> 
+			<span class="letter" data-letter="ラ">ラ</span>
+			<span class="letter" data-letter="ン">ン</span>
+			<span class="letter" data-letter="キ">キ</span>
+			<span class="letter" data-letter="ン">ン</span>
+			<span class="letter" data-letter="グ">グ</span>
+		</div>
 		<form method="POST" id="search_form" action="/Qsama/SearchServlet">
 			<div id="search_window" class="tabs2">
 				<input id="teacher" type="radio" name="tab_item2" checked>
@@ -29,7 +44,7 @@
 				<div class="tab_content2" id="teacher_content">
 				    <div class="tab_content_description">
 				    	<div>
-						<h3>質問検索</h3><!--質問窓-->
+						<!--    <h3>質問検索</h3>   質問窓-->
 							<input type="search" id="search_word" class="search_word" name="search_word" size="50" placeholder="検索キーワード(例) JavaScript オブジェクト" autofocus required>
 							<input type="submit" name="submit" value="検索">
 						</div>
@@ -121,7 +136,7 @@
 				<div class="tab_content2" id="office_content">
 				    <div class="tab_content_description">
 						<div>
-						<h3>質問検索</h3><!--質問窓-->
+					<!-- 	<h3>質問検索</h3>  -->  <!--質問窓-->   
 
 							<input type="text" class="input_items" name="search_word2" size="50" placeholder="検索キーワード">
 							<input type="submit" name="submit" value="検索">
@@ -154,15 +169,19 @@
 	</div >
 	</form>
 		<!--ランキング窓-->
+		
+		
+		
+		
 		<div class="tabs" style="float:left;">
 			<input id="w_ranking" type="radio" name="tab_item" checked>
-			<label class="tab_item" for="w_ranking">週間ランキング</label>
+			<label class="tab_item" for="w_ranking">週間</label>
 			<input id="a_ranking" type="radio" name="tab_item">
-			<label class="tab_item" for="a_ranking">通期ランキング</label>
+			<label class="tab_item" for="a_ranking">通期</label>
 			<div class="tab_content" id="w_ranking_content">
 				<div class="tab_content_description">
 				<p class="c-txtsp">
-				<h3>週間ランキング</h3>
+				<!--    <h3>週間ランキング</h3>    -->
 					<ol class="ranking">
 					<c:forEach var="w" items="${WeekRankingList}" varStatus="t1">
 						${(t1.index)+1}位 : ${w.word} <br>
@@ -173,19 +192,32 @@
 			<div class="tab_content" id="a_ranking_content">
 				<div class="tab_content_description">
 				<p class="c-txtsp">
-				<h3>通期ランキング</h3>
+				<!-- <h3>通期ランキング</h3>   -->
 					<ol class="ranking">
 					<c:forEach var="y" items="${MaxRankingList}" varStatus="t2">
-						${(t2.index)+1}位 : ${y.word} <br>
+						${(t2.index)+1}位　　${y.word} <br>
 					</c:forEach>
 					</ol>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	
 	<div id="search_results" class="search_results" style="clear:both;">
+	
+	
 		<div id="result_body" class="result_body" style="clear:both;">
-		<h3>検索結果</h3><br>
+		<!-- <h3>検索結果</h3><br> -->
+		
+		<div class="foo" >
+			<span class="letter" data-letter="検">検</span>
+			<span class="letter" data-letter="索">索</span>
+			<span class="letter" data-letter="結">結</span>
+			<span class="letter" data-letter="果">果</span>
+		</div>
+		
+	
 			<div class="cp_qa">
 			<c:forEach var="s" items="${SearchList}" varStatus="z">
 				<div class="cp_actab">

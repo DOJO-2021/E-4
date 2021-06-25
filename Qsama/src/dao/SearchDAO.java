@@ -17,11 +17,14 @@ public class SearchDAO {
 	  List<Search> SearchList = new ArrayList<Search>();
 
       Connection conn = null;					// 接続リセット
-      String sqladd = null;					// SQLの追加分作成準備
-      String Operator = null;					// AND・OR入れ物準備
+      String sqladd = "";						// SQLの追加分作成準備
+      String Operator = "";					// AND・OR入れ物準備
 
       word_insert(S4_word);						// 検索キーワード蓄積
       var Search_word = S4_word.split(" ");	// 半角スペースで配列
+
+
+      System.out.println("ワード："+S4_word +"\nラジオ："+ Search_radio +"\n大項目："+ m_items +"\n小項目："+ s_items);
 
    //------------------AND・OR判定---------------------------------------
       if( Search_radio.equals("and")) {
@@ -37,8 +40,8 @@ public class SearchDAO {
       }else if(!(m_items.equals(""))) {							// 大項目のみ記入あり
     	  sqladd = "M_items='"+m_items+"' AND ";
       }
-//		System.out.println(!(m_items.equals("")));
-// 		System.out.println(!(m_items.equals("")) && !(s_items.equals("")));
+		System.out.println(!(m_items.equals("")));
+ 		System.out.println(!(m_items.equals("")) && !(s_items.equals("")));
 
    //-------------------検索キーワード判定------------------------------------------------------------
       if(Search_word.length==1) {
@@ -46,13 +49,13 @@ public class SearchDAO {
       }else {
             for (int i = 0; Search_word.length > 0; i++){	// 検索キーワード数が２つ以上ならfor文で追記
             	if(i == 0) {
-            		sqladd = "Q_CONTENT LIKE '%"+Search_word[i]+"%' "+Operator;
+            		sqladd = sqladd+" Q_CONTENT LIKE '%"+Search_word[i]+"%' "+Operator;
             	}else if((Search_word.length - i) ==0){
             		break;
             	}else if((Search_word.length - i) ==1) {
-            		sqladd =  sqladd+"Q_CONTENT LIKE '%"+Search_word[i]+"%'";
+            		sqladd =  sqladd+" Q_CONTENT LIKE '%"+Search_word[i]+"%'";
             	}else if((Search_word.length - i) !=0) {
-            		sqladd =  sqladd+"Q_CONTENT LIKE '%"+Search_word[i]+"%' "+Operator;
+            		sqladd =  sqladd+" Q_CONTENT LIKE '%"+Search_word[i]+"%' "+Operator;
             	}
             }
       }
@@ -64,7 +67,7 @@ public class SearchDAO {
 		conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 		// SQL文の準備 検索キーワードに対して、個別質問 + 管理テーブルを全出力
-		String sql = "select * from POST_WORD outer join MANAGEMENT_WORD where "+sqladd;
+		String sql = "select * from POST_WORD as p inner join MANAGEMENT_WORD as m  on p.post_number=m.post_number where "+sqladd;
 
 		PreparedStatement s_res = conn.prepareStatement(sql);
 
@@ -233,7 +236,7 @@ public class SearchDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 			// SQL文の準備 週間：上位５位まで出力
-			String sql = "SELECT word ,count(word) from SEARCH_WORD where A_DATE >= (NOW() - INTERVAL 7 DAY) group by word order by count(word) DESC limit 5";
+			String sql = "SELECT word ,count(word) from SEARCH_WORD where SEARCH_DATE >= (NOW() - INTERVAL 7 DAY) group by word order by count(word) DESC limit 5";
 
 			PreparedStatement s2_res = conn.prepareStatement(sql);
 

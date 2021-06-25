@@ -40,8 +40,8 @@ public class ProfileServlet extends HttpServlet {
 		String Sac_id = (String)session.getAttribute("ac_id");
 		int ac_id = Integer.parseInt(Sac_id);
 
-		System.out.println("プロフィールのac_id＝"+ac_id);
-//		int ac_id = 100; //10は仮値　　ここにログイン時のac_idを格納する！！
+//		System.out.println("プロフィールのac_id＝"+ac_id);
+//		int ac_id = 100; // test用
 
 		ProfileDAO pDao = new ProfileDAO();
 		List<Profile> ProfileList = pDao.profileAll(ac_id);
@@ -65,39 +65,64 @@ public class ProfileServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-			// もしもログインしていなかったらログインサーブレットにリダイレクトする
-//		HttpSession session = request.getSession();
-	/*	if (session.getAttribute("id") == null) {
+	// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user_id") == null) {
 			response.sendRedirect("/Qsama/LoginServlet");
 			return;
-	}
-	*/
+		}
 
 		request.setCharacterEncoding("UTF-8");
 		ProfileDAO pDao = new ProfileDAO();
 
+	    // ac_idを設定
+		String Sac_id = (String)session.getAttribute("ac_id");
+		int ac_id = Integer.parseInt(Sac_id);
+
+		String prof_url = "";
+		String back_url = "";
+
 	    // 登録処理を行う
-		int ac_id = 100; //100は仮値　　ここにログイン時のac_idを格納する！！
+		// ---------------背景画像を処理・格納-----------------------------------------------------
+		try {
+			Part part = request.getPart("IMAGE"); // getPartで取得
+
+			String image = this.getFileName(part);
+			request.setAttribute("image", image);
+
+			//ここで名前を決定
+			 LocalDateTime nowDateTime = LocalDateTime.now();
+			 DateTimeFormatter java8Format = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+			 // 日時情報を指定フォーマットの文字列で取得
+			 String java8Disp = nowDateTime.format( java8Format );
+			 part.write(java8Disp+image);
+			 String filename = java8Disp+image;
+			 back_url = "img/"+filename;
+		}catch (Exception e) {
+			System.out.println("背景画像入力されてません");
+	   	}
+
+		// ---------------顔画像を処理・格納-----------------------------------------------------
+		try {
+			Part part2 = request.getPart("IMAGE2"); // getPartで取得
+
+			String image2 = this.getFileName(part2);
+			request.setAttribute("image2", image2);
+
+			//ここで名前を決定
+			 LocalDateTime nowDateTime2 = LocalDateTime.now();
+			 DateTimeFormatter java8Format2 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+			 // 日時情報を指定フォーマットの文字列で取得
+			 String java8Disp2 = nowDateTime2.format( java8Format2 );
+			 part2.write(java8Disp2+image2);
+			 String filename2 = java8Disp2+image2;
+			 prof_url = "img/"+filename2;
+		}catch (Exception e) {
+			System.out.println("顔画像入力されてません");
+	   	}
 
 
-		// ----------------画像を処理・格納-----------------------------------------------------
-		Part part = request.getPart("IMAGE"); // getPartで取得
-
-		String image = this.getFileName(part);
-		request.setAttribute("image", image);
-
-		//ここで名前を決定
-		 LocalDateTime nowDateTime = LocalDateTime.now();
-		 DateTimeFormatter java8Format = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-		 // 日時情報を指定フォーマットの文字列で取得
-		 String java8Disp = nowDateTime.format( java8Format );
-		 part.write(java8Disp+".jpg");
-
-		 String filename = java8Disp+".jpg";
-
-		 String back_url = "Qsama/img/"+filename;
-		 String prof_url = "Qsama/img/";
-
+		System.out.println("acid"+ac_id +"顔："+ prof_url +"背景："+ back_url);
 		 pDao.pic_insert(ac_id, prof_url, back_url);		// 画像の更新
 
 	//------------リクエストパラメータを取得する-----------------------------

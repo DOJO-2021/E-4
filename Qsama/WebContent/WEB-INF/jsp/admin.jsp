@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Qsama | 管理者ページ</title>
+<link rel="stylesheet" href="css/common.css">
 <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="css/admin.css">
 </head>

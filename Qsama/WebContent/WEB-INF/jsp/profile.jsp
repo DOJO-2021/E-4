@@ -6,7 +6,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Qさま｜プロフィール</title>
+  <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/profile.css">
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
   <link href="https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
@@ -85,9 +87,21 @@
   </form>
   </div>
 
+   
+   <!-- 過去の質問一覧表示 -->
+  <div class="foo">
+    <span class="letter" data-letter="過">過</span>
+    <span class="letter" data-letter="去">去</span>
+    <span class="letter" data-letter="の">の</span>
+    <span class="letter" data-letter="質">質</span>
+    <span class="letter" data-letter="問">問</span>
+    <span class="letter" data-letter="一">一</span>
+    <span class="letter" data-letter="覧">覧</span>
+  </div>
+  
    <div class="container">
     <!-- 過去の質問一覧表示（ここから） -->
-       <p style="font-size: 1.2em; margin-inline-start: 10px;">過去の質問一覧表示</p>
+      
     		<c:forEach var="mg" items="${MyGetList}" varStatus="mm">
    				<div class="cp_qa">
 					<div class="cp_actab">

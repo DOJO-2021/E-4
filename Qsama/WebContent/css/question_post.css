@@ -3,21 +3,6 @@
   color: #fff;
 }
 
-/* -------- 個別投稿のすべてのページに適用 -------- */
-html {
-  font-family: sans-serif;
-}
-
-html * {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0 auto;
-  max-width: 1000px;
-  background-color: #f3f3f3;
-}
-
 /* -------- <h?>タグ -------- */
 h1{
    font-weight: lighter;
@@ -27,7 +12,7 @@ h1{
 h2{
   text-align: center;
   position: relative;
-  padding: 0.2em 0.5em;
+  padding: 10px 5px;
   background-color: #ffc06e;
   color: white;
   font-weight: lighter;
@@ -37,14 +22,23 @@ h2{
 }
 
 /* -------- フォーム -------- */
+
 .form-wrapper {
   display: flex;
-  background-color: #fffffc;
-  box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+    background-color: #fffffc;
+    width: 1080px;
+    margin: 0 auto;
+    box-shadow: #bdc3c7 0 5px 5px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 8px;
 }
 
 .form1 {
-  padding: 10px 0 0 15px;;
+  padding: 10px 0 0 15px;
+  margin: 0 auto;
 }
 
 .question_cat {
@@ -60,8 +54,9 @@ h2{
 }
 
 .form2 {
-  padding-left: 60px;
+/* padding-left: 60px; */
   padding-top: 15px;
+  margin: 0 auto;
 }
 
 
@@ -69,15 +64,22 @@ h2{
 /* --------------- ここから、タブ切り替え -----------------*/
 
 .cp_qa *, .cp_qa *:before, .cp_qa *:after {
-	font-family: 'FontAwesome', sans-serif;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+  font-family: 'FontAwesome', sans-serif;
+  -webkit-box-sizing: border-box;
+	      box-sizing: border-box;
 }
 
 .cp_qa {
-	margin: 0 auto;
-	background: #ffffff;
-	box-shadow: 0 0 5px rgba(0,0,0,.1);
+  margin: 0 auto 50px auto;
+  width: 1080px;
+  background: #fffffc;
+/*  box-shadow: 0 0 5px rgba(0,0,0,.1);   */
+  box-shadow: #bdc3c7 0 5px 5px;
+  -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 8px;
 }
 
 .cp_qa input {
@@ -163,7 +165,7 @@ h2{
 
 /* .cp_actab はQ&A 1つずつのブロック */
 .cp_qa .cp_qain .cp_actab {
-	padding: 20px 0;
+	padding: 20px 20px 0 20px;
 	border-bottom: 1px dotted #cccccc;
 }
 
@@ -176,6 +178,10 @@ h2{
 	padding: 10px 10px 0 48px;
 	cursor: pointer;
 }
+.cp_qa .cp_qain label:hover {
+  color: #09c9d999;
+}
+
 /* ＋アイコン */
 .cp_qa .cp_qain .cp_plus {
 	font-size: 2em;
@@ -201,25 +207,83 @@ h2{
 	background-color: #f3f3f3;
 	border-radius: 18px;
 }
-/* 質問を開いた時の仕様 */
+
+/* 質問を開いた時の仕様 回答部分 */
 input[type=checkbox]:checked ~ .cp_actab-content {
 	height: auto;
 	opacity: 1;
 }
+
+/* 質問を開いた時の仕様 質問部分 */
+input[type=checkbox]:checked ~ .cp_qa .cp_qain label {
+	color: #09C9D9;
+}
+
 /* 質問をクリックした時の▼アイコンの動き */
  input[type=checkbox]:checked ~ .cp_plus {
 	-webkit-transform: rotate(45deg);
-	        transform: rotate(45deg);     
+	        transform: rotate(45deg);
 }
 
 /* ----------------- 投稿フォーム  ----------------- */
-/* ラジオボタン */
+/* -------   セレクトタグ   ------- */
+
+/*
+.select-box {
+  cursor: pointer;
+  position : relative;
+  max-width:  20em;
+  margin: 5em auto;
+  width: 100%;
+}
+
+.select,
+.label {
+  color: #414141;
+  display: block;
+  font: 400 17px/2em 'Source Sans Pro', sans-serif;
+}
+
+.select {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  padding: 5px 0;
+  height: 40px;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  background: none transparent;
+  border: 0 none;
+}
+.select-box1 {
+  background: #ececec;
+}
+
+.label {
+  position: relative;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.open .label::after {
+   content: "▲";
+}
+.label::after {
+  content: "▼";
+  font-size: 12px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 5px 15px;
+  border-left: 5px solid #fff;
+}
+
+*/
+/* ----------  ラジオボタン   ------------ */
 .emergency input[name="emergency"] {
   cursor: pointer;
   display: inline-block;
 }
 .emergency input[name="emergency"]::before {
-  content: "";
   display: block;
   border: 1px solid #999;
   border-radius: 1000px;
@@ -262,8 +326,8 @@ input[type=checkbox]:checked ~ .cp_actab-content {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  
-  
+
+
  /* overflow: scroll; */
 }
 
@@ -274,16 +338,16 @@ textarea :focus {
 
 .Q_content label {
   font-size: 22px;
-  
+
 }
 
 /* --------ドラッグ＆ドロップ -------- */
-  
+
 
 
 .text {
     position: absolute;
-    top: 50%; 
+    top: 50%;
     right: 50%;
     transform: translate(50%,-50%);
     text-transform: uppercase;
@@ -323,12 +387,12 @@ textarea :focus {
     font-size: 14px;
     font-size: 1.1em;
 /*     position: absolute;
-    top: 50%; 
+    top: 50%;
     right: 50%;
     transform: translate(50%,-50%);
     text-transform: uppercase;
     font-family: verdana;
-   font-size: 12em; 
+   font-size: 12em;
     font-weight: 700;
     color: #f5f5f5;
     text-shadow: 1px 1px 1px #919191,
@@ -395,7 +459,7 @@ input[name="Q_submit"]:before, input[name="Q_submit"]:after {
   height: 1em;
   transition: all 0.3s ease-in-out;
 }
-	
+
 input[name="Q_submit"]:before {
   top: -6px;
   left: -6px;
@@ -414,7 +478,7 @@ input[name="Q_submit"]:hover:before, input[name="Q_submit"]:hover:after {
   height: calc(100% + 12px);
   border-color: #fff;
 }
-  
+
 input[name="Q_submit"]:hover {
   color: #353535;
   background-color: #fff;
@@ -459,7 +523,7 @@ button:before, button:after {
   height: 1em;
   transition: all 0.3s ease-in-out;
 }
-	
+
 button:before {
   top: -6px;
   left: -6px;
@@ -478,7 +542,7 @@ button:hover:before, button:hover:after {
   height: calc(100% + 12px);
   border-color: #fff;
 }
-  
+
 button:hover {
   color: #353535;
   background-color: #fff;
@@ -492,5 +556,64 @@ button:hover {
   margin: auto;
 }
 
+/*  てらっこ  */
 
+/*
+.anime_move1 {
+position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    -webkit-animation: anime_move1 30s linear infinite;
+    animation: anime_move1 30s linear infinite;
+}
+/*
+?s→アニメーション１回分が?秒
+linear→一定の速度で動く
+infinite→無限に繰り返す
+*/
+/*
+@keyframes anime_move1 {
+  0% {
+  transform: translateX(0px);
+  }
 
+  5% {
+  transform: rotate(315deg);
+  }
+  20% {
+  transform: translateX(200px);
+  }
+  25% {
+  transform: rotate(45deg);
+  }
+  45% {
+  transform: translateX(200px);
+  }
+  50% {
+  transform: rotate(135deg);
+  }
+  20% {
+  transform: translateX(200px);
+  }
+  25% {
+  transform: rotate(225deg);
+  }
+  20% {
+  transform: translateX(200px);
+  }
+}
+/*
+@keyframes anime_move1 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.anime_move {
+  animation: rotate-elm 30s linear infinite;
+}
+@keyframes rotate-elm {
+  100% { transform: rotate(-360deg); }
+}
+*/

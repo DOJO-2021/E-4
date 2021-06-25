@@ -214,3 +214,14 @@ input:placeholder-shown {
 	padding-top: 70px 0 50px 0;
 	font-size: 30px;
 }
+
+/*ログアウトしましたメッセージ*/
+.logout_cont {
+	margin: 5px;
+}
+
+/*ログイン失敗ページ*/
+h2 {
+	color: #565656;
+	
+}

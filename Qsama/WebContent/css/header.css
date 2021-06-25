@@ -21,9 +21,9 @@ header {
 	margin-right: auto;
 }
 
-.header_left > img{
-	width:135px;
-	height:90px;
+.header_left img{
+	width:125px;
+	height:80px;
 }
 
 .header_right {

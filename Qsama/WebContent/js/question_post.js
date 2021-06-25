@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 /* -------------------- テキストエリアのサイズ可変 --------------------- */
-  
+
   function flexTextarea(el) {
     const dummy = el.querySelector('.FlexTextarea__dummy')
     el.querySelector('.FlexTextarea__textarea').addEventListener('input', e => {
@@ -34,10 +34,10 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 /* ----------------------- 画像添付 ： input要素 ----------------------- */
-  
+
   // ドロップ有効範囲
     var fileArea = document.getElementById('dragDropArea');
-  
+
 
   // ファイル選択ボタン
     var fileInput = document.getElementById('fileInput');
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function(){
     fileArea.addEventListener('dragover',function(evt) {
     //  evt.stopPropagation();
       evt.preventDefault();
-      
+
       this.style.background = '#e1e7f0';
       fileArea.classList.add('dragover');
     });
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function(){
     fileArea.addEventListener('dragleave', function(evt) {
     //  evt.stopPropagation();
       evt.preventDefault();
-      
+
       this.style.background = '#ffffff';
       fileArea.classList.remove('dragover');
     });
@@ -69,18 +69,18 @@ document.addEventListener("DOMContentLoaded", function(){
       evt.preventDefault();
       fileArea.classList.remove('dragenter');
 
-	
-	  
+
+
       var files = evt.dataTransfer.files;       // drag&dropでのファイル取得（ここが配列！）
 
 		// sendFiles(evt.originalEvent.dataTransfer.files, 'Qsama/images/*');
-		
+
         console.log("DRAG & DROP");      // OK
         console.table(files);            // ファイル数確認OK
-	
-	
+
+
     // 取得したファイルをinput[type=file]へ
-      fileInput.files = files;           
+      fileInput.files = files;
 
      //   console.table(fileInput.files);              // ファイル数確認OK filesと一致
         photoPreview('onChenge',files[0]);
@@ -92,14 +92,14 @@ document.addEventListener("DOMContentLoaded", function(){
     function photoPreview(evt, f = null) {
       var file = f;
       if(file === null){
-	
+
          file = evt.target.files[0];
 
     }
 
   /* FileReaderで読み込み、プレビュー画像を表示。 */
 //   for (i = 0; i < files.length; i++) {
-	
+
       var reader = new FileReader();
       var preview = document.getElementById("previewArea");
       var previewImage = document.getElementById("previewImage");
@@ -140,14 +140,14 @@ document.addEventListener("DOMContentLoaded", function(){
 			event.preventDefault();
 			window.alert('投稿失敗！未入力項目があります。');
 			document.getElementById('output1').textContent = '大カテゴリは必須選択です';
-		
-		
+
+
 		} else if (M_items != "" && Q_content === "") {
 			event.preventDefault();
 			window.alert('投稿失敗！未入力項目があります。');
 			document.getElementById('output2').textContent = '質問内容を入力してください';
-		
-		
+
+
 		} else {
 			event.preventDefault();
 			window.alert('投稿失敗！未入力項目があります。');
@@ -158,4 +158,3 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
     */
-

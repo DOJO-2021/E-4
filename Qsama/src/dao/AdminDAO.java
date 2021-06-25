@@ -27,10 +27,8 @@ public class AdminDAO {
 
 		// SQL文の準備 検索キーワードに対して、個別質問 + 管理テーブルを全出力
 		String sql = "SELECT p.QQ_ID, p.POST_NUMBER, p.M_ITEMS, p.S_ITEMS, p.Q_DATE, p.Q_CONTENT, p.A_LEVEL, p.EMERGENCY,"
-				+ "	p.POSTPIC_URL, m.A_FLAG, m.A_CONTENT, u.NAME"
-				+ "	FROM POST_WORD as p inner join MANAGEMENT_WORD as m inner join p_user as u"
-				+ "	on p.post_number=m.post_number on u.ac_id = p.ac_id"
-				+ "	where m.A_flag=0 order by p.Q_DATE DESC";
+				+ " p.POSTPIC_URL,  u.NAME FROM POST_WORD as p inner join p_user as u"
+				+ " on u.ac_id = p.ac_id where p.Q_flag=0 order by p.Q_DATE DESC";
 
 		PreparedStatement s_res = conn.prepareStatement(sql);
 
@@ -49,8 +47,6 @@ public class AdminDAO {
 				rs.getInt("A_level"),
 				rs.getInt("emergency"),
 				rs.getString("Postpic_url"),
-				rs.getInt("A_flag"),
-				rs.getString("A_CONTENT"),
 				rs.getString("NAME")
 				);
 				GetList.add(Admin_);
@@ -68,6 +64,7 @@ public class AdminDAO {
 			// データベースを切断
 			if (conn != null) {
 				try {
+					conn.commit();
 					conn.close();
 				}
 				catch (SQLException e) {
@@ -133,6 +130,7 @@ public class AdminDAO {
 			// データベースを切断
 			if (conn != null) {
 				try {
+					conn.commit();
 					conn.close();
 				}
 				catch (SQLException e) {
@@ -198,6 +196,7 @@ public class AdminDAO {
 				// データベースを切断
 				if (conn != null) {
 					try {
+						conn.commit();
 						conn.close();
 					}
 					catch (SQLException e) {
@@ -210,7 +209,7 @@ public class AdminDAO {
 
 
 //---------------管理ページ：回答記入---------------------------------------------------------------------------
-	public boolean PostAnswer(String post_number, String answer) {
+	public boolean PostAnswer(String post_number, String m_items, String s_items, String answer) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -220,7 +219,7 @@ public class AdminDAO {
 		String today = datetimeformatter.format(nowDateTime);
 
 //------------------ジャンルの更新-----------------------------
-		UpdateItem(post_number);
+		UpdateItem(m_items, s_items, post_number);
 
 	try {
 		// JDBCドライバを読み込む
@@ -262,7 +261,7 @@ public class AdminDAO {
 }
 
 	//---------------ジャンルの更新----223行目で実行--------------------------------------------------------------
-		public boolean UpdateItem(String post_number) {
+		public boolean UpdateItem(String m_items, String s_items, String post_number) {
 			Connection conn = null;
 			boolean result = false;
 
@@ -275,7 +274,7 @@ public class AdminDAO {
 
 
 			// SQL文を準備する
-			String sql2 = "update POST_WORD set M_ITEMS=?, S_ITEMS=? where post_number="+post_number;
+			String sql2 = "update POST_WORD set M_ITEMS='"+m_items+"', S_ITEMS='"+s_items+"' where post_number="+post_number;
 
 			PreparedStatement pStmt = conn.prepareStatement(sql2);
 
@@ -294,7 +293,6 @@ public class AdminDAO {
 			// データベースを切断
 			if (conn != null) {
 				try {
-					conn.commit();
 					conn.close();
 				}
 				catch (SQLException e) {
@@ -1495,4 +1493,50 @@ public class AdminDAO {
 		  }return StudentList;	 	// 結果を返す
 		}
 
+	// --------------post_numberの最大値を取得-------------------------------------------------------
+	public String Getpic_url(String Post_number) {
+			Connection conn = null;
+
+			String pic_url = "";
+
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("org.h2.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
+
+				//bc_idの最大値を検索
+				String sql = "SELECT Postpic_url FROM POST_WORD WHERE POST_NUMBER="+Post_number;
+				PreparedStatement pStmt2 = conn.prepareStatement(sql);
+
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs = pStmt2.executeQuery();
+
+				// 結果表をコレクションにコピーする
+				while(rs.next()){
+					pic_url = rs.getString("Postpic_url");
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+				pic_url = null;
+			}
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				pic_url = null;
+			}
+			finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			return pic_url;
+		}
 }

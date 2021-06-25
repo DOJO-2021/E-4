@@ -1,30 +1,23 @@
 @charset "UTF-8";
 
-html * {
-	box-sizing	: border-box;
-}
-body {
-  margin: 0 auto;
-  max-width: 1000px;
-background-color: #f3f3f3;
+/* -----------------  aタグ ------------------ */
+a {
+	text-decoration: none;
+	color : inherit;
 }
 
-
-/* -----------------  h3タグ ------------------ */
+/* -----------------  h3 ------------------ */
 h3 {
-  text-align:left;
-  margin:2px ;
+  text-align: left;
+  margin: 70px auto 20px 130px;
   font-size: 1.2em;
   position: relative;
-  padding-top: .5em;
-  padding-bottom: .5em;
-  padding-left: 2em;
-
 }
+
 h3:before {
 position: absolute;
 font-family: "Font Awesome 5 Free";
-content: "\f0a1";
+/*  content: "\f0a1";   */
 font-weight: 900;
 font-size: 20px;
 top: 50%;
@@ -33,12 +26,13 @@ width: 40px;
 height: 40px;
 text-align: center;
 line-height: 40px;
-color: #168c6b;
+color: #09C9D9;
 -webkit-transform: translateY(-50%);
 transform: translateY(-50%);
 -webkit-animation: flash 2s ease infinite;
 animation: flash 4s ease infinite;
 animation-name: my-animation;
+padding: 15px 2px 0 1px;
 }
 
 @keyframes my-animation{
@@ -48,6 +42,8 @@ animation-name: my-animation;
 }
 /* ------------------ お知らせ ----------------- */
 
+
+/*  表示部分  */
 *, *:before, *:after {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -55,10 +51,9 @@ animation-name: my-animation;
 }
 
 .info {
-  margin: 2em auto 3em auto;
+  margin: 0 auto 50px;
   padding: 1em 1.5em;
   box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-/*  border: 1px solid #ccc;  */      /* 枠 */
   text-align: left;
   font-size: 1em;
   line-height: 1.2;
@@ -67,13 +62,21 @@ animation-name: my-animation;
   width: 1000px;
   height: 13em;
   background-color: #fcfcfc;
+  -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 8px;
+
+
 }
 
 .info dl {
-  margin: 0;
-  padding: 0.5em 0;
+  margin: 0 auto;
+  padding: 10px 0;
   border-bottom: 1px solid #ccc;
   font-size:14px;
+  cursor: pointer;
 }
 
 /* 奇数行の背景色変える */
@@ -92,7 +95,7 @@ animation-name: my-animation;
 .info dl div {
   display: table-cell;
 }
-
+/*
 .cat{
   display: table-cell;
   vertical-align: middle;
@@ -104,38 +107,68 @@ animation-name: my-animation;
   text-align: center;
   width: 50px;
 }
+*/
 
-.info dt {
-  padding-bottom: 0;
-  width: 5em;
-  font-size:10px;
+.info dd {
+  margin-left: 5em;
 }
 
 /* ------ よくある質問集コンテンツ、最近の質問コンテンツ ------ */
 .box {
-  margin		: 0 auto;
-  background     : #fffffc;                 /* BOXの背景色         */
+ margin: 0 auto 50px auto;
+/* padding: 0 80px; */
+/* background: #fffffc; */
   box-shadow: 0 0 5px rgb(0 0 0 / 10%);
-  display        : flex;                 /* FlexBox定義         */
-  height         : 500px;
-  flex-wrap      : wrap;                 /* 折り返し定義        */
+  display: flex;
+  height: 480px;
+  width: 1000px;
+  flex-wrap: wrap;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  border-radius: 8px;
 
 }
 
 .box2 {
-  margin		 : 1em 0;
-  padding        : 1em;
+  margin		 : 0 auto;
+  padding        : 25px 50px;
   background     : #fff;                 /* BOXの背景色         */
   display        : flex;                 /* FlexBox定義         */
-  height         : 500px;
+  height         : 493px;
+  width: 1000px;
   flex-wrap      : wrap;                 /* 折り返し定義        */
-  overflow-y: scroll;
+  overflow : auto;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 8px;
 }
+
+  /*スクロールバーの横幅指定*/
+.box2::-webkit-scrollbar {
+    width: 15px;
+}
+/*スクロールバーの背景色・角丸指定*/
+.box2::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background: #f2f2f2;
+}
+/*スクロールバー自体の色・角丸指定*/
+.box2::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: #09C9D9;
+  cursor: pointer;
+}
+
 
  /*最近の質問BOXの定義*/
  .content{
-  background     : #FFCC66;              /* BOXの背景色         */
-  border-left    : 8px solid orange;
+  background     :#ffd667;            /* BOXの背景色         */
+  border-left    : 8px solid #f9c320;
   padding        : 20px;
   width          : 1000px;                 /* サンプルBOXの幅     */
   margin		 : 1em 0;
@@ -143,12 +176,17 @@ animation-name: my-animation;
 /* ---------------- 解決済みの質問集 ------------------- */
 /*タブ切り替え全体のスタイル*/
 .tabs {
-
-  padding-bottom: 40px;
+/*  padding-bottom: 40px;  */
   background-color: #fff;
-  width:1000px;
+  width:100%;
   box-shadow: 0 0 10px rgba(5, 0, 0, 0.2);
-  margin: 0 ;}
+  margin: 0 ;
+  -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 8px;
+}
 
 /*タブのスタイル*/
 .tab_item {
@@ -165,9 +203,16 @@ animation-name: my-animation;
   text-align: center;
   font-weight: bold;
   transition: all 0.2s ease;
+  cursor: pointer;
+/*  border-top-left-radius:8px;
+  border-top-right-radius:8px;   */
 }
 .tab_item:hover {
   opacity: 0.75;
+}
+
+.tab_item input[name="tab_item"] {
+  border-right: 2px solid #f3f3f3;
 }
 
 /*ラジオボタンを全て消す*/
@@ -181,6 +226,7 @@ input[name="tab_item"] {
   padding: 40px 40px 0;
   clear: both;
   overflow: hidden;
+  border-radius: 8px;
 }
 
 
@@ -197,18 +243,15 @@ input[name="tab_item"] {
   display: block;
 }
 
-/* ------------- 選択されているタブのスタイルを変える --------------- */
-.tabs input:checked + .tab_item {
-  color: #fff;
-
-}
-
 p.question {
 	cursor: pointer;
 }
 
 p.question:hover {
-        text-decoration: underline;
+  color: #09C9D9;
+}
+.question_open {
+  color: #09C9D9;
 }
 
 p.ans {
@@ -217,8 +260,14 @@ p.ans {
   border-radius: 18px;
   padding: 10px 1em 10px 1em;
   line-height: 1.6;
-
 }
+
+.hr {
+  background-color: #ccc;
+  height: 1px;
+  border: none;
+}
+
 /* ----------------- プロフィール ------------------- */
 .box .profile {
   margin: 15px auto;                 /* サンプル用 中央寄せ */

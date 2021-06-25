@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.IdpwDAO;
 import model.LoginUser;
+import model.Result;
 
 /**
  * Servlet implementation class LoginServlet
@@ -72,7 +73,15 @@ public class LoginServlet extends HttpServlet {
 			}
 		}
 		else {									// ログイン失敗
-			System.out.println("失敗");
+			// リクエストスコープに、タイトル、メッセージ、戻り先を格納する
+			request.setAttribute("result",
+			new Result("ログイン失敗…。", "ユーザIDまたはパスワードに間違いがあります。", "/Qsama/LoginServlet"));
+
+			// 結果ページにフォワードする
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+			dispatcher.forward(request, response);
+
+			//System.out.println("失敗");
 
 		}
 	}

@@ -31,7 +31,8 @@ public class SearchServlet extends HttpServlet {
 		List<Search> MaxRankingList = sDao.MaxSearchRanking();
 		List<Search> WeekRankingList = sDao.WeekSearchRanking();
 
-		System.out.println(MaxRankingList);		//結果出力　テストok
+//		System.out.println(WeekRankingList);	//結果出力　テストok
+//		System.out.println(MaxRankingList);		//結果出力　テストok
 
 		request.setAttribute("MaxRankingList", MaxRankingList);
 		request.setAttribute("WeekRankingList", WeekRankingList);
@@ -100,12 +101,14 @@ public class SearchServlet extends HttpServlet {
 		SearchDAO sDao = new SearchDAO();
 		List<Search> SearchList = sDao.KeywordSearch(S4_word, Search_radio, m_items, s_items);
 		List<Search> MaxRankingList = sDao.MaxSearchRanking();
+		List<Search> WeekRankingList = sDao.WeekSearchRanking();
 
 //		System.out.println(SearchList);			//結果出力　テストok
 
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("SearchList", SearchList);
 		request.setAttribute("MaxRankingList", MaxRankingList);
+		request.setAttribute("WeekRankingList", WeekRankingList);
 
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search.jsp");

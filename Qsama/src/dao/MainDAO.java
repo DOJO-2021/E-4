@@ -24,7 +24,7 @@ public class MainDAO {
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 				// SQL文の準備 回答フラグを取得 ac_idを一致させる
-				String sql = "SELECT l.user_id, l.ac_id, p.q_date,  m.a_flag FROM login as l INNER JOIN management_word  as m INNER JOIN post_word  as p"
+				String sql = "SELECT l.user_id, l.ac_id, p.q_date, p.m_items, m.a_flag FROM login as l INNER JOIN management_word  as m INNER JOIN post_word  as p"
 						+ " on l.ac_id=p.ac_id on m.post_number = p.post_number  where m.a_flag=1 and l.user_id= '"+user_id +"'";
 
 				PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -37,6 +37,7 @@ public class MainDAO {
 					S_Main recent = new S_Main(
 						rs.getInt("ac_id"),
 						rs.getInt("A_flag"),
+						rs.getString("M_items"),
 						rs.getString("Q_date")
 						);
 					NoticeList.add(recent);

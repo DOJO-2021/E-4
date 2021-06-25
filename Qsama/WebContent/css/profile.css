@@ -1,11 +1,5 @@
 @charset "UTF-8";
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-body {
-  background-color: #ECF0F1; }
+
 header {
   display: block;
   overflow: hidden;
@@ -21,13 +15,13 @@ header {
 
 .container {
   width: 1000px;
-  margin: 3em auto 1em auto;
+  margin: 0 auto 60px auto;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
   border-radius: 8px;
-  padding: 1.5em;
+  padding: 30px 80px;
   background-color: white;
   -webkit-box-shadow: #BDC3C7 0 5px 5px;
   -moz-box-shadow: #BDC3C7 0 5px 5px;
@@ -180,13 +174,37 @@ header {
     font-size: .9em;
     font-family: 'Quicksand';
     line-height: 1.5em; }
+    
+/*    bottun   */
 
 .edit {
   text-align: center;
+  margin-top: 20px;
 }
-  .edit :hover {
+/*
+.edit :hover {
     color:  #FFAD90;
-    cursor: pointer; }
+    cursor: pointer; 
+}
+*/
+
+/* -------------  ボタン  -------------- */
+#h_edit, #h_submit, #h_reset {
+  outline: none;
+  border: 1px solid #09c9d999;
+  width: 100px;
+  height: 30px;
+  color: #fff;
+  background-color: #09c9d999;
+  border-radius: 100vh;
+  cursor: pointer;
+}
+
+#h_edit:hover, #h_submit:hover, #h_reset:hover {
+  color: #fff;
+  background: #09C9D9;
+}
+
 
 label {
 	margin-inline-start: 100px;
@@ -201,6 +219,7 @@ input#A1,#A2,#A3,#A4,#A5,#A6,#A7,#A8,#A9,#A10,#A11,#A12,#A13{
 	float: right;
 	clear: both;
 	margin-right: 50px;
+
 }
 
 .preview {
@@ -239,7 +258,6 @@ canvas {
 }
 /* 質問 */
 .cp_qa .cp_actab label {
-	font-weight			: bold;
 	line-height			: 1.6;
 	position			: relative;
 	display				: block;
@@ -254,11 +272,12 @@ canvas {
 /* 答え */
 .cp_qa .cp_actab .cp_actab-content {
 	overflow: hidden;
-	max-height: 0;
-	-webkit-transition: max-height 0.5s ease;
-	        transition: max-height 0.5s ease;
-	color: #ffffff;
-	background: rgba(0, 131, 143, 0.5);
+    max-height: 0;
+    -webkit-transition: max-height 0.5s ease;
+    transition: max-height 0.5s ease;
+    background-color: #f3f3f3;
+    border-radius: 18px;
+    margin: 10px 20px 10px 32px;
 }
 .cp_qa .cp_actab .cp_actab-content p {
 	margin: 1em;
@@ -266,7 +285,7 @@ canvas {
 /* 質問を開いた時の仕様 */
 /* --アイコン */
 .cp_qa .cp_actab input:checked ~ label {
-	color: #00838F;
+	color: #09C9D9;
 }
 /* --答えの高さ */
 .cp_qa .cp_actab input:checked ~ .cp_actab-content {
@@ -292,3 +311,27 @@ canvas {
 	-webkit-transform: rotateX(180deg);
 	transform: rotateX(180deg);
 }
+
+/* 削除更新ボタン */
+#display_form {
+  margin: 0 auto 15px 16px;
+}
+
+#display_form button[name="button"] {
+  margin-right: 10px;
+  outline: none;
+  border: 1px solid #09c9d999;
+  width: 100px;
+  height: 30px;
+  color: #fff;
+  background-color: #09c9d999;
+  border-radius: 100vh;
+  cursor: pointer;
+}
+
+#display_form button[name="button"]:hover {
+  color: #fff;
+  background: #09C9D9;
+}
+
+
