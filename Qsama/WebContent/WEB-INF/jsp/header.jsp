@@ -10,7 +10,7 @@
 <body>
 <!-- 共通のヘッダー -->
 <header>
-<div class="header_body">
+<div class="header_body" id="heder">
   <div class="header_left">
   <table>
     <tr>

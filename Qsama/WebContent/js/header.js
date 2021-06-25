@@ -2,11 +2,4 @@
  *
  */
 
-//共通ヘッダーのメニュー
-$(function(){
-    $('.dropdwn li').hover(function(){
-        $("ul:not(:animated)", this).slideDown();
-    }, function(){
-        $("ul.dropdwn_menu",this).slideUp();
-    });
-});
+//受講者、管理者のヘッダーの切り替え

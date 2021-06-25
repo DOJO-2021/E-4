@@ -70,7 +70,7 @@ public class MainDAO {
 				return NoticeList;
 	}
 
-	//最近の質問のリスト
+	//過去に投稿された質問のリスト
 	public List<S_Main> RecentQ(){
 		List<S_Main> RecentqList = new ArrayList<S_Main>();
 
