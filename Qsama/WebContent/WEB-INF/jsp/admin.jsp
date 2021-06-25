@@ -500,6 +500,7 @@
 		</div>
 	</div>
 </div>
+<jsp:include page="/WEB-INF/jsp/footer.jsp" />
 </body>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="js/Admin.js"></script>		<!--モーダルウィンドウ用js-->

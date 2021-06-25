@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+html * {
+	box-sizing	: border-box;
+}
+
+
+div {
+	margin: 20px;
+}
+p {
+	font-size: 10px;
+	text-align: center;
+}

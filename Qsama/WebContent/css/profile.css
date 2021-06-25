@@ -23,9 +23,9 @@ header {
   border-radius: 8px;
   padding: 30px 80px;
   background-color: white;
-  -webkit-box-shadow: #BDC3C7 0 5px 5px;
+/*  -webkit-box-shadow: #BDC3C7 0 5px 5px;
   -moz-box-shadow: #BDC3C7 0 5px 5px;
-  box-shadow: #BDC3C7 0 5px 5px; 
+  box-shadow: #BDC3C7 0 5px 5px; */
 }
 
 .bg {

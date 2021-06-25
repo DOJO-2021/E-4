@@ -1,13 +1,28 @@
 @charset "UTF-8";
 
+/* -------  フォント  ------- */
+/* --- font-family: 'M PLUS Rounded 1c', sans-serif; --- */
+@import url('https：//fonts.googleapis.com/css2？family=M+PLUS+Rounded+1c＆display=swap');
+
+/* --- font-family: 'Kosugi Maru', sans-serif;; --- */
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap');
+
+/* ---  font-family: 'Noto Sans Japanese', sans-serif;  --- */
+@import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
+
+
 html * {
-	box-sizing	: border-box;
+  box-sizing	: border-box;
+
 }
 
 body {
   margin: 0 auto;
   max-width: 1200px;
-background-color: #f3f3f3;
+  background-color: #f3f3f3;
+  font-family: 'Noto Sans Japanese', sans-serif;
+  
+ 
 }
 
 p {
@@ -37,7 +52,7 @@ div.foo{
   font-size: 2.5em;
   margin: 0.2em;
   position: relative;
-  color: #ffd667;          /*  背景文字色  */
+  color: #f9c320;          /*  めくったあとの文字色  */
   transform-style: preserve-3d;
   perspective: 400;
   z-index: 1;
@@ -53,7 +68,7 @@ div.foo{
   transition: all 0.3s ease-in-out;
 }
 .letter:before{
-  color: #ffd667;     /*  元の色   #fff;   */
+  color: #09c9d999;     /* 見えている文字色　　 元の色   #fff;   */
   text-shadow: 
     -1px 0px 1px rgba(255,255,255,.8),
     1px 0px 1px rgba(0,0,0,.8);

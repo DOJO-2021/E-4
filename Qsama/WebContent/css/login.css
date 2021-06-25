@@ -3,22 +3,24 @@
 /*すべてのページに適応*/
 body {
 	text-align: center;
+	    background-image: url(../images/Villager.jpg);
+	    background-color: rgba(255,255,255,0.8);
+    background-blend-mode: lighten;
 }
 
 /*タブ切り替え全体のスタイル*/
 .tabs {
-  margin-top: 50px;
   padding-bottom: 40px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: #fffffc;
   width: 700px;
-  margin: 0 auto;}
+  margin: 70px auto;
+}
 
 /*タブのスタイル*/
 .tab_item {
   width: calc(100%/2);
   height: 50px;
-  border-bottom: 3px solid orange;
+  border-bottom: 3px solid #f9c320;
   background-color: #F2F2F2;
   line-height: 50px;
   font-size: 16px;
@@ -57,7 +59,7 @@ input[name="tab_item"] {
 
 /*選択されているタブのスタイルを変える*/
 .tabs input:checked + .tab_item {
-  background-color: orange;
+  background-color: #f9c320;
   color: #fff;
 }
 
@@ -88,7 +90,7 @@ input[name="tab_item"] {
 	transition: 0.3s;
 	letter-spacing: 1px;
 	color: #000000;
-	border: 1px solid #1b2538;
+	border: 1px solid #ccc;
 	border-radius: 4px;
 	margin: 0 0 10px 0;
 }
@@ -101,7 +103,7 @@ input[name="tab_item"] {
 	transition: 0.3s;
 	letter-spacing: 1px;
 	color: #000000;
-	border: 1px solid #1b2538;
+	border: 1px solid #ccc;
 	border-radius: 4px;
 	margin: 0 0 10px 0;
 }
@@ -114,9 +116,9 @@ input[name="tab_item"] {
 	margin-right: auto;
 }
 .content input[type='text']:focus {
-	border: 1px solid #c20c33;
+	border: 1px solid #ffd667;
 	outline: none;
-	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
+	box-shadow: 0 0 5px 1px #ffd667;
 }
 
 /*コンテンツ(ボックス)の配置*/
@@ -135,7 +137,7 @@ input[name="tab_item"] {
 	transition: 0.3s;
 	letter-spacing: 1px;
 	color: #000000;
-	border: 1px solid #1b2538;
+	border: 1px solid #ccc;
 	border-radius: 4px;
 	margin: 0 0 10px 0;
 }
@@ -148,18 +150,36 @@ input[name="tab_item"] {
 	transition: 0.3s;
 	letter-spacing: 1px;
 	color: #000000;
-	border: 1px solid #1b2538;
+	border: 1px solid #ccc;
 	border-radius: 4px;
 	margin: 0 0 10px 0;
 }
 
 .content input[type='password']:focus {
-	border: 1px solid #da3c41;
+	border: 1px solid #ffd667;
 	outline: none;
-	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
+	box-shadow: 0 0 5px 1px #ffd667;  
 }
 
 /*以下ボタンスタイル*/
+input[name="Login"] {
+  display       : inline-block;
+/*  font-size     : 18pt;         文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 12px 64px;   /* 余白       */
+  background    : #f9c320;     /* 背景色     */
+  color         : #ffffff;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+  border        : 1.5px solid #f9c320;    /* 枠の指定 */
+  border-radius: 20px;
+}
+input[name="Login"]:hover {
+  color         : #ff7f00;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+/*
 button {
   padding: 20px 0 20px 0;
   background-color: #fff;
@@ -168,7 +188,7 @@ button {
   cursor: pointer;
   font-size: 30px;
 }
-
+*/
 .popup {
     display: none;
     height: 100vh;
@@ -206,7 +226,7 @@ input {
   background-color: #FFF;
 }
 
-input:placeholder-shown {
+.content input:placeholder-shown {
   background-color: #FFE4B3;
 }
 

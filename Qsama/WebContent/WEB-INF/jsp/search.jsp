@@ -10,20 +10,24 @@
 	<title>Qさま｜質問検索</title>
 	<link rel="stylesheet" href="css/common.css">
 	<link rel="stylesheet" href="css/search.css"><!--CSS読み込み-->
+	<!-- choice -->
+	 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
 	<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?ver=1.11.3'></script>
 	<script src="js/Search3.js"></script>		<!--検索ボタン空作動防止js-->
+
 </head>
 <body>
 <!-- 共通のヘッダー -->
 <c:choose>
-  <c:when test="${sessionScope.user_rank == 1}">
-    <jsp:include page="/WEB-INF/jsp/header.jsp" />
-  </c:when>
-  <c:otherwise>
-  	<jsp:include page="/WEB-INF/jsp/a_header.jsp" />
-  </c:otherwise>
+ <c:when test="${sessionScope.user_rank == 1}">
+  <jsp:include page="/WEB-INF/jsp/header.jsp" />
+ </c:when>
+ <c:otherwise>
+  <jsp:include page="/WEB-INF/jsp/a_header.jsp" />
+ </c:otherwise>
 </c:choose>
 <!-- 共通ヘッダーここまで -->
+
 	<main>
 		<!--メイン-->
 		<div id="search_body" class="search_body">
@@ -34,6 +38,7 @@
 			<span class="letter" data-letter="検">検</span>
 			<span class="letter" data-letter="索">索</span>
 		</div>
+
 	  	<div class="foo"  id="foo_serch2">
 			<span class="letter" data-letter="ラ">ラ</span>
 			<span class="letter" data-letter="ン">ン</span>
@@ -41,8 +46,13 @@
 			<span class="letter" data-letter="ン">ン</span>
 			<span class="letter" data-letter="グ">グ</span>
 		</div>
+
+
 		<form method="POST" id="search_form" action="/Qsama/SearchServlet">
 			<div id="search_window" class="tabs2">
+
+
+
 				<input id="teacher" type="radio" name="tab_item2" checked>
  				<label class="tab_item2" for="teacher">講師</label>
  				<input id="office" type="radio" name="tab_item2">
@@ -59,10 +69,12 @@
 							<input type="radio" name="search_radio" value="and" checked> 全てのワードを含む<br>
 							<input type="radio" name="search_radio" value="or"> いずれかのワードを含む<br>
 						</div>
+
 						<div class="pulldownset" style="float:left;">
-						<br>ジャンル選択<br>
-					<select class="major_items" name="m_items">
-						<option value="" selected="selected">ジャンルを選択</option>
+						<br>検索カテゴリ選択<br>
+						<div class="m_items">
+					<select class="major_items js-choices" name="m_items" id="m_items">
+						<option value="" selected="selected">カテゴリを選択</option>
 						<option value="HTML">HTML</option>
 						<option value="CSS">CSS</option>
 						<option value="JavaScript">JavaScript</option>
@@ -72,8 +84,11 @@
 						<option value="ｱﾌﾟﾘｹｰｼｮﾝ">ｱﾌﾟﾘｹｰｼｮﾝ</option>
 						<option value="その他">その他</option>
 					</select><br>
-					<select class="sub_item" name="s_items">
-						<option value="" selected="selected">詳細ジャンルを選択</option>
+						</div>
+
+						<div class="s_items">
+					<select class="sub_item js-choices" name="s_items" id="s_items">
+						<option value="" selected="selected">詳細カテゴリを選択</option>
 						<option value="基礎・基本的な書式" data-val="HTML">基礎・基本的な書式</option>
 						<option value="見出し・段落・リスト" data-val="HTML">見出し・段落・リスト</option>
 						<option value="テキスト・単語" data-val="HTML">テキスト・単語</option>
@@ -136,6 +151,7 @@
 						<option value="講義全般" data-val="その他">講義全般</option>
     					<option value="その他" data-val="その他">その他</option>
 					</select>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -190,7 +206,7 @@
 				<!--    <h3>週間ランキング</h3>    -->
 					<ol class="ranking">
 					<c:forEach var="w" items="${WeekRankingList}" varStatus="t1">
-						${(t1.index)+1}位 : ${w.word} <br>
+						${(t1.index)+1}位  :  ${w.word} <br>
 					</c:forEach>
 					</ol>
 				</div>
@@ -201,7 +217,7 @@
 				<!-- <h3>通期ランキング</h3>   -->
 					<ol class="ranking">
 					<c:forEach var="y" items="${MaxRankingList}" varStatus="t2">
-						${(t2.index)+1}位　　${y.word} <br>
+						${(t2.index)+1}位 ： ${y.word} <br>
 					</c:forEach>
 					</ol>
 				</div>
@@ -239,10 +255,31 @@
 	</div>
 	</main>
 
-<!-- 共通のフッターー -->
 <jsp:include page="/WEB-INF/jsp/footer.jsp" />
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><!--jquery読み込み-->
 		<script src="js/Search.js"></script>		<!--講師・事務局ジャンル表示用js-->
+
+		<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+	  new Choices('#m_items', {
+	    removeItemButton: true,        // 各アイテムに削除ボタンを付けるかどうか
+	    shouldSort: false,             // 選択肢はHTML記述順で表示
+	    noResultsText: '検索結果はありません',
+
+	  });
+	  new Choices('#s_items', {
+		    removeItemButton: true,
+		    shouldSort: false,
+		    noResultsText: '検索結果はありません'
+
+
+		  });
+	});
+</script>
+
 </body>
 </html>

@@ -17,16 +17,23 @@
 <!-- choice -->
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
 
+<!-- font -->
+<link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+
 </head>
 
 <!--   body（ここから）  -->
 <body>
 
   <!-- ヘッダー -->
-<jsp:include page="/WEB-INF/jsp/header.jsp"/>
-<!--
-  <h1><i class="fa fa-chevron-circle-right color-change"></i>投稿</h1>
- -->
+<c:choose>
+ <c:when test="${sessionScope.user_rank == 1}">
+  <jsp:include page="/WEB-INF/jsp/header.jsp" />
+ </c:when>
+ <c:otherwise>
+  <jsp:include page="/WEB-INF/jsp/a_header.jsp" />
+ </c:otherwise>
+</c:choose>
   <main>
 
 <!----------------    質問タブ表示 （ ここから ）  --------------->
@@ -93,7 +100,7 @@
 
     <!----------------    大カテゴリ (必須選択）   ---------------->
     <div class="question_cat">
-      <select id="M_items" name="M_items">
+      <select id="M_items" name="M_items"  class="js-choices">
         <option value=""> -- 大カテゴリ選択 -- </option>
         <option value="HTML">HTML</option>
         <option value="CSS">CSS</option>
@@ -114,7 +121,7 @@
     <!---------------- 中カテゴリ
                JavaScriptで大カテゴリと中カテゴリを連動させる ----------------->
     <div class="question_cat">
-      <select id="S_items" name="S_items">
+      <select id="S_items" name="S_items"  class="js-choices">
         <option value="" data-category=""> -- 中カテゴリ選択 -- </option>
         <option value="基礎・基本的な書式" data-category="HTML">基礎・基本的な書式</option>
         <option value="見出し・段落・リスト" data-category="HTML">見出し・段落・リスト</option>
@@ -193,20 +200,16 @@
 
 
     <!----------------    回答レベル選択    ---------------->
-    <div class="A_level">
-    <!--  -->
-      <select name="A_level">
-        <option value="-1"> -- 回答レベル選択 --</option>
-        <option value="0">ヒントが欲しい</option>
-        <option value="1">回答が欲しい</option>
-      </select>
+    <div class="A_level custom-radio">
+        <input type="radio" id="hint" name="A_level" value="0"><label for="hint"><span class="radio-text">ヒントが欲しい</span></label>
+        <input type="radio" id="ans" name="A_level" value="1" checked><label for="ans"><span class="radio-text">回答が欲しい</span></label>
     </div>
 
 
     <!------------------   緊急レベル選択   ------------------>
-    <div class="emergency"> 緊急の場合は「はい」を選択してください。
-      <input type="radio" name="emergency" value="0">はい
-      <input type="radio" name="emergency" value="1" checked>いいえ
+    <div class="emergency custom-radio" > 回答は緊急ですか？<br>
+      <input type="radio" name="emergency" value="0" id="emergency1"><label for="emergency1"><span class="radio-text">はい</span></label>
+      <input type="radio" name="emergency" value="1" id="emergency2" checked><label for="emergency2"><span class="radio-text">いいえ</span></label>
     </div>
 
 
@@ -247,28 +250,48 @@
    </div>
    <!---------------- class = form2 ( ここまで ) ---------------->
 
-
  </div>
  <!-------------- class = form-wrapper ( ここまで ) -------------->
 
-
-
-    <!--------------------    投稿ボタン    -------------------->
+  <!--------------------    投稿ボタン    -------------------->
     <div class="Q_submit">
       <input type="submit" name="Q_submit" value="投稿" >
     </div>
+
 
   </form>
 <!----------------  投稿入力フォーム（ここまで） ---------------->
 <!--   <p class="anime_move1"><img src="images/teracco.png" class="anime_move"></p>  -->
 
 
+<jsp:include page="/WEB-INF/jsp/footer.jsp" />
+  </main>
+
+
 <script type='text/javascript' src= "js/question_post.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+	  new Choices('#M_items', {
+	    removeItemButton: true,        // 各アイテムに削除ボタンを付けるかどうか
+	    shouldSort: false,             // 選択肢はHTML記述順で表示
+	    noResultsText: '検索結果はありません',
+	    itemSelectText: '選択',         // Default: Press to select
+	    position: 'below'
+
+	  });
+	  new Choices('#S_items', {
+		    removeItemButton: true,
+		    shouldSort: false,
+		    noResultsText: '検索結果はありません',
+		    itemSelectText: '選択',         // Default: Press to select
+		    position: 'bottom'
+		  });
+	});
+</script>
 <!---------------------   フッター   ----------------------->
-<!-- 共通のフッターー -->
-<jsp:include page="/WEB-INF/jsp/footer.jsp" />
 </body>
 <!---------------- body（ここまで） ---------------->
 </html>
