@@ -1,8 +1,5 @@
 @charset "UTF-8";
 
-a {
-	text-decoration:none;
-}
 /* -----------------  h3 ------------------ */
 h3 {
   text-align: left;
@@ -49,13 +46,14 @@ padding: 15px 2px 0 1px;
 }
 
 .info {
-  margin: 0 auto 50px;
+  border-bottom: 1px solid #ccc6;
+  margin: 20px auto 50px auto;
   padding: 1em 1.5em;
  /* box-shadow: 0px 4px 4px rgb(0 0 0 / 25%); */
   text-align: left;
   font-size: 1em;
   line-height: 1.2;
-  color: #444;
+  color: #4d5156;
   overflow: none;
   width: 1000px;
   height: 13em;
@@ -65,8 +63,8 @@ padding: 15px 2px 0 1px;
     -ms-border-radius: 8px;
     -o-border-radius: 8px;
     border-radius: 8px;
-
-
+ 
+  
 }
 
 .info dl {
@@ -118,7 +116,7 @@ padding: 15px 2px 0 1px;
 /* background: #fffffc; */
 /*  box-shadow: 0 0 5px rgb(0 0 0 / 10%);  */
   display: flex;
-  height: 320px;
+  height: 390px;
   width: 1000px;
   flex-wrap: wrap;
   -webkit-border-radius: 8px;
@@ -130,6 +128,7 @@ padding: 15px 2px 0 1px;
 }
 
 .box2 {
+	border-bottom: 1px solid #ccc6;
   margin		 : 0 auto;
   padding        : 25px 50px;
   background     : #fffffc;                 /* BOXの背景色         */
@@ -139,7 +138,7 @@ padding: 15px 2px 0 1px;
   flex-wrap      : wrap;                 /* 折り返し定義        */
   overflow : auto;
 /*  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);  */
-  -webkit-border-radius: 8px;
+  -webkit-border-radius: 8px; 
     -moz-border-radius: 8px;
     -ms-border-radius: 8px;
     -o-border-radius: 8px;
@@ -174,10 +173,11 @@ padding: 15px 2px 0 1px;
 /* ---------------- 解決済みの質問集 ------------------- */
 /*タブ切り替え全体のスタイル*/
 .tabs {
+	border-bottom: 1px solid #ccc6;
 /*  padding-bottom: 40px;  */
   background-color: #fffffc;
   width:1000px;
-  height: 320px;
+  height: 390px;/*320px;*/
 /*  box-shadow: 0 0 10px rgba(5, 0, 0, 0.2);  */
   margin: 0 ;
   -webkit-border-radius: 8px;
@@ -189,6 +189,7 @@ padding: 15px 2px 0 1px;
 
 /*タブのスタイル*/
 .tab_item {
+  border-right: 1px solid #fffffc;
   width: calc(100%/9);
   height: 35px;
   border-bottom: 3px solid #f9c320;
@@ -196,7 +197,7 @@ padding: 15px 2px 0 1px;
   line-height: 35px;
   font-size: 14px;
   text-align: center;
-  color: #565656;
+  color: #fffffc;
   display: block;
   float: left;
   text-align: center;
@@ -210,8 +211,8 @@ padding: 15px 2px 0 1px;
   opacity: 0.75;
 }
 
-.tab_item input[name="tab_item"] {
-  border-right: 2px solid #f3f3f3;
+.tab_item label a{
+  color: #fffffc;
 }
 
 /*ラジオボタンを全て消す*/
@@ -222,7 +223,7 @@ input[name="tab_item"] {
 /*タブ切り替えの中身のスタイル*/
 .tab_content {
   display: none;
-  padding: 40px 40px 0;
+  padding: 40px 40px;
   clear: both;
   overflow: hidden;
   border-radius: 8px;
@@ -245,7 +246,6 @@ input[name="tab_item"] {
 /* ------------- 選択されているタブのスタイルを変える --------------- */
 .tabs input:checked + .tab_item {
   color: #fffffc;
-
 }
 
 p.question {
@@ -255,7 +255,7 @@ p.question {
 p.question:hover {
   color: #09C9D9;
 }
-.question_open {
+.tab_content:checked + .question {
   color: #09C9D9;
 }
 
@@ -268,14 +268,46 @@ p.ans {
   line-height: 1.6;
 }
 
-.hr {
-  background-color: #ccc;
-  height: 1px;
-  border: none;
+/* -- アイコンの後ろにテキスト表示 -- */
+.color_change {
+  float: left;
 }
 
-#foo_main {
+/* 解決済み　見出し */
+.foo_main {
   margin: 0 auto;
+  background-color: #fffffc;
+  border-radius: 8px; 
+  border-bottom: 1px solid #ccc6;
+}
+
+/* 過去の質問　見出し */
+.foo_old {
+ background-color: #fffffc;
+ border-radius: 8px; 
+ border-bottom: 1px solid #ccc6; 
+}
+
+.foo_old::before,
+.foo_old::after {
+  position: absolute;
+  content: '';
+  width: 20px;
+  height: 50px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.foo_old::before {
+  border-top: 1.5px solid #ccc;
+  border-left: 1.5px solid #ccc;
+  margin: 5px -145px;
+}
+
+.foo_old::after {
+  border-bottom: 1.5px solid #ccc;
+  border-right: 1.5px solid #ccc;
+  margin: 20px 0 0 126px;
 }
 
 /* ----------------- プロフィール ------------------- */

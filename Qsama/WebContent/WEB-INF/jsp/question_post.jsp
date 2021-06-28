@@ -12,6 +12,8 @@
 <script type='text/javascript' src= "js/question_post.js"></script>
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" type="text/css" href="css/question_post.css">
+
+<!-- font awesome -->
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
 <!-- choice -->
@@ -37,7 +39,7 @@
   <main>
 
 <!----------------    質問タブ表示 （ ここから ）  --------------->
-<div class="foo">
+<div class="foo foo1">
   <span class="letter" data-letter="質">質</span>
   <span class="letter" data-letter="問">問</span>
   <span class="letter" data-letter="集">集</span>
@@ -85,7 +87,7 @@
 
    <!---------------- 投稿入力フォーム（ここから）---------------->
    <!--  <h2>投稿入力欄</h2>  -->
-   <div class="foo">
+   <div class="foo foo2">
      <span class="letter" data-letter="質">質</span>
      <span class="letter" data-letter="問">問</span>
      <span class="letter" data-letter="内">内</span>
@@ -208,8 +210,8 @@
 
     <!------------------   緊急レベル選択   ------------------>
     <div class="emergency custom-radio" > 回答は緊急ですか？<br>
-      <input type="radio" name="emergency" value="0" id="emergency1"><label for="emergency1"><span class="radio-text">はい</span></label>
-      <input type="radio" name="emergency" value="1" id="emergency2" checked><label for="emergency2"><span class="radio-text">いいえ</span></label>
+      <input type="radio" name="emergency" value="0" id="emergency1"><label for="emergency1"><span class="radio-text emergency1">はい</span></label>
+      <input type="radio" name="emergency" value="1" id="emergency2" checked><label for="emergency2"><span class="radio-text emergency2">いいえ</span></label>
     </div>
 
 
@@ -239,7 +241,10 @@
             <p class="drag-drop-info" class="text">ここにファイルをドロップ</p>
             <p>または</p>
             <p class="drag-drop-buttons">
+            <!-- 	<label for="fileInput">
+            	<span>ファイルを選択</span> -->
                 <input id="fileInput" type="file" value="ファイルを選択" name="Postpic_url"  multiple>
+                
             </p>
             <div id="previewArea"></div>
         </div>
@@ -255,7 +260,7 @@
 
   <!--------------------    投稿ボタン    -------------------->
     <div class="Q_submit">
-      <input type="submit" name="Q_submit" value="投稿" >
+      <input type="submit" name="Q_submit" value="投　稿" >
     </div>
 
 

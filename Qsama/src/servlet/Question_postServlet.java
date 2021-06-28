@@ -50,8 +50,8 @@ public class Question_postServlet extends HttpServlet {
 			List<Question_post> PostFaqList = qDao.PostFaq();
 			List<Question_post> WeekFaqList = qDao.WeekFaqRanking();
 
-			System.out.println("scope PostFaqList:" + PostFaqList);   // 結果出力
-			System.out.println("scope WeekFaqList:" + WeekFaqList);
+//			System.out.println("scope PostFaqList:" + PostFaqList);   // 結果出力
+//			System.out.println("scope WeekFaqList:" + WeekFaqList);
 
 			// 結果をリクエストスコープに格納する
 			request.setAttribute("PostFaqList", PostFaqList);
@@ -90,30 +90,30 @@ public class Question_postServlet extends HttpServlet {
 	//	int QQ_id = Integer.parseInt(request.getParameter("QQ_id"));
 	//	int Post_Number = Integer.parseInt(request.getParameter("Post_Number"));
 
-		int Post_Number = qDao.MAXpost_number()+1;				// post_numberの最大値を検索して「最大値+1」代入
-		qDao.NewPost_number(Post_Number);							// テーブル「MANAGEMENT_WORD」に新規post_nemuberを追加
+		int Post_Number = qDao.MAXpost_number()+1;						// post_numberの最大値を検索して「最大値+1」代入
+		qDao.NewPost_number(ac_id, Post_Number);							// テーブル「MANAGEMENT_WORD」に新規post_nemuberを追加
 //		System.out.println("Post_number："+Post_Number);
 
 		String M_items = request.getParameter("M_items");
 		String S_items = request.getParameter("S_items");
 		String Q_date = request.getParameter("Q_date");
 		String Q_content = request.getParameter("Q_content");
-		int A_level = Integer.parseInt(request.getParameter("A_level"));
+		String A_level = request.getParameter("A_level");
 	//	int A_level = 0;
 	//	int Q_flag = Integer.parseInt(request.getParameter("Q_flag"));
 		int Q_flag = 0;
-		int emergency = Integer.parseInt(request.getParameter("emergency"));
+		String emergency = request.getParameter("emergency");
 	//	int emergency = 0;
 		String Postpic_url = request.getParameter("Postpic_url");
 
 		// ----------パラメータの取得確認 ----------
 
+		System.out.println("Post_number：" + Post_Number);
 		System.out.println("大項目：" + M_items);
 		System.out.println("中項目：" + S_items);
 		System.out.println("日付：" + Q_date);
 		System.out.println("質問内容：" + Q_content);
 		System.out.println("回答レベル：" + A_level);
-	//	System.out.println("回答フラグ：" + Q_flag);
 		System.out.println("緊急レベル：" + emergency);
 		System.out.println("画像URL：" + Postpic_url);          // null値
 
@@ -226,6 +226,8 @@ public class Question_postServlet extends HttpServlet {
 			System.out.println("登録失敗");
 		}
 
+		System.out.println("-----------------------Question_postServletここまで-----------------------\n");
+
 		// 投稿ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question_post.jsp");
 				dispatcher.forward(request, response);
@@ -237,16 +239,16 @@ public class Question_postServlet extends HttpServlet {
 	private String getFileName(Part part) {
 		String name = null;
 
-        for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
+		for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
 
-            if (dispotion.trim().startsWith("filename")) {
+			if (dispotion.trim().startsWith("filename")) {
 
-                name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
-                name = name.substring(name.lastIndexOf("\\") + 1);
-                System.out.println(name);
-                break;
-            }
-        }
+				name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+				name = name.substring(name.lastIndexOf("\\") + 1);
+				System.out.println(name);
+				break;
+			}
+		}
 		return name;
 	}
 }

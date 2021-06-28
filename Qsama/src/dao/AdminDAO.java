@@ -26,9 +26,10 @@ public class AdminDAO {
 		conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
 
 		// SQL文の準備 検索キーワードに対して、個別質問 + 管理テーブルを全出力
-		String sql = "SELECT p.QQ_ID, p.POST_NUMBER, p.M_ITEMS, p.S_ITEMS, p.Q_DATE, p.Q_CONTENT, p.A_LEVEL, p.EMERGENCY,"
-				+ " p.POSTPIC_URL,  u.NAME FROM POST_WORD as p inner join p_user as u"
-				+ " on u.ac_id = p.ac_id where p.Q_flag=0 order by p.Q_DATE DESC";
+		String sql = "SELECT p.QQ_ID, p.POST_NUMBER, p.M_ITEMS, p.S_ITEMS, p.Q_DATE, p.Q_CONTENT, p.A_LEVEL, p.EMERGENCY, p.POSTPIC_URL, m.A_FLAG, m.A_CONTENT, u.NAME"
+				+ " FROM POST_WORD as p inner join MANAGEMENT_WORD as m inner join p_user as u"
+				+ " on p.post_number=m.post_number on u.ac_id = p.ac_id"
+				+ " where m.A_flag=0 order by p.Q_DATE DESC";
 
 		PreparedStatement s_res = conn.prepareStatement(sql);
 
@@ -1559,7 +1560,6 @@ public class AdminDAO {
 			while (rs.next()) {
 				A_flag = rs.getInt("A_flag");
 			}
-
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -1600,7 +1600,8 @@ public class AdminDAO {
 
 
 			// SQL文を準備する
-			String sql2 ="update MANAGEMENT_WORD set POST_NUMBER="+post_number+", A_DATE="+today+", A_CONTENT="+answer+", A_FLAG=1, AREA_OPEN=0)";
+			String sql2 ="update MANAGEMENT_WORD set POST_NUMBER='"+post_number+"', A_DATE='"+today+"', A_CONTENT='"+answer+"', A_FLAG='1', AREA_OPEN='0'"
+					+ " where post_number="+post_number;
 
 			PreparedStatement pStmt = conn.prepareStatement(sql2);
 

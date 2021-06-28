@@ -4,9 +4,6 @@
 /* --- font-family: 'M PLUS Rounded 1c', sans-serif; --- */
 @import url('https：//fonts.googleapis.com/css2？family=M+PLUS+Rounded+1c＆display=swap');
 
-/* --- font-family: 'Kosugi Maru', sans-serif;; --- */
-@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap');
-
 /* ---  font-family: 'Noto Sans Japanese', sans-serif;  --- */
 @import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 
@@ -21,7 +18,7 @@ body {
   max-width: 1200px;
   background-color: #f3f3f3;
   font-family: 'Noto Sans Japanese', sans-serif;
-  
+  color: #4d5156;
  
 }
 
@@ -41,10 +38,10 @@ body{
 }
 */
 div.foo{
-  font-family: 'Lato', sans-serif;
   width: 90%;
-  margin: 0 auto 10px auto;
+  margin: auto auto 10px auto;
   text-align: center;
+
 }
 .letter{
   display: inline-block;
@@ -68,7 +65,7 @@ div.foo{
   transition: all 0.3s ease-in-out;
 }
 .letter:before{
-  color: #09c9d999;     /* 見えている文字色　　 元の色   #fff;   */
+  color: #ffd667;     /* 見えている文字色　　 元の色   #fff;   */
   text-shadow: 
     -1px 0px 1px rgba(255,255,255,.8),
     1px 0px 1px rgba(0,0,0,.8);
@@ -102,4 +99,57 @@ div.foo{
     rotateY(40deg)
     rotateZ(0deg)
     skew(0deg,22deg);
+}
+
+/* --------  font awesome  --------- */
+.color_change {
+  content: "\f138";
+  color: #ccc;
+  margin: 10px 12px 1px 10px;
+  display: inline-block;
+}
+
+/* ---------  ハイパーリンク  ----------- */
+.href {
+  color: #fffffc;
+  text-decoration: none;
+}
+
+/* -----------  hr  --------- */
+.hr {
+  background-color: #ccc;
+  height: 1px;
+  border: none;
+}
+/* --------------  ラジオボタン  -------------- */
+.custom-radio [type="radio"] {
+  opacity: 0;
+}
+
+.custom-radio label {
+  padding-left: 2rem;
+  position: relative;
+  cursor: pointer;
+  font-weight: 200;
+}
+
+.custom-radio label::before {
+  content: "";
+  border: 2px solid #fcbd00;
+  border-radius: 9999px;
+  display: inline-block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  top: 50%;
+  transform: translatey(-50%);
+  width: 20px;
+}
+
+.custom-radio [type="radio"]:focus + label .radio-text {
+  background: linear-gradient(transparent 60%, #fcbd00 60%);
+}
+
+.custom-radio [type="radio"]:checked + label::before {
+  border-width: 7px;
 }

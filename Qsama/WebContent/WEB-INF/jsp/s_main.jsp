@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/s_main.css">
 <link href="https://use.fontawesome.com/releases/5.12.0/css/all.css" rel="stylesheet">
+<!-- font awesome -->
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 <script src="https://unpkg.com/scrollreveal"></script>
 <script src="jquery.simplePagination.js"></script>
 </head>
@@ -60,28 +62,29 @@
 	<!-- よくある質問集 -->
 	<div class="tabs">
 	  <input id="html" type="radio" name="tab_item" checked>
-	  <label class="tab_item" for="html"><a href="#html_content">HTML</a></label>
+	  <label class="tab_item" for="html"><a href="#html_content" class="href">HTML</a></label>
 	  <input id="css" type="radio" name="tab_item">
-	  <label class="tab_item" for="css"><a href="#css_content">CSS</a></label>
+	  <label class="tab_item" for="css"><a href="#css_content" class="href">CSS</a></label>
 	  <input id="javascript" type="radio" name="tab_item">
-	  <label class="tab_item" for="javascript"><a href="#javascript_content">JavaScript</a></label>
+	  <label class="tab_item" for="javascript"><a href="#javascript_content" class="href">JavaScript</a></label>
 	  <input id="java" type="radio" name="tab_item">
-	  <label class="tab_item" for="java"><a href="#java_content">Java</a></label>
+	  <label class="tab_item" for="java"><a href="#java_content" class="href">Java</a></label>
 	  <input id="sql" type="radio" name="tab_item">
-	  <label class="tab_item" for="sql"><a href="#sql_content">SQL</a></label>
+	  <label class="tab_item" for="sql"><a href="#sql_content" class="href">SQL</a></label>
 	  <input id="servlet" type="radio" name="tab_item">
-	  <label class="tab_item" for="servlet"><a href="#servlet_content">サーブレット</a></label>
+	  <label class="tab_item" for="servlet"><a href="#servlet_content" class="href">サーブレット</a></label>
 	  <input id="jimukyoku" type="radio" name="tab_item">
-	  <label class="tab_item" for="jimukyoku"><a href="#jimukyoku_content">事務局</a></label>
+	  <label class="tab_item" for="jimukyoku"><a href="#jimukyoku_content" class="href">事務局</a></label>
 	  <input id="drill" type="radio" name="tab_item">
-	  <label class="tab_item" for="drill"><a href="#drill_content">ドリル</a></label>
+	  <label class="tab_item" for="drill"><a href="#drill_content" class="href">ドリル</a></label>
 	  <input id="dani" type="radio" name="tab_item">
-	  <label class="tab_item" for="dani"><a href="#dani_content">段位認定</a></label>
+	  <label class="tab_item" for="dani"><a href="#dani_content" class="href">段位認定</a></label>
 
 
 	  <div class="tab_content" id="html_content">
 	    <div class="tab_content_description">
 			<c:forEach var="h" items="${ResoledQList}">
+				<i class="fa fa-chevron-circle-right color_change"></i>
 				<p class="question">${h.q_content}</p>
 				<p class="ans">${h.a_content}</p>
 				<hr class="hr">
@@ -91,54 +94,60 @@
 	  <div class="tab_content" id="css_content">
 	    <div class="tab_content_description">
 			<c:forEach var="h2" items="${ResoledQList2}">
+				<i class="fa fa-chevron-circle-right color_change"></i>
 				<p class="question">${h2.q_content}</p>
 				<p class="ans">${h2.a_content}</p>
-				<hr>
+				<hr class="hr">
 			</c:forEach>
 	    </div>
 	  </div>
 	  <div class="tab_content" id="javascript_content">
 	    <div class="tab_content_description">
 			<c:forEach var="h3" items="${ResoledQList3}">
+				<i class="fa fa-chevron-circle-right color_change"></i>
 				<p class="question">${h3.q_content}</p>
 				<p class="ans">${h3.a_content}</p>
-				<hr>
+				<hr class="hr">
 			</c:forEach>
 	    </div>
 	  </div>
 	  <div class="tab_content" id="java_content">
 	    <div class="tab_content_description">
 			<c:forEach var="h4" items="${ResoledQList4}">
+				<i class="fa fa-chevron-circle-right color_change"></i>
 				<p class="question">${h4.q_content}</p>
 				<p class="ans">${h4.a_content}</p>
-				<hr>
+				<hr class="hr">
 			</c:forEach>
 	    </div>
 	  </div>
 	  <div class="tab_content" id="sql_content">
 	    <div class="tab_content_description">
 			<c:forEach var="h5" items="${ResoledQList5}">
+				<i class="fa fa-chevron-circle-right color_change"></i>
 				<p class="question">${h5.q_content}</p>
 				<p class="ans">${h5.a_content}</p>
-				<hr>
+				<hr class="hr">
 			</c:forEach>
 	    </div>
 	  </div>
     <div class="tab_content" id="servlet_content">
       <div class="tab_content_description">
 		  <c:forEach var="h6" items="${ResoledQList6}">
+				<i class="fa fa-chevron-circle-right color_change"></i>
 			    <p class="question">${h6.q_content}</p>
 			    <p class="ans">${h6.a_content}</p>
-			    <hr>
+			    <hr class="hr">
 		  </c:forEach>
       </div>
     </div>
 	<div class="tab_content" id="jimukyoku_content">
 	   <div class="tab_content_description">
 			<c:forEach var="h7" items="${ResoledQList7}">
+				<i class="fa fa-chevron-circle-right color_change"></i>
 				<p class="question">${h7.q_content}</p>
 				<p class="ans">${h7.a_content}</p>
-				<hr>
+				<hr class="hr">
 			</c:forEach>
 	    </div>
 	 </div>
@@ -146,18 +155,20 @@
 	    <div class="tab_content_description">
 	      <p class="c-txtsp"></p>
 			<c:forEach var="h8" items="${ResoledQList8}">
+				<i class="fa fa-chevron-circle-right color_change"></i>
 				<p class="question">${h8.q_content}</p>
 				<p class="ans">${h8.a_content}</p>
-				<hr>
+				<hr class="hr">
 			</c:forEach>
 	    </div>
 	  </div>
 	  <div class="tab_content" id="dani_content">
 	    <div class="tab_content_description">
 			<c:forEach var="h9" items="${ResoledQList9}">
+				<i class="fa fa-chevron-circle-right color_change"></i>
 				<p class="question">${h9.q_content}</p>
 				<p class="ans">${h9.a_content}</p>
-				<hr>
+				<hr class="hr">
 			</c:forEach>
 	    </div>
 	  </div>
@@ -165,7 +176,7 @@
 </div>
 
 <!--  <h3>過去に投稿された質問</h3>  -->
-<div class="foo">
+<div class="foo foo_old">
   <span class="letter" data-letter="過">過</span>
   <span class="letter" data-letter="去">去</span>
   <span class="letter" data-letter="に">に</span>

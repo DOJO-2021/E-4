@@ -10,6 +10,8 @@
   <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
   <link href="https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+  <!-- font awesome -->
+<link href="https://use.fontawesome.com/releases/5.0.0/css/all.css" rel="stylesheet">
   <script type="text/javascript" src="/Qsama/js/profile.js"></script>
   <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
 </head>
@@ -93,9 +95,9 @@
   </form>
   </div>
 
-   <div class="container">
+   <div class="container2">
     <!-- 過去の質問一覧表示（ここから） -->
-       <p style="font-size: 1.2em; margin-inline-start: 10px;">過去の質問一覧表示</p>
+       <p class="old_p_list">過去の質問一覧表示</p>
     		<c:forEach var="mg" items="${MyGetList}" varStatus="mm">
    				<div class="cp_qa">
 					<div class="cp_actab">

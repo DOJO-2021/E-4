@@ -13,7 +13,6 @@ import java.util.List;
 import model.Question_post;
 
 
-
 public class Question_postDAO {
 
 	public List<Question_post> postAll(){
@@ -59,7 +58,7 @@ public class Question_postDAO {
 				rs.getString("Postpic_url")
 				);
 				Question_postList.add(question_post);
-				System.out.println(question_post);
+//				System.out.println(question_post);
 			}
 
 
@@ -92,7 +91,7 @@ public class Question_postDAO {
 
 
 	// insert
-	public boolean P_insert(String ac_id, int Post_Number, String M_items, String S_items, String Q_date, String Q_content, int A_level, int Q_flag, int emergency, String Postpic_url) {
+	public boolean P_insert(String ac_id, int Post_Number, String M_items, String S_items, String Q_date, String Q_content, String A_level, int Q_flag, String emergency, String Postpic_url) {
 //	public boolean P_insert(Question_post question_post) {
 
 		Connection conn = null;
@@ -145,11 +144,11 @@ public class Question_postDAO {
 				pStmt.setString(4, null);
 			}
 
-			pStmt.setInt(5, A_level);
+			pStmt.setString(5, A_level);
 
 			pStmt.setInt(6, Q_flag);
 
-			pStmt.setInt(7, emergency);
+			pStmt.setString(7, emergency);
 
 			if (Postpic_url != null) {
 				pStmt.setString(8, Postpic_url);
@@ -158,7 +157,7 @@ public class Question_postDAO {
 				pStmt.setString(8, null);
 			}
 
-			System.out.println("insert→"+pStmt);
+			System.out.println("insert SQL →"+pStmt);
 
 			// insert文を実行する
 			if (pStmt.executeUpdate() == 1) {
@@ -222,7 +221,7 @@ public class Question_postDAO {
 				PostFaqList.add(question_post);
 				}
 
-			System.out.println("DAO　PostFaqList:" + PostFaqList);     //OK
+			System.out.println("DAO　よくある質問出力PostFaqList:" + PostFaqList);     //OK
 
 		  }  // エラー処理
 		  catch (SQLException e) {
@@ -291,7 +290,7 @@ public class Question_postDAO {
 				WeekFaqList.add(question_post);
 				}
 
-			System.out.println("DAO　WeekFaqList:" + WeekFaqList);
+			System.out.println("DAO　週間質問リストWeekFaqList:" + WeekFaqList);
 
 		  }  // エラー処理
 		  catch (SQLException e) {
@@ -348,7 +347,7 @@ public class Question_postDAO {
 					pStmt.setString(2, null);
 				}
 
-				System.out.println(pStmt);
+				System.out.println("画像保存SQL→"+pStmt);
 
 				// SQL文を実行する
 				if (pStmt.executeUpdate() == 1) {
@@ -422,7 +421,7 @@ public class Question_postDAO {
 		}
 
 	//------------------MANAGEMENT_WORDに新規post_nemuberを追加-------------------------------------
-	public boolean NewPost_number(int post_number) {
+	public boolean NewPost_number(String ac_id, int post_number) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -435,7 +434,7 @@ public class Question_postDAO {
 
 
 			// SQL文を準備する
-			String sql2 = "insert into MANAGEMENT_WORD ( POST_NUMBER ) values ("+post_number+")";
+			String sql2 = "insert into MANAGEMENT_WORD ( AC_ID, POST_NUMBER, A_CONTENT, A_flag) values ('"+ac_id+"', '"+post_number+"',' ','0')";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql2);
 

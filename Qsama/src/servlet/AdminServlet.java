@@ -98,10 +98,8 @@ public class AdminServlet extends HttpServlet {
 		System.out.println("AdminS内post_number:"+post_number);
 		System.out.println("m_items："+m_items+"\t s_items:"+s_items+"\n");
 
-		// ---------質問内容の検索処理を行う----------------------------------------------
+
 		AdminDAO aDao = new AdminDAO();
-		List<Admin> GetList = aDao.PostGet();								// 未回答の検索
-		List<Admin> GetList2 = aDao.PostGet2();							// 回答済の検索
 
 		System.out.println("post_number.length()の結果："+post_number.length());
 
@@ -148,10 +146,10 @@ public class AdminServlet extends HttpServlet {
 //		System.out.println("DoPostのDisplayGetListの中身"+DisplayGetList);
 		System.out.println("DoPostの変数post_numberの中身"+post_number+"\t answerは："+answer);
 
-
 		// ------------回答済みかチェックする----------------------------------------------
 		String answer_submit = request.getParameter("answer_submit");
 
+		System.out.println("answer_submitの中身→"+answer_submit);
 
 //		int AnswerResult=aDao.AnswerCheck(post_number);
 		if(answer_submit != null) {
@@ -159,24 +157,24 @@ public class AdminServlet extends HttpServlet {
 				if(answer != null) {												// 未回答
 					if(post_number.length() != 0) {
 						// ------------回答の登録処理を行う----------------------------------------
-						aDao.PostAnswer(post_number, m_items, s_items, answer);		// 回答書き込み
-						if(m_items != null) {
-							//-------------ジャンルの更新------------------------------------------
-							aDao.UpdateItem(m_items, s_items, post_number);			// ジャンルアップデート
-						}
-					}
-				}else {																// 回答済
-					if(post_number.length() != 0) {
-						// ------------回答の登録変更を行う----------------------------------------
+					//	aDao.PostAnswer(post_number, m_items, s_items, answer);		// 回答書き込み
 						aDao.PostCorrection(post_number, m_items, s_items, answer);	// 回答書き込み
+						System.out.println("回答の登録処理を行う１ を通りました");
 						if(m_items != null) {
 							//-------------ジャンルの更新------------------------------------------
 							aDao.UpdateItem(m_items, s_items, post_number);			// ジャンルアップデート
+							System.out.println("ジャンルの更新１ を通りました");
 						}
 					}
 				}
 			}
 		}
+
+		// ---------質問内容の検索処理を行う----------------------------------------------
+
+		List<Admin> GetList = aDao.PostGet();								// 未回答の検索
+		List<Admin> GetList2 = aDao.PostGet2();							// 回答済の検索
+
 		System.out.println("--------------------------------END------------------------------------");
 
 		request.setAttribute("GetList", GetList);

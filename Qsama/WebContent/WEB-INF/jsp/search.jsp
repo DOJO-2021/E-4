@@ -10,6 +10,9 @@
 	<title>Qさま｜質問検索</title>
 	<link rel="stylesheet" href="css/common.css">
 	<link rel="stylesheet" href="css/search.css"><!--CSS読み込み-->
+	
+<!-- font awesome -->
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 	<!-- choice -->
 	 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
 	<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?ver=1.11.3'></script>
@@ -59,10 +62,11 @@
   				<label class="tab_item2" for="office">事務局</label>
 				<div class="tab_content2" id="teacher_content">
 				    <div class="tab_content_description">
-				    	<div>
+				    	<div class="search_bar">
 						<!--    <h3>質問検索</h3>   質問窓-->
+							<i class="fas fa-search search_icon"></i>
 							<input type="search" id="search_word" class="search_word" name="search_word" size="50" placeholder="検索キーワード(例) JavaScript オブジェクト" autofocus required>
-							<input type="submit" name="submit" value="検索">
+							<input type="submit" name="submit" value="検索" id="search_submit">
 						</div>
 						<div class="genre" style="width:50%; float:left;">
 						<br>検索条件<br>
@@ -157,17 +161,22 @@
 		</div>
 				<div class="tab_content2" id="office_content">
 				    <div class="tab_content_description">
-						<div>
+						
 					<!-- 	<h3>質問検索</h3>  -->  <!--質問窓-->
-
-							<input type="text" class="input_items" name="search_word2" size="50" placeholder="検索キーワード">
+						<div class="search_bar">
+							<i class="fas fa-search search_icon"></i>
+							<input type="text" class="input_items" name="search_word2" placeholder="検索キーワード">
+							<i class="fas fa-times search_icon"></i>
 							<input type="submit" name="submit" value="検索">
 						</div>
-				<div style="width:50%; float:left;">
+				<div style="width:50%; float:left;" class="custom-radio">
 					<br>検索条件<br>
-					<input type="radio" name="search_radio2" value="and" checked> 全てのワードを含む<br>
-					<input type="radio" name="search_radio2" value="or"> いずれかのワードを含む<br>
+					<input type="radio" name="search_radio2" value="and" id="search_radio1" checked>
+					<label for="search_radio1"><span class="radio-text"> 全てのワードを含む</span></label><br>
+					<input type="radio" name="search_radio2" value="or" id="search_radio2">
+					<label for="search_radio2"><span class="radio-text"> いずれかのワードを含む</span></label><br>
 				</div>
+				
 				<div style="float:left;">
 					<br>ジャンル選択<br>
 					<select class="major_items2" name="m_items2">
@@ -269,12 +278,16 @@ document.addEventListener('DOMContentLoaded', () => {
 	    removeItemButton: true,        // 各アイテムに削除ボタンを付けるかどうか
 	    shouldSort: false,             // 選択肢はHTML記述順で表示
 	    noResultsText: '検索結果はありません',
+	    itemSelectText: '選択',         // Default: Press to select
+	    position: 'bottom'
 
 	  });
 	  new Choices('#s_items', {
 		    removeItemButton: true,
 		    shouldSort: false,
-		    noResultsText: '検索結果はありません'
+		    noResultsText: '検索結果はありません',
+		    itemSelectText: '選択',         // Default: Press to select
+		    position: 'bottom'
 
 
 		  });

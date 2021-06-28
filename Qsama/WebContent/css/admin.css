@@ -3,35 +3,56 @@
 
 
 .right_content{
-	margin		:5px;
+  width: 520px;
+  margin: 20px 10px 20px 10px;
+  background-color: #ffd66745;
+  border-radius: 5px;
 }
 
 .content_box {
+	border-bottom: 1px solid #ccc6;
 	display		: flex;
 	flex-wrap	: wrap;
+	background-color: #fff;
+	border-radius: 8px;
 }
 
 /* --- 質問通知 解決済み通知 --- */
 /*タブ切り替え全体のスタイル*/
 .tabs {
-  margin-top		: 50px;
-  padding-bottom	: 40px;
-  background-color	: #fff;
-  box-shadow		: 0 0 10px rgba(5, 0, 0, 0.2);
-  width				: 400px;
-  margin			: 0 ;
-  }
-
+  padding: 20px auto;
+  background-color: #fffffc;
+  width: 420px;
+  margin: 20px;
+  overflow: auto;
+}
+/*スクロールバーの横幅指定*/
+.tabs::-webkit-scrollbar {
+    width: 15px;
+}
+/*スクロールバーの背景色・角丸指定*/
+.tabs::-webkit-scrollbar-track {
+  border-radius: 8px;
+	background: #ccc;
+}
+/*スクロールバーの色・角丸指定*/
+.tabs::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: #09C9D9; 
+  cursor: pointer;
+}
 /*タブのスタイル*/
 .tab_item {
+	cursor: pointer;
   width: calc(100%/2);
   height: 35px;
-  border-bottom: 3px solid grey;
-  background-color: orange;
+  border-bottom: 3px solid #f9c320;
+  background-color: #ffd667;
+  border-right: 1px solid #fff;
   line-height: 35px;
   font-size: 14px;
   text-align: center;
-  color: #565656;
+  color: #fffffc;
   display: block;
   float: left;
   text-align: center;
@@ -49,11 +70,15 @@ input[name="tab_item"] {
 
 /*タブ切り替えの中身のスタイル*/
 .tab_content {
+	border-bottom: 1px solid #ccc6;
+	border-left: 1px solid #ccc6;
   display: none;
   padding: 20px 20px 0;
   clear: both;
-  height:500px;
-  overflow-y: scroll;
+  height: 770px;
+  overflow: auto;
+  border: 1px solid #cccccca1;
+  border-radius: 5px;
 }
 
 /*選択されているタブのコンテンツのみを表示*/
@@ -72,62 +97,162 @@ input[name="tab_item"] {
 }
 
 .content_box .content1 {
-  box-sizing     : border-box;           /* 罫線も含む長さ      */
-  background     : white;              /* BOXの背景色         */
-  border         : 1px solid black;    /* 枠線の指定          */
-  width          : 720px;                 /* BOXの幅     */
-  height         : 160px;                 /* BOXの幅     */
-  margin         : 2px;                  /* BOXの間     */
+  box-sizing: border-box;
+  background: #fffffc;
+  border-bottom: 0.5px solid #cccccc42;
+  width: 500px;
+  height: 170px;
+  margin: 0 auto 20px auto;
+  border-radius: 3px;
 }
 
 /* -------- 質問回答フォームテキストエリア --------*/
+/* 背景色 */
+.back_color {
+  background-color: #ffd66745;
+  border-radius: 7px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #cccccc42;
+}
+/* 見出し */
+.right_content .admin_heading {
+  font-weight: 500;
+  font-size: 18px;
+  margin: 10px 0 10px 10px;
+}
 
-textarea {
+/* 項目選択欄 */
+.admin_cat {
+  margin: 0 0 10px 10px;
+}
+
+.choices {
+  width: 200px;
+  position: relative;
+  margin: 0 0 0 5px;
+  display: inline-block;
+}
+
+#answer_area {
   font-family: inherit;
   font-size: inherit;
   resize: none;
-  width:720px;
-  height:160px;
-  overflow: scroll;
+  border: 1px solid #ccc;
+  background: #fffffc;
+  width:500px;
+  height:170px;
+  margin: 0 10px 5px 10px;
+  border-radius: 3px;
 }
+
+#answer_area:checked {
+  outline: 0;
+  border: 2px splid #E6A54D;
+}
+
+/* --------  投稿ボタン  --------- */
+#A_submit {
+  outline: none;
+  border: 1px solid #09c9d999;
+  width: 200px;
+  height: 30px;
+  color: #fff;
+  background-color: #09c9d999;
+  border-radius: 100vh;
+  cursor: pointer;
+  margin: 0 0 10px 305px;
+}
+
+#A_submit:hover {
+  color: #fff;
+  background: #09C9D9;
+}
+
+
+
+
 
 /* -------- 質問公開設定、受講者別質問管理 --------*/
 .under_content {
 	display:flex;
+	margin: 25px 0 0 0;
 }
 
 /* -------- 質問公開設定コンテンツ --------*/
 .content_box .content2 {
   box-sizing     : border-box;           /* 罫線も含む長さ      */
-  background     : white;              /* BOXの背景色         */
-  border         : 1px solid black;    /* 枠線の指定          */
-  width          : 350px;                 /* BOXの幅     */
-  height         : 220px;                 /* BOXの幅     */
-  margin         : 2px;                  /* BOXの間     */
+  background     : #fffffc;              /* BOXの背景色         */
+  border         : 1px solid #ccc;    /* 枠線の指定          */
+  width          : 242px;                 /* BOXの幅     */
+  height         : 184px;                 /* BOXの幅     */
+  margin: 5px 10px 0 10px;                   /* BOXの間     */
   text-align	 : center;
+  border-radius: 3px;
 }
 
+.right_content .cont_mgm {
+  text-align	 : center;
+  font-weight: 500;
+  color: #4d5156;
+}
+
+.content2 button {
+  outline: none;
+  border: 1px solid #09c9d999;
+  width: 200px;
+  height: 30px;
+  color: #fffffc;
+  background-color: #09c9d999;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.content2 button:hover {
+  color: #fff;
+  background: #09C9D9;
+}
+  
 /* -------- 受講者別質問管理 --------*/
 .content_box .content3 {
   box-sizing     : border-box;           /* 罫線も含む長さ      */
-  background     : white;              /* BOXの背景色         */
-  border         : 1px solid black;    /* 枠線の指定          */
-  width          : 350px;                 /* BOXの幅     */
-  height         : 220px;                 /* BOXの幅     */
-  margin         : 2px;                  /* BOXの間     */
+  background     : #fffffc;              /* BOXの背景色         */
+  border         : 1px solid #ccc;    /* 枠線の指定          */
+  width          : 243px;                 /* BOXの幅     */
+  height         : 184px;                 /* BOXの幅     */
+  margin: 5px 10px 0 5px;                  /* BOXの間     */
+  border-radius: 3px;
+  text-align	 : center;
+}
+.content3 button {
+  outline: none;
+  border: 1px solid #09c9d999;
+  width: 80px;
+  height: 30px;
+  color: #fffffc;
+  background-color: #09c9d999;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px 0 0 120px;
+}
+
+.content3 button:hover {
+  color: #fff;
+  background: #09C9D9;
 }
 
 /* -------- 最新質問ボタン --------*/
 button.cp_btn {
+	cursor: pointer;
 	position		: relative;
 	display			: block;
 	width			: 350px;
 	padding			: 0.5em;
 	text-align		: center;
-	border			: 3px solid #9C27B0;
+	border			: 3px solid #ffd667;
 	text-decoration	: none;
 	outline			: none;
 	transition		: all .4s;
+	color: #4d5156;
 }
 button.cp_btn::before,
 button.cp_btn::after {
@@ -141,17 +266,17 @@ button.cp_btn::after {
 	transition		: all .4s;
 }
 button.cp_btn::before {
-	border-top		: 3px solid #FF5722;
-	border-bottom	: 3px solid #FF5722;
+	border-top		: 3px solid #f9c320;
+	border-bottom	: 3px solid #f9c320;
 	transform		: scale(0, 1);
 }
 button.cp_btn::after {
-	border-right	: 3px solid #FF5722;
-	border-left		: 3px solid #FF5722;
+	border-right	: 3px solid #f9c320;
+	border-left		: 3px solid #f9c320;
 	transform		: scale(1, 0);
 }
 button.cp_btn:hover {
-	color			: #FF5722;
+	color			: #4d5156;
 }
 button.cp_btn:hover::after,
 button.cp_btn:hover::before {
@@ -160,29 +285,33 @@ button.cp_btn:hover::before {
 
 /* -------- モーダルウィンドウ表示　一覧２つ --------*/
 .modal{
-    display		: none;
-    height		: 100vh;
-    position	: fixed;
-    top			: 0;
-    width		: 70%;
+  display: none;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  width: 70%;
+  color: #4d5156;
 }
 .modal__bg{
-    background	: rgba(0,0,0,0.8);
+    background	: rgba(0,0,0,0.74);
     height		: 100vh;
     position	: absolute;
     width		: 150%;
 }
 .modal__content{
-    background	: #fff;
-    left		: 50%;
-    padding		: 40px;
-    position	: absolute;
-    top			: 50%;
-    transform	: translate(-50%,-50%);
-    overflow-y	: scroll;
-	max-width	: inherit;
-    width		: 120%;
-    margin-left	: -260px;
+  background: #fffffc;
+  left: 36%;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  /* overflow-y: scroll; */
+  max-width: inherit;
+  width: 1200px;
+  height: 300px;
+  margin-left: -300px;
+  color: #4d5156;
+  border-radius: 5px;
 }
 /* -------- モーダルウィンドウ中身 --------*/
 .cp_qa *, .cp_qa *:before, .cp_qa *:after {
@@ -192,7 +321,7 @@ button.cp_btn:hover::before {
 }
 .cp_qa {
 	margin: 0 auto;
-	background: #ffffff;
+	background: #fffffc;
 }
 .cp_qa input {
 	display: none;
@@ -223,7 +352,7 @@ button.cp_btn:hover::before {
 	margin		: 0 0 -1px;
 	padding		: 15px 25px;
 	text-align	: center;
-	color		: black;
+	color		: #4d5156;
 	border		: 1px solid transparent;
 }
 .cp_qa label.cp_tabitem:before {
@@ -320,6 +449,10 @@ button.cp_btn:hover::before {
 		margin-right: 0px;
 	}
 }
+/* -- モーダルウィンドウの戻る表示 -- */
+js-modal-window {
+  cursor: pointer;
+}
 /* QAブロック */
 .cp_qa #cp_conttab1:checked ~ #cp_content1,
 .cp_qa #cp_conttab2:checked ~ #cp_content2,
@@ -342,7 +475,7 @@ button.cp_btn:hover::before {
 .cp_qa .cp_qain {
 	overflow-x: hidden;
 	margin: 0 auto;
-	color: #333333;
+	color: #4d5156;
 }
 .cp_qa .cp_qain .cp_actab {
 	padding: 3px 0;

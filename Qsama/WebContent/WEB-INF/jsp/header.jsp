@@ -18,11 +18,12 @@
     </tr>
   </table>
   </div>
+  
   <div class="header_right">
     <nav class="global">
       <ul class="globalList">
         <li><a href="/Qsama/S_MainServlet">TOP</a></li>
-        <li><a href="/Qsama/ProfileServlet">プロフィール編集</a></li>
+        <li><a href="/Qsama/ProfileServlet">マイページ</a></li>
         <li><a href="/Qsama/Question_postServlet">投稿</a></li>
         <li><a href="/Qsama/SearchServlet">検索</a></li>
         <li><a href="/Qsama/LogoutServlet">ログアウト</a></li>

@@ -50,7 +50,7 @@ a:active{
 .search_window {
 	top				: 5px;
 	background-color:#fffffc;
-	border			: 2px solid gold;
+	border			: 2px solid #f9c320;
 	padding			: 10px;
 }
 
@@ -72,20 +72,27 @@ a:active{
 
 /*  --------------  見出し  -------------- */
 #foo_serch1 {
-  margin: 0 30px 0 160px;
-  width: 300px;
+  margin: 0 130px 10px 140px;
+  width: 400px;
   display: inline-block;
+  background-color: #fffffc;
+  border-radius: 8px; 
+  border-bottom: 1px solid #ccc6;
 }
 
 #foo_serch2 {
   margin: 0 0 10px 0;
-  width: 30%;
+  width: 32%;
   display: inline-block;
   letter-spacing: -0.4em;
+  background-color: #fffffc;
+  border-radius: 8px; 
+  border-bottom: 1px solid #ccc6;
 }
 
 /*-----------------検索ランキング用-----------------*/
 .tabs {
+	border-bottom: 1px solid #ccc6;
   margin			: 0 auto;  
   padding			: 20px 30px;
   background-color	: #fffffc;
@@ -104,7 +111,7 @@ a:active{
 .tab_item {
   width				: 50%;
   height			: 50px;
-  border-bottom		: 3px solid gold;
+  border-bottom		: 3px solid #f9c320;
   background-color	: #d9d9d9;;
   line-height		: 50px;
   font-size			: 16px;
@@ -143,7 +150,7 @@ input[name="tab_item"] {
 
 	/*選択されているタブのスタイルを変える*/
 .tabs input:checked + .tab_item {
-  background-color	: gold;
+  background-color	: #ffd667;
   color				: #fffffc;
 }
 
@@ -152,11 +159,10 @@ input[name="tab_item"] {
   margin: 0 0 0 auto;
   padding: 20px 40px 0;
   background-color	: #fffffc;
-/*  box-shadow		: 0 0 10px rgba(0, 0, 0, 0.2);   */
+  border-bottom: 1px solid #ccc6;
   width				: 660px;
   height			: 350px;
   float				: left;
-/*  box-shadow: #bdc3c7 0 5px 5px;  */
   -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     -ms-border-radius: 8px;
@@ -169,7 +175,7 @@ input[name="tab_item"] {
 .tab_item2 {
   width				: 50%;
   height			: 50px;
-  border-bottom		: 3px solid gold;
+  border-bottom		: 3px solid #f9c320;
   background-color	: #d9d9d9;
   line-height		: 50px;
   font-size			: 16px;
@@ -194,6 +200,7 @@ input[name="tab_item2"] {
 
 	/*タブ切り替えの中身のスタイル*/
 .tab_content2 {
+	
   display		: none;
   padding		: 50px 40px 0 80px;
   clear			: both;
@@ -208,7 +215,7 @@ input[name="tab_item2"] {
 }
 
 .tabs2 input:checked + .tab_item2 {
-  background-color	: gold;
+  background-color	: #ffd667;
   color				: #fffffc;
 }
 
@@ -216,7 +223,7 @@ input[name="tab_item2"] {
 .m_items {
   width: 230px;
   height: 30px;
-  margin: 0 auto 35px;
+  margin: 0 auto 40px;
   padding: 8px;
 }
 
@@ -235,13 +242,104 @@ input[name="tab_item2"] {
 .sub_item {
 	color	:black;
 }
+/* ----------------- 検索Word入力部分 --------------- */
+.search_bar{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 50px;
+   width: 540px;
+   background-color: #f3f3f3;
+   margin: 0 -60px;
+   text-align: center;
+}
 
+.search_icon{ /*アイコンに一定のスペースを設ける*/
+    height: 15px;
+    padding: 0 5px;
+}
+
+input[name="search_word"] {
+   width: 350px;
+    display: inline-block;
+    /* margin: 0 0 0 50px; */
+    /* text-align: center; */
+    /* cursor: pointer; */
+    padding: 8px 20px;
+    background: #fffffc;
+    /* color: #f9c320; */
+    line-height: 1em;
+    transition: .3s;
+    border: 1.5px solid #f9c320;
+    border-radius: 2px;
+}
+input[name="search_word"]:focus {
+  border: 1.5px solid #f9c320;
+}
+
+input[name="submit"] {
+  outline: none;
+  border: 1px solid #09c9d999;
+  width: 80px;
+  margin: 0 0 0 10px;
+  height: 30px;
+  color: #fffffc;
+  background-color: #09c9d999;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[name="submit"]:hover {
+  color: #fffffc;
+  background: #09C9D9;
+}
+.choices:last-child {
+    margin: -10px 0;
+}
+/* -----------  ラジオボタン   ------------- */
+input[name="search_radio2"] {
+  margin: 15px 0 30px 0;
+}
+/*.custom-radio + .custom-radio {
+  margin-left: 2rem;
+}
+
+.genre [type="radio"] {
+  opacity: 0;
+}
+
+.genre label {
+  padding-left: 2rem;
+  position: relative;
+}
+
+.genre label::before {
+  content: "";
+  border: 1px solid #ff467e;
+  border-radius: 9999px;
+  display: inline-block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  top: 50%;
+  transform: translatey(-50%);
+  width: 20px;
+}
+
+.genre [type="radio"]:focus + label .radio-text {
+  background: linear-gradient(transparent 60%, #fd94b4 60%);
+}
+
+.genre [type="radio"]:checked + label::before {
+  border-width: 7px;
+}
 /*-----------------検索結果出力 全体用-----------------*/
 .search_results {
   padding		 : 10px;
 }
 
 .result_body {
+	border-bottom: 1px solid #ccc6;
   margin: 40px 0 auto;
   max-width: 100%;
   margin-left: -7px;

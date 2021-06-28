@@ -1,7 +1,4 @@
 @charset "UTF-8";
-.color-change {
-  color: #fff;
-}
 
 /* -------- <h?>タグ -------- */
 h1{
@@ -22,8 +19,8 @@ h2{
 }
 
 /* -------------- フォーム --------------- */
-
 .form-wrapper {
+	border-bottom: 1px solid #ccc6;
   display: flex;
   background-color: #fffffc;
   width: 1000px;
@@ -45,6 +42,14 @@ h2{
   padding-top: 5px;
   width: 300px;
 }
+
+/* 見出し */
+.foo1, .foo2 {
+  background-color: #fffffc;
+  border-radius: 8px; 
+  border-bottom: 1px solid #ccc6; 
+}
+
 /* -----------  ラジオボタン   ------------- */
 .A_level {
   padding-top: 20px;
@@ -130,6 +135,7 @@ h2{
 
 /* タブ */
 .cp_qa label.cp_tabitem {
+	width: 500px;
 	display: inline-block;
 	margin: 0 0 -1px;
 	padding: 15px 25px;
@@ -155,11 +161,12 @@ h2{
 /* --ブロックのバーの色 */
 .cp_qa input:checked + label[for*='1'] {
 	border-top: 5px solid #ffc06e;
-	width: 170px;
+	width: 490px;
 }
 .cp_qa input:checked + label[for*='2'] {
 	border-top: 5px solid #fd8b68;
-	width: 170px;
+	border-right: 1px solid #dddddd;
+    width: 496px;
 }
 
 /* レスポンシブデザイン対応 */
@@ -213,6 +220,9 @@ h2{
 .cp_qa .cp_qain label:hover {
   color: #09c9d999;
 }
+.cp_qa .cp_qain label:focus {
+  color: #09c9d999;
+}
 
 /* ＋アイコン */
 .cp_qa .cp_qain .cp_plus {
@@ -238,6 +248,10 @@ h2{
 	opacity: 0;
 	background-color: #f3f3f3;
 	border-radius: 18px;
+}
+
+.cp_actab-content p {
+  font-weight: 200;
 }
 
 /* 質問を開いた時の仕様 回答部分 */
@@ -345,6 +359,12 @@ input[type=checkbox]:checked ~ .cp_qa .cp_qain label {
   opacity: 1
 }
 
+.emergency1{
+  margin-right: 80px;
+}
+.emergency1, .emergency2 {
+  margin-top: 5px;
+}
 
 /* -------- テキストエリア --------*/
 
@@ -364,7 +384,7 @@ input[type=checkbox]:checked ~ .cp_qa .cp_qain label {
  /* overflow: scroll; */
 }
 
-#Q_content:checked {
+#Q_content:focus {
   outline: 0;
   border: 2px splid #E6A54D;
 }
@@ -375,8 +395,42 @@ input[type=checkbox]:checked ~ .cp_qa .cp_qain label {
 }
 
 /* --------ドラッグ＆ドロップ -------- */
-  
+/* ファイル選択ボタン */
+/*
+.drag-drop-buttons span {
+display: block;
+    color: #fffffc;
+    font-weight: 300;
+    font-size: 14px;
+    background: #ffd667;
+    padding: 8px 0;
+    border-radius: 16px;
+    max-width: 140px;
+    text-align: center;
+    
+    transition: .3s;
+    cursor: pointer;
+}
 
+.drag-drop-buttons span:hover {
+  background: #fffffc;
+  color: #ffd667;
+  border: 2px solid #ffd667;
+}
+.drag-drop-inside input[name="Postpic_url"] {
+position: relative;
+margin: 8px 0 0 -14px;
+}
+.drag-drop-inside input[name="Postpic_url"]::before {
+content: “添付ファイル：”;
+position: absolute;
+background: #fffffc;
+width: 110px;
+height: 26px;
+line-height: 1.8;
+text-align: right;
+}
+*/
 
 .text {
     position: absolute;
@@ -407,12 +461,13 @@ input[type=checkbox]:checked ~ .cp_qa .cp_qain label {
 #dragDropArea{
   background-color: #f4f4f4;
   margin: 10px;
-  padding: 10px;
+  padding: 30px 10px auto;
   border: #ddd dashed 5px;
-  min-height: 200px;
+  height: 460px;
   text-align: center;
   width: 400px;
-  
+  align-items: center;
+  justify-content: center;
 }
 
 #dragDropArea p{
@@ -467,21 +522,21 @@ input[type=checkbox]:checked ~ .cp_qa .cp_qain label {
 @import 'https://fonts.googleapis.com/css?family=Comfortaa:300,400,700&subset=cyrillic,cyrillic-ext,latin-ext';
 
 input[name="Q_submit"] {
-  color: #454545;
-  background: transparent;
-  border-width: 2px;
-  border-style: solid;
-  border-color: #454545;
-  position: relative;
-  margin: 1em;
-  display: inline-block;
-  padding: 0.5em 1em;
-  transition: all 0.3s ease-in-out;
-  text-align: center;
-/*  font-family: comfortaa; */
-  font-family: 'Noto Sans Japanese', sans-serif;
-  font-weight: bold;
-  width: 350px;
+  color: #4d5156;
+    background: #fffffc;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #ffd667;
+    position: relative;
+    margin: 1em;
+    display: inline-block;
+    padding: 0.5em 1em;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+    /* font-family: comfortaa; */
+    font-family: 'Noto Sans Japanese', sans-serif;
+    font-weight: 500;
+    width: 350px;
 
 }
 

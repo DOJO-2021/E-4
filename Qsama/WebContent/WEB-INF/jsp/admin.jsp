@@ -6,7 +6,10 @@
 <meta charset="UTF-8">
 <title>Qsama | 管理者ページ</title>
 <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+<!-- choice -->
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
 <link rel="stylesheet" href="css/admin.css">
+<link rel="stylesheet" href="css/common.css">
 </head>
 <body>
 <!-- 共通のヘッダー -->
@@ -19,6 +22,15 @@
   </c:otherwise>
 </c:choose>
 <!-- 共通ヘッダーここまで -->
+
+<!--  <h2>質問管理</h2>  -->
+<div class="foo">
+  <span class="letter" data-letter="質">質</span>
+  <span class="letter" data-letter="問">問</span>
+  <span class="letter" data-letter="管">管</span>
+  <span class="letter" data-letter="理">理</span>
+</div>
+
 
 <div class="content_box">
 	<!-- 通知欄 -->
@@ -56,7 +68,8 @@
 
 <!---------------------- 右側全体のコンテンツ ---------------------->
 		<div class="right_content" >
-				質　問　内　容
+			<div class="back_color">
+			<p class="admin_heading">質問内容</p>
 			<!-- 質問内容 -->
 			<div class="content1">	<!-- 一番上のコンテンツ -->
 				<c:forEach var="d" items="${DisplayGetList}" varStatus="DG">
@@ -68,11 +81,17 @@
 				</c:if>
 						${picURL}
 			</div>
+			<hr class="hr">
 			<form method="POST" id="answer_form1" name="answer_form2" action="/Qsama/AdminServlet">
 			<div class="middle_content"> <!-- 真ん中のコンテンツ -->
 				<!-- 質問カテゴリ修正欄 -->
+				
+<!----------------------- 回答入力フォーム ----------------------->
+				<p class="admin_heading">回答入力</p>
+				
+				<div class="admin_cat">
 				項目選択
-					<select class="major_items" name="m_items">
+					<select class="major_items js-choices" name="m_items" id="major_items">
 						<option value="" selected="selected">ジャンルを選択</option>
 						<option value="HTML">HTML</option>
 						<option value="CSS">CSS</option>
@@ -86,7 +105,8 @@
 				  <option value="${d.m_items}" selected>${d.m_items}</option>
 				  </c:forEach>
 				</select>
-				<select class="sub_item" name="s_items">
+				
+				<select class="sub_item js-choices" name="s_items" id="sub_item">
 						<option value="" selected="selected">詳細ジャンルを選択</option>
 						<option value="基礎・基本的な書式" data-val="HTML">基礎・基本的な書式</option>
 						<option value="見出し・段落・リスト" data-val="HTML">見出し・段落・リスト</option>
@@ -154,8 +174,8 @@
 						</c:forEach>
 					</select>
 					<br>
-<!----------------------- 回答入力フォーム ----------------------->
-				回　答　入　力
+					</div>
+				
 					<label>
 						<c:forEach var="d" items="${DisplayGetList}" varStatus="DG">
 						<input type="hidden" name="post_number" value="${d.post_Number}">
@@ -163,13 +183,15 @@
 						<textarea id="answer_area" name="answer_area"><c:forEach var="d" items="${DisplayGetList}" varStatus="DG">${d.a_content}</c:forEach>
 						</textarea><br>
 						<!-- 投稿ボタン -->
-						<button type="submit" name="answer_submit" class="answer_submit" onClick="return answersubmit()"style="width: 50%;" value="投稿">投   稿</button>
+						<button id="A_submit" type="submit" name="answer_submit" class="answer_submit" onClick="return answersubmit()" value="投稿">投   稿</button>
 					</label>
 			</div>
 		</form>
+		</div>
 			<div class="under_content" style="float:left;"> <!-- 下二つのコンテンツ -->
 				<!-- 質問公開設定 -->
-				<div class="content2">質問公開設定<br><br>
+				<div class="content2">
+				<p class="cont_mgm">質問公開設定</p>
 					<button style="width: 80%;" class="js-modal-open" data-target="modal01">公開済 - 投稿一覧表示</button><br><br>
 					<button style="width: 80%;" class="js-modal-open" data-target="modal02">未公開 - 投稿一覧表示</button>
 				</div>
@@ -477,11 +499,12 @@
 								<a class="js-modal-close" href="">閉じる</a>
 					</div><!--modal__inner-->
 				</div><!--modal-->
-			</div>
+			
 			<!-- 受講者質問管理 -->
-			<div class="content3" style="float:left;">受講者別質問管理
+			<div class="content3" style="float:left;">
+			<p class="cont_mgm">受講者別質問管理</p>
 					<form method="POST" id="personal_form" action="/Qsama/AdminServlet">
-						<select class="personal_items" name="personal_items">
+						<select class="personal_items  js-choices" name="personal_items" id="personal_items">
 							<option value="" selected>検索したい受講者を選択</option>
 							<c:forEach var="pp" items="${PersonalList}" varStatus="pp1">
 							<option value="${pp.name}" >${pp.name}</option>
@@ -498,9 +521,43 @@
 			</div>
 	    	</c:forEach>
 		</div>
+		</div>
 	</div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+	  new Choices('#major_items', {
+	    removeItemButton: true,        // 各アイテムに削除ボタンを付けるかどうか
+	    shouldSort: false,             // 選択肢はHTML記述順で表示
+	    noResultsText: '検索結果はありません',
+	    itemSelectText: '選択',         // Default: Press to select
+	    position: 'below'
+
+	  });
+	  new Choices('#sub_item', {
+		    removeItemButton: true,
+		    shouldSort: false,
+		    noResultsText: '検索結果はありません',
+		    itemSelectText: '選択',         // Default: Press to select
+		    position: 'bottom'
+		  });
+	  new Choices('#personal_items', {
+		    removeItemButton: true,
+		    shouldSort: false,
+		    noResultsText: '検索結果はありません',
+		    itemSelectText: '選択',         // Default: Press to select
+		    position: 'bottom'
+		  });
+	});
+</script>
+
+
 <jsp:include page="/WEB-INF/jsp/footer.jsp" />
+
 </body>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="js/Admin.js"></script>		<!--モーダルウィンドウ用js-->

@@ -14,20 +14,20 @@ header {
 }
 
 .container {
+	border-bottom: 1px solid #ccc6;
   width: 1000px;
-  margin: 0 auto 60px auto;
+  margin: 20px auto 60px auto;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
   border-radius: 8px;
   padding: 30px 80px;
-  background-color: white;
-/*  -webkit-box-shadow: #BDC3C7 0 5px 5px;
-  -moz-box-shadow: #BDC3C7 0 5px 5px;
-  box-shadow: #BDC3C7 0 5px 5px; */
+  background-color: #fffffc;;
 }
-
+.introducation {
+  margin: 30px auto;
+}
 .bg {
   width: 100%;
   margin-top: 5%;
@@ -104,10 +104,9 @@ header {
   left: -400px;
   font-size: 1.8em;
   text-align: center;
-  color: white;
+  color: #fffffc;
   padding-top: 18%;
   opacity: 1;
-  font-family: 'FontAwesome';
   font-weight: 300;
   border: 3px solid #FF773E ;
   -webkit-border-radius: 50%;
@@ -151,7 +150,7 @@ header {
   width: 100%;
   height: 171px;
   padding: 1.2em 1em 0 1em;
-  color: white;
+  color: #fffffc;
   text-align: center;
   opacity: 0;
   -webkit-transition-property: all;
@@ -194,14 +193,14 @@ header {
   border: 1px solid #09c9d999;
   width: 100px;
   height: 30px;
-  color: #fff;
+  color: #fffffc;
   background-color: #09c9d999;
   border-radius: 100vh;
   cursor: pointer;
 }
 
 #h_edit:hover, #h_submit:hover, #h_reset:hover {
-  color: #fff;
+  color: #fffffc;
   background: #09C9D9;
 }
 
@@ -323,15 +322,34 @@ canvas {
   border: 1px solid #09c9d999;
   width: 100px;
   height: 30px;
-  color: #fff;
+  color: #fffffc;
   background-color: #09c9d999;
   border-radius: 100vh;
   cursor: pointer;
 }
 
 #display_form button[name="button"]:hover {
-  color: #fff;
+  color: #fffffc;
   background: #09C9D9;
 }
 
+/*  過去の質問一覧  */
+.container2 {
+	border-bottom: 1px solid #ccc6;
+  width: 1000px;
+  height: auto;
+  min-height: 200px;
+  margin: 20px auto auto auto;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  border-radius: 8px;
+  padding: 20px 30px;
+  background-color: #fffffc;
+}
+.old_p_list {
+  margin: 0;
+  font-weight: 300;
+}
 
