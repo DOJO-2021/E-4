@@ -56,7 +56,7 @@ padding: 15px 2px 0 1px;
   color: #4d5156;
   overflow: none;
   width: 1000px;
-  height: 13em;
+  height: auto;
   background-color: #fffffc;
   -webkit-border-radius: 8px;
     -moz-border-radius: 8px;

@@ -36,7 +36,7 @@ header {
 }
 
 .bio {
-  background-color: #FFAD90;
+  background-color: #09c9d999;
   background-image: url(../logo/profile_header2.png);
 }
 .bio:hover > .desc {
@@ -99,7 +99,7 @@ header {
 .icon {
  background-image: url(../logo/computer_businessman.png);
  background: no-repeat;
-    /* position: absolute; */
+    position: absolute; 
     width: 180px;
     height: 180px;
     margin: -350px -370px;
@@ -115,7 +115,7 @@ header {
     /* padding-top: 18%; */
     opacity: 1;
     font-weight: 300;
-    border: 1px solid #f3f3f3;
+  /*  border: 1px solid #f3f3f3;  */
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
@@ -262,13 +262,14 @@ canvas {
 }
 /* 質問 */
 .cp_qa .cp_actab label {
+	color: #4d5156;
+    border-bottom: 1px solid #ccc;
 	line-height			: 1.6;
 	position			: relative;
 	display				: block;
 	margin				: 0 0 0 0;
 	padding				: 1em 2em 1em 1em;
 	cursor				: pointer;
-	border-bottom		: 1px solid #1b2538;
 }
 .cp_qa .cp_actab label:hover {
 	color: #00838F;

@@ -149,17 +149,21 @@ h2{
 }
 .cp_qa input:checked + label {
 	color: #555555;
-	border: 1px solid #dddddd;
-	border-bottom: 1px solid #ffffff;
+/*	border: 1px solid #dddddd;
+	border-bottom: 1px solid #ffffff;   */
 }
 
 /* --ブロックのバーの色 */
 .cp_qa input:checked + label[for*='1'] {
-	border-top: 5px solid #ffc06e;
+	background-color: #ffd667;
+    border-top: 5px solid #f4a641;
+/*
+	border-top: 5px solid #ffc06e;  	*/
 	width: 490px;
 }
 .cp_qa input:checked + label[for*='2'] {
 	border-top: 5px solid #fd8b68;
+	background-color: #ffd667;
 	border-right: 1px solid #dddddd;
     width: 496px;
 }
@@ -192,6 +196,7 @@ h2{
 
 /* Q&A 内部(.cp_qain) */
 .cp_qa .cp_qain {
+	border: 1px solid #ffd667;
 	overflow-x: hidden;
 	margin: 0 auto;
 	color: #4d5156;
@@ -621,80 +626,3 @@ button:hover {
   margin: auto;
 }
 
-/*試し　　　いらんやつ
-
-.container {
-	box-sizing: border-box;
-  padding: 2rem;
-}
-
-.form-group + .form-group {
-  margin-top: 1.5rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-}
-*/
-/*  てらっこ  */
-
-/*
-.anime_move1 {
-position: relative;
-    width: 300px;
-    height: 300px;
-    margin: 0 auto;
-    -webkit-animation: anime_move1 30s linear infinite;
-    animation: anime_move1 30s linear infinite;
-}
-/*
-?s→アニメーション１回分が?秒
-linear→一定の速度で動く
-infinite→無限に繰り返す
-*/
-/*
-@keyframes anime_move1 {
-  0% {
-  transform: translateX(0px);
-  }
-  
-  5% {
-  transform: rotate(315deg);
-  }
-  20% {
-  transform: translateX(200px);
-  }
-  25% {
-  transform: rotate(45deg);
-  }
-  45% {
-  transform: translateX(200px);
-  }
-  50% {
-  transform: rotate(135deg);
-  }
-  20% {
-  transform: translateX(200px);
-  }
-  25% {
-  transform: rotate(225deg);
-  }
-  20% {
-  transform: translateX(200px);
-  }
-}
-/*
-@keyframes anime_move1 {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.anime_move {
-  animation: rotate-elm 30s linear infinite;
-}
-@keyframes rotate-elm {
-  100% { transform: rotate(-360deg); }
-}
-*/

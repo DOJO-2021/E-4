@@ -300,6 +300,12 @@ input[name="submit"]:hover {
 .choices:last-child {
     margin: -10px 0;
 }
+.choices [name="s_items2"] {
+  width: 220px;
+  position: relative;
+  margin: 0 0 0 5px;
+  display: inline-block;
+}
 /* -----------  ラジオボタン   ------------- */
 input[name="search_radio2"] {
   margin: 15px 0 5px 0;
