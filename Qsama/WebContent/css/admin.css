@@ -45,11 +45,11 @@
 }
 /*タブのスタイル*/
 .tab_item {
-	cursor: pointer;
+  cursor: pointer;
   width: calc(100%/2);
   height: 35px;
   border-bottom: 3px solid #f9c320;
-  background-color: #ffd667;
+  background-color: #ccc;
   border-right: 1px solid #fff;
   line-height: 35px;
   font-size: 14px;
@@ -71,8 +71,8 @@ input[name="tab_item"] {
 
 /*タブ切り替えの中身のスタイル*/
 .tab_content {
-	border-bottom: 1px solid #ccc6;
-	border-left: 1px solid #ccc6;
+  border-bottom: 1px solid #ccc6;
+  border-left: 1px solid #ccc6;
   display: none;
   padding: 20px 20px 0;
   clear: both;
@@ -95,6 +95,7 @@ input[name="tab_item"] {
 .tabs input:checked + .tab_item {
   color: #fff;
   width: 50%;
+  background-color: #09C9D9;
 }
 
 .content_box .content1 {
@@ -103,6 +104,7 @@ input[name="tab_item"] {
   border-bottom: 0.5px solid #cccccc42;
   width: 500px;
   height: 170px;
+  padding: 5px;
   margin: 0 auto 20px auto;
   border-radius: 3px;
 }
@@ -125,15 +127,21 @@ input[name="tab_item"] {
 /* 項目選択欄 */
 .admin_cat {
   margin: 0 0 10px 10px;
+  height: 75px;
 }
-
-.choices {
-  width: 220px;
+.admin_cat .choices {
+  width: 210px;
   position: relative;
-  margin: 0 0 0 5px;
-  display: inline-block;
+  margin: 5px 5px 0 2px;
 }
 
+.admin_cat2 .choices:last-child {
+  width: 275px;
+  margin-left: 5px;
+}
+.admin_cat2 {
+  display: flex;
+}
 #answer_area {
   font-family: inherit;
   font-size: inherit;
@@ -142,6 +150,7 @@ input[name="tab_item"] {
   background: #fffffc;
   width:500px;
   height:170px;
+  padding: 5px;
   margin: 0 10px 5px 10px;
   border-radius: 3px;
 }
@@ -154,11 +163,11 @@ input[name="tab_item"] {
 /* --------  投稿ボタン  --------- */
 #A_submit {
   outline: none;
-  border: 1px solid #09c9d999;
+  border: 1px solid #09c9d9;
   width: 200px;
   height: 30px;
   color: #fff;
-  background-color: #09c9d999;
+  background-color: #09c9d9;
   border-radius: 100vh;
   cursor: pointer;
   margin: 0 0 10px 305px;
@@ -166,10 +175,12 @@ input[name="tab_item"] {
 
 #A_submit:hover {
   color: #fff;
-  background: #09C9D9;
+  background: #09C9D999;
 }
 
-
+.under_content {
+  display: flex;
+}
 
 
 
@@ -226,7 +237,7 @@ input[name="tab_item"] {
 }
 .content3 button {
   outline: none;
-  border: 1px solid #09c9d999;
+  border: 1px solid #09c9d9;
   width: 80px;
   height: 30px;
   color: #fffffc;
@@ -239,6 +250,10 @@ input[name="tab_item"] {
 .content3 button:hover {
   color: #fff;
   background: #09C9D9;
+}
+.content3 .choices {
+  width: 220px;
+  margin: 5px 0 10px 10px;
 }
 
 /* -------- 最新質問ボタン --------*/
@@ -267,13 +282,13 @@ button.cp_btn::after {
 	transition		: all .4s;
 }
 button.cp_btn::before {
-	border-top		: 3px solid #f9c320;
-	border-bottom	: 3px solid #f9c320;
+	border-top		: 3px solid #09C9D9;
+	border-bottom	: 3px solid #09C9D9;
 	transform		: scale(0, 1);
 }
 button.cp_btn::after {
-	border-right	: 3px solid #f9c320;
-	border-left		: 3px solid #f9c320;
+	border-right	: 3px solid #09C9D9;
+	border-left		: 3px solid #09C9D9;
 	transform		: scale(1, 0);
 }
 button.cp_btn:hover {
@@ -283,40 +298,90 @@ button.cp_btn:hover::after,
 button.cp_btn:hover::before {
 	transform		: scale(1);
 }
+button.cp_btn:checked ~ button.cp_btn {
+  border: 3px solid #09C9D9;
+}
+button.cp_btn2 {
+  cursor: pointer;
+  position: relative;
+  display: block;
+  width: 300px;
+  height: 50px;
+  padding: 0.5em;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  transition: all .4s;
+  color: #4d5156;
+}
 
-/* -------- モーダルウィンドウ表示　一覧２つ --------*/
+/* -------- 公開非公開・モーダルウィンドウ表示　一覧２つ --------*/
 .modal{
   display: none;
   height: 100vh;
   position: fixed;
   top: 0;
-  width: 70%;
+  width: 100%;
   color: #4d5156;
+  z-index: 2;
 }
 .modal__bg{
-    background	: rgba(0,0,0,0.74);
+    background	: rgba(0,0,0,0.8);
     height		: 100vh;
     position	: absolute;
-    width		: 150%;
+    width: 850%;
+    margin-left: -900px;
 }
 .modal__content{
   background: #fffffc;
-  left: 36%;
-  padding: 40px;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  /* overflow-y: scroll; */
-  max-width: inherit;
-  width: 1200px;
-  height: 300px;
-  margin-left: -300px;
+    left: 32%;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    overflow-y: scroll;
+    max-width: inherit;
+    width: 1200px;
+    height: 400px;
+    margin-left: -500px;
+    color: #4d5156;
+    border-radius: 5px;
+    z-index: 999;
+}
+.modal_last1 {
+  display: none;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  width: 100%;
   color: #4d5156;
-  border-radius: 5px;
+  z-index: 2;
+}
+.modal_last2{
+    background	: rgba(0,0,0,0.8);
+    height		: 100vh;
+    position	: absolute;
+    width: 220%;
+    margin-left: -1900px
+}
+.modal_last3{
+  background: #fffffc;
+    left: 16%;
+    padding: 45px 50px 25px 0px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    overflow-y: scroll;
+    max-width: inherit;
+    width: 550px;
+    height: 400px;
+    margin-left: -500px;
+    color: #4d5156;
+    border-radius: 5px;
+    z-index: 999;
 }
 /* -------- モーダルウィンドウ中身 --------*/
 .cp_qa *, .cp_qa *:before, .cp_qa *:after {
-	font-family: 'FontAwesome', sans-serif;
 	-webkit-box-sizing: border-box;
 	        box-sizing: border-box;
 }
@@ -374,7 +439,7 @@ button.cp_btn:hover::before {
 .cp_qa label.cp_tabitem[for*='15']:before { content: '\f2bd'; }
 .cp_qa label.cp_tabitem[for*='16']:before { content: '\f15c'; }
 .cp_qa label.cp_tabitem[for*='17']:before { content: '\f0f4'; }
-.cp_qa label.cp_tabitem[for*='18']:before { content: '\f001'; }
+.cp_qa label.cp_tabitem[for*='18']:before { content: '\f001'; }  
 .cp_qa label.cp_tabitem:hover {
 	cursor: pointer;
 	color: #888888;

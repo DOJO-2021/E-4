@@ -90,7 +90,8 @@
 				<p class="admin_heading">回答入力</p>
 				
 				<div class="admin_cat">
-				項目選択
+				項目選択<br>
+				<div class="admin_cat2">
 					<select class="major_items js-choices" name="m_items" id="major_items">
 						<option value="" selected="selected">ジャンルを選択</option>
 						<option value="HTML">HTML</option>
@@ -173,6 +174,7 @@
 						<option value="${d.s_items}" selected>${d.s_items}</option>
 						</c:forEach>
 					</select>
+					</div>
 					<br>
 					</div>
 				
@@ -510,16 +512,30 @@
 							<option value="${pp.name}" >${pp.name}</option>
 							</c:forEach>
 						</select>
-						<button type="submit" id="personal_submit" name="personal_submit"onClick="personalsubmit()">検索</button>
+						<button type="submit" id="personal_submit" name="personal_submit"  class="js-modal-open" data-target="modal03" onClick="personalsubmit()">検索</button>
 					</form>
-			<c:forEach var="st" items="${StudentList}" varStatus="stu">
-	     	<div>
-	     		<form method="POST" id="personal2_form" action="/Qsama/AdminServlet">
-	     			<input type="hidden" name="post_number" value="${st.post_Number}">
- 					<button class="cp_btn" id="title_${stu.index}" >質問No:${st.post_Number} ｼﾞｬﾝﾙ：${st.m_items}</button><br>
- 				</form>
-			</div>
-	    	</c:forEach>
+					
+			<!---------- 【モーダルウィンドウ】受講者別質問表示 ---------->
+				<div id="modal03" class="modal js-modal  modal_last1">
+					<div class="modal__bg js-modal-close modal_last2"></div>
+					<div class="modal__content  modal_last3">
+					<div class="cp_qa" >
+	
+					<c:forEach var="st" items="${StudentList}" varStatus="stu">
+				     	<div>
+			     		<form method="POST" id="personal2_form" action="/Qsama/AdminServlet">
+			     			<input type="hidden" name="post_number" value="${st.post_Number}">
+		 					<button class="cp_btn2" id="title_${stu.index}" >質問No:${st.post_Number} ｼﾞｬﾝﾙ：${st.m_items}</button><br>
+		 				</form>
+						</div>
+		    		</c:forEach>
+		    		
+		    
+	    			</div>
+					<a class="js-modal-close" href="">閉じる</a>
+					</div><!--modal__inner-->
+				</div><!--modal-->
+
 		</div>
 		</div>
 	</div>

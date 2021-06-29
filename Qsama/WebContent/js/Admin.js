@@ -59,8 +59,6 @@ function personalsubmit() {
 	}
 
 
-
-
 /* ------「select」を変更したら即submit------
 $(function(){
   $("#personal_items").change(function(){

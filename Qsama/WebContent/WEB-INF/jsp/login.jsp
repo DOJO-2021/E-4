@@ -11,7 +11,7 @@
 	<meta charset="UTF-8">
 	<title>ログイン</title>
 </head>
-<body>
+<body class="login_body">
 <div class="tabs">
   <input id="login" type="radio" name="tab_item" checked>
   <label class="tab_item" for="login">ログイン</label>

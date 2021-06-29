@@ -8,7 +8,7 @@
 
 <!-- JavaScript -->
 <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?ver=1.11.3'></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 <script type='text/javascript' src= "js/question_post.js"></script>
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" type="text/css" href="css/question_post.css">
@@ -209,7 +209,7 @@
 
 
     <!------------------   緊急レベル選択   ------------------>
-    <div class="emergency custom-radio" > 回答は緊急ですか？<br>
+    <div class="emergency custom-radio" ><p class="emergency_text">回答は緊急ですか？</p><br>
       <input type="radio" name="emergency" value="0" id="emergency1"><label for="emergency1"><span class="radio-text emergency1">はい</span></label>
       <input type="radio" name="emergency" value="1" id="emergency2" checked><label for="emergency2"><span class="radio-text emergency2">いいえ</span></label>
     </div>

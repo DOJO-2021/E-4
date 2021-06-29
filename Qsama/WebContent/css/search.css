@@ -221,7 +221,7 @@ input[name="tab_item2"] {
 
 	/* カテゴリ選択のスタイル */
 .m_items {
-  width: 230px;
+  width: 240px;
   height: 30px;
   margin: 0 auto 40px;
   padding: 8px;
@@ -229,14 +229,10 @@ input[name="tab_item2"] {
 }
 
 .s_items {
-  width: 230px;
+  width: 240px;
   height: 60px;
   padding: 8px;
   z-index:9999 !important;
-}
-.office_search #s_items2 {
-  margin: 0 ;
-  width: 200px;
 }
 
 /*-----------------ジャンル切替-----------------*/
@@ -300,12 +296,29 @@ input[name="submit"]:hover {
 .choices:last-child {
     margin: -10px 0;
 }
+
+
 .choices [name="s_items2"] {
   width: 220px;
   position: relative;
   margin: 0 0 0 5px;
   display: inline-block;
 }
+
+
+.office_search .choices {
+  width: 220px;
+  margin: 10px 0 0 0;
+}
+.office_search .choices:last-child {
+  width: 220px;
+  margin: -10px 0 0 0;
+}
+.office_search {
+  z-index: 99;
+}
+
+
 /* -----------  ラジオボタン   ------------- */
 input[name="search_radio2"] {
   margin: 15px 0 5px 0;
@@ -315,10 +328,7 @@ input[name="search_radio"] {
   margin: 15px 0 5px 0;
 }
 
-.office_search .choices {
-  width: 220px;
-  margin: 10px 0 0 0;
-}
+
 /*.custom-radio + .custom-radio {
   margin-left: 2rem;
 }

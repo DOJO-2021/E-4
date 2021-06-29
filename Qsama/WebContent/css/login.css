@@ -1,13 +1,15 @@
 @charset "UTF-8";
 
 /*すべてのページに適応*/
-body {
+.login_body {
   text-align: center;
   background-image: url(../logo/Villager.jpg);
   background-color: rgba(255,255,255,0.8);
   background-blend-mode: lighten;
   font-family: 'Noto Sans Japanese', sans-serif;
   color: #4d5156;
+  margin: 0 auto;
+  max-width: 1000px;
 }
 
 /*タブ切り替え全体のスタイル*/

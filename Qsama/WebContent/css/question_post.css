@@ -34,7 +34,7 @@ h2{
 }
 
 .form1 {
-  padding: 10px 0 0 15px;
+  padding: 19px 0 0 15px;
   margin: 0 auto;
 }
 
@@ -84,12 +84,14 @@ h2{
 
 /* -----------  緊急レベル   ------------- */
 .emergency, .Q_content {
-  padding-top: 20px;
+  padding-top: 10px;
 }
-
+.emergency_text {
+  margin: 10px 0 -18px 1em;
+}
 .form2 {
 /* padding-left: 60px; */
-  padding-top: 15px;
+  padding-top: 13px;
   margin: 0 auto;
 }
 
@@ -270,6 +272,10 @@ input[type=checkbox]:checked ~ .cp_qa .cp_qain label {
 	-webkit-transform: rotate(45deg);
 	        transform: rotate(45deg);     
 }
+/* ---------  JavaScriptの表示部分  ------------ */
+#output1, #output2 {
+  margin: 3px;
+}
 
 /* ----------------- 投稿フォーム  ----------------- */
 /* -------   セレクトタグ   ------- */
@@ -433,7 +439,7 @@ text-align: right;
 }
 */
 .drag-drop-inside {
-  padding: 120px 10px;
+  padding: 110px 10px;
   text-align: center;
 }
 
@@ -519,7 +525,7 @@ text-align: right;
 
 #previewImage {
   max-width: 300px;
-  max-height: 200px;
+  max-height: 150px;
 }
 
 

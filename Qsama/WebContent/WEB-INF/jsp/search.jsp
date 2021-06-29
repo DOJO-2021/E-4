@@ -270,7 +270,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	  new Choices('#m_items', {
 	    removeItemButton: true,        // 各アイテムに削除ボタンを付けるかどうか
 	    shouldSort: false,             // 選択肢はHTML記述順で表示
-	    noResultsText: '検索結果はありません',
 	    itemSelectText: '選択',         // Default: Press to select
 	    searchEnabled: false,
 	    position: 'bottom'
@@ -279,7 +278,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	  new Choices('#s_items', {
 		    removeItemButton: true,
 		    shouldSort: false,
-		    noResultsText: '検索結果はありません',
 		    itemSelectText: '選択',         // Default: Press to select
 		    position: 'bottom',
 		    searchEnabled: false
@@ -287,20 +285,19 @@ document.addEventListener('DOMContentLoaded', () => {
 	  new Choices('#m_items2', {
 		    removeItemButton: true,        // 各アイテムに削除ボタンを付けるかどうか
 		    shouldSort: false,             // 選択肢はHTML記述順で表示
-		    noResultsText: '検索結果はありません',
 		    itemSelectText: '選択',         // Default: Press to select
 		    searchEnabled: false,
 		    position: 'bottom'
 
 		  });
 	  new Choices('#s_items2', {
-			removeItemButton: true,
-			shouldSort: false,
-			noResultsText: '検索結果はありません',
+		    removeItemButton: true,        // 各アイテムに削除ボタンを付けるかどうか
+		    shouldSort: false,             // 選択肢はHTML記述順で表示
 		    itemSelectText: '選択',         // Default: Press to select
-			position: 'bottom',
-			searchEnabled: false
-		 });
+		    searchEnabled: false,
+		    position: 'bottom'
+
+		  });
 });
 </script>
 

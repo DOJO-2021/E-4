@@ -13,6 +13,7 @@
   <link href="https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
   <!-- font awesome -->
 <link href="https://use.fontawesome.com/releases/5.0.0/css/all.css" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/3.1.0/css/all.css" rel="stylesheet">
   <script type="text/javascript" src="/Qsama/js/profile.js"></script>
   <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
 </head>

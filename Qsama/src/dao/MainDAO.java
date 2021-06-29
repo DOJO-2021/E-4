@@ -25,7 +25,7 @@ public class MainDAO {
 
 				// SQL文の準備 回答フラグを取得 ac_idを一致させる
 				String sql = "SELECT l.user_id, l.ac_id, p.q_date, p.m_items, m.a_flag FROM login as l INNER JOIN management_word  as m INNER JOIN post_word  as p"
-						+ " on l.ac_id=p.ac_id on m.post_number = p.post_number  where m.a_flag=1 and l.user_id= '"+user_id +"'";
+						+ " on l.ac_id=p.ac_id on m.post_number = p.post_number  where m.a_flag=1 and l.user_id= '"+user_id +"' order by p.q_date desc";
 
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 

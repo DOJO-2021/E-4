@@ -124,14 +124,13 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 /* ---------------------------  notNull制約部分が未記入・未選択で投稿した場合  ---------------------------- */
-    /*
+  
     document.getElementById('form').onsubmit = function(event) {
       const M_items = document.getElementById('form').M_items.value;         // 大項目
       const Q_content = document.getElementById('form').Q_content.value;     // 質問内容
 
 
       if (M_items != "" && Q_content != ""){
-     		event.preventDefault();
 			console.log('登録成功');
 			window.alert('投稿完了しました！');
 
@@ -157,4 +156,4 @@ document.addEventListener("DOMContentLoaded", function(){
 	 };
 
 
-    */
+  
