@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.IdpwDAO;
+import dao.ProfileDAO;
 import model.LoginUser;
 
 /**
@@ -52,6 +53,13 @@ public class RegistServlet extends HttpServlet {
 			IdpwDAO bDao = new IdpwDAO();
 			if (bDao.insert(new LoginUser(0, id, pw, myclass, email, name, rank2))) {	// 登録成功
 				System.out.println("登録成功！");
+
+				ProfileDAO pDao = new ProfileDAO();
+				// -------------新規登録したユーザーの共通ID「ac_id」を取得-------------
+				String ac_id = bDao.acReturn(id, pw);
+				// ----新規登録したユーザーの「氏名・クラス」をプロフィールに書き込み(新規ページ確保)----
+				pDao.NewUser(myclass, name, ac_id);
+
 			}
 			else {												// 登録失敗
 				System.out.println("登録失敗！");
@@ -67,6 +75,12 @@ public class RegistServlet extends HttpServlet {
 			IdpwDAO bDao = new IdpwDAO();
 			if (bDao.insert(new LoginUser(0, id, pw, myclass, email, name, rank2))) {	// 登録成功
 				System.out.println("登録成功！");
+
+				ProfileDAO pDao = new ProfileDAO();
+				// -------------新規登録したユーザーの共通ID「ac_id」を取得-------------
+				String ac_id = bDao.acReturn(id, pw);
+				// ----新規登録したユーザーの「氏名・クラス」をプロフィールに書き込み(新規ページ確保)----
+				pDao.NewUser(myclass, name, ac_id);
 			}
 			else {												// 登録失敗
 				System.out.println("登録失敗！");

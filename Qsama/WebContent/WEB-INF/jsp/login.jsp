@@ -3,6 +3,7 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="/Qsama/css/login.css">
+	<link rel="stylesheet" href="css/common.css">
 	<!-- choice -->
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
 	<script type='text/javascript' src= "js/login.js"></script>
@@ -47,8 +48,10 @@
 	      <label class = "content"><input type="text" placeholder = "氏名" name = "name"required></label><br>
 	      <label class = "content"><input type="password" placeholder = "パスワード" name = "pw"required></label><br>
           <div class="rank custom-radio">
-	          <input type="radio" name="rank" value="1" checked="checked" id="rank1"><label class = "content" for="rank1"><span class="radio-text"> 受講者</span></label>
-			  <input type="radio" name="rank" value="2" id="rank2"><label class = "content" for="rank2" ><span class="radio-text"> 管理者</span></label><br>
+	          <input type="radio" name="rank" value="1" checked="checked" id="rank1">
+	          <label class = "content" for="rank1"><span class="radio-text"> 受講者</span></label>
+			  <input type="radio" name="rank" value="2" id="rank2">
+			  <label class = "content" for="rank2" ><span class="radio-text"> 管理者</span></label><br>
 	      </div>
 	    
 	    <div class = "button">

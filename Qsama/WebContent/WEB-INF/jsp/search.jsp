@@ -42,14 +42,6 @@
 			<span class="letter" data-letter="索">索</span>
 		</div>
 
-	  	<div class="foo"  id="foo_serch2">
-			<span class="letter" data-letter="ラ">ラ</span>
-			<span class="letter" data-letter="ン">ン</span>
-			<span class="letter" data-letter="キ">キ</span>
-			<span class="letter" data-letter="ン">ン</span>
-			<span class="letter" data-letter="グ">グ</span>
-		</div>
-
 
 		<form method="POST" id="search_form" action="/Qsama/SearchServlet">
 			<div id="search_window" class="tabs2">
@@ -68,17 +60,19 @@
 							<input type="search" id="search_word" class="search_word" name="search_word" size="50" placeholder="検索キーワード(例) JavaScript オブジェクト" autofocus required>
 							<input type="submit" name="submit" value="検索" id="search_submit">
 						</div>
-						<div class="genre" style="width:50%; float:left;">
+						<div class="genre custom-radio" style="width:50%; float:left;">
 						<br>検索条件<br>
-							<input type="radio" name="search_radio" value="and" checked> 全てのワードを含む<br>
-							<input type="radio" name="search_radio" value="or"> いずれかのワードを含む<br>
+							<input type="radio" name="search_radio" value="and" id="search_radio3" checked>
+							<label for="search_radio3"><span class="radio-text"> 全てのワードを含む</span></label><br>
+							<input type="radio" name="search_radio" value="or" id="search_radio4">
+							<label for="search_radio4"><span class="radio-text"> いずれかのワードを含む</span></label><br>
 						</div>
 
 						<div class="pulldownset" style="float:left;">
-						<br>検索カテゴリ選択<br>
+						<br>検索範囲選択<br>
 						<div class="m_items">
 					<select class="major_items js-choices" name="m_items" id="m_items">
-						<option value="" selected="selected">カテゴリを選択</option>
+						<option value="" selected="selected">大カテゴリを選択</option>
 						<option value="HTML">HTML</option>
 						<option value="CSS">CSS</option>
 						<option value="JavaScript">JavaScript</option>
@@ -166,7 +160,6 @@
 						<div class="search_bar">
 							<i class="fas fa-search search_icon"></i>
 							<input type="text" class="input_items" name="search_word2" placeholder="検索キーワード">
-							<i class="fas fa-times search_icon"></i>
 							<input type="submit" name="submit" value="検索">
 						</div>
 				<div style="width:50%; float:left;" class="custom-radio">
@@ -177,15 +170,15 @@
 					<label for="search_radio2"><span class="radio-text"> いずれかのワードを含む</span></label><br>
 				</div>
 				
-				<div style="float:left;">
+				<div style="float:left;" class="office_search">
 					<br>ジャンル選択<br>
-					<select class="major_items2" name="m_items2">
+					<select class="major_items2 js-choices" name="m_items2" id="m_items2">
 						<option value="" selected="selected">ジャンルを選択</option>
 						<option value="Procedure">事務手続き</option>
 						<option value="Report">遅刻・欠席・退勤忘れ</option>
 						<option value="S_other">その他</option>
 					</select><br>
-					<select class="sub_item2" name="s_items2">
+					<select class="sub_item2 js-choices" name="s_items2" id="s_items2">
 						<option value="" selected="selected">項目を選択</option>
 						<option value="項目A" data-val="Procedure">項目A</option>
 						<option value="項目B" data-val="Procedure">項目B</option>
@@ -206,16 +199,16 @@
 
 		<div class="tabs" style="float:left;">
 			<input id="w_ranking" type="radio" name="tab_item" checked>
-			<label class="tab_item" for="w_ranking">週間</label>
+			<label class="tab_item" for="w_ranking">週間ランキング</label>
 			<input id="a_ranking" type="radio" name="tab_item">
-			<label class="tab_item" for="a_ranking">通期</label>
+			<label class="tab_item" for="a_ranking">通期ランキング</label>
 			<div class="tab_content" id="w_ranking_content">
 				<div class="tab_content_description">
 				<p class="c-txtsp">
 				<!--    <h3>週間ランキング</h3>    -->
 					<ol class="ranking">
 					<c:forEach var="w" items="${WeekRankingList}" varStatus="t1">
-						${(t1.index)+1}位  :  ${w.word} <br>
+						${(t1.index)+1}位　:　${w.word} <br>
 					</c:forEach>
 					</ol>
 				</div>
@@ -226,7 +219,7 @@
 				<!-- <h3>通期ランキング</h3>   -->
 					<ol class="ranking">
 					<c:forEach var="y" items="${MaxRankingList}" varStatus="t2">
-						${(t2.index)+1}位 ： ${y.word} <br>
+						${(t2.index)+1}位　:　${y.word} <br>
 					</c:forEach>
 					</ol>
 				</div>
@@ -279,6 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	    shouldSort: false,             // 選択肢はHTML記述順で表示
 	    noResultsText: '検索結果はありません',
 	    itemSelectText: '選択',         // Default: Press to select
+	    searchEnabled: false,
 	    position: 'bottom'
 
 	  });
@@ -287,11 +281,27 @@ document.addEventListener('DOMContentLoaded', () => {
 		    shouldSort: false,
 		    noResultsText: '検索結果はありません',
 		    itemSelectText: '選択',         // Default: Press to select
+		    position: 'bottom',
+		    searchEnabled: false
+	 });
+	  new Choices('#m_items2', {
+		    removeItemButton: true,        // 各アイテムに削除ボタンを付けるかどうか
+		    shouldSort: false,             // 選択肢はHTML記述順で表示
+		    noResultsText: '検索結果はありません',
+		    itemSelectText: '選択',         // Default: Press to select
+		    searchEnabled: false,
 		    position: 'bottom'
 
-
 		  });
-	});
+	  new Choices('#s_items2', {
+			removeItemButton: true,
+			shouldSort: false,
+			noResultsText: '検索結果はありません',
+		    itemSelectText: '選択',         // Default: Press to select
+			position: 'bottom',
+			searchEnabled: false
+		 });
+});
 </script>
 
 </body>

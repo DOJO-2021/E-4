@@ -184,7 +184,7 @@ input[name="Login"], input[name="regist"] {
   display       : inline-block;
   margin: 40px auto 0 auto;
   font-family: 'Noto Sans Japanese', sans-serif;
-  font-weight: bolder;
+  font-weight: 300;
 /*  font-size     : 18pt;         文字サイズ */
   text-align    : center;      /* 文字位置   */
   cursor        : pointer;     /* カーソル   */

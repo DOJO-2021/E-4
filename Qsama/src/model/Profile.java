@@ -2,6 +2,7 @@ package model;
 import java.io.Serializable;
 
 public class Profile implements Serializable {
+	private int pro_id;			// プロフィールID
 	private int ac_id;				// 識別ID
 	private int user_id;			// ユーザーID
 	private String company;		// 会社名
@@ -77,9 +78,25 @@ public class Profile implements Serializable {
 		this.qualification = qualification;	// 資格
 		this.favorite = favorite;			// 好きなアーティスト
 		this.comment = comment;				// 一言コメント
-		this.back_url = back_url;		// 壁紙のURL
-		this.prof_url = prof_url;		// 顔写真のURL
-		this.ac_id = ac_id;
+		this.back_url = back_url;			// 壁紙のURL
+		this.prof_url = prof_url;			// 顔写真のURL
+		this.ac_id = ac_id;					// 共通ID
+	}
+
+	public Profile(int pro_id, String my_class, String name, int ac_id, String company) {
+		this.pro_id = pro_id;				// 識別ID
+		this.my_class = my_class;	        // クラスNo
+		this.name = name;					// 氏名
+		this.ac_id = ac_id;					// 共通ID
+		this.company = company;				// 会社名
+	}
+
+	public int getPro_id() {
+		return pro_id;
+	}
+
+	public void setPro_id(int pro_id) {
+		this.pro_id = pro_id;
 	}
 
 	public String getBack_url() {

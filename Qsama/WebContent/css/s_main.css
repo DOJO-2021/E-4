@@ -77,14 +77,14 @@ padding: 15px 2px 0 1px;
 
 /* 奇数行の背景色変える */
 .info dl:nth-child(odd) {
-  background-color: #ffd6676e;
+  background-color: #f3f3f3;
   opacity: 1;
 }
 
 /* ホバーしたら色を変える<a>タグできたら */
 .info dl:hover {
   text-decoration: none;
-  background-color: #ffd667;
+  background-color: #7affbc;/*#ffd667;*/
 }
 
 */
@@ -116,7 +116,7 @@ padding: 15px 2px 0 1px;
 /* background: #fffffc; */
 /*  box-shadow: 0 0 5px rgb(0 0 0 / 10%);  */
   display: flex;
-  height: 390px;
+  height: auto;
   width: 1000px;
   flex-wrap: wrap;
   -webkit-border-radius: 8px;
@@ -177,7 +177,7 @@ padding: 15px 2px 0 1px;
 /*  padding-bottom: 40px;  */
   background-color: #fffffc;
   width:1000px;
-  height: 390px;/*320px;*/
+  height: auto;
 /*  box-shadow: 0 0 10px rgba(5, 0, 0, 0.2);  */
   margin: 0 ;
   -webkit-border-radius: 8px;
@@ -244,7 +244,7 @@ input[name="tab_item"] {
 }
 
 /* ------------- 選択されているタブのスタイルを変える --------------- */
-.tabs input:checked + .tab_item {
+.tabs input:checked ~ .tab_item {
   color: #fffffc;
 }
 
@@ -255,7 +255,7 @@ p.question {
 p.question:hover {
   color: #09C9D9;
 }
-.tab_content:checked + .question {
+.tab_content_description p.question:checked ~ .question_open p {
   color: #09C9D9;
 }
 
@@ -269,25 +269,27 @@ p.ans {
 }
 
 /* -- アイコンの後ろにテキスト表示 -- */
-.color_change {
+.color_change, .color_change2 {
   float: left;
+}
+
+.faa-parent:hover {
+  color: #fffffc;
+}
+.faa-parent:hover ~ .color_change2 {
+  color: #fffffc;
 }
 
 /* 解決済み　見出し */
 .foo_main {
-  margin: 0 auto;
-  background-color: #fffffc;
-  border-radius: 8px; 
-  border-bottom: 1px solid #ccc6;
+  margin: auto auto 10px 200px;
 }
-
-/* 過去の質問　見出し */
 .foo_old {
- background-color: #fffffc;
- border-radius: 8px; 
- border-bottom: 1px solid #ccc6; 
+  margin: auto auto 10px 200px;
 }
 
+
+/*  鍵かっこ作成
 .foo_old::before,
 .foo_old::after {
   position: absolute;
@@ -309,7 +311,7 @@ p.ans {
   border-right: 1.5px solid #ccc;
   margin: 20px 0 0 126px;
 }
-
+*/
 /* ----------------- プロフィール ------------------- */
 .box .profile {
   margin: 15px auto;                 /* サンプル用 中央寄せ */

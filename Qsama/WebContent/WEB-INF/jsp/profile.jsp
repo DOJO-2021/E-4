@@ -7,6 +7,7 @@
   <meta charset="UTF-8">
   <title>Qさま｜プロフィール</title>
   <link rel="stylesheet" href="css/profile.css">
+  <link rel="stylesheet" href="css/common.css">
   <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
   <link href="https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
@@ -28,12 +29,12 @@
 <!-- 共通ヘッダーここまで -->
  <div class="container">
  	<form method="POST" id="form" action="/Qsama/ProfileServlet" enctype="multipart/form-data">
-    <header>
+    <div class="profile_header">
      <!----------- 画像表示部分 ----------->
 	<div class="bio">
 		<div class="result" id="result"><c:forEach var="pr" items="${ProfileList}" varStatus="pri"><img src=${pr.back_url}></c:forEach>
 		</div>
-       	<div class="file">
+      	<div class="file">
        		<input type="file" id="file" name="IMAGE" accept="Qsama/img/*" onchange="previewImage(this);" multiple accept=".jpg,.gif,.png,image/gif,image/jpeg,image/png" hidden="true">
        	</div>
 	</div>
@@ -43,7 +44,7 @@
 			<input type="file" id="file2" name="IMAGE2" accept="Qsama/img/*" onchange="preview2Image(this);" multiple accept=".jpg,.gif,.png,image/gif,image/jpeg,image/png" hidden="true">
 		</div>
 	</div>
-    </header>
+    </div>
 
     <div class="content">
       <div class="data">
@@ -97,7 +98,17 @@
 
    <div class="container2">
     <!-- 過去の質問一覧表示（ここから） -->
-       <p class="old_p_list">過去の質問一覧表示</p>
+        <!--  <p class="old_p_list">過去の質問一覧表示</p>
+        -->
+		<div class="foo foo_old">
+		  <span class="letter" data-letter="過">過</span>
+		  <span class="letter" data-letter="去">去</span>
+		  <span class="letter" data-letter="の">の</span>
+		  <span class="letter" data-letter="質">質</span>
+		  <span class="letter" data-letter="問">問</span>
+		  <span class="letter" data-letter="一">一</span>
+		  <span class="letter" data-letter="覧">覧</span>
+		</div>
     		<c:forEach var="mg" items="${MyGetList}" varStatus="mm">
    				<div class="cp_qa">
 					<div class="cp_actab">

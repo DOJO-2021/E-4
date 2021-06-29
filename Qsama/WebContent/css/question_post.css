@@ -42,12 +42,8 @@ h2{
   padding-top: 5px;
   width: 300px;
 }
-
-/* 見出し */
-.foo1, .foo2 {
-  background-color: #fffffc;
-  border-radius: 8px; 
-  border-bottom: 1px solid #ccc6; 
+.foo1 {
+  margin: auto auto 10px 200px;
 }
 
 /* -----------  ラジオボタン   ------------- */
@@ -129,7 +125,6 @@ h2{
 .cp_qa #cp_content1,
 .cp_qa #cp_content2{
 	display: none;
-	padding: 20px 0 0;
 	border-top: 1px solid #dddddd;
 }
 
@@ -199,7 +194,7 @@ h2{
 .cp_qa .cp_qain {
 	overflow-x: hidden;
 	margin: 0 auto;
-	color: #333333;
+	color: #4d5156;
 }
 
 /* .cp_actab はQ&A 1つずつのブロック */
@@ -369,6 +364,7 @@ input[type=checkbox]:checked ~ .cp_qa .cp_qain label {
 /* -------- テキストエリア --------*/
 
 #Q_content {
+  border: 1px solid #dbdada;
   font-weight: lighter;
   font-family: inherit;
   font-size: 16px;
@@ -384,8 +380,8 @@ input[type=checkbox]:checked ~ .cp_qa .cp_qain label {
  /* overflow: scroll; */
 }
 
-#Q_content:focus {
-  outline: 0;
+.Q_content textarea[name="Q_content"]:focus {
+  outline: none;
   border: 2px splid #E6A54D;
 }
 
@@ -431,6 +427,10 @@ line-height: 1.8;
 text-align: right;
 }
 */
+.drag-drop-inside {
+  padding: 120px 10px;
+  text-align: center;
+}
 
 .text {
     position: absolute;
@@ -522,11 +522,12 @@ text-align: right;
 @import 'https://fonts.googleapis.com/css?family=Comfortaa:300,400,700&subset=cyrillic,cyrillic-ext,latin-ext';
 
 input[name="Q_submit"] {
-  color: #4d5156;
-    background: #fffffc;
+	border-radius: 6px;
+    color: #fffffc;
+    background: #09C9D9;
     border-width: 2px;
     border-style: solid;
-    border-color: #ffd667;
+    border-color: #09c9d999;
     position: relative;
     margin: 1em;
     display: inline-block;
@@ -535,54 +536,26 @@ input[name="Q_submit"] {
     text-align: center;
     /* font-family: comfortaa; */
     font-family: 'Noto Sans Japanese', sans-serif;
-    font-weight: 500;
+    font-weight: 200;
+    font-size: 15px;
     width: 350px;
 
 }
-
-input[name="Q_submit"]:before, input[name="Q_submit"]:after {
-  content: '';
-  display: block;
-  position: absolute;
-  border-color: #454545;
-  box-sizing: border-box;
-  border-style: solid;
-  width: 1em;
-  height: 1em;
-  transition: all 0.3s ease-in-out;
-}
-	
-input[name="Q_submit"]:before {
-  top: -6px;
-  left: -6px;
-  border-width: 2px 0 0 2px;
-  z-index: 5;
-}
-
-input[name="Q_submit"]:after {
-  bottom: -6px;
-  right: -6px;
-  border-width: 0 2px 2px 0;
-}
-
-input[name="Q_submit"]:hover:before, input[name="Q_submit"]:hover:after {
-  width: calc(100% + 12px);
-  height: calc(100% + 12px);
-  border-color: #fffffc;
-}
-  
 input[name="Q_submit"]:hover {
-  color: #353535;
-  background-color: #fffffc;
-  border-color: #fffffc;
+   background: #fffffC;
+   border-width: 2px;
+   border-style: solid;
+   border-color: #09c9d9;
+   color: #4d5156;
 }
+
 
 .Q_submit {
   max-width: 960px;
   text-align: center;
   position: relative;
   margin: auto;
-  padding-top: 40px;
+  padding-top: 20px;
 }
 
 /* -------- <button>タグ --------*/

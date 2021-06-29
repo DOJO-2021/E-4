@@ -270,9 +270,6 @@ public class IdpwDAO {
 			ResultSet rs = pStmt.executeQuery();
 
 			// ユーザーIDとパスワードが一致するユーザーがいたかどうかをチェックする
-			//rs.next();
-			//System.out.println(rs);
-			//System.out.println(rs.getInt("count(*)"));
 			while (rs.next()) {
 					ac_id = rs.getString("AC_ID");
 

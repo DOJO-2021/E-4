@@ -15,7 +15,7 @@ html * {
 
 body {
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1000px;
   background-color: #f3f3f3;
   font-family: 'Noto Sans Japanese', sans-serif;
   color: #4d5156;
@@ -39,17 +39,18 @@ body{
 */
 div.foo{
   width: 90%;
+  max-width:1000px;
   margin: auto auto 10px auto;
-  text-align: center;
+  text-align: left;
 
 }
 .letter{
   display: inline-block;
-  font-weight: 900;
-  font-size: 2.5em;
-  margin: 0.2em;
+  font-weight: 300;
+  font-size: 1.575rem;
+  margin: 2px;
   position: relative;
-  color: #f9c320;          /*  めくったあとの文字色  */
+  color: #09c9d999;          /*  めくったあとの文字色  */
   transform-style: preserve-3d;
   perspective: 400;
   z-index: 1;
@@ -65,7 +66,7 @@ div.foo{
   transition: all 0.3s ease-in-out;
 }
 .letter:before{
-  color: #ffd667;     /* 見えている文字色　　 元の色   #fff;   */
+  color: #09C9D9;      /* 見えている文字色　　 元の色   #fff;   */
   text-shadow: 
     -1px 0px 1px rgba(255,255,255,.8),
     1px 0px 1px rgba(0,0,0,.8);
@@ -103,12 +104,20 @@ div.foo{
 
 /* --------  font awesome  --------- */
 .color_change {
+  font-family: "Font Awesome 5 Brands";
   content: "\f138";
   color: #ccc;
   margin: 10px 12px 1px 10px;
   display: inline-block;
+  align-items: center;
 }
-
+.color_change2 {
+  font-family: "Font Awesome 5 Brands";
+  margin: 1.5px 5px;
+  color: #746c6c;
+  display: inline-block;
+  align-items: center;
+}
 /* ---------  ハイパーリンク  ----------- */
 .href {
   color: #fffffc;

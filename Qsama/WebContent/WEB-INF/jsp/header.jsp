@@ -9,7 +9,7 @@
 </head>
 <body>
 <!-- 共通のヘッダー -->
-<header>
+<header class="header_wrapper">
 <div class="header_body" id="heder">
   <div class="header_left">
   <table>
@@ -31,6 +31,7 @@
    </nav>
   </div>
  </div>
+
 </header>
 <!-- 共通ヘッダーここまで -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

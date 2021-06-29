@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.AdminDAO;
+import dao.ProfileDAO;
 import model.Admin;
+import model.Profile;
 
 /**
  * Servlet implementation class AdminServlet
@@ -27,10 +29,13 @@ public class AdminServlet extends HttpServlet {
 
 		// 検索処理を行う
 		AdminDAO aDao = new AdminDAO();
+		ProfileDAO pDao = new ProfileDAO();
+
 		List<Admin> GetList = aDao.PostGet();							// 未回答の検索
 		List<Admin> GetList2 = aDao.PostGet2();						// 回答済の検索
+		List<Profile> PersonalList = pDao.Personal_information();		// 個人情報全出力
 
-		List<Admin> HtmlModalList = aDao.HtmlOpenModal();				// 公開済 HTML モーダルウィンドウ用
+//		List<Admin> HtmlModalList = aDao.HtmlOpenModal();				// 公開済 HTML モーダルウィンドウ用
 		List<Admin> CssModalList = aDao.CssOpenModal();				// 公開済 CSS モーダルウィンドウ用
 		List<Admin> JavaModalList = aDao.JavaOpenModal();				// 公開済 Java モーダルウィンドウ用
 		List<Admin> JavascriptModalList = aDao.JavascriptOpenModal();// 公開済 JavaScript モーダルウィンドウ用
@@ -48,13 +53,15 @@ public class AdminServlet extends HttpServlet {
 		List<Admin> Dan2ModalList = aDao.DanCloseModal();				// 非公開 段位認定 モーダルウィンドウ用
 		List<Admin> Drill2ModalList = aDao.DrillCloseModal();			// 非公開 ﾄﾞﾘﾙ モーダルウィンドウ用
 
-//		System.out.println("DoGetのGetListの中身："+GetList);			// 結果出力　テストok
-//		System.out.println("OpenModalListの中身："+OpenModalList);		// 結果出力　テストok
-//		System.out.println("Java2ModalListの中身："+Java2ModalList);	// 結果出力　テストok
+		System.out.println("DoGetのGetListの中身："+GetList);			// 結果出力　テストok
+		System.out.println("JavaModalListの中身："+JavaModalList);		// 結果出力　テストok
+		System.out.println("Java2ModalListの中身："+Java2ModalList);	// 結果出力　テストok
 
 		request.setAttribute("GetList", GetList);
 		request.setAttribute("GetList2", GetList2);
-		request.setAttribute("HtmlModalList", HtmlModalList);
+		request.setAttribute("PersonalList", PersonalList);
+
+//		request.setAttribute("HtmlModalList", HtmlModalList);
 		request.setAttribute("CssModalList", CssModalList);
 		request.setAttribute("JavaModalList", JavaModalList);
 		request.setAttribute("JavascriptModalList", JavascriptModalList);
@@ -94,14 +101,17 @@ public class AdminServlet extends HttpServlet {
 		String m_items = request.getParameter("m_items");					// 大項目取得
 		String s_items = request.getParameter("s_items");					// 中項目取得
 		String displaybutton = request.getParameter("displaybutton");		// 左メニューボタン取得
+		String Student = request.getParameter("personal_items");			// 生徒名を取得
+//		String personal_submit = request.getParameter("personal_submit");// 生徒検索ボタン取得
 
 		System.out.println("AdminS内post_number:"+post_number);
 		System.out.println("m_items："+m_items+"\t s_items:"+s_items+"\n");
 
 
 		AdminDAO aDao = new AdminDAO();
+		ProfileDAO pDao = new ProfileDAO();
 
-		System.out.println("post_number.length()の結果："+post_number.length());
+//		System.out.println("post_number.length()の結果："+post_number.length());
 
 		// --------左のボタン　→　右のデータ表示機能--------------------------------------
 		if(displaybutton != null) {
@@ -141,6 +151,42 @@ public class AdminServlet extends HttpServlet {
 				aDao.Release(areapost_number);							// 公開エリア:「公開」に更新
 			}
 		}
+
+//		List<Admin> HtmlModalList = aDao.HtmlOpenModal();				// 公開済 HTML モーダルウィンドウ用
+		List<Admin> CssModalList = aDao.CssOpenModal();				// 公開済 CSS モーダルウィンドウ用
+		List<Admin> JavaModalList = aDao.JavaOpenModal();				// 公開済 Java モーダルウィンドウ用
+		List<Admin> JavascriptModalList = aDao.JavascriptOpenModal();// 公開済 JavaScript モーダルウィンドウ用
+		List<Admin> SQLModalList = aDao.SQLOpenModal();				// 公開済 SQL モーダルウィンドウ用
+		List<Admin> SJspModalList = aDao.SJspOpenModal();				// 公開済 ｻｰﾌﾞﾚｯﾄ・JSP モーダルウィンドウ用
+		List<Admin> DanModalList = aDao.DanOpenModal();				// 公開済 段位認定 モーダルウィンドウ用
+		List<Admin> DrillModalList = aDao.DrillOpenModal();			// 公開済 ﾄﾞﾘﾙ モーダルウィンドウ用
+
+//		List<Admin> Html2ModalList = aDao.HtmlCloseModal();			// 非公開 HTML モーダルウィンドウ用
+		List<Admin> Css2ModalList = aDao.CssCloseModal();				// 非公開 CSS モーダルウィンドウ用
+		List<Admin> Java2ModalList = aDao.JavaCloseModal();			// 非公開 Java モーダルウィンドウ用
+		List<Admin> Javascript2ModalList = aDao.JavascriptCloseModal();// 非公開 JavaScript モーダルウィンドウ用
+		List<Admin> SQL2ModalList = aDao.SQLCloseModal();				// 非公開 SQL モーダルウィンドウ用
+		List<Admin> SJsp2ModalList = aDao.SJspCloseModal();			// 非公開 ｻｰﾌﾞﾚｯﾄ・JSP モーダルウィンドウ用
+		List<Admin> Dan2ModalList = aDao.DanCloseModal();				// 非公開 段位認定 モーダルウィンドウ用
+		List<Admin> Drill2ModalList = aDao.DrillCloseModal();			// 非公開 ﾄﾞﾘﾙ モーダルウィンドウ用
+
+//		request.setAttribute("HtmlModalList", HtmlModalList);
+		request.setAttribute("CssModalList", CssModalList);
+		request.setAttribute("JavaModalList", JavaModalList);
+		request.setAttribute("JavascriptModalList", JavascriptModalList);
+		request.setAttribute("SQLModalList", SQLModalList);
+		request.setAttribute("SJspModalList", SJspModalList);
+		request.setAttribute("DanModalList", DanModalList);
+		request.setAttribute("DrillModalList", DrillModalList);
+//		request.setAttribute("Html2ModalList", Html2ModalList);
+		request.setAttribute("Css2ModalList", Css2ModalList);
+		request.setAttribute("Java2ModalList", Java2ModalList);
+		request.setAttribute("Javascript2ModalList", Javascript2ModalList);
+		request.setAttribute("SQL2ModalList", SQL2ModalList);
+		request.setAttribute("SJsp2ModalList", SJsp2ModalList);
+		request.setAttribute("Dan2ModalList", Dan2ModalList);
+		request.setAttribute("Drill2ModalList", Drill2ModalList);
+
 //		System.out.println("DoPostのGetListの中身："+GetList);
 //		System.out.println("DoPostのGetList2の中身："+GetList2);
 //		System.out.println("DoPostのDisplayGetListの中身"+DisplayGetList);
@@ -170,15 +216,23 @@ public class AdminServlet extends HttpServlet {
 			}
 		}
 
-		// ---------質問内容の検索処理を行う----------------------------------------------
+		// ---------質問内容の検索処理を行う--------------------------------------------------
 
 		List<Admin> GetList = aDao.PostGet();								// 未回答の検索
 		List<Admin> GetList2 = aDao.PostGet2();							// 回答済の検索
+		List<Admin> DisplayGetList = aDao.DisplayPostGet(post_number);	// 右欄へ表示する内容検索
+
+		// ---------生徒名で個人の過去質問を検索----------------------------------------------
+		List<Profile> PersonalList = pDao.Personal_information();			// 個人情報全出力
+		List<Admin> StudentList = aDao.Student_Search(Student);			// 受講生の名前で過去の質問を検索
 
 		System.out.println("--------------------------------END------------------------------------");
 
 		request.setAttribute("GetList", GetList);
 		request.setAttribute("GetList2", GetList2);
+		request.setAttribute("DisplayGetList", DisplayGetList);
+		request.setAttribute("PersonalList", PersonalList);
+		request.setAttribute("StudentList", StudentList);
 
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/admin.jsp");

@@ -9,7 +9,7 @@
 </head>
 <body>
 <!-- 共通のヘッダー -->
-<header>
+<header class="header_wrapper">
 <div class="header_body" id="heder">
   <div class="header_left">
   <table>
@@ -22,7 +22,7 @@
     <nav class="global">
       <ul class="globalList">
         <li><a href="/Qsama/S_MainServlet">TOP</a></li>
-        <li><a href="/Qsama/ProfileServlet">プロフィール編集</a></li>
+        <li><a href="/Qsama/ProfileServlet">マイページ</a></li>
         <li><a href="/Qsama/AdminServlet">質問管理</a></li>
         <li><a href="/Qsama/SearchServlet">検索</a></li>
         <li><a href="/Qsama/LogoutServlet">ログアウト</a></li>

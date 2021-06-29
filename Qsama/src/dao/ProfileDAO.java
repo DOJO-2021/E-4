@@ -403,4 +403,48 @@ public class ProfileDAO {
 			}
 		}return result;
 	}
+
+	//---------------プロフィール初期導入---------------------------------------------------------------------------
+		public boolean NewUser(String myclass,String name,String ac_id) {
+			Connection conn = null;
+			boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/E-4/Qsama/data/E-4", "sa", "");
+
+
+			// SQL文を準備する
+			String sql2 = "insert into p_user (PRO_ID, MY_CLASS, NAME, AC_ID, COMPANY) values"
+					+ " (null, '"+myclass+"', '"+name+"', '"+ac_id+"',' ')";
+
+			PreparedStatement pStmt = conn.prepareStatement(sql2);
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.commit();
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}return result;
+	}
 }

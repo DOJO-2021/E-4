@@ -8,9 +8,10 @@
 <title>Qsama | top</title>
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/s_main.css">
-<link href="https://use.fontawesome.com/releases/5.12.0/css/all.css" rel="stylesheet">
 <!-- font awesome -->
+<link href="https://use.fontawesome.com/releases/5.11.0/css/all.css" rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.css" type="text/css" media="all" />
 <script src="https://unpkg.com/scrollreveal"></script>
 <script src="jquery.simplePagination.js"></script>
 </head>
@@ -38,8 +39,8 @@
 
   <c:forEach var="o" items="${NoticeList}">
 	<dl>
-	    <dd>
-			<i class="fab fa-bell-on"></i>${o.q_date} の質問に対して回答が届いています！
+	    <dd class="faa-parent animated-hover">
+			<i class="fas fa-bell fa-fw color_change2 faa-shake"></i> ${o.q_date} の質問に対して回答が届いています！
 	    </dd>
 	</dl>
   </c:forEach>

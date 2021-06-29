@@ -1,67 +1,96 @@
 @charset "UTF-8";
 
 html * {
-	box-sizing	: border-box;
+  box-sizing	: border-box;
 }
 
 body {
   margin: 0 auto;
   max-width: 1000px;
-background-color: #f3f3f3;
+  background-color: #f3f3f3;
 }
 
-header {
-	width: 100%;
-	height: 100px;
-	background-color:#f3f3f3;
-	margin: 0 auto 10px auto;
+.header_wrapper {
+  max-width: 100%;
+  height: 100px;
+  background-color:#f3f3f3;
+  margin: 0 auto 50px auto;
+}
+
+.header_body{
+  display: flex;
+    /* max-width: 1000px; */
+  margin: 0 auto;
+  height: 90px;
+  align-items: center;
+  background: #fffffc;
+  border-bottom: 0.05px solid #ccc6;
+  line-height: 1;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  text-align: center;
+  padding: 1rem;
 }
 
 .header_left {
-	padding: 0 25px;
-	margin-right: auto;
+  padding: 0 0 15px 30px;
+  margin-right: auto;
 }
 
 .header_left img{
-	width:125px;
-	height:80px;
+  width:125px;
+  height:80px;
 }
 
 .header_right {
-	padding: 20px;
-	color: #4d5156;
-    font-weight: 200;
+  padding: 30px;
+  color: #4d5156;
+  font-weight: 300;
 }
 
+.global .globalList{
+  margin:0;
+  padding: 0;
+}
+
+.globalList > li{
+  list-style: none;
+  font-size:16px;
+  padding: 0 10px;
+  display: inline-block;
+  width: 10%;
+  min-width: 120px;
+  height: 20px;
+}
+.global li:not(:last-child){
+  border-right:1.5px solid #ddd;
+}
+.global a{
+  text-decoration: none;
+  color: #333;
+}
+.global a.current{
+  color: #00B0F0;
+  border-bottom:2px solid #00B0F0;
+}
+.global a:hover{
+  text-decoration: none;
+  color:#F7CB4D;
+  border-bottom:2px solid #F7CB4D;
+}
+/*
 .globalList{
   list-style: none; /* マーカーの削除 */
-  display: flex;
+ /* display: flex;
 }
 .globalList > li > a{
   text-decoration: none; /* 下線の削除 */
-  color: #4d5156; /* フォントカラーを白 */
-}
-.globalList > li{
-	font-size:16px;
-    padding: 0 10px;
+/*  color: #4d5156; /* フォントカラーを白 */
+/* } */
 
-}
-.header_body{
-  display: flex;
-  max-width: 1000px;
-  margin: 0 auto;
-  height:90px;
-  align-items: center;
-  background:#f3f3f3; 
-  border-bottom: 1px solid #fdfdfd;
-  line-height:1;
-  position:fixed;
-  top:0;
-  width:100%;
-  z-index:100;
-  text-align:center;
-  padding:1rem;
-}
+
 
 .globalList > li > a:hover{
   opacity: 0.7;
